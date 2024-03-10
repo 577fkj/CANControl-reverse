@@ -1,0 +1,41 @@
+local NTC_10K = {97120,91660,86540,81720,77220,72980,69000,65260,61760,58460,
+55340,52420,49660,47080,44640,42340,40160,38120,36200,34380,
+32660,31040,29500,28060,26680,25400,24180,23020,21920,20880,
+19900,18970,18090,17260,16460,15710,15000,14320,13680,13070,
+12490,11940,11420,10920,10450,10000,9574,9166,8778,8408,
+8058,7722,7404,7098,6808,6532,6268,6016,5776,5546,
+5326,5118,4918,4726,4544,4368,4202,4042,3888,3742,
+3602,3468,3340,3216,3098,2986,2878,2774,2674,2580,
+2488,2400,2316,2234,2158,2082,2012,1942,1876,1813,
+1751,1693,1637,1582,1530,1480,1432,1385,1341,1298,
+1256,1216,1178,1141,1105,1071,1038,1006,975,945.2,
+916.4,888.8,862,836.4,811.4,787.4,764.2,741.8,720.2}
+-- -20 TO 98
+local Index = 2     --Save the last tag index
+function ReadADC(IO)
+local ADC,Max,Min,Mean={},0,4095,0
+for i = 1,7,1 do
+ADC[i]=adc.read(1,IO)
+if Max < ADC[i] then Max = ADC[i] end
+if Min > ADC[i] then Min = ADC[i] end
+Mean = Mean + ADC[i]
+-- LOG(ADC[i])
+end
+Mean = (Mean - Max - Min) / 5
+-- LOG(Min,Max,Mean)
+return Mean
+end
+function GetNTC(IO,RS,VCC)
+VCC = VCC or 3.3 , RS = RS or 10000
+local V_NTC, NTC = (4096-ReadADC(IO)+150)/1200, 2          --SOLO
+if V_NTC > 2.5 or V_NTC < 0.22 then return -1 end
+local R_NTC = (RS * V_NTC) / (VCC - V_NTC)
+--LOG(V_NTC)
+if NTC_10K[Index] < R_NTC then Index = 2 end
+for i = Index , 119 , 1 do
+if NTC_10K[i] <= R_NTC then Index = i-5 , NTC = i , break end
+end
+local Str1 = NTC_10K[NTC-1] - NTC_10K[NTC]
+local Str2 = (NTC_10K[NTC-1] - R_NTC) / Str1
+return tonumber(string.format("%.1f",(NTC - 21 + Str2)))
+end
