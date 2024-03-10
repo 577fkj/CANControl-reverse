@@ -1,0 +1,503 @@
+<image class="background" mode="aspectFill" src="/img/bc1.gif"></image>
+<view id="page" style="display:{{Panel==1?'block':'none'}}">
+    <view class="btnLayout">
+        <canvas bindtap="nvbt" id="nvbt" style="width: 50%; height: 88px;" type="2d"></canvas>
+        <canvas bindtap="nabt" id="nabt" style="width: 50%; height: 88px;" type="2d"></canvas>
+    </view>
+    <view class="btnLayout">
+        <canvas id="t1" style="width: 2.5%; height: 88px;" type="2d"></canvas>
+        <canvas bindtap="pwrbt" id="pwrbt" style="width: 10%; height: 188px;" type="2d"></canvas>
+        <canvas bindtap="btbt" id="btbt" style="width: 75%; height: 188px;" type="2d"></canvas>
+        <view style="width: 10%; height: 188px;">
+            <view style="height: 148px;"></view>
+            <image bindtap="uset" mode="aspectFit" src="/img/set.png" style="width: 20px; height: 20px;"></image>
+        </view>
+        <canvas id="t1" style="width: 2.5%; height: 88px;" type="2d"></canvas>
+    </view>
+    <view class="btnLayout">
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+        <canvas bindtap="pwrbt" id="ivbt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas bindtap="otbt" id="otbt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas bindtap="owbt" id="owbt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+    </view>
+    <view class="btnLayout">
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+        <canvas bindtap="ahbt" id="ahbt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas bindtap="whbt" id="whbt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas bindtap="tibt" id="tibt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+    </view>
+    <view class="btnLayout">
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+        <canvas bindtouchend="hqbt0" bindtouchmove="hqbt2" bindtouchstart="hqbt1" id="hqbt" style="width: 30%; height:120px;" type="2d"></canvas>
+        <canvas bindtouchend="sa2bt0" bindtouchmove="sa2bt2" bindtouchstart="sa2bt1" id="sa2bt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas bindtouchend="sdbt0" bindtouchmove="sdbt2" bindtouchstart="sdbt1" id="sdbt" style="width: 30%; height: 120px;" type="2d"></canvas>
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+    </view>
+    <view class="btnLayout">
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+        <canvas bindtap="ks1bt" id="ks1bt" style="width: 23.75%; height: 80px;" type="2d"></canvas>
+        <canvas bindtap="ks2bt" id="ks2bt" style="width: 23.75%; height: 80px;" type="2d"></canvas>
+        <canvas bindtap="ks3bt" id="ks3bt" style="width: 23.75%; height: 80px;" type="2d"></canvas>
+        <canvas bindtap="ks4bt" id="ks4bt" style="width: 23.75%; height: 80px;" type="2d"></canvas>
+        <canvas id="t1" style="width: 5%; height: 88px;" type="2d"></canvas>
+    </view>
+</view>
+<view style="display:{{Panel==2?'block':'none'}}">
+    <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+        <view class="SendLayout">
+            <button bindtap="BTGPWD" class="DisINF" style="width: 33.33%;">修改密码</button>
+            <button bindtap="BTRST" class="DisINF" style="width: 33.33%;">重置设置</button>
+            <button bindtap="BTBC" class="DisINF" style="width: 33.33%;">返回上级</button>
+        </view>
+    </view>
+    <view style="height:5px;"></view>
+    <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+        <view class="SendLayout">
+            <button bindtap="BTOVT" class="DisTIP" style="width: 65%;">输出电压校正</button>
+            <button bindtap="BTOVT0" class="DisINF" style="width: 35%;">开始校正</button>
+        </view>
+        <view style="display:{{ShowBar==0?'block':'none'}}">
+            <view class="btnLayout">
+                <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">显示补偿值</button>
+                <button bindtap="BTOVT1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{OVT}}</button>
+            </view>
+            <view class="btnLayout">
+                <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">设置补偿值</button>
+                <button bindtap="BTOVD1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{OVD}}</button>
+            </view>
+            <view class="btnLayout">
+                <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">允许设置范围</button>
+                <button bindtap="BTOVS" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{LSV+'-'+HSV}}</button>
+            </view>
+            <view style="display:{{SWV==1?'block':'none'}}">
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">第二电压校正</button>
+                    <button bindtap="BTOST0" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">开始校正</button>
+                </view>
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">设置补偿值二</button>
+                    <button bindtap="BTOSD1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{O2D}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">允许设置范围二</button>
+                    <button bindtap="BTOVT1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{L2V+'-'+H2V}}</button>
+                </view>
+            </view>
+            <view class="tip2">　　点击右上角绿色"开始校正",然后用万用表测量实际输出电压,在弹出的输入框中输入刚才所测得的实际输出电压后发送即可。</view>
+            <view class="tip2">　　如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
+            <view style="height:15px;"></view>
+        </view>
+    </view>
+    <view style="height:5px;"></view>
+    <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+        <view class="SendLayout">
+            <button bindtap="BTOAT" class="DisTIP" style="width: 65%;">输出电流校正</button>
+            <button bindtap="BTOAT0" class="DisINF" style="width: 35%;">开始校正</button>
+        </view>
+        <view style="display:{{ShowBar==1?'block':'none'}}">
+            <view class="btnLayout">
+                <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">显示补偿值</button>
+                <button bindtap="BTOAT1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{OAT}}</button>
+            </view>
+            <view class="btnLayout">
+                <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">设置补偿值</button>
+                <button bindtap="BTOAD1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{OAD}}</button>
+            </view>
+            <view style="display:{{CAN>=5.2?'block':'none'}}">
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">允许设置范围</button>
+                    <button bindtap="BTOAS" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{LSA+'-'+HSA}}</button>
+                </view>
+            </view>
+            <view class="tip2">　　点击右上角绿色数字开始校正,然后用电流表测量出实际输出电流,在弹出的输入框中输入刚才所测得的实际输出电流后发送即可。</view>
+            <view class="tip2">　　如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
+            <view style="height:15px;"></view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=517?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTOVF" class="DisTIP" style="width: 65%;">输出电压补偿</button>
+                <button bindtap="BTOVF1" class="DisINF" style="width: 35%;">{{OVF}}</button>
+            </view>
+            <view style="display:{{ShowBar==2?'block':'none'}}">
+                <view style="position: relative;top: 5px;left: 2%;width: 97%;">　　输出电压补偿作用是电源电压呈现出线性偏差且校正电压后任然有误差时所需的补偿,例如设置50V时实际电压 50.2,设置70V时实际电流70.3,设置90V时实际电压90.4,输出电压呈现出线性放大,此时设置此值即可进行修正,算法是设置电压除以实际电压,如:90/90.4=0.9955,取小数掉后四位即可 ,然后点击右上角绿色数字,在弹出输入框中输入刚才计算出的数据后发送即可。</view>
+                <view style="position: relative;top: 5px;left: 2%;width: 97%;">　　不管是线性偏大还是线性偏小均可按上述算法计算出补偿值后进行修正。</view>
+                <view style="position: relative;top: 5px;left: 2%;width: 97%;">　　英可瑞大部分电源输出值会偏高,可以设置此值解决输出电压偏高问题。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=517?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTOAF" class="DisTIP" style="width: 65%;">输出电流补偿</button>
+                <button bindtap="BTOAF1" class="DisINF" style="width: 35%;">{{OAF}}</button>
+            </view>
+            <view style="display:{{ShowBar==3?'block':'none'}}">
+                <view class="tip2">　　输出电流补偿作用是电源电流呈现出线性偏差且校正电流后任然有误差时所需的补偿,例如设置5A时实际电流 5.1,设置10A时实际电流10.2,设置30A时实际电流30.6,输出电流呈现出线性放大,此时设置此值即可进行修正,算法是设置电流除以实际电流,如:30/30.4=0.9868,取小数掉后四位即可 ,然后点击右上角绿色数字,在弹出输入框中输入刚才计算出的数据后发送即可。</view>
+                <view class="tip2">　　不管是线性偏大还是线性偏小均可按上述算法计算出补偿值后进行修正。</view>
+                <view class="tip2">　　华为电源大部分输出电流会比设置电流呈现出线性高一点,默认已进行补偿。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=5.1?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTUMT" class="DisTIP" style="width: 65%;">设置超温限制</button>
+                <button class="DisINF" style="width: 35%;">{{UMT+'℃'+TMW+'W'}}</button>
+            </view>
+            <view style="display:{{ShowBar==5?'block':'none'}}">
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">超温进入值</button>
+                    <button bindtap="BTTMC" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{UMT}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">功率限制值</button>
+                    <button bindtap="BTTMW" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{TMW}}</button>
+                </view>
+                <view style="display:{{OMT?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">超温退出值</button>
+                        <button bindtap="BTTMC1" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{OMT}}</button>
+                    </view>
+                </view>
+                <view class="tip2">　　超温限制是指温度到达指定值后自动将功率限制在指定功率值,默认75度3KW,默认当温度小于设置限制温度1度 后将会恢到复原来设置电流。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=5.07?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTFAN" class="DisTIP" style="width: 65%;">设置风机速度</button>
+                <button class="DisINF" style="width: 35%;">{{NFS}}</button>
+            </view>
+            <view style="display:{{ShowBar==6?'block':'none'}}">
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">初始风速值</button>
+                    <button bindtap="BTLFS" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{LFS}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">功率加速值</button>
+                    <button bindtap="BTAFS" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{AFS}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">温度加速值</button>
+                    <button bindtap="BTUFS" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{UFS}}</button>
+                </view>
+                <view class="tip2">　　如添加了风机控制小板后风速可由此设置控制,风速设置有三个值。(风速最大值255)</view>
+                <view class="tip2">　　1.初始风速值,此值决定了初始最低风速。(默认50)</view>
+                <view class="tip2">　　2.电流加速值,意思是每A电流增加指定风速,如设置15A按默认值就是15*1.0=15点风速。(默认1.0)</view>
+                <view class="tip2">　　3.温度加速值,意思是每升温1度时增加指定风速,30度起算,如当前温度35度那么该加速值是(35-30)*8=40点。(默认8)</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=5.07?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTCAN" class="DisTIP" style="width: 65%;">设置电源协议</button>
+                <button class="DisINF" style="width: 35%;">{{SCAN}}</button>
+            </view>
+            <view style="display:{{ShowBar==16?'block':'none'}}">
+                <view class="btnLayout">
+                    <button bindtap="BTCAN1" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">华为</button>
+                    <button bindtap="BTCAN2" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">英可瑞</button>
+                    <button bindtap="BTCAN4" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">中兴</button>
+                </view>
+                <view class="btnLayout">
+                    <button bindtap="BTCAN8" style="text-align:center;width: 50%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">英飞源</button>
+                    <button bindtap="BTCAN16" style="text-align:center;width: 50%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">EPS6020</button>
+                </view>
+                <view class="tip2">　　华为电源支持R4815 R4830 R4850 R4875以及R48100。</view>
+                <view class="tip2">　　英可瑞电源支持TR72-3500 TR48-3000 TR240-6000 EVR500-10000 EVR700-15000C 目前已知的型号均可支持。</view>
+                <view class="tip2">　　中兴支持ZXD3000 V5.5 V5.6 V5.7 V5.8。(ZXD4000可控制电压,部分不能控制电流)</view>
+                <view class="tip2">　　英飞源目前只测试了REG50010S。(理论上其他的型号均可支持)</view>
+                <view class="tip2">　　EPS6020这个支持EPS4820 EPS6020 EPS7220。 </view>
+                <view class="tip2">　　点击对应电源品牌即可切换。(设置后会重启)</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=5.23?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTNTC" class="DisTIP" style="width: 65%;">输出温度采集</button>
+                <button bindtap="BTNTC1" class="DisINF" style="width: 35%;">{{NTC==-1?'自动':NTC==0?'电源':'控制'}}</button>
+            </view>
+            <view style="display:{{ShowBar==17?'block':'none'}}">
+                <view class="tip2">　　设置输出温度采集点,华为电源原机附带有输出温度，其它电源无。</view>
+                <view class="tip2">　　自动：优先检测控制板上的NTC传感器是否安装，如无安装则使用CAN通信读取到的系统温度。</view>
+                <view class="tip2">　　电源：使用CAN通信读取到的系统温度。</view>
+                <view class="tip2">　　控制：使用控制板上的NTC传感器取到的温度。</view>
+                <view class="tip2">　　点击右上角绿色文字即可切换。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view style="display:{{CAN>=5.07?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTSMW" class="DisTIP" style="width: 65%;">输出功率限制</button>
+                <button bindtap="BTSMW1" class="DisINF" style="width: 35%;">{{SMW}}</button>
+            </view>
+            <view style="display:{{ShowBar==18?'block':'none'}}">
+                <view class="tip2">　　设置电源输出功率上限,设置好后用户设置功率就不能超过此值。</view>
+                <view class="tip2">　　点击右上角绿色文字设置。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<view style="display:{{Panel==3?'block':'none'}}">
+    <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+        <button bindtap="BTBC" style="width: 100%;background-color: #5559;color:#fffc;">返回上级</button>
+    </view>
+    <view style="height:5px;"></view>
+    <view style="display:{{false?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTKEY" class="DisTIP" style="width: 65%;">动态背景设置</button>
+                <button bindtap="BTKEY1" class="DisINF" style="width: 35%;">{{KEY?'是':'否'}}</button>
+            </view>
+            <view style="display:{{ShowBar==8?'block':'none'}}">
+                <view style="display:{{CAN>=5.18?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button style="text-align: left;font-size: 15px;width:70%;height: 20;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">对调加减位置</button>
+                        <button bindtap="BTKEY2" style="text-align: right;width: 30;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{KRC?'是':'否'}}</button>
+                    </view>
+                </view>
+                <view class="tip2">　　面板按键可以按自己需求打开或者关闭。</view>
+                <view class="tip2">　　点击右上角绿色文字进行切换。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTKEY" class="DisTIP" style="width: 65%;">面板按键启用</button>
+                <button bindtap="BTKEY1" class="DisINF" style="width: 35%;">{{KEY?'是':'否'}}</button>
+            </view>
+            <view style="display:{{ShowBar==8?'block':'none'}}">
+                <view style="display:{{CAN>=5.18?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button class="DisTIP1" style="text-align: left;font-size: 15px;width:70%;height: 35;color: rgba(0, 183, 255, 0.836);background-color: #88888850;">对调加减位置</button>
+                        <button bindtap="BTKEY2" class="DisINF1" style="text-align: right;width: 30%;height: 35;font-size: 15px;color: rgba(11, 255, 133, 0.788);background-color: #88888850;">{{KRC?'是':'否'}}</button>
+                    </view>
+                </view>
+                <view class="tip2">　　面板按键可以按自己需求打开或者关闭。</view>
+                <view class="tip2">　　点击右上角绿色文字进行切换。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.24?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTEN" class="DisTIP" style="width: 65%;">语言/Language</button>
+                <button bindtap="BTEN1" class="DisINF" style="width: 35%;">{{EN?'English':'中文'}}</button>
+            </view>
+            <view style="display:{{ShowBar==19?'block':'none'}}">
+                <view class="tip2">　　目前仅限显示屏能中英文,小程序暂时无英文,以后会支持小程序同步切换,切换后重启生效.</view>
+                <view class="tip2">　　点击右上角绿色文字进行切换/Click on the green text in the upper right corner to switch.</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.19?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTBLE" class="DisTIP" style="width: 60%;">蓝牙名称设置</button>
+                <button bindtap="BTBLE1" class="DisINF" style="width: 40%;">{{UBLE}}</button>
+            </view>
+            <view style="display:{{ShowBar==9?'block':'none'}}">
+                <view style="display:{{CAN>=5.18?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button class="DisTIP1">蓝牙密码设置</button>
+                        <button bindtap="BTBLE2" class="DisINF1">{{UPWD}}</button>
+                    </view>
+                </view>
+                <view class="tip2">　　设置蓝牙名称和密码。(重启生效)</view>
+                <view class="tip2">　　点击右上角绿色文字进行设置。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.17?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTUP" class="DisTIP" style="width: 65%;">远程固件升级</button>
+                <button bindtap="BTUP1" class="DisINF" style="width: 35%;">{{UPDate>CAN?'开始升级':'已最新版'}}</button>
+            </view>
+            <view style="display:{{ShowBar==4?'block':'none'}}">
+                <view style="display:{{CAN>=5.18?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button class="DisTIP1">设备ID</button>
+                        <button bindtap="BTUP2" class="DisINF1">{{ID}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">固件版本</button>
+                        <button bindtap="BTUP3" class="DisINF1">{{CAN}}</button>
+                    </view>
+                    <view class="btnLayout" style="display:{{CAN>=5.24?'block':'none'}}">
+                        <view class="btnLayout">
+                            <button class="DisTIP1">固件回退</button>
+                            <button bindtap="BTUP0" class="DisINF1">退回5.23</button>
+                        </view>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">APP版本</button>
+                        <button bindtap="BTUP4" class="DisINF1">{{APP}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">激活日期</button>
+                        <button bindtap="BTUP5" class="DisINF1">{{ACT}}</button>
+                    </view>
+                </view>
+                <view class="tip2">　　固件升级需要连接手机热点,且手机要处于有网络连接状态,手机打开热点后请按下面说明设置。</view>
+                <view class="tip2">　　1.热点名:config</view>
+                <view class="tip2">　　2.密码:88888888</view>
+                <view class="tip2">　　3.频段:2.4G</view>
+                <view class="tip2">　　按上述设置后点击右上角"开始升级"按钮启动升级程序。</view>
+                <view class="tip2">　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.19?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTDDT" class="DisTIP" style="width: 65%;">设置屏幕方向</button>
+                <button bindtap="BTDDT1" class="DisINF" style="width: 35%;">{{DDT}}</button>
+            </view>
+            <view style="display:{{ShowBar==7?'block':'none'}}">
+                <view class="tip2">　　屏幕显示朝向可以四个方向可调。</view>
+                <view class="tip2">　　按上述设置后点击右上角绿色数字进行切换(重启生效)。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.19?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTLEDK" class="DisTIP" style="width: 65%;">设置屏幕亮度</button>
+                <button bindtap="BTLEDK1" class="DisINF" style="width: 35%;">{{LEDK1}}</button>
+            </view>
+            <view style="display:{{ShowBar==11?'block':'none'}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">设置关机亮度</button>
+                    <button bindtap="BTLEDK2" class="DisINF1">{{LEDK0}}</button>
+                </view>
+                <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。(重启生效)</view>
+                <view class="tip2">　　击右上角绿色数字进行设置。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.21?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTLEDKS" class="DisTIP" style="width: 65%;">屏幕息屏设置</button>
+                <button bindtap="BTLEDKS1" class="DisINF" style="width: 35%;">{{Sleep==0?'关闭':Sleep+'秒'}}</button>
+            </view>
+            <view style="display:{{ShowBar==12?'block':'none'}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">设置息屏亮度</button>
+                    <button bindtap="BTLEDKS2" class="DisINF1">{{LEDK2}}</button>
+                </view>
+                <view class="tip2">　　息屏后按任意按键或者连接上蓝牙均可点亮屏幕,小程序连接时不会进入息屏,如不需要息屏则把息屏时间设置为0即可。</view>
+                <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
+                <view class="tip2">　　击右上角绿色数字进行设置。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.21?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTStart" class="DisTIP" style="width: 65%;">初始页面时间</button>
+                <button bindtap="BTStart1" class="DisINF" style="width: 35%;">{{StartTi}}秒</button>
+            </view>
+            <view style="display:{{ShowBar==13?'block':'none'}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">是否显示倒计时</button>
+                    <button bindtap="BTStart2" class="DisINF1">{{WTs?'是':'否'}}</button>
+                </view>
+                <view class="tip2">　　初始页面时间范围是3-15秒可根据自己需要设置。(按下任意按键可跳过)</view>
+                <view class="tip2">　　击右上角绿色数字进行设置。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.21?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTGIF" class="DisTIP" style="width: 65%;">充电动图启用</button>
+                <button bindtap="BTGIF1" class="DisINF" style="width: 35%;">{{GIF?'是':'否'}}</button>
+            </view>
+            <view style="display:{{ShowBar==14?'block':'none'}}">
+                <view class="btnLayout" style=" height: 73px;">
+                    <image bindtap="BT_GIF1" mode="aspectFit" src="{{GIF1}}" style="height: 73px;"></image>
+                    <image bindtap="BT_GIF2" mode="aspectFit" src="{{GIF2}}" style="height: 73px;"></image>
+                    <image bindtap="BT_GIF3" mode="aspectFit" src="{{GIF3}}" style="height: 73px;"></image>
+                    <image bindtap="BT_GIF4" mode="aspectFit" src="{{GIF4}}" style="height: 73px;"></image>
+                    <image bindtap="BT_GIF5" mode="aspectFit" src="{{GIF5}}" style="height: 73px;"></image>
+                </view>
+                <view class="tip2">　　设置在充电过程中屏幕LOGO框位置播放动图。(修改动画完成后可能会重启)</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view style="display:{{CAN>=5.19?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTCr" class="DisTIP" style="width: 65%;">设置屏幕颜色</button>
+                <button bindtap="BTCr1" class="DisINF" style="width: 35%;">发送</button>
+            </view>
+            <view style="display:{{ShowBar==10?'block':'none'}}">
+                <view class="SendLayout">
+                    <button bindtap="Cr0" class="DisCr" style="width: 33.33%;color:{{Cr0}};">顶部标题</button>
+                    <button bindtap="Cr1" class="DisCr" style="width: 33.33%;color:{{Cr1}};">输出电压</button>
+                    <button bindtap="Cr2" class="DisCr" style="width: 33.33%;color:{{Cr2}};">输出电流</button>
+                </view>
+                <view class="SendLayout">
+                    <button bindtap="Cr3" class="DisCr" style="width: 33.33%;color:{{Cr3}};">设置信息</button>
+                    <button bindtap="Cr4" class="DisCr" style="width: 33.33%;color:{{Cr4}};">统计信息</button>
+                    <button bindtap="Cr6" class="DisCr" style="width: 33.33%;color:{{Cr6}};">功率显示</button>
+                </view>
+                <view class="SendLayout">
+                    <button bindtap="Cr7" class="DisCr" style="width: 33.33%;color:{{Cr7}};">温度显示</button>
+                    <button bindtap="Cr5" class="DisCr" style="width: 33.33%;color:{{Cr5}};">LOGO显示</button>
+                    <button bindtap="Cr8" class="DisCr" style="width: 33.33%;color:{{Cr8}};">电量显示</button>
+                </view>
+                <view class="tip2">　　此功能仅限彩屏版有效,点击对应显示栏后在弹出选色器中选择颜色。</view>
+                <view class="tip2">　　点击右上角绿色发送按钮即可生效。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+</view>
+<color-picker bindchangeColor="pickColor" colorRes="{{rgb}}" initColor="{{rgb}}" show="{{pick}}" title="{{title}}"></color-picker>

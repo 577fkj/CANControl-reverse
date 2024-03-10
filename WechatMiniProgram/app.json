@@ -1,0 +1,33 @@
+{
+  "networkTimeout": {
+    "request": 2000,
+    "downloadFile": 5000
+  },
+  "miniApp": {
+    "useAuthorizePage": true
+  },
+  "style": "v2",
+  "debug": true,
+  "subPackages": [
+    {
+      "root": "donutAuthorize__/",
+      "independent": true,
+      "pages": [
+        "pages/miniProgramLoginAuthorize/miniProgramLoginAuthorize"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "CAN-Control",
+    "navigationBarTextStyle": "black"
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/device/device",
+    "pages/device2/device",
+    "pages/NewUI/NewUI",
+    "pages/NewUI1/NewUI"
+  ]
+}

@@ -1,0 +1,113 @@
+<view id="container">
+    <view class="btnLayout">
+        <view bindtap="Check5" style="width: 100%;color:#0bce2c; font-size: 35rpx; height: 25px;">{{title}}</view>
+    </view>
+    <canvas id="canvas" style="width: 100%; height: 205px;" type="2d"></canvas>
+    <view id="Control" style="display:{{ShowPan==1?'block':'none'}}">
+        <view class="btnLayout">
+            <canvas bindtap="bt1" id="bt1" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt2" id="bt2" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt3" id="bt3" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt4" id="bt4" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+        <view class="btnLayout">
+            <canvas bindtap="bt5" id="bt5" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt6" id="bt6" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt7" id="bt7" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt8" id="bt8" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+        <view class="btnLayout">
+            <canvas bindtap="bt9" id="bt9" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt10" id="bt10" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt11" id="bt11" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt12" id="bt12" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+        <view class="btnLayout">
+            <canvas bindtap="BtKS1" id="BtKS1" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="BtKS2" id="BtKS2" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="BtKS3" id="BtKS3" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="BtKS4" id="BtKS4" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+    </view>
+    <view id="Admin" style="display:{{ShowPan==2?'block':'none'}}">
+        <view class="btnLayout">
+            <canvas bindtap="bt21" id="bt21" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt22" id="bt22" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt23" id="bt23" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt24" id="bt24" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+        <view class="btnLayout">
+            <canvas bindtap="bt25" id="bt25" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt26" id="bt26" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt27" id="bt27" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt28" id="bt28" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+        <view class="btnLayout">
+            <canvas bindtap="bt29" id="bt29" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt30" id="bt30" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt31" id="bt31" style="width: 25%; height: 43px;" type="2d"></canvas>
+            <canvas bindtap="bt32" id="bt32" style="width: 25%; height: 43px;" type="2d"></canvas>
+        </view>
+    </view>
+    <view id="Check" style="display:{{ShowPan==3?'block':'none'}}">
+        <button style="background:#ffffff ;color:#ff0000; width: 100%; height: 50px;">{{CKStr}}</button>
+        <button style="background:#ffffff ;color:#ff7300; width: 100%; height: 78px;">{{ID}}</button>
+    </view>
+    <view id="UPD" style="display:{{ShowPan==4?'block':'none'}}">
+        <button style="background:#ffffff ;color:#ff0000; width: 100%; height: 29px;">LOGO预览</button>
+        <view class="SendLayout" id="lin" style="font-size: 20rpx; display:'block';width: 100%;">
+            <view id="lin" style="display:'block';width: 65%;">
+                <view>设置参数说明:</view>
+                <view>共四个参数,参数以","分开 行以"|"隔开,最多可三行</view>
+                <view>1.文字X坐标 2.文字Y坐标 3.文字大小 4.需要设置的文字</view>
+                <view>例如:4,27,30,欢迎|4,57,30,使用</view>
+            </view>
+            <canvas bindtap="CheckLOGO" id="myCanvas" style="width: 60px; height: 60px" type="2d"></canvas>
+        </view>
+        <button style="background:#ffffff ;color:#ff0000; width: 100%; height: 29px;"></button>
+    </view>
+    <view class="SendLayout" style="display:{{ShowPan==5?'none':'flex'}}">
+        <input bindinput="CMDInput" class="SendBox" holdKeyboard="true" placeholder="{{TIP}}" style="width: 75%; height: 41px;" value="{{CMD}}"></input>
+        <button bindtap="Send" style="width: 25%; height: 43px;background:#59ebbf;">{{STX}}</button>
+    </view>
+    <view id="Admin1" style="display:{{IsICR==0?'none':'block'}}">
+        <view class="btnLayout">
+            <view class="bterr" style="background-color:{{STS4==1?'#ff0000':'#0bce2c'}};">输入过压</view>
+            <view class="bterr" style="background-color:{{STS6==1?'#ff0000':'#0bce2c'}};">输出过压</view>
+            <view class="bterr" style="background-color:{{STS2==0?'#ff0000':'#0bce2c'}};">恒压状态</view>
+            <view class="bterr" style="background-color:{{STS9==1?'#ff0000':'#0bce2c'}};">过热保护</view>
+            <view class="bterr" style="background-color:{{STS3==1?'#ff0000':'#0bce2c'}};">风机故障</view>
+            <view class="bterr" style="background-color:{{STS0==1?'#ff0000':'#0bce2c'}};">模块关机</view>
+        </view>
+        <view class="btnLayout">
+            <view class="bterr" style="background-color:{{STS5==1?'#ff0000':'#0bce2c'}};">输入欠压</view>
+            <view class="bterr" style="background-color:{{STS7==1?'#ff0000':'#0bce2c'}};">输出欠压</view>
+            <view class="bterr" style="background-color:{{STS2==1?'#ff0000':'#0bce2c'}};">恒流状态</view>
+            <view class="bterr" style="background-color:{{STS8==1?'#ff0000':'#0bce2c'}};">过流保护</view>
+            <view class="bterr" style="background-color:{{STS1==1?'#ff0000':'#0bce2c'}};">模块故障</view>
+            <view class="bterr" style="background-color:{{STS10==1?'#ff0000':'#0bce2c'}};">设置关机</view>
+        </view>
+    </view>
+    <view id="Admin1" style="display:{{IsIFY==0?'none':'block'}}">
+        <view class="btnLayout">
+            <view class="bterr" style="background-color:{{STS4==1?'#ff0000':'#0bce2c'}};">输入过压</view>
+            <view class="bterr" style="background-color:{{STS6==1?'#ff0000':'#0bce2c'}};">输出过压</view>
+            <view class="bterr" style="background-color:{{STS7==1?'#ff0000':'#0bce2c'}};">三相缺相</view>
+            <view class="bterr" style="background-color:{{STS9==1?'#ff0000':'#0bce2c'}};">过热保护</view>
+            <view class="bterr" style="background-color:{{STS3==1?'#ff0000':'#0bce2c'}};">风机故障</view>
+            <view class="bterr" style="background-color:{{STS0==1?'#ff0000':'#0bce2c'}};">模块关机</view>
+        </view>
+        <view class="btnLayout">
+            <view class="bterr" style="background-color:{{STS5==1?'#ff0000':'#0bce2c'}};">输入欠压</view>
+            <view class="bterr" style="background-color:{{STS11==1?'#ff0000':'#0bce2c'}};">输出短路</view>
+            <view class="bterr" style="background-color:{{STS2==1?'#ff0000':'#0bce2c'}};">模块保护</view>
+            <view class="bterr" style="background-color:{{STS8==1?'#ff0000':'#0bce2c'}};">功率限制</view>
+            <view class="bterr" style="background-color:{{STS1==1?'#ff0000':'#0bce2c'}};">模块故障</view>
+            <view class="bterr" style="background-color:{{STS10==1?'#ff0000':'#0bce2c'}};">放电异常</view>
+        </view>
+    </view>
+    <view class="conic-progress" style="background-image: conic-gradient(rgb(4, 200, 100) 0%,rgb(7, 255, 50) {{SOC}}%,#ccc 0%);">
+        <text class="progress-value" style="color:rgb(136, 1, 136)">{{SOC}}%</text>
+    </view>
+    <footer style="color:#888888">{{Ver}}</footer>
+</view>
