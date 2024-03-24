@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import requests
 
 url = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin'
