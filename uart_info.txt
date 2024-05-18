@@ -1,0 +1,57 @@
+ets Junets Jun  80ets Jun  8 2016 00:22:57
+
+rst:0x10 (RTCWDT_RTC_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13192
+load:0x40080400,len:3028
+entry 0x400805e4
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13192
+load:0x40080400,len:3028
+entry 0x400805e4
+E (621) esp_core_dump_flash: 朚½ɕdump partition found!
+E (622) esp_core_dump_flash: No core dump partition found!
+Pass:FFS init completed! Heap:  All=221272  Now=191404  Low=190412
+Pass:NTC init completed! Heap:  All=221240  Now=191316  Low=190412
+Pass:CAN init completed! Heap:  All=221192  Now=190928  Low=190412
+Pass:BLE init completed! Heap:  All=235172  Now=170916  Low=170880
+Pass:KEY init completed! Heap:  All=235172  Now=170916  Low=170864
+Pass:DSP init completed! Heap:  All=235092  Now=170420  Low=170104
+Pass:GIF init completed! Heap:  All=235076  Now=170372  Low=170104
+Pass:WIFI init completed! Heap:  All=235076  Now=170372  Low=170104
+Pass:ALL init completed! Heap:  All=235060  Now=170324  Low=170104
+BLE:  connected!
+BLE:  Disconnected!
+WiFi.begin:config
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13192
+load:0x40080400,len:3028
+entry 0x400805e4
+E (678) esp_core_dump_flash: No core dump partition found!
+E (678) esp_core_dump_flash: No core dump partition found!
+Pass:FFS init completed! Heap:  All=222064  Now=192196  Low=191204
+Pass:NTC init completed! Heap:  All=222032  Now=192108  Low=191204
+Pass:CAN init completed! Heap:  All=221984  Now=191720  Low=191204
+Pass:BLE init completed! Heap:  All=235964  Now=171708  Low=171672
+Pass:KEY init completed! Heap:  All=235964  Now=171708  Low=171656
+Pass:DSP init completed! Heap:  All=235884  Now=171212  Low=170896
+Pass:GIF init completed! Heap:  All=235868  Now=171164  Low=170896
+Pass:WIFI init completed! Heap:  All=235868  Now=171164  Low=170896
+Pass:ALL init completed! Heap:  All=235852  Now=171116  Low=170896
+BLE:  connected!
+BLE:  Disconnected!
