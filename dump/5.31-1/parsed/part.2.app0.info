@@ -1,0 +1,14 @@
+Image version: 1
+Entry point: 40082fc0
+real partition size: 1523200
+secure_pad: None
+flash_mode: 2
+flash_size_freq: 47
+5 segments
+
+Segment 1 : len 0x74258 load 0x3f400020 file_offs 0x00000018 include_in_checksum=True DROM
+Segment 2 : len 0x07504 load 0x3ffbdb60 file_offs 0x00074278 include_in_checksum=True BYTE_ACCESSIBLE,DRAM
+Segment 3 : len 0x0488c load 0x40080000 file_offs 0x0007b784 include_in_checksum=True IRAM
+Segment 4 : len 0xdbc20 load 0x400d0020 file_offs 0x00080018 include_in_checksum=True IROM
+Segment 5 : len 0x18190 load 0x4008488c file_offs 0x0015bc40 include_in_checksum=True IRAM
+Checksum: 28 (valid)

@@ -1,0 +1,128 @@
+Reading firmware from: D:\program\Dump-CANControl\dump\5.31-1\dump.bin
+Writing bootloader to: parsed/bootloader.bin
+Bootloader image info:
+=================================================================================
+Image version: 1
+Entry point: 400805e4
+real partition size: 17488
+secure_pad: None
+flash_mode: 2
+flash_size_freq: 32
+3 segments
+
+Segment 1 : len 0x004a0 load 0x3fff0030 file_offs 0x00000018 include_in_checksum=True BYTE_ACCESSIBLE,DRAM,DIRAM_DRAM
+Segment 2 : len 0x03388 load 0x40078000 file_offs 0x000004c0 include_in_checksum=True CACHE_APP
+Segment 3 : len 0x00bd4 load 0x40080400 file_offs 0x00003850 include_in_checksum=True IRAM
+Checksum: bf (valid)
+Validation Hash: c30d05a99b93d5a6d21b1469a5ea15f641ea50244e549232f264e1a0d47fe53b (valid)
+Segment at addr=0x3fff0030 => {'DRAM', 'DIRAM_DRAM', 'BYTE_ACCESSIBLE'} => .dram0.data
+Segment at addr=0x40078000 => {'CACHE_APP'} => .iram_loader.text
+Segment at addr=0x40080400 => {'IRAM'} => .iram0.text
+
+Adding program headers
+prg_seg 0 : 3fff0030 000004a0 rw .dram0.data
+prg_seg 1 : 40078000 00003388 rx .iram_loader.text
+prg_seg 2 : 40080400 00000bd4 rwx .iram0.text
+Program Headers:
+Type  Offset    VirtAddr  PhysAddr  FileSize  MemSize  Flg Align
+ 1    000001c1  3fff0030  3fff0030  000004a0  000004a0  6  1000
+ 1    00000661  40078000  40078000  00003388  00003388  5  1000
+ 1    000039e9  40080400  40080400  00000bd4  00000bd4  7  1000
+
+Writing ELF to parsed/bootloader.bin.elf...
+=================================================================================
+
+Partition table found at: 8000
+Verifying partitions table...
+Writing partitions table to: parsed/partitions.csv
+Writing partitions table to: parsed/partitions.bin
+PARTITIONS:
+   0  nvs      DATA:nvs   off=0x00009000 sz=0x00005000  parsed/part.0.nvs
+      Parsing NVS partition: parsed/part.0.nvs to parsed/part.0.nvs.cvs
+      Parsing NVS partition: parsed/part.0.nvs to parsed/part.0.nvs.txt
+      Parsing NVS partition: parsed/part.0.nvs to parsed/part.0.nvs.json
+   1  otadata  DATA:ota   off=0x0000e000 sz=0x00002000  parsed/part.1.otadata
+   2  app0     APP :ota_0 off=0x00010000 sz=0x001c0000  parsed/part.2.app0
+   3  app1     APP :ota_1 off=0x001d0000 sz=0x001c0000  parsed/part.3.app1
+   4  spiffs   DATA:spiffs off=0x00390000 sz=0x00070000  parsed/part.4.spiffs
+
+APP PARTITIONS INFO:
+=================================================================================
+Partition  app0     APP :ota_0 off=0x00010000 sz=0x001c0000 
+-------------------------------------------------------------------
+Image version: 1
+Entry point: 40082fc0
+real partition size: 1523200
+secure_pad: None
+flash_mode: 2
+flash_size_freq: 47
+5 segments
+
+Segment 1 : len 0x74258 load 0x3f400020 file_offs 0x00000018 include_in_checksum=True DROM
+  DROM, app data: secure_version = 0000 app_version=esp-idf: v4.4.5 ac5d805d0e project_name=arduino-lib-builder date=Jun 12 2023 time=16:41:45 sdk=v4.4.5
+Segment 2 : len 0x07504 load 0x3ffbdb60 file_offs 0x00074278 include_in_checksum=True BYTE_ACCESSIBLE,DRAM
+Segment 3 : len 0x0488c load 0x40080000 file_offs 0x0007b784 include_in_checksum=True IRAM
+Segment 4 : len 0xdbc20 load 0x400d0020 file_offs 0x00080018 include_in_checksum=True IROM
+Segment 5 : len 0x18190 load 0x4008488c file_offs 0x0015bc40 include_in_checksum=True IRAM
+Checksum: 28 (valid)
+Validation Hash: 9412dcccbde9b28241a7df1d63a5868a57b137b600a38b5e3ea25e7bea1f9d13 (valid)
+Segment at addr=0x3f400020 => {'DROM'} => .flash.rodata
+Segment at addr=0x3ffbdb60 => {'DRAM', 'BYTE_ACCESSIBLE'} => .dram0.data
+Segment at addr=0x40080000 => {'IRAM'} => .iram0.vectors
+Segment at addr=0x4008488c => {'IRAM'} => .iram0.text
+Segment at addr=0x400d0020 => {'IROM'} => .flash.text
+
+Adding program headers
+combine section .iram0.vectors and .iram0.text in one program segment
+prg_seg 0 : 3f400020 00074258 rw .flash.rodata
+prg_seg 1 : 3ffbdb60 00007504 rw .dram0.data
+prg_seg 2 : 40080000 0001ca1c wxr .iram0.vectors
+prg_seg 3 : 400d0020 000dbc20 rx .flash.text
+Program Headers:
+Type  Offset    VirtAddr  PhysAddr  FileSize  MemSize  Flg Align
+ 1    00000248  3f400020  3f400020  00074258  00074258  6  1000
+ 1    000744a0  3ffbdb60  3ffbdb60  00007504  00007504  6  1000
+ 1    0007b9a4  40080000  40080000  0001ca1c  0001ca1c  7  1000
+ 1    000983c0  400d0020  400d0020  000dbc20  000dbc20  5  1000
+
+Writing ELF to parsed/part.2.app0.elf...
+Partition  app1     APP :ota_1 off=0x001d0000 sz=0x001c0000 
+-------------------------------------------------------------------
+Image version: 1
+Entry point: 40082fc0
+real partition size: 1510880
+secure_pad: None
+flash_mode: 2
+flash_size_freq: 47
+5 segments
+
+Segment 1 : len 0x74204 load 0x3f400020 file_offs 0x00000018 include_in_checksum=True DROM
+  DROM, app data: secure_version = 0000 app_version=esp-idf: v4.4.5 ac5d805d0e project_name=arduino-lib-builder date=Jun 12 2023 time=16:41:45 sdk=v4.4.5
+Segment 2 : len 0x06d24 load 0x3ffbdb60 file_offs 0x00074224 include_in_checksum=True BYTE_ACCESSIBLE,DRAM
+Segment 3 : len 0x050c0 load 0x40080000 file_offs 0x0007af50 include_in_checksum=True IRAM
+Segment 4 : len 0xd9430 load 0x400d0020 file_offs 0x00080018 include_in_checksum=True IROM
+Segment 5 : len 0x1795c load 0x400850c0 file_offs 0x00159450 include_in_checksum=True IRAM
+Checksum: 50 (valid)
+Validation Hash: 67be97565f58005dda7203e062577165084fdb3040748244f62984ca0c823db2 (valid)
+Segment at addr=0x3f400020 => {'DROM'} => .flash.rodata
+Segment at addr=0x3ffbdb60 => {'DRAM', 'BYTE_ACCESSIBLE'} => .dram0.data
+Segment at addr=0x40080000 => {'IRAM'} => .iram0.vectors
+Segment at addr=0x400850c0 => {'IRAM'} => .iram0.text
+Segment at addr=0x400d0020 => {'IROM'} => .flash.text
+
+Adding program headers
+combine section .iram0.vectors and .iram0.text in one program segment
+prg_seg 0 : 3f400020 00074204 rw .flash.rodata
+prg_seg 1 : 3ffbdb60 00006d24 rw .dram0.data
+prg_seg 2 : 40080000 0001ca1c wxr .iram0.vectors
+prg_seg 3 : 400d0020 000d9430 rx .flash.text
+Program Headers:
+Type  Offset    VirtAddr  PhysAddr  FileSize  MemSize  Flg Align
+ 1    00000248  3f400020  3f400020  00074204  00074204  6  1000
+ 1    0007444c  3ffbdb60  3ffbdb60  00006d24  00006d24  6  1000
+ 1    0007b170  40080000  40080000  0001ca1c  0001ca1c  7  1000
+ 1    00097b8c  400d0020  400d0020  000d9430  000d9430  5  1000
+
+Writing ELF to parsed/part.3.app1.elf...
+=================================================================================
+

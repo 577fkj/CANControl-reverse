@@ -1,0 +1,6 @@
+0x400805e4
+3
+None 2 32 
+1 parsed/bootloader.bin.seg1 0x3fff0030 0x00000018 True
+2 parsed/bootloader.bin.seg2 0x40078000 0x000004c0 True
+3 parsed/bootloader.bin.seg3 0x40080400 0x00003850 True

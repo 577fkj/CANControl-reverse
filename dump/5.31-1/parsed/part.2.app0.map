@@ -1,0 +1,8 @@
+0x40082fc0
+5
+None 2 47 
+1 parsed/part.2.app0.seg1 0x3f400020 0x00000018 True
+2 parsed/part.2.app0.seg2 0x3ffbdb60 0x00074278 True
+3 parsed/part.2.app0.seg3 0x40080000 0x0007b784 True
+4 parsed/part.2.app0.seg4 0x400d0020 0x00080018 True
+5 parsed/part.2.app0.seg5 0x4008488c 0x0015bc40 True
