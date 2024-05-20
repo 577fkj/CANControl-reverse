@@ -1,6 +1,5 @@
 import asyncio
 import os
-import curses
 from bleak import BleakScanner, BleakClient
 from prompt_toolkit import PromptSession
 from prompt_toolkit.patch_stdout import patch_stdout
@@ -54,6 +53,9 @@ class PowerData:
     min_current_filter = 0
     support_protocol = 0
     would_user_set_logo = 0
+
+    per_charge_voltage = 0
+    per_charge_current = 0
 
     ble_name = ''
     ble_password = ''
@@ -190,7 +192,7 @@ def notify_callback(sender, data):
         power_data.timer = yt(ie(data, 1))  # 充电时间
         power_data.total_timer = yt(ie(data, 5))  # 累计时间
         power_data.power_off_timer = yt(ie(data, 9))  # 关机剩余时间
-        power_data.soc = round(ie(data, 13))  # 电池电量
+        power_data.soc = round(ie(data, 13), 2)  # 电池电量
     elif mode == 0x10:
         power_data.slot[0] = [ie(data, 1), ie(data, 5)]  # 槽位1 电压 电流
         power_data.slot[1] = [ie(data, 9), ie(data, 13)]  # 槽位2 电压 电流
@@ -250,6 +252,9 @@ def notify_callback(sender, data):
         power_data.would_user_set_logo = data[17]  # 允许用户设置LOGO
         power_data.support_protocol = data[18]  # 支持协议
         # wt = data[19] # 未知
+    elif mode == 0x18:
+        power_data.per_charge_voltage = ie(data, 1)  # 预充电电压
+        power_data.per_charge_current = ie(data, 5)  # 预充电电流
     elif mode == 0x20:
         power_data.ble_name = read_c_string_from_bytes(data[1:20])  # 蓝牙名称
     elif mode == 0x21:
@@ -1088,6 +1093,26 @@ def set_custom_logo(client, logo_offset: int, logo: bytes):
     for i in range(0, len(logo), 240):
         send_data(client, b'\xF2' + logo[i:i + 240])
     send_data(client, b'\xF3')
+
+def set_per_charge_voltage(client, voltage: float):
+    """
+    设置预充电压
+    :param client:
+    :param voltage:
+    :return:
+    """
+    send_data(client, b'\xF8\xF6' + int(voltage * 100).to_bytes(4, byteorder='big'))
+    send_end(client)
+
+def set_per_charge_current(client, current: float):
+    """
+    设置预充电流
+    :param client:
+    :param current:
+    :return:
+    """
+    send_data(client, b'\xF8\xF5' + int(current * 100).to_bytes(4, byteorder='big'))
+    send_end(client)
 
 
 stop = False
