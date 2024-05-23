@@ -52,6 +52,89 @@
             <button bindtap="BTBC" class="DisINF" style="width: 33.33%;">返回上级</button>
         </view>
     </view>
+    <view style="display:{{CAN>=5.1?'block':'none'}}">
+        <view style="height:5px;"></view>
+        <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SetBox">
+                <view class="SendLayout">
+                    <button bindtap="BTHELP" class="DisTIP" onTap="BTHELP" style="width: 65%;">{{'版本更新说明'}}</button>
+                    <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-03-29</button>
+                </view>
+                <view style="display:{{ShowBar==22?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
+                        <button bindtap="BTUP10" class="DisINF1" onTap="BTUP10">{{UEN?'Copy Connection':'复制连接'}}</button>
+                    </view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.27 2024-03-29 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴"ZXEPS R4875F1"电源支持(专用版本 普通版本无法切换) 风机初始风速设置最大值由120改为150(中兴4875初始风速默认为120,低了会停转) 加入了关机电流设置(以前是默认0.5A开始启动倒计时 不能设置) 重新打开5.24及之前版本升级5.25之后通道(用户设置中不能升级 仅限小程序系统设置中升级 且会重置所有设置)</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">1.10 2024-03-22(小程序更新) </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}由于最近5.25版本底层数据改动较大,导致部分用户升级后出现屏幕黑屏,电压范围异常,风速异常等情况,为避免大量异常导致机器返工问题所以决定关闭老版本升级5.25及之后的升级通道,由于APP端升级管理较为复杂,从此版本开始关闭安卓APP升级,只能小程序升级.更改更新日志为倒序.</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.26 2024-03-18 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复固件升级后不能自动重启问题(下次更新才生效) 修复5.25校正电压后不能立刻设置电压问题 修复5.25升级后部分机器电压范围错误问题 修改重置设置不再删除文字LOGO 修复了启动时按键跳过后偶尔会重启问题 加入允许用户设置LOGO选项 加入输出电压缓冲器(用于优化部分机器波纹偏大导致输出电压跳动频繁问题) 加入版本更新说明(涉及部分改机专业问题 所以仅在中文状态下系统设置中展示 切换至英文时不予显示)</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.25 2024-03-07 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}本次版本大量代码优化重写 重写小程序与控制板通讯协议 重写小程序UI绘制方法(以前UI部分会抖动) 加入详细数据显示功能 微信小程序加入英文支持 正式推出APP(从支持蓝牙开始历史所有版本均支持) 修复了ZXD3000一个Bug导致的电压设置和显示出现误差 重置设置后会清除所有设置图片了 优化苹果手机设置LOGO卡顿问题 优化传输图片中途退出导致死机问题 重新加入二段电流缓降功能 由于两个小程序更新比较麻烦 且改过蓝牙通讯后专业版需要重写才能使用 加上专业版代码过于老旧 所以正式放弃专业版 所有功能已搬迁至炫酷版 炫酷板加入导入图片代码方法(由于微信因安全及隐私等限制小程序访问手机图片 所以只能以代码形式发送 代码由PC端程序转换图片得到 复制好需要设置的图片代码 在点击设置电压后留空别粘贴 然后点确定即可识别 识别时会提示"CAN蓝牙读取了你的剪切板" 正确识别到图片代码后会弹出确认发送框 如无弹出请检查图片代码是否复制完整)</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.24 2024-01-19 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}优化部分代码 重写了升级界面 加入系统密码查询(一机一码永久有效) 加入英文显示支持(小程序暂不支持英文) 修复数据清零问题</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.23 2023-12-31 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入上下键同时按下开关机 修复4875低温异常问题 修复设置低于10A时会错误显示A</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.22 2023-11-16 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.21风速异常 修复部分手机不能连接专业版小程序</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.21 2023-11-12 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}提高显示刷新率 加入自动息屏默认60秒亮度50 支持GIF图片上传和JPG欢迎页面上传</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.20 2023-10-18 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}去除OVF和OAF,改为设置系数OVD和OAD,显示系数OVT和OAT设置</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.19 2023-10-12 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}部分显示信息修复 屏幕方向蓝牙名称和蓝牙密码移至用户设置</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.18 2023-10-05</view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修改开机提示倒计根据CAN通讯变色 加入充电动画 修复1个BUG导致缓启开启后部分英可瑞不能进入充电状态 加入按键交换功能</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.17 2023-09-29 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入OTA功能 部分UI调整 加入开机提示 移除驱动选择 受文件大小限制移除SSD1306和SH1106两个驱动 不再支持黑白屏</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.16 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}重写电流电压修正功能 现在按系数修正 优化电流采样显示 加入设置电压系数 OAF电流系数 </view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.15 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}由于部分电源异常 默认关闭电压电流修正功能</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.14 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复二段进入异常问题 二段电流缓降功能部分电源异常暂时移除二段电流缓降</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.13 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}重写电压电流自动修正功能 优化缓启显示 修复不能延时关机问题</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.12 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入重置所有设置 修改初始蓝牙密码为0000</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.11 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入英可瑞自动修正输出电压高于设置电压</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.10 </view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复屏幕统计数据问题 修改充电识别模式</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.09</view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入liteffs文件系统 以及ST7789V240*240高分屏 正式推出彩屏版本</view>
+                    <view style="height: 10px;"></view>
+                    <view class="tip2" style="color: #fa0;">5.08</view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入彩屏驱动GC9A01支持 128*128LCD屏幕</view>
+                    <view class="tip2" style="color: #fa0;">5.07</view>
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.06不能正确进入温度限制</view>
+                    <view style="height:15px;"></view>
+                </view>
+            </view>
+        </view>
+    </view>
     <view style="height:5px;"></view>
     <view style="color:rgb(252, 145, 4);position: relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
         <view class="SendLayout">
@@ -258,6 +341,50 @@
                 <view style="height:15px;"></view>
             </view>
         </view>
+    </view>
+    <view style="height:5px;"></view>
+    <view style="display:{{CAN>=5.17?'block':'none'}}">
+        <view style="color:rgb(252, 145, 4);position:relative;border-style:solid;left:5%;width: 90%;border-width: 3px;border-radius: 15px;border-color:#555;">
+            <view class="SendLayout">
+                <button bindtap="BTUP" class="DisTIP" style="width: 65%;">远程固件升级</button>
+                <button bindtap="BTUP6" class="DisINF" style="width: 35%;">{{ADD?'已禁用':5.25>CAN?'开始升级':'已最新版'}}</button>
+            </view>
+            <view style="display:{{ShowBar==4?'block':'none'}}">
+                <view style="display:{{CAN>=5.18?'block':'none'}}">
+                    <view class="btnLayout">
+                        <button class="DisTIP1">设备ID</button>
+                        <button bindtap="BTUP2" class="DisINF1">{{ID}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">固件版本</button>
+                        <button bindtap="BTUP3" class="DisINF1">{{CAN}}</button>
+                    </view>
+                    <view class="btnLayout" wx:if="{{CAN>=5.24}}">
+                        <button class="DisTIP1">固件回退</button>
+                        <button bindtap="BTUP0" class="DisINF1">退回5.23</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">APP版本</button>
+                        <button bindtap="BTUP4" class="DisINF1">{{APP}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">激活日期</button>
+                        <button bindtap="BTUP5" class="DisINF1">{{ACT}}</button>
+                    </view>
+                </view>
+                <view style="display:{{ADD?'block':'none'}}">
+                    <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
+                </view>
+                <view class="tip2">　　固件升级需要连接手机热点,且手机要处于有网络连接状态,手机打开热点后请按下面说明设置。</view>
+                <view class="tip2">　　1.热点名:config</view>
+                <view class="tip2">　　2.密码:88888888</view>
+                <view class="tip2">　　3.频段:2.4G</view>
+                <view class="tip2">　　按上述设置后点击右上角"开始升级"按钮启动升级程序。</view>
+                <view class="tip2">　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
     </view>
 </view>
 <view style="display:{{Panel==3?'block':'none'}}">
