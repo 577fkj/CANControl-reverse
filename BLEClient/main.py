@@ -271,9 +271,9 @@ def send_data(client, data):
     client.write_gatt_char(SERVICE_WRITE_UUID, data)
 
 
-def send_end(client):
+def send_get_data(client):
     """
-    发送结束
+    发送获取数据
     :param client:
     :return:
     """
@@ -288,7 +288,7 @@ def set_password(client, password: str):
     :return:
     """
     send_data(client, b'\xFA75' + password.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def reset_img_and_settings(client):
@@ -328,7 +328,7 @@ def set_max_power(client, power: int):
     power = int(100 * power).to_bytes(4, byteorder='big')
     send_data(client, b'\xF8\x4E' + power)
     send_data(client, b'\xF8\x4D' + power)
-    send_end(client)
+    send_get_data(client)
 
 
 def set_would_user_set_logo(client, is_user_set_logo: bool):
@@ -339,7 +339,7 @@ def set_would_user_set_logo(client, is_user_set_logo: bool):
     :return:
     """
     send_data(client, b'\xF9\xC0' + (b'\x00' if is_user_set_logo else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_is_ntc(client, is_ntc: bool):
@@ -350,7 +350,7 @@ def set_is_ntc(client, is_ntc: bool):
     :return:
     """
     send_data(client, b'\xF9\x62' + (b'\x00' if is_ntc else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def switch_protocol(client, protocol: str, chip_id: str = None):
@@ -384,7 +384,7 @@ def switch_protocol(client, protocol: str, chip_id: str = None):
         send_data(client, b'\xC8\x3F' + (int((e // 611) * n) & 0xFFFFFF).to_bytes(3, byteorder='big'))
 
     send_data(client, b'\xFC\x53' + maps[protocol].to_bytes(2, byteorder='big') + b'\x01')
-    send_end(client)
+    send_get_data(client)
 
 
 def set_shutdown_backlight(client, level: int):
@@ -396,7 +396,7 @@ def set_shutdown_backlight(client, level: int):
     :return:
     """
     send_data(client, b'\xF9\x68' + level.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_startup_backlight(client, level: int):
@@ -408,7 +408,7 @@ def set_startup_backlight(client, level: int):
     :return:
     """
     send_data(client, b'\xF9\x69' + level.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_sleep_backlight(client, level: int):
@@ -420,7 +420,7 @@ def set_sleep_backlight(client, level: int):
     :return:
     """
     send_data(client, b'\xF9\x6A' + level.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_sleep_time(client, time: int):
@@ -432,7 +432,7 @@ def set_sleep_time(client, time: int):
     :return:
     """
     send_data(client, b'\xF9\x6D' + time.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_startup_time(client, time: int):
@@ -444,7 +444,7 @@ def set_startup_time(client, time: int):
     :return:
     """
     send_data(client, b'\xF9\x6B' + time.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_show_startup_time(client, is_show: bool):
@@ -455,7 +455,7 @@ def set_show_startup_time(client, is_show: bool):
     :return:
     """
     send_data(client, b'\xF9\x6C' + (b'\x00' if is_show else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_show_gif(client, is_show: bool):
@@ -466,7 +466,7 @@ def set_show_gif(client, is_show: bool):
     :return:
     """
     send_data(client, b'\xF9\x6F' + (b'\x00' if is_show else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def color_to_bytes(color: int):
@@ -520,7 +520,7 @@ def set_decrease_current(client, enable: bool):
     :return:
     """
     send_data(client, b'\xF9\x72' + (b'\x00' if enable else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_english(client, enable: bool):
@@ -531,7 +531,7 @@ def set_english(client, enable: bool):
     :return:
     """
     send_data(client, b'\xF9\x70' + (b'\x00' if enable else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_ble_name(client, name: str):
@@ -542,7 +542,7 @@ def set_ble_name(client, name: str):
     :return:
     """
     send_data(client, b'\xFA\x73' + name.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_ble_password(client, password: str):
@@ -553,7 +553,7 @@ def set_ble_password(client, password: str):
     :return:
     """
     send_data(client, b'\xFA\x74' + password.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_swap_key(client, key: bool):
@@ -564,7 +564,7 @@ def set_swap_key(client, key: bool):
     :return:
     """
     send_data(client, b'\xF9\x66' + (b'\x00' if key else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_screen_orientation(client, orientation: int):
@@ -579,7 +579,7 @@ def set_screen_orientation(client, orientation: int):
     :return:
     """
     send_data(client, b'\xF9\x6E' + orientation.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_wifi_name(client, name: str):
@@ -590,7 +590,7 @@ def set_wifi_name(client, name: str):
     :return:
     """
     send_data(client, b'\xAB\x00' + name.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_wifi_password(client, password: str):
@@ -601,7 +601,7 @@ def set_wifi_password(client, password: str):
     :return:
     """
     send_data(client, b'\xAB\x01' + password.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def update_fw(client, fw_type='NewUI', version='0'):
@@ -628,7 +628,7 @@ def set_temp_acceleration_value(client, value: int):
     :return:
     """
     send_data(client, b'\xF9\x63' + value.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_acceleration_value(client, value: float):
@@ -640,7 +640,7 @@ def set_current_acceleration_value(client, value: float):
     :return:
     """
     send_data(client, b'\xF9\x64' + int(value * 10).to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_fan_init_speed(client, speed: int):
@@ -652,7 +652,7 @@ def set_fan_init_speed(client, speed: int):
     :return:
     """
     send_data(client, b'\xF9\x65' + speed.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_temp_limit_join(client, limit: int):
@@ -664,7 +664,7 @@ def set_temp_limit_join(client, limit: int):
     :return:
     """
     send_data(client, b'\xF8\x4A' + limit.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_temp_limit_exit(client, limit: int):
@@ -676,7 +676,7 @@ def set_temp_limit_exit(client, limit: int):
     :return:
     """
     send_data(client, b'\xF8\x4B' + limit.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_temp_limit_power(client, limit: int):
@@ -688,7 +688,7 @@ def set_temp_limit_power(client, limit: int):
     :return:
     """
     send_data(client, b'\xF8\x4C' + limit.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def start_voltage_offset(client):
@@ -698,7 +698,7 @@ def start_voltage_offset(client):
     :return:
     """
     send_data(client, b'\xC1')
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_voltage_offset(client, offset: float, slot: int, power_type: int, set_voltage: float,
@@ -738,10 +738,10 @@ def set_current_voltage_offset(client, offset: float, slot: int, power_type: int
         max_voltage = 59.4
     send_data(client, b'\xF8\x76' + int(100 * (min_voltage * a)).to_bytes(4, byteorder='big'))
     send_data(client, b'\xF8\x77' + int(100 * (max_voltage * a)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
     send_data(client, b'\xA8' + slot.to_bytes(1, byteorder='big') + int(100 * (50 * a)).to_bytes(4, byteorder='big') + (
                 set_current * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_display_voltage_offset(client, offset: float):
@@ -753,7 +753,7 @@ def set_display_voltage_offset(client, offset: float):
     :return:
     """
     send_data(client, b'\xFB\x47' + int(100 * (offset * 100)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_voltage_offset(client, offset: float):
@@ -765,7 +765,7 @@ def set_voltage_offset(client, offset: float):
     :return:
     """
     send_data(client, b'\xFB\x46' + int(100 * (offset * 100)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_voltage_range(client, start: float, end: float):
@@ -779,7 +779,7 @@ def set_voltage_range(client, start: float, end: float):
     """
     send_data(client, b'\xF8\x76' + int(start * 100).to_bytes(4, byteorder='big'))
     send_data(client, b'\xF8\x77' + int(end * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_voltage_jump_buffer(client, buffer: float):
@@ -791,7 +791,7 @@ def set_voltage_jump_buffer(client, buffer: float):
     :return:
     """
     send_data(client, b'\xF8\xF3' + int(buffer * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_zte4875_voltage_offset_auto(client, offset: float, output_voltage: int):
@@ -803,11 +803,11 @@ def set_zte4875_voltage_offset_auto(client, offset: float, output_voltage: int):
     :return:
     """
     send_data(client, b'\xC2')
-    send_end(client)
+    send_get_data(client)
     e = round(offset / output_voltage, 4)
     send_data(client, b'\xC4' + int(100 * (100 * round(offset / output_voltage, 4))).to_bytes(4, byteorder='big') + int(
         100 * (100 * e)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_zte4875_display_voltage_offset(client, offset: float):
@@ -819,7 +819,7 @@ def set_zte4875_display_voltage_offset(client, offset: float):
     :return:
     """
     send_data(client, b'\xFB\xF2' + int(100 * (offset * 100)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_zte4875_voltage_offset(client, offset: float):
@@ -831,7 +831,7 @@ def set_zte4875_voltage_offset(client, offset: float):
     :return:
     """
     send_data(client, b'\xFB\xF1' + int(100 * (offset * 100)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_current_offset(client, offset: float, set_current: float, current_output: float):
@@ -843,11 +843,11 @@ def set_current_current_offset(client, offset: float, set_current: float, curren
     :return:
     """
     send_data(client, b'\xC0')
-    send_end(client)
+    send_get_data(client)
     e = round(offset / current_output, 4)
     send_data(client, b'\xC5' + int(100 * (100 * round(offset / set_current, 4))).to_bytes(4, byteorder='big') + int(
         100 * (100 * e)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_display_offset(client, offset: float):
@@ -859,7 +859,7 @@ def set_current_display_offset(client, offset: float):
     :return:
     """
     send_data(client, b'\xFB\x45' + int(100 * (offset * 100)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_jump_buffer(client, buffer: float):
@@ -871,7 +871,7 @@ def set_current_jump_buffer(client, buffer: float):
     :return:
     """
     send_data(client, b'\xF8\xF4' + int(buffer * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_min_filter(client, filter: float):
@@ -883,7 +883,7 @@ def set_current_min_filter(client, filter: float):
     :return:
     """
     send_data(client, b'\xF8\x48' + int(filter * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_offset(client, offset: float):
@@ -895,7 +895,7 @@ def set_current_offset(client, offset: float):
     :return:
     """
     send_data(client, b'\xFB\x44' + int(100 * (offset * 100)).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_current_range(client, start: float, end: float):
@@ -908,7 +908,7 @@ def set_current_range(client, start: float, end: float):
     """
     send_data(client, b'\xF8\x78' + int(start * 100).to_bytes(4, byteorder='big'))
     send_data(client, b'\xF8\x79' + int(end * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_power_on_or_off(client, is_on: bool):
@@ -919,7 +919,7 @@ def set_power_on_or_off(client, is_on: bool):
     :return:
     """
     send_data(client, b'\xA6' + (b'\x01' if is_on else b'\x00'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_power_limit(client, limit: int):
@@ -931,7 +931,7 @@ def set_power_limit(client, limit: int):
     :return:
     """
     send_data(client, b'\xF8\x4D' + (limit * 100).to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_appointment_time(client, time: int):
@@ -943,7 +943,7 @@ def set_appointment_time(client, time: int):
     :return:
     """
     send_data(client, b'\xA9' + time.to_bytes(2, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_slot_voltage_current(client, slot: int, voltage: float, current: float):
@@ -958,7 +958,7 @@ def set_slot_voltage_current(client, slot: int, voltage: float, current: float):
     send_data(client,
               b'\xA8' + slot.to_bytes(1, byteorder='big') + int(voltage * 100).to_bytes(4, byteorder='big') + int(
                   current * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_soft_start(client, time: int):
@@ -970,7 +970,7 @@ def set_soft_start(client, time: int):
     :return:
     """
     send_data(client, b'\xF9\x61' + time.to_bytes(1, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_voltage_current(client, voltage: float, current: float, slot: int):
@@ -995,7 +995,7 @@ def set_second_current(client, current: float):
     :return:
     """
     send_data(client, b'\xF8\x57' + int(current * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_second_voltage(client, voltage: float):
@@ -1006,7 +1006,7 @@ def set_second_voltage(client, voltage: float):
     :return:
     """
     send_data(client, b'\xF8\x58' + int(voltage * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_delay_time(client, time: int):
@@ -1018,7 +1018,7 @@ def set_delay_time(client, time: int):
     :return:
     """
     send_data(client, b'\xF8\x59' + (time * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_shutdown_current(client, current: float):
@@ -1030,7 +1030,7 @@ def set_shutdown_current(client, current: float):
     :return:
     """
     send_data(client, b'\xF8\xF0' + int(current * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 def send_password(client, password: str):
@@ -1041,7 +1041,7 @@ def send_password(client, password: str):
     :return:
     """
     send_data(client, b'\xA0' + password.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def send_act_time(client, time: str):
@@ -1052,7 +1052,7 @@ def send_act_time(client, time: str):
     :return:
     """
     send_data(client, b'\xFD\x48' + time.encode('utf-8'))
-    send_end(client)
+    send_get_data(client)
 
 
 def get_system_password(device_id):
@@ -1074,7 +1074,7 @@ def set_enable_custom_background(client, enable: bool):
     :return:
     """
     send_data(client, b'\xF9\x67' + (b'\x00' if enable else b'\x01'))
-    send_end(client)
+    send_get_data(client)
 
 
 def set_custom_logo(client, logo_offset: int, logo: bytes):
@@ -1103,7 +1103,7 @@ def set_per_charge_voltage(client, voltage: float):
     :return:
     """
     send_data(client, b'\xF8\xF6' + int(voltage * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 def set_per_charge_current(client, current: float):
     """
@@ -1113,7 +1113,7 @@ def set_per_charge_current(client, current: float):
     :return:
     """
     send_data(client, b'\xF8\xF5' + int(current * 100).to_bytes(4, byteorder='big'))
-    send_end(client)
+    send_get_data(client)
 
 
 stop = False
