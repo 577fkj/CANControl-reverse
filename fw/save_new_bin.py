@@ -25,7 +25,7 @@ def download(url, file_name, save_dir, bin_id, next_bin = None):
     version = get_version(data)
     if os.path.exists(f'{save_dir}/{name}'):
         os.remove(f'{save_dir}/{name}')
-    name = f'{file_name}({file_id})_{version}.bin'
+    name = f'{file_id}_{file_name}_{version}.bin'
     print(f'Saving {name}')
     with open(f'{save_dir}/{name}', 'wb') as f:
         f.write(data)
