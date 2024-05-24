@@ -353,7 +353,7 @@ def set_is_ntc(client, is_ntc: bool):
     send_end(client)
 
 
-def switch_protocol(client, protocol: str, zte4875_device_id: str = None):
+def switch_protocol(client, protocol: str, chip_id: str = None):
     """
     切换协议
     huawei
@@ -361,28 +361,29 @@ def switch_protocol(client, protocol: str, zte4875_device_id: str = None):
     zte3000
     infy
     eps6020
-    zte4875
+    zte4875 : need chip_id
+    :param chip_id:
     :param client:
     :param protocol:
     :return:
     """
     maps = {
-        'huawei': 0x0101,
-        'increase': 0x0201,
-        'zte3000': 0x0401,
-        'infy': 0x0801,
-        'eps6020': 0x1001,
-        'zte4875': 0x2001,
+        'huawei': 0x01,
+        'increase': 0x02,
+        'zte3000': 0x04,
+        'infy': 0x08,
+        'eps6020': 0x10,
+        'zte4875': 0x20,
     }
-    if not zte4875_device_id:
-        e = int(zte4875_device_id, 16)
+    if not chip_id:
+        e = int(chip_id, 16)
         a = str(e)
         n = 0
         for i in a:
             n += ord(i)
         send_data(client, b'\xC8\x3F' + (int((e // 611) * n) & 0xFFFFFF).to_bytes(3, byteorder='big'))
 
-    send_data(client, b'\xFC\x53' + maps[protocol].to_bytes(2, byteorder='big'))
+    send_data(client, b'\xFC\x53' + maps[protocol].to_bytes(2, byteorder='big') + b'\x01')
     send_end(client)
 
 
