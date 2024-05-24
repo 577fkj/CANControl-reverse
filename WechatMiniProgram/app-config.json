@@ -1,1 +1,63 @@
-{"subPackages":[{"root":"donutAuthorize__/","independent":true}],"entryPagePath":"pages/index/index.html","pages":["pages/index/index","pages/device/device","pages/device2/device","pages/NewUI/NewUI","pages/NewUI1/NewUI","donutAuthorize__/pages/miniProgramLoginAuthorize/miniProgramLoginAuthorize"],"page":{"pages/index/index.html":{"window":{"backgroundTextStyle":"dark","enablePullDownRefresh":true}},"pages/device/device.html":{"window":{}},"pages/device2/device.html":{"window":{}},"pages/NewUI/NewUI.html":{"window":{"backgroundColorContent":"#000000ff","navigationBarBackgroundColor":"#001","navigationBarTextStyle":"white","navigationBarTitleText":"CAN-Control","backgroundColor":"#001","backgroundTextStyle":"light","backgroundColorTop":"#001","backgroundColorBottom":"#001"}},"pages/NewUI1/NewUI.html":{"window":{"backgroundColorContent":"#000000ff","navigationBarBackgroundColor":"#001","navigationBarTextStyle":"white","navigationBarTitleText":"CAN-Control","backgroundColor":"#001","backgroundTextStyle":"light","backgroundColorTop":"#001","backgroundColorBottom":"#001"}},"donutAuthorize__/pages/miniProgramLoginAuthorize/miniProgramLoginAuthorize.html":{"window":{"navigationStyle":"default","navigationBarBackgroundColor":"#ffffff","navigationBarTextStyle":"black","backgroundColor":"#ffffff","backgroundTextStyle":"light","backgroundColorTop":"ffffff","backgroundColorBottom":"ffffff"}}},"global":{"window":{"backgroundTextStyle":"light","navigationBarBackgroundColor":"#fff","navigationBarTitleText":"CAN-Control","navigationBarTextStyle":"black"}},"networkTimeout":{"request":2000,"downloadFile":5000},"miniApp":{"useAuthorizePage":true},"style":"v2","renderer":{"allUsed":["webview"],"default":"webview"}}
+{
+  "subPackages": [],
+  "entryPagePath": "pages/index/index.html",
+  "pages": ["pages/index/index", "pages/device/device", "pages/device2/device", "pages/NewUI/NewUI", "pages/NewUI1/NewUI"],
+  "page": {
+    "pages/index/index.html": {
+      "window": {
+        "backgroundTextStyle": "dark",
+        "enablePullDownRefresh": true
+      }
+    },
+    "pages/device/device.html": {
+      "window": {}
+    },
+    "pages/device2/device.html": {
+      "window": {}
+    },
+    "pages/NewUI/NewUI.html": {
+      "window": {
+        "backgroundColorContent": "#000000ff",
+        "navigationBarBackgroundColor": "#001",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "CAN-Control",
+        "backgroundColor": "#001",
+        "backgroundTextStyle": "light",
+        "backgroundColorTop": "#001",
+        "backgroundColorBottom": "#001"
+      }
+    },
+    "pages/NewUI1/NewUI.html": {
+      "window": {
+        "backgroundColorContent": "#000000ff",
+        "navigationBarBackgroundColor": "#001",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "CAN-Control",
+        "backgroundColor": "#001",
+        "backgroundTextStyle": "light",
+        "backgroundColorTop": "#001",
+        "backgroundColorBottom": "#001"
+      }
+    }
+  },
+  "global": {
+    "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "CAN-Control",
+      "navigationBarTextStyle": "black"
+    }
+  },
+  "networkTimeout": {
+    "request": 2000,
+    "downloadFile": 5000
+  },
+  "miniApp": {
+    "useAuthorizePage": true
+  },
+  "style": "v2",
+  "renderer": {
+    "allUsed": ["webview"],
+    "default": "webview"
+  }
+}
