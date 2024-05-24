@@ -41,7 +41,7 @@ def yt(t):
 class PowerData:
     activation_time = ''
     ver = 0
-    sub_ver = 0
+    current_protocol = 0
     can = ''
     chip_id = ''
     is_english = 0
@@ -202,7 +202,7 @@ def notify_callback(sender, data):
     elif mode == 0x11:
         power_data.slot[2] = [ie(data, 1), ie(data, 5)]  # 槽位3 电压 电流
         power_data.slot[3] = [ie(data, 9), ie(data, 13)]  # 槽位4 电压 电流
-        power_data.sub_ver = data[17]  # 子版本
+        power_data.current_protocol = data[17]  # 当前协议
         power_data.is_english = data[18]  # 是否英文
         power_data.swap_key = data[19]  # 对调加减位置
     elif mode == 0x12:
@@ -1165,7 +1165,7 @@ async def main():
             while client.is_connected and paired:
                 os.system('cls')
                 print(
-                    f'激活时间: {power_data.activation_time} 系统密码: {get_system_password(power_data.chip_id)} 版本: {power_data.ver}-{power_data.sub_ver} 协议: {power_data.can} 芯片ID: {power_data.chip_id} 英文: {power_data.is_english} 交换上下按键: {power_data.swap_key} NTC: {power_data.is_ntc}')
+                    f'激活时间: {power_data.activation_time} 系统密码: {get_system_password(power_data.chip_id)} 版本: {power_data.ver}-{power_data.current_protocol} 协议: {power_data.can} 芯片ID: {power_data.chip_id} 英文: {power_data.is_english} 交换上下按键: {power_data.swap_key} NTC: {power_data.is_ntc}')
                 print(
                     f'电池电量: {power_data.soc}% 电压: {power_data.output_voltage}V 电流: {power_data.output_current}A 功率: {power_data.output_power}W')
                 print(
