@@ -170,7 +170,7 @@ def notify_callback(sender, data):
         power_data.output_current = ie(data, 5)  # 输出电流
         power_data.output_power = ie(data, 9)  # 输出功率
         power_data.output_temperature = ie(data, 13)  # 输出温度
-        power_data.status = data[34]  # 充电状态 0=等待接入电池 1=正在充电中 2=第二段充电中 3=充电完成 4=充电器已关机 40=预约等待中 43=充电完成(已关机)
+        power_data.status = data[34]  # 充电状态 0=等待接入电池 1=正在充电中 2=第二段充电中 3=充电完成 4=充电器已关机 5=正在预充 40=预约等待中 43=充电完成(已关机)
         power_data.fan_speed = data[36]  # 风机速度
         power_data.is_can_error = data[38]  # 0=CAN通讯异常
     elif mode == 0x02:
