@@ -105,3 +105,14 @@ Low level trigger
 | ----- | -------- |
 | IO27  | PCB      |
 | IO13  | FAN PCB  |
+
+### Tips
+
+If you want to replicate this project, please use the firmware '[dump_no_nvs.bin](dump/lcd/5.31/dump_no_nvs.bin)' and activate it using '[active.py](tools/active.py)'.
+
+## Thanks
+
+- [Hacking a Smart Home Device](https://jmswrnr.com/blog/hacking-a-smart-home-device)
+- [esp32knife](https://github.com/jmswrnr/esp32knife)
+- [ghidra](https://github.com/NationalSecurityAgency/ghidra)
+- [SVD-Loader-Ghidra](https://github.com/leveldown-security/SVD-Loader-Ghidra)
