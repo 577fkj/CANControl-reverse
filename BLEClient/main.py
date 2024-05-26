@@ -381,7 +381,7 @@ def switch_protocol(client, protocol: str, chip_id: str = None):
         n = 0
         for i in a:
             n += ord(i)
-        send_data(client, b'\xC8\x3F' + (int((e // 611) * n) & 0xFFFFFF).to_bytes(3, byteorder='big'))
+        send_data(client, b'\xC8\x3F' + (int((e // 0x263) * n) & 0xFFFFFF).to_bytes(3, byteorder='big')) # 写入协议范围
 
     send_data(client, b'\xFC\x53' + maps[protocol].to_bytes(2, byteorder='big') + b'\x01')
     send_get_data(client)
