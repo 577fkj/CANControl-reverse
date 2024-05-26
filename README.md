@@ -106,7 +106,7 @@ Low level trigger
 | IO27  | PCB      |
 | IO13  | FAN PCB  |
 
-### Tips
+## Tips
 
 If you want to replicate this project, please use the firmware '[dump_no_nvs.bin](dump/lcd/5.31/dump_no_nvs.bin)' and activate it using '[active.py](tools/active.py)'.
 
