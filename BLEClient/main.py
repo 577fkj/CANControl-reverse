@@ -1115,6 +1115,16 @@ def set_per_charge_current(client, current: float):
     send_data(client, b'\xF8\xF5' + int(current * 100).to_bytes(4, byteorder='big'))
     send_get_data(client)
 
+def set_max_fan_speed(client, speed: int):
+    """
+    设置最大风扇速度
+    200-255
+    :param client:
+    :param speed:
+    :return:
+    """
+    send_data(client, b'\xF9\xC5' + speed.to_bytes(1, byteorder='big'))
+    send_get_data(client)
 
 stop = False
 
