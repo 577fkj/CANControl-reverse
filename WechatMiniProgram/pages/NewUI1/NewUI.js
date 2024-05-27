@@ -1,7 +1,7 @@
 var t, e, a, n, i, o, r, s, c, u, f, F, h, d, l, S, p, T, g, B, C, D, m, w, O, v, x, E, A, I, b, G, R, N, $, L, M, U, W, V, K, P, y, k, Y, H, j, q, Z, _, z, Q, J, X, tt, et, at, nt, it, ot, rt, st, ct, ut, ft, Ft, ht, dt, lt, St, pt, Tt, gt, Bt, Ct, Dt, mt, wt, Ot, vt, xt = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   Et = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  At = require("../../6CA8B5449E166AAF0ACEDD43BE69AD44.js"),
-  It = require("../../CCB772C49E166AAFAAD11AC3E189AD44.js"),
+  At = require("../../0D81CD379E166AAF6BE7A5301854D591.js"),
+  It = require("../../37FA01939E166AAF519C69944194D591.js"),
   bt = 0,
   Gt = 0,
   Rt = 0,
@@ -403,7 +403,7 @@ Page({
   uset: function (t) {
     Zt("FF"), (2 == Rt || Gt) && this.setData({
       Panel: 2 == Gt ? 2 : 3,
-      ShowBar: 2 == Gt ? 0 : bt < Number("5.31") ? 4 : 8,
+      ShowBar: 2 == Gt ? 0 : bt < Number("5.32") ? 4 : 8,
       LOGO: N ? "Preview" : "预览"
     })
   },
@@ -770,7 +770,7 @@ Page({
       confirmText: N ? "YES" : "确定",
       cancelText: N ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return Zt("A7" + ae("8", 4) + ae("NewUI")), void(0, At.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return Zt("A7" + ae("9", 4) + ae("NewUI")), void(0, At.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
@@ -1073,15 +1073,15 @@ Page({
       UEN: N,
       ShowM: Vt,
       RollV: 5.3,
-      TestV: "5.31测试一",
-      UPDate: "5.31",
-      APP: "1.15",
+      TestV: "5.32测试一",
+      UPDate: "5.32",
+      APP: "1.16",
       GM: Gt,
       ADD: Kt,
       CAN: bt,
       BackIMG: (0, At.GetCFG)("BIMG", "/img/bc1.gif")
-    }), "5.31测试一" != (0, At.GetCFG)("TVer") && Gt && ((0, At.SetCFG)("TVer", "5.31测试一"), wx.showModal({
-      title: "有新测试固件:5.31测试一",
+    }), "5.32测试一" != (0, At.GetCFG)("TVer") && Gt && ((0, At.SetCFG)("TVer", "5.32测试一"), wx.showModal({
+      title: "有新测试固件:5.32测试一",
       editable: !1,
       confirmText: "知道了",
       showCancel: !1

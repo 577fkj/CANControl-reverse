@@ -8,7 +8,15 @@
   },
   "style": "v2",
   "debug": true,
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "donutAuthorize__/",
+      "independent": true,
+      "pages": [
+        "pages/miniProgramLoginAuthorize/miniProgramLoginAuthorize"
+      ]
+    }
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

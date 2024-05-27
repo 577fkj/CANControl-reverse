@@ -153,13 +153,16 @@
         <view class="SetBox">
             <view class="SendLayout">
                 <button bindtap="BTHELP" class="DisTIP" onTap="BTHELP" style="width: 65%;">{{'版本更新说明'}}</button>
-                <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-05-16</button>
+                <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-05-25</button>
             </view>
             <view style="display:{{ShowBar==22?'block':'none'}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
                     <button bindtap="BTUP10" class="DisINF1" onTap="BTUP10">{{UEN?'Copy Connection':'复制连接'}}</button>
                 </view>
+                <view style="height: 10px;"></view>
+                <view class="tip2" style="color: #fa0;">5.32 2024-05-25 </view>
+                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
                 <view style="height: 10px;"></view>
                 <view class="tip2" style="color: #fa0;">5.31 2024-05-16 </view>
                 <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
@@ -839,6 +842,11 @@
                 <view wx:if="{{!UEN}}">
                     <view style="display:{{ADD?'block':'none'}}">
                         <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
+                    </view>
+                    <view wx:if="{{CVer<5.32}}">
+                        <view style="height: 10px;"></view>
+                        <view class="tip2" style="color: #0f0;">5.32 2024-05-25</view>
+                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
                     </view>
                     <view wx:if="{{CVer<5.31}}">
                         <view style="height: 10px;"></view>
