@@ -4,16 +4,16 @@
 
 ### PCB Image
 
-Control board (1.0mm)
-
-Screw specification (M2*3)
+#### Control board (1.0mm)
 
 | TOP                   | BOTTOM                   |
 | --------------------- | ------------------------ |
 | ![](images/top.jpg)   | ![](images/bottom.jpg)   |
 | ![](images/top_1.png) | ![](images/bottom_1.png) |
 
-Fan board (1.6mm)
+- Screw specification M3 * 2
+
+#### Fan board (1.6mm)
 
 | TOP                     | BOTTOM                     |
 | ----------------------- | -------------------------- |
