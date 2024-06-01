@@ -6,6 +6,8 @@
 
 Control board (1.0mm)
 
+Screw specification (M2*3)
+
 | TOP                   | BOTTOM                   |
 | --------------------- | ------------------------ |
 | ![](images/top.jpg)   | ![](images/bottom.jpg)   |
