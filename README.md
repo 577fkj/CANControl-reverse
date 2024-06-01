@@ -4,10 +4,18 @@
 
 ### PCB Image
 
+Control board (1.0mm)
+
 | TOP                   | BOTTOM                   |
 | --------------------- | ------------------------ |
 | ![](images/top.jpg)   | ![](images/bottom.jpg)   |
 | ![](images/top_1.png) | ![](images/bottom_1.png) |
+
+Fan board (1.6mm)
+
+| TOP                     | BOTTOM                     |
+| ----------------------- | -------------------------- |
+| ![](images/fan_top.jpg) | ![](images/fan_bottom.jpg) |
 
 ### Test
 
@@ -19,16 +27,16 @@
 
 | Device        | Support |
 | ------------- | ------- |
-| Huawei R48100 | ✅      |
-| Huawei R4875  | ✅      |
-| Huawei R4850  | ✅      |
-| Huawei R4830  | ✅      |
-| Huawei R4815  | ✅      |
+| Huawei R48100 | ✅       |
+| Huawei R4875  | ✅       |
+| Huawei R4850  | ✅       |
+| Huawei R4830  | ✅       |
+| Huawei R4815  | ✅       |
 
 ### ZTE 3000 protocol
 
-| Device            | Support       |
-| ----------------- | ------------- |
+| Device            | Support      |
+| ----------------- | ------------ |
 | ZTE ZXD 3000 V5.5 | ✅            |
 | ZTE ZXD 3000 V5.6 | ✅            |
 | ZTE ZXD 3000 V5.7 | ✅            |
@@ -37,8 +45,8 @@
 
 ### ZTE 4875 protocol
 
-| Device            | Support      |
-| ----------------- | ------------ |
+| Device            | Support     |
+| ----------------- | ----------- |
 | ZTE ZXEPS R4875F1 | ✅           |
 | ZTE ZXEPS R4850F1 | ⚠️ (No test) |
 | ZTE ZXD 3000 V6.6 | ⚠️ (No test) |
@@ -47,25 +55,25 @@
 
 | Device  | Support |
 | ------- | ------- |
-| EPS4820 | ✅      |
-| EPS6020 | ✅      |
-| EPS7220 | ✅      |
+| EPS4820 | ✅       |
+| EPS6020 | ✅       |
+| EPS7220 | ✅       |
 
 ### Increase protocol
 
 | Device                 | Support |
 | ---------------------- | ------- |
-| Increase TR72-3500     | ✅      |
-| Increase TR48-3000     | ✅      |
-| Increase TR240-6000    | ✅      |
-| Increase EVR500-10000  | ✅      |
-| Increase EVR700-15000C | ✅      |
-| Increase other models  | ✅      |
+| Increase TR72-3500     | ✅       |
+| Increase TR48-3000     | ✅       |
+| Increase TR240-6000    | ✅       |
+| Increase EVR500-10000  | ✅       |
+| Increase EVR700-15000C | ✅       |
+| Increase other models  | ✅       |
 
 ### INFY protocol
 
-| Device            | Support      |
-| ----------------- | ------------ |
+| Device            | Support     |
+| ----------------- | ----------- |
 | INFY REG50010S    | ✅           |
 | INFY other models | ⚠️ (No test) |
 
