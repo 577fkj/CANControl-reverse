@@ -7,7 +7,6 @@
     "useAuthorizePage": true
   },
   "style": "v2",
-  "debug": true,
   "subPackages": [
     {
       "root": "donutAuthorize__/",

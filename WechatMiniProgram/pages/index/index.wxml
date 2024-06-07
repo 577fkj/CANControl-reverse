@@ -11,7 +11,7 @@
         <text class="list-item-rssi">{{item.rssi}}</text>
         <view class="list-item-line"></view>
     </view>
-    <view class="notice" wx:if="{{!deviceListDataShow.length&&Start}}"> -自动搜索中,长间无设备时请确认蓝牙及定位是否打开 - </view>
+    <view class="notice" wx:if="{{!deviceListDataShow.length}}"> -自动搜索中,长间无设备时请确认蓝牙及定位是否打开 - </view>
     <view class="gap"></view>
 </scroll-view>
 <view class="footer" style="display:{{ShowUI?'flex':'none'}}">

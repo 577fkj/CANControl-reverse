@@ -17,13 +17,17 @@
         <view style=" border-style:solid;border-width:8px;border-radius:5px;border-color:#fff;  position:absolute;left:78%;top:160px;width:0%;height:25px;"></view>
         <view style="position:absolute;top:135px;color:#fff;width:100%;font-size:{{UEN?15:30}}px;">{{STR}}</view>
         <view style="position:absolute;top:180px;color:#fff;width:100%;font-size:40px;">{{SOC}}%</view>
-        <view style="left:90%; top:240px; width: 28px; height: 28px;position:absolute;">
+        <view bindtap="uset" style="left:90%; top:240px; width: 28px; height: 28px;position:absolute;">
             <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate}}"></view>
-            <image bindtap="uset" mode="aspectFit" onTap="uset" src="/img/set.png" style="width: 25px; height: 25px;"></image>
+            <image mode="aspectFit" onTap="uset" src="/img/set.png" style="width: 25px; height: 25px;"></image>
         </view>
+        <view bindtap="DST1" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:195px;position:absolute;color:{{DST==0?'#0f0':'#AAAA'}};">①</view>
+        <view bindtap="DST2" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:160px;position:absolute;color:{{DST==1?'#0f0':'#AAAA'}};">②</view>
+        <view bindtap="DST3" hidden="{{!(DOL>2)}}" style="font-size:28px;left:90%;top:125px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">③</view>
+        <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top: 90px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">④</view>
         <image bindtap="SetSM" mode="aspectFit" onTap="SetSM" src="/img/vw.png" style="left:5%; top:240px; width: 25px; height: 25px;position:absolute;"></image>
     </view>
-    <view class="btnLayout" style="height:240px;display:{{ShowM>=1?'block':'none'}}">
+    <view class="btnLayout" hidden="{{ShowM==0}}" style="height:240px;">
         <view style="border-style:solid;border-width:1px;border-radius:0px;border-color:#033f;position:absolute;left:49%;top:280px;width:0px;height:215px;"></view>
         <view style="display:{{ShowM==2?'block':'none'}}">
             <view style="border-style:solid;border-width:2px;border-radius: 1px;border-color:#033f;position:absolute;left:3.5%;top:308px;width:91%;height:25px;"></view>
@@ -81,13 +85,14 @@
         <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*7}}px;width:35.5%;height:25px;">{{TI}}</view>
         <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*7}}px;width:42.5%;height:25px;color:#999;"></view>
     </view>
-    <view class="btnLayout" style="height:240;display:{{ShowM==0?'block':'none'}}">
+    <view class="btnLayout" hidden="{{ShowM!=0}}" style="height:240;">
         <image bindtap="pwrbt" mode="aspectFit" onTap="pwrbt" src="/img/{{PON==1?'iv':'iv1'}}.png" style="left:5%;top:280px;width:30%;height: 120px;position:absolute;"></image>
         <view style="position:absolute;left:5%;top:356px;width:30%;font-size:17px;color:white;">{{IV}}</view>
         <image bindtap="otbt" mode="aspectFit" onTap="otbt" src="/img/ot.png" style="left:35%;top:280px;width:30%;height: 120px;position:absolute;"></image>
         <view style="position:absolute;left:35%;top:356px;width:30%;font-size:17px;color:{{SMT?'red':'white'}};">{{OT==0?IT:OT}}℃</view>
         <image bindtap="owbt" mode="aspectFit" onTap="owbt" src="/img/ow.png" style="left:65%;top:280px;width:30%;height: 120px;position:absolute;"></image>
         <view style="position:absolute;left:65%;top:356px;width:30%;font-size:17px;color:{{SWT||SMT?'red':'white'}};">{{OW}}</view>
+        <view style="position:absolute;left:65%;top:346px;width:30%;font-size:12px;color:gray;">{{UMW}}</view>
         <image bindtap="ahbt" mode="aspectFit" onTap="ahbt" src="/img/ah.png" style="left:5%;top:400px;width:30%;height: 120px;position:absolute;"></image>
         <view style="position:absolute;left:5%;top:476px;width:30%;font-size:17px;color:white;">{{Ah}}</view>
         <image bindtap="whbt" mode="aspectFit" onTap="whbt" src="/img/wh.png" style="left:35%;top:400px;width:30%;height: 120px;position:absolute;"></image>
@@ -152,14 +157,21 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTHELP" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=22}}"></view>
+                    <view class="close" hidden="{{ShowBar==22}}"></view>
+                </view>
                 <button bindtap="BTHELP" class="DisTIP" onTap="BTHELP" style="width: 65%;">{{'版本更新说明'}}</button>
-                <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-05-25</button>
+                <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-06-02</button>
             </view>
             <view style="display:{{ShowBar==22?'block':'none'}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
                     <button bindtap="BTUP10" class="DisINF1" onTap="BTUP10">{{UEN?'Copy Connection':'复制连接'}}</button>
                 </view>
+                <view style="height: 10px;"></view>
+                <view class="tip2" style="color: #fa0;">5.33 2024-06-02 </view>
+                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开) </view>
                 <view style="height: 10px;"></view>
                 <view class="tip2" style="color: #fa0;">5.32 2024-05-25 </view>
                 <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
@@ -248,10 +260,14 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTOVT" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=0}}"></view>
+                    <view class="close" hidden="{{ShowBar==0}}"></view>
+                </view>
                 <button bindtap="BTOVT" class="DisTIP" id="BTOVT" onTap="BTOVT" style="width: 65%;">{{UEN?'OUT Voltage Correction':'输出电压校正'}}</button>
                 <button bindtap="BTOVT0" class="DisINF" onTap="BTOVT0" style="width: 35%;">{{UEN?'Start':'开始校正'}}</button>
             </view>
-            <view style="display:{{ShowBar==0?'block':'none'}}">
+            <view hidden="{{ShowBar!=0}}">
                 <view style="background-color: #88888850;height:88px">
                     <button style="position:absolute;width:50%;left:0;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OV}}V</button>
                     <view style="position:absolute;left:30%;top:105px;font-size:15px;color:white;">{{SV}}V</view>
@@ -318,6 +334,10 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTOAT" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=1}}"></view>
+                    <view class="close" hidden="{{ShowBar==1}}"></view>
+                </view>
                 <button bindtap="BTOAT" class="DisTIP" onTap="BTOAT" style="width: 65%;">{{UEN?'OUT Current Correction':'输出电流校正'}}</button>
                 <button bindtap="BTOAT0" class="DisINF" onTap="BTOAT0" style="width: 35%;">{{UEN?'Start':'开始校正'}}</button>
             </view>
@@ -378,6 +398,10 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTSMW" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=18}}"></view>
+                    <view class="close" hidden="{{ShowBar==18}}"></view>
+                </view>
                 <button bindtap="BTSMW" class="DisTIP" onTap="BTSMW" style="width: 65%;">{{UEN?'SYS Power Limit':'系统功率限制'}}</button>
                 <button bindtap="BTSMW1" class="DisINF" onTap="BTSMW1" style="width: 35%;">{{SMW}}</button>
             </view>
@@ -404,8 +428,12 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTUMT" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=5}}"></view>
+                    <view class="close" hidden="{{ShowBar==5}}"></view>
+                </view>
                 <button bindtap="BTUMT" class="DisTIP" onTap="BTUMT" style="width: 65%;">{{UEN?'Set Over Temp Limit':'设置超温限制'}}</button>
-                <button class="DisINF" style="width: 35%;">{{UMT+'℃'+TMW+'W'}}</button>
+                <button bindtap="BTUMT" class="DisINF" style="width: 35%;">{{UMT+'℃'+TMW+'W'}}</button>
             </view>
             <view style="display:{{ShowBar==5?'block':'none'}}">
                 <view class="btnLayout">
@@ -430,6 +458,10 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTFAN" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=6}}"></view>
+                    <view class="close" hidden="{{ShowBar==6}}"></view>
+                </view>
                 <button bindtap="BTFAN" class="DisTIP" onTap="BTFAN" style="width: 65%;">{{UEN?'Set Fan Speed':'设置风机速度'}}</button>
                 <button bindtap="BTLFS" class="DisINF" onTap="BTLFS" style="width: 35%;">{{NFS}}</button>
             </view>
@@ -483,8 +515,12 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTCAN" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=16}}"></view>
+                    <view class="close" hidden="{{ShowBar==16}}"></view>
+                </view>
                 <button bindtap="BTCAN" class="DisTIP" onTap="BTCAN" style="width: 65%;">{{UEN?'Set Power Protocol':'设置电源协议'}}</button>
-                <button class="DisINF" style="width: 35%;">{{SCAN}}</button>
+                <button bindtap="BTCAN" class="DisINF" style="width: 35%;">{{SCAN}}</button>
             </view>
             <view style="display:{{ShowBar==16?'block':'none'}}">
                 <view class="btnLayout">
@@ -529,6 +565,10 @@
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTNTC" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=17}}"></view>
+                    <view class="close" hidden="{{ShowBar==17}}"></view>
+                </view>
                 <button bindtap="BTNTC" class="DisTIP" onTap="BTNTC" style="width: 65%;">{{UEN?'Output Temp Collection':'输出温度采集'}}</button>
                 <button bindtap="BTNTC1" class="DisINF" onTap="BTNTC1" style="width: 35%;" wx:if="{{UEN}}">{{NTC?'Control':'Power'}}</button>
                 <button bindtap="BTNTC1" class="DisINF" onTap="BTNTC1" style="width: 35%;" wx:if="{{!UEN}}">{{NTC?'控制':'电源'}}</button>
@@ -565,6 +605,11 @@
 <view wx:if="{{UEG&&Panel==3||Panel==2}}">
     <view class="SetBox">
         <view class="SendLayout">
+            <view bindtap="BTLOGO" style="width: 20px; background-color: #88888850;">
+                <view class="open" hidden="{{ShowBar!=20}}"></view>
+                <view class="close" hidden="{{ShowBar==20}}" wx:if="{{!UEG}}"></view>
+                <view class="close1" hidden="{{ShowBar==20}}" wx:else></view>
+            </view>
             <button bindtap="BTLOGO" class="DisTIP" onTap="BTLOGO" style="width: 65%;">{{UEN?'Set LOGO':'设置LOGO文字'}}</button>
             <button bindtap="BTLOGO0" class="DisINF" onTap="BTLOGO0" style="width: 35%;">{{LOGO}}</button>
         </view>
@@ -667,6 +712,10 @@
     <view style="display:{{CVer>=5?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTKEY" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=8}}"></view>
+                    <view class="close1" hidden="{{ShowBar==8}}"></view>
+                </view>
                 <button bindtap="BTKEY" class="DisTIP" onTap="BTKEY" style="width: 65%;">{{UEN?'Enable Panel Buttons':'面板按键启用'}}</button>
                 <button bindtap="BTKEY1" class="DisINF" onTap="BTKEY1" style="width: 35%;" wx:if="{{UEN}}">{{KON?'Yes':'No'}}</button>
                 <button bindtap="BTKEY1" class="DisINF" onTap="BTKEY1" style="width: 35%;" wx:if="{{!UEN}}">{{KON?'是':'否'}}</button>
@@ -693,6 +742,10 @@
     <view style="display:{{CVer>=5?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTCKA" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=21}}"></view>
+                    <view class="close1" hidden="{{ShowBar==21}}"></view>
+                </view>
                 <button bindtap="BTCKA" class="DisTIP" onTap="BTKEY" style="width: 65%;">{{UEN?'Enable Panel Buttons':'二段电流缓降'}}</button>
                 <button bindtap="BTCKA2" class="DisINF" onTap="BTCKA2" style="width: 35%;" wx:if="{{UEN}}">{{CKA2?'Yes':'No'}}</button>
                 <button bindtap="BTCKA2" class="DisINF" onTap="BTCKA2" style="width: 35%;" wx:if="{{!UEN}}">{{CKA2?'是':'否'}}</button>
@@ -716,6 +769,10 @@
     <view style="display:{{CVer>=5.31?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTYC" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=23}}"></view>
+                    <view class="close1" hidden="{{ShowBar==23}}"></view>
+                </view>
                 <button bindtap="BTYC" class="DisTIP" style="width: 65%;">{{UEN?'Set Pre Charge Voltage':'设置预充功能'}}</button>
                 <button bindtap="BTYC1" class="DisINF" style="width: 35%;">{{YCV!='0.00'?YCV+'V':UEN?'OFF':'关闭'}}</button>
             </view>
@@ -738,6 +795,10 @@
     <view style="display:{{CVer>=5.24?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTEN" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=19}}"></view>
+                    <view class="close1" hidden="{{ShowBar==19}}"></view>
+                </view>
                 <button bindtap="BTEN" class="DisTIP" onTap="BTEN" style="width: 65%;">语言/Language</button>
                 <button bindtap="BTEN1" class="DisINF" onTap="BTEN1" style="width: 35%;">{{UEN?'English':'中文'}}</button>
             </view>
@@ -758,6 +819,10 @@
     <view style="display:{{CVer>=5.19?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTBLE" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=9}}"></view>
+                    <view class="close1" hidden="{{ShowBar==9}}"></view>
+                </view>
                 <button bindtap="BTBLE" class="DisTIP" onTap="BTBLE" style="width: 60%;">{{UEN?'Set Bluetooth Name':'设置蓝牙名称'}}</button>
                 <button bindtap="BTBLE1" class="DisINF" onTap="BTBLE1" style="width: 40%;">{{SSID}}</button>
             </view>
@@ -784,6 +849,10 @@
     <view style="display:{{CVer>=5.17?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTUP" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=4}}"></view>
+                    <view class="close1" hidden="{{ShowBar==4}}"></view>
+                </view>
                 <button bindtap="BTUP" class="DisTIP" onTap="BTUP" style="width: 65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
                 <button bindtap="BTUP1" class="DisINF" onTap="BTUP1" style="width: 35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate>CVer?'Start Upgrade':'No Available'}}</button>
                 <button bindtap="BTUP1" class="DisINF" onTap="BTUP1" style="width: 35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate>CVer?'开始升级':'已最新版'}}</button>
@@ -843,6 +912,11 @@
                     <view style="display:{{ADD?'block':'none'}}">
                         <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
                     </view>
+                    <view wx:if="{{CVer<5.33}}">
+                        <view style="height: 10px;"></view>
+                        <view class="tip2" style="color: #0f0;">5.33 2024-06-02</view>
+                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
+                    </view>
                     <view wx:if="{{CVer<5.32}}">
                         <view style="height: 10px;"></view>
                         <view class="tip2" style="color: #0f0;">5.32 2024-05-25</view>
@@ -875,6 +949,10 @@
     <view style="display:{{CVer>=5.19?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTDDT" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=7}}"></view>
+                    <view class="close1" hidden="{{ShowBar==7}}"></view>
+                </view>
                 <button bindtap="BTDDT" class="DisTIP" onTap="BTDDT" style="width: 65%;">{{UEN?'Set Screen Orientation':'设置屏幕方向'}}</button>
                 <button bindtap="BTDDT1" class="DisINF" onTap="BTDDT1" style="width: 35%;">{{DDT}}</button>
             </view>
@@ -895,6 +973,10 @@
     <view style="display:{{CVer>=5.19?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTLEDK" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=11}}"></view>
+                    <view class="close1" hidden="{{ShowBar==11}}"></view>
+                </view>
                 <button bindtap="BTLEDK" class="DisTIP" onTap="BTLEDK" style="width: 65%;">{{UEN?'Set Screen Brightness':'设置屏幕亮度'}}</button>
                 <button bindtap="BTLEDK1" class="DisINF" onTap="BTLEDK1" style="width: 35%;">{{LEDK1}}</button>
             </view>
@@ -919,6 +1001,10 @@
     <view style="display:{{CVer>=5.21?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTLEDKS" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=12}}"></view>
+                    <view class="close1" hidden="{{ShowBar==12}}"></view>
+                </view>
                 <button bindtap="BTLEDKS" class="DisTIP" onTap="BTLEDKS" style="width: 65%;">{{UEN?'Set Screen Rest ':'屏幕息屏设置'}}</button>
                 <button bindtap="BTLEDKS1" class="DisINF" onTap="BTLEDKS1" style="width: 35%;" wx:if="{{UEN}}">{{Sleep==0?'OFF':Sleep+' Second'}}</button>
                 <button bindtap="BTLEDKS1" class="DisINF" onTap="BTLEDKS1" style="width: 35%;" wx:if="{{!UEN}}">{{Sleep==0?'关闭':Sleep+'秒'}}</button>
@@ -946,6 +1032,10 @@
     <view style="display:{{CVer>=5.21?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTStart" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=13}}"></view>
+                    <view class="close1" hidden="{{ShowBar==13}}"></view>
+                </view>
                 <button bindtap="BTStart" class="DisTIP" onTap="BTStart" style="width: 65%;">{{UEN?'Initial Page Time':'初始页面时间'}}</button>
                 <button bindtap="BTStart1" class="DisINF" onTap="BTStart1" style="width: 35%;">{{WTi+(UEN?' Second':'秒')}}</button>
             </view>
@@ -971,6 +1061,10 @@
     <view style="display:{{CVer>=5.21?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTGIF" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=14}}"></view>
+                    <view class="close1" hidden="{{ShowBar==14}}"></view>
+                </view>
                 <button bindtap="BTGIF" class="DisTIP" onTap="BTGIF" style="width: 65%;">{{UEN?'Enable GIF':'充电动画启用'}}</button>
                 <button bindtap="BTGIF1" class="DisINF" onTap="BTGIF1" style="width: 35%;" wx:if="{{UEN}}">{{GIF?'Yes':'No'}}</button>
                 <button bindtap="BTGIF1" class="DisINF" onTap="BTGIF1" style="width: 35%;" wx:if="{{!UEN}}">{{GIF?'是':'否'}}</button>
@@ -993,6 +1087,10 @@
     <view style="display:{{CVer>=5.19?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
+                <view bindtap="BTCr" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=10}}"></view>
+                    <view class="close1" hidden="{{ShowBar==10}}"></view>
+                </view>
                 <button bindtap="BTCr" class="DisTIP" onTap="BTCr" style="width: 65%;">{{UEN?'Set Screen Color':'设置屏幕颜色'}}</button>
                 <button bindtap="BTCr1" class="DisINF" onTap="BTCr1" style="width: 35%;">{{UEN?'Send':'发送'}}</button>
             </view>
