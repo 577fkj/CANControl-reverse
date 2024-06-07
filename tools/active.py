@@ -3,8 +3,7 @@ import subprocess
 import re
 
 def get_active_code(chip_id):
-    code = chip_id[2:]
-    mac = [code[i:i + 2] for i in range(0, len(code), 2)]
+    mac = [chip_id[i:i + 2] for i in range(0, len(chip_id), 2)]
     mac = [mac[i] for i in range(len(mac) - 1, -1, -1)]
     mac = ':'.join(mac)
     print(mac)
@@ -31,7 +30,9 @@ def read_data():
                 line = b''
 
                 if data.startswith("ID:"):
-                    chip_id = data.split(":")[1].strip()
+                    chip_id = data.split(":")[1].strip()[2:]
+                    if len(chip_id) != 12:
+                        chip_id = '0' * (12 - len(chip_id)) + chip_id
                     active_code = get_active_code(chip_id)
                     ser.write(f"Active={active_code}\n".encode())
                     print(f"Chip ID: {chip_id}, Active Code: {active_code}")
