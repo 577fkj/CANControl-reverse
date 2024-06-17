@@ -973,6 +973,15 @@ def set_soft_start(client, time: int):
     send_get_data(client)
 
 
+def send_system_password(client, password: str):
+    """
+    发送系统密码
+    :param client:
+    :param password:
+    :return:
+    """
+    send_data(client, b'\xA1' + str(password).encode())
+
 def set_voltage_current(client, voltage: float, current: float, slot: int):
     """
     设置电压电流
@@ -983,7 +992,6 @@ def set_voltage_current(client, voltage: float, current: float, slot: int):
     :param slot: 1-4
     :return:
     """
-    send_data(client, b'\xA1' + str(voltage).encode())
     set_slot_voltage_current(client, slot, voltage, current)
 
 

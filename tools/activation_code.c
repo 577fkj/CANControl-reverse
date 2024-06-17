@@ -7,12 +7,13 @@
 // 5c:6a:4b:84:ff:1d S: 00ae8b S1: 51c110
 
 static char CODE_CHARS[] = "0123456789abcdef";
-static uint64_t U_CHANNEL_KEY = 0x12f5bd2llu;
-static uint64_t S_CHANNEL_KEY = 0x12a403ac3llu;
-static uint64_t S1_CHANNEL_KEY0 = 0x2acllu;
-static uint64_t S1_CHANNEL_KEY1 = 0x0llu;
-static uint64_t G_CHANNEL_KEY0 = 0x28fllu;
+static uint64_t U_CHANNEL_KEY = 0x12f5bd2llu; // 用户超级密码
+static uint64_t G_CHANNEL_KEY0 = 0x28fllu;    // 系统超级密码
 static uint64_t G_CHANNEL_KEY1 = 0x0llu;
+
+static uint64_t S_CHANNEL_KEY = 0x12a403ac3llu; // 旧激活码
+static uint64_t S1_CHANNEL_KEY0 = 0x2acllu;     // 新激活码
+static uint64_t S1_CHANNEL_KEY1 = 0x0llu;
 
 static void print_usage(const char *arg0)
 {

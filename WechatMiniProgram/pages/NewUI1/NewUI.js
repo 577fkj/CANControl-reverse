@@ -1020,8 +1020,12 @@ Page({
         if (t.startsWith("FFF8")) zt(t.substr(2, 4) + re(t.substr(6))), zt("FF");
         else if (t.startsWith("FFC8")) zt(t.substr(2, 4) + t.substr(6)), zt("FF");
       else {
-        if (zt("A1" + ie(t)), (t = parseFloat(t)) > X || t < J || !isFinite(t)) return void(0, bt.Toast)(N ? "Beyond the set range!" : "超出设置范围!");
-        zt("A80" + A + re(t) + re(k)), zt("FF")
+        zt("A1" + ie(t))
+        if ((t = parseFloat(t)) > X || t < J || !isFinite(t)) {
+          return bt.Toast(N ? "Beyond the set range!" : "超出设置范围!")
+        };
+        zt("A80" + A + re(t) + re(k))
+        zt("FF")
       } else wx.getClipboardData({
         success: function (t) {
           var e = t.data;
