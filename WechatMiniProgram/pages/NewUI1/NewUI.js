@@ -1,14 +1,14 @@
-var t, e, a, n, i, o, r, s, c, u, f, F, h, d, S, l, T, p, g, B, C, D, m, w, O, v, x, A, E, I, b, G, R, N, L, $, M, W, U, V, K, P, y, k, Y, H, j, q, Z, _, z, Q, J, X, tt, et, at, nt, it, ot, rt, st, ct, ut, ft, Ft, ht, dt, St, lt, Tt, pt, gt, Bt, Ct, Dt, mt, wt, Ot, vt, xt, At, Et = require("../../@babel/runtime/helpers/regeneratorRuntime"),
-  It = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  bt = require("../../EDE8AFC69E166AAF8B8EC7C1578910B5.js"),
-  Gt = require("../../9F5565209E166AAFF9330D27199910B5.js"),
+var t, e, a, n, i, o, r, s, c, u, f, F, h, d, S, l, T, p, g, B, C, D, m, w, O, v, x, A, E, b, I, G, R, N, L, $, W, U, M, V, K, P, y, k, Y, H, j, q, Z, _, z, Q, J, X, tt, et, at, nt, it, ot, rt, st, ct, ut, ft, Ft, ht, dt, St, lt, Tt, pt, gt, Bt, Ct, Dt, mt, wt, Ot, vt, xt, At, Et = require("../../@babel/runtime/helpers/regeneratorRuntime"),
+  bt = require("../../@babel/runtime/helpers/asyncToGenerator"),
+  It = require("../../6754D5619E166AAF0132BD66E613EFC4.js"),
+  Gt = require("../../2E18F0939E166AAF487E98946523EFC4.js"),
   Rt = 0,
   Nt = 0,
   Lt = 0,
   $t = "设备连接成功",
-  Mt = "1,27,30,欢迎",
-  Wt = "1,57,30,使用",
-  Ut = 0,
+  Wt = "1,27,30,欢迎",
+  Ut = "1,57,30,使用",
+  Mt = 0,
   Vt = "ff",
   Kt = "ff",
   Pt = "ff",
@@ -40,7 +40,7 @@ function Ht(t, e, a, n) {
     success: function (t) {
       if (t.confirm) {
         var e = parseFloat(t.content);
-        if ((e > Number(n) || e < Number(a) || !isFinite(e)) && 2 != Nt) return void(0, bt.Toast)(N ? "Beyond the set range!" : "超出设置范围!");
+        if ((e > Number(n) || e < Number(a) || !isFinite(e)) && 2 != Nt) return void(0, It.Toast)(N ? "Beyond the set range!" : "超出设置范围!");
         i(e)
       }
     }
@@ -58,7 +58,7 @@ function jt(t, e, a, n) {
     success: function (t) {
       if (t.confirm) {
         var e = t.content.trim();
-        if ("" == e) return void(0, bt.Toast)(N ? "Input cannot be empty!" : "输入不能为空!");
+        if ("" == e) return void(0, It.Toast)(N ? "Input cannot be empty!" : "输入不能为空!");
         i(e)
       }
     }
@@ -96,7 +96,7 @@ function zt(t) {
 }
 
 function Qt() {
-  return (Qt = It(Et().mark((function t(e) {
+  return (Qt = bt(Et().mark((function t(e) {
     return Et().wrap((function (t) {
       for (;;) switch (t.prev = t.next) {
         case 0:
@@ -104,7 +104,7 @@ function Qt() {
             t.next = 3;
             break
           }
-          return (0, bt.Toast)(N ? "There are unfinished sending tasks" : "有发送任务未完成"), t.abrupt("return");
+          return (0, It.Toast)(N ? "There are unfinished sending tasks" : "有发送任务未完成"), t.abrupt("return");
         case 3:
           return e = e.substring(0, 40), t.next = 6, Gt.easySendData1(e, !0);
         case 6:
@@ -131,12 +131,12 @@ function te(t) {
         Jt[Jt.length] = "F3", Xt = 0, ee()
       }
     }
-  }) : (0, bt.Toast)(N ? "There are unfinished sending tasks" : "有发送任务未完成")
+  }) : (0, It.Toast)(N ? "There are unfinished sending tasks" : "有发送任务未完成")
 }
 
 function ee(t) {
   var e = Jt[Xt];
-  Gt.easySendData1(e, !0), (0, bt.Toast)((N ? "Sending:" : "发送进度:") + (Xt / Jt.length * 100).toFixed(2) + "%"), Xt++
+  Gt.easySendData1(e, !0), (0, It.Toast)((N ? "Sending:" : "发送进度:") + (Xt / Jt.length * 100).toFixed(2) + "%"), Xt++
 }
 
 function ae(t) {
@@ -153,23 +153,23 @@ function ae(t) {
 }
 
 function ne() {
-  0 == Ut ? t.setData({
+  0 == Mt ? t.setData({
     Cr0: "#" + Vt + Kt + Pt
-  }) : 1 == Ut ? t.setData({
+  }) : 1 == Mt ? t.setData({
     Cr1: "#" + Vt + Kt + Pt
-  }) : 2 == Ut ? t.setData({
+  }) : 2 == Mt ? t.setData({
     Cr2: "#" + Vt + Kt + Pt
-  }) : 3 == Ut ? t.setData({
+  }) : 3 == Mt ? t.setData({
     Cr3: "#" + Vt + Kt + Pt
-  }) : 4 == Ut ? t.setData({
+  }) : 4 == Mt ? t.setData({
     Cr4: "#" + Vt + Kt + Pt
-  }) : 5 == Ut ? t.setData({
+  }) : 5 == Mt ? t.setData({
     Cr5: "#" + Vt + Kt + Pt
-  }) : 6 == Ut ? t.setData({
+  }) : 6 == Mt ? t.setData({
     Cr6: "#" + Vt + Kt + Pt
-  }) : 7 == Ut ? t.setData({
+  }) : 7 == Mt ? t.setData({
     Cr7: "#" + Vt + Kt + Pt
-  }) : 8 == Ut && t.setData({
+  }) : 8 == Mt && t.setData({
     Cr8: "#" + Vt + Kt + Pt
   })
 }
@@ -413,7 +413,7 @@ Page({
       ShowM: 1
     }) : (this.data.ShowM, this.setData({
       ShowM: 0
-    })), (0, bt.SetCFG)("ShowM", this.data.ShowM)
+    })), (0, It.SetCFG)("ShowM", this.data.ShowM)
   },
   BTGPWD: function (t) {
     jt("设置系统密码", "Set System password", "最多18个字符", "Up to 18 characters", (function (t) {
@@ -422,21 +422,21 @@ Page({
   },
   BTRST: function (t) {
     qt("确认是否重置设置", "Confirm whether to restart control", "将会清除所有图片和设置", "All images and settings will be cleared", (function (t) {
-      zt("F601"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      zt("F601"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
   },
   BTRstart: function (t) {
     qt("确认是否重启设备", "Confirm whether to restart the device", "", "", (function (t) {
-      zt("F001"), (0, bt.Toast)(N ? "The device is restarting" : "设备正在重启!"), kt.navigateBack({
+      zt("F001"), (0, It.Toast)(N ? "The device is restarting" : "设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
   },
   BTClean: function (t) {
     qt("确认是否清除数据", "Confirm whether to clear data", "将会清零累计安时瓦时和工作时间", "Accumulated ampere hours, watt hours, and working hours will be reset to zero", (function (t) {
-      zt("AA01"), (0, bt.Toast)(N ? "Data cleared to zero" : "数据已清零!"), kt.navigateBack({
+      zt("AA01"), (0, It.Toast)(N ? "Data cleared to zero" : "数据已清零!"), kt.navigateBack({
         delta: 0
       })
     }))
@@ -473,37 +473,37 @@ Page({
       icon: "loading",
       duration: 46e5,
       mask: !0
-    }), t.SetLOGO(Mt + "|" + Wt, t)) : "发送" != t.data.LOGO && "Send" != t.data.LOGO || te(n, 1), t.setData({
+    }), t.SetLOGO(Wt + "|" + Ut, t)) : "发送" != t.data.LOGO && "Send" != t.data.LOGO || te(n, 1), t.setData({
       ShowBar: 20,
       LOGO: N ? "Preview" : "预览"
     })
   },
   BTLOGO1: function (e) {
-    jt("设置第一行LOGO", "Set the first line logo", Mt, Mt, (function (e) {
-      if (e.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) Mt = e;
-      else if (e.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) Mt = "1,27,30," + RegExp.$1, Wt = "1,57,30," + RegExp.$2;
+    jt("设置第一行LOGO", "Set the first line logo", Wt, Wt, (function (e) {
+      if (e.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) Wt = e;
+      else if (e.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) Wt = "1,27,30," + RegExp.$1, Ut = "1,57,30," + RegExp.$2;
       else {
-        if (!e.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, bt.Toast)(N ? "Input format error" : "输入格式错误");
-        Mt = "1,27,30," + RegExp.$1
+        if (!e.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, It.Toast)(N ? "Input format error" : "输入格式错误");
+        Wt = "1,27,30," + RegExp.$1
       }
       t.setData({
-        LOGO1: Mt,
-        LOGO2: Wt,
+        LOGO1: Wt,
+        LOGO2: Ut,
         LOGO: N ? "Preview" : "预览"
       })
     }))
   },
   BTLOGO2: function (e) {
-    jt("设置第二行LOGO", "Set second line logo", Wt, Wt, (function (e) {
-      if (e.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) Wt = e;
-      else if (e.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) Mt = "1,27,30," + RegExp.$1, Wt = "1,57,30," + RegExp.$2;
+    jt("设置第二行LOGO", "Set second line logo", Ut, Ut, (function (e) {
+      if (e.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) Ut = e;
+      else if (e.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) Wt = "1,27,30," + RegExp.$1, Ut = "1,57,30," + RegExp.$2;
       else {
-        if (!e.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, bt.Toast)(N ? "Input format error" : "输入格式错误");
-        Wt = "1,57,30," + RegExp.$1
+        if (!e.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, It.Toast)(N ? "Input format error" : "输入格式错误");
+        Ut = "1,57,30," + RegExp.$1
       }
       t.setData({
-        LOGO1: Mt,
-        LOGO2: Wt,
+        LOGO1: Wt,
+        LOGO2: Ut,
         LOGO: N ? "Preview" : "预览"
       })
     }))
@@ -551,35 +551,35 @@ Page({
   },
   BTCAN1: function (t) {
     qt("确认是否切换为华为", "Switch to Huawei", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      zt("FC530101"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      zt("FC530101"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN2: function (t) {
     qt("确认是否切换为英可瑞", "Switch to Increase", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      zt("FC530201"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      zt("FC530201"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN4: function (t) {
     qt("确认是否切换为中兴3000", "Switch to ZTE3000", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      zt("FC530401"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      zt("FC530401"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN8: function (t) {
     qt("确认是否切换为英飞源", "Switch to Infy", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      zt("FC530801"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      zt("FC530801"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN16: function (t) {
     qt("确认是否切换为EPS6020", "Switch to EPS6020", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      zt("FC531001"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      zt("FC531001"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
@@ -589,7 +589,7 @@ Page({
       if (2 == Nt) {
         for (var e = parseInt(g, 16), a = e.toString(), n = 0, i = 0; i < a.length; i++) n += a.charCodeAt(i);
         zt("C83F" + Math.floor(Math.floor(e / 611) * n).toString(16).slice(-6)), zt("FC532001"), zt("FF")
-      } else zt("FC532001"), (0, bt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
+      } else zt("FC532001"), (0, It.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), kt.navigateBack({
         delta: 0
       })
     }))
@@ -626,81 +626,81 @@ Page({
     zt("F96F" + se(1 - ct)), zt("FF")
   },
   BT_GIF1: function (t) {
-    te((0, bt.GetGIF)(1))
+    te((0, It.GetGIF)(1))
   },
   BT_GIF2: function (t) {
-    te((0, bt.GetGIF)(2))
+    te((0, It.GetGIF)(2))
   },
   BT_GIF3: function (t) {
-    te((0, bt.GetGIF)(3))
+    te((0, It.GetGIF)(3))
   },
   BT_GIF4: function (t) {
-    te((0, bt.GetGIF)(4))
+    te((0, It.GetGIF)(4))
   },
   BT_GIF5: function (t) {
-    te((0, bt.GetGIF)(5))
+    te((0, It.GetGIF)(5))
   },
   BTCr1: function (t) {
     zt("F53000" + Zt(this.data.Cr0) + "0000f01c"), zt("F53100" + Zt(this.data.Cr1) + "00209F26"), zt("F53200" + Zt(this.data.Cr2) + "00479F26"), zt("F53300" + Zt(this.data.Cr3) + "006e9F26"), zt("F53400" + Zt(this.data.Cr4) + "00969F3e"), zt("F53500" + Zt(this.data.Cr5) + "A3204d4d"), zt("F53600" + Zt(this.data.Cr6) + "50d64f1A"), zt("F53700" + Zt(this.data.Cr7) + "00d64f1A"), zt("F53801" + Zt(this.data.Cr8) + "A3774d68")
   },
   CK0: function (t) {
-    Ut = 0, this.data.Cr0.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 0, this.data.Cr0.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK1: function (t) {
-    Ut = 1, this.data.Cr1.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 1, this.data.Cr1.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK2: function (t) {
-    Ut = 2, this.data.Cr2.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 2, this.data.Cr2.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK3: function (t) {
-    Ut = 3, this.data.Cr3.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 3, this.data.Cr3.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK4: function (t) {
-    Ut = 4, this.data.Cr4.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 4, this.data.Cr4.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK5: function (t) {
-    Ut = 5, this.data.Cr5.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 5, this.data.Cr5.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK6: function (t) {
-    Ut = 6, this.data.Cr6.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 6, this.data.Cr6.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK7: function (t) {
-    Ut = 7, this.data.Cr7.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 7, this.data.Cr7.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
     })
   },
   CK8: function (t) {
-    Ut = 8, this.data.Cr8.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
+    Mt = 8, this.data.Cr8.match(/#(..)(..)(..)/), Vt = RegExp.$1, Kt = RegExp.$2, Pt = RegExp.$3, this.setData({
       CR: parseInt(Vt, 16),
       CG: parseInt(Kt, 16),
       CB: parseInt(Pt, 16)
@@ -719,7 +719,7 @@ Page({
     zt("F972" + se(1 - ut)), zt("FF")
   },
   BTEN1: function (t) {
-    (0, bt.SetCFG)("UEN", 1 - N), zt("F970" + se(1 - N)), zt("FF")
+    (0, It.SetCFG)("UEN", 1 - N), zt("F970" + se(1 - N)), zt("FF")
   },
   BTBLE1: function (t) {
     jt("设置蓝牙名称", "Set Bluetooth name", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
@@ -732,7 +732,7 @@ Page({
     }))
   },
   BTKEY1: function (t) {
-    zt("F967" + se(1 - I)), zt("FF")
+    zt("F967" + se(1 - b)), zt("FF")
   },
   BTKEY2: function (t) {
     zt("F966" + se(1 - L)), zt("FF")
@@ -757,7 +757,7 @@ Page({
       confirmText: N ? "YES" : "确定",
       cancelText: N ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return zt("A700000000" + ie("NewUI")), void(0, bt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return zt("A700000000" + ie("NewUI")), void(0, It.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
@@ -783,7 +783,7 @@ Page({
       confirmText: N ? "YES" : "确定",
       cancelText: N ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return zt("A7" + ie("9", 4) + ie("NewUI")), void(0, bt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return zt("A7" + ie("9", 4) + ie("NewUI")), void(0, It.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
@@ -794,7 +794,7 @@ Page({
       confirmText: N ? "YES" : "确定",
       cancelText: N ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return zt("A700000000" + ie("NewTest")), void(0, bt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return zt("A700000000" + ie("NewTest")), void(0, It.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
@@ -839,7 +839,7 @@ Page({
     }), wx.pageScrollTo({
       scrollTop: 95,
       duration: 300
-    }), i < 10 || o > 0 ? (0, bt.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (zt("C1"), zt("FF"), Ht("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+    }), i < 10 || o > 0 ? (0, It.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (zt("C1"), zt("FF"), Ht("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
       var e = Number(t / i).toFixed(4),
         a = Number(t / y).toFixed(4);
       zt("C3" + re(100 * a) + re(100 * e)), 2 == R ? (zt("F876" + re(20 * a)), zt("F877" + re(100 * a))) : 1 == R ? (zt("F876" + re(41 * a)), zt("F877" + re(58.5 * a))) : 4 == R ? (zt("F876" + re(41 * a)), zt("F877" + re(59 * a))) : 16 == R ? (zt("F876" + re(44 * a)), zt("F877" + re(61 * a))) : 32 == R && (zt("F876" + re(41.2 * a)), zt("F877" + re(59.4 * a))), zt("FF"), zt("A80" + A + re(50 * a) + re(k)), zt("FF")
@@ -869,7 +869,7 @@ Page({
   },
   BTOVS: function (t) {
     Yt(N ? "Set voltage range" : "设置电压范围", (N ? "Now:" : "当前范围:") + this.data.LSV + "-" + this.data.HSV, (function (t) {
-      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (zt("F876" + re(Number(RegExp.$1))), zt("F877" + re(Number(RegExp.$2))), zt("FF")) : (0, bt.Toast)(N ? "Input format error" : "输入格式错误!")
+      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (zt("F876" + re(Number(RegExp.$1))), zt("F877" + re(Number(RegExp.$2))), zt("FF")) : (0, It.Toast)(N ? "Input format error" : "输入格式错误!")
     }))
   },
   BTOVS1: function (t) {
@@ -878,7 +878,7 @@ Page({
     }))
   },
   BTOVT3: function (t) {
-    i < 10 || o > 0 ? (0, bt.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (zt("C2"), zt("FF"), Ht("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+    i < 10 || o > 0 ? (0, It.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (zt("C2"), zt("FF"), Ht("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
       var e = Number(t / i).toFixed(4);
       zt("C4" + re(100 * Number(t / y).toFixed(4)) + re(100 * e)), zt("FF")
     })))
@@ -911,7 +911,7 @@ Page({
     }), wx.pageScrollTo({
       scrollTop: 145,
       duration: 300
-    }), o < 5 || y - i < .2 ? (0, bt.Toast)(N ? "During current correction, the output current must be greater than 5A and in a constant current state" : "电流校正时输出电流必须大于5A且处于恒流状态") : (zt("C0"), zt("FF"), Ht("输入实际测量出的输出电流", "Input the actual measured output current", "3", "100", (function (t) {
+    }), o < 5 || y - i < .2 ? (0, It.Toast)(N ? "During current correction, the output current must be greater than 5A and in a constant current state" : "电流校正时输出电流必须大于5A且处于恒流状态") : (zt("C0"), zt("FF"), Ht("输入实际测量出的输出电流", "Input the actual measured output current", "3", "100", (function (t) {
       var e = Number(t / o).toFixed(4);
       zt("C5" + re(100 * Number(t / k).toFixed(4)) + re(100 * e)), zt("FF")
     })))
@@ -950,14 +950,14 @@ Page({
   },
   BTOAS: function (t) {
     Yt(N ? "Set current range" : "设置电流范围", (N ? "Now:" : "当前范围:") + z + "-" + Q, (function (t) {
-      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (zt("F878" + re(Number(RegExp.$1))), zt("F879" + re(Number(RegExp.$2))), zt("FF")) : (t = parseFloat(t), isFinite(t) && t > 1 ? (zt("F879" + re(t)), zt("FF")) : (0, bt.Toast)(N ? "Input format error" : "输入格式错误!"))
+      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (zt("F878" + re(Number(RegExp.$1))), zt("F879" + re(Number(RegExp.$2))), zt("FF")) : (t = parseFloat(t), isFinite(t) && t > 1 ? (zt("F879" + re(t)), zt("FF")) : (0, It.Toast)(N ? "Input format error" : "输入格式错误!"))
     }))
   },
   pwrbt: function (t) {
     zt("A6" + se(1 - E)), zt("FF")
   },
   owbt: function (t) {
-    Ht("设置输出功率限制", "Set output power limit", "300", W, (function (t) {
+    Ht("设置输出功率限制", "Set output power limit", "300", U, (function (t) {
       zt("F84D" + re(t)), zt("FF")
     }))
   },
@@ -993,8 +993,8 @@ Page({
     })) : (zt("A80" + (A = 2) + re(e) + re(a)), zt("FF"))
   },
   ks3bt: function (t) {
-    var e = b[0],
-      a = b[1] > Q ? Q : b[1];
+    var e = I[0],
+      a = I[1] > Q ? Q : I[1];
     e > X || e < J ? Ht("设置输出电压", "Set output voltage", J, X, (function (t) {
       zt("A80" + (A = 3) + re(t) + re(a)), zt("FF")
     })) : (zt("A80" + (A = 3) + re(e) + re(a)), zt("FF"))
@@ -1020,12 +1020,8 @@ Page({
         if (t.startsWith("FFF8")) zt(t.substr(2, 4) + re(t.substr(6))), zt("FF");
         else if (t.startsWith("FFC8")) zt(t.substr(2, 4) + t.substr(6)), zt("FF");
       else {
-        zt("A1" + ie(t))
-        if ((t = parseFloat(t)) > X || t < J || !isFinite(t)) {
-          return bt.Toast(N ? "Beyond the set range!" : "超出设置范围!")
-        };
-        zt("A80" + A + re(t) + re(k))
-        zt("FF")
+        if (zt("A1" + ie(t)), (t = parseFloat(t)) > X || t < J || !isFinite(t)) return void(0, It.Toast)(N ? "Beyond the set range!" : "超出设置范围!");
+        zt("A80" + A + re(t) + re(k)), zt("FF")
       } else wx.getClipboardData({
         success: function (t) {
           var e = t.data;
@@ -1050,7 +1046,7 @@ Page({
     }))
   },
   sa2bt0: function (t) {
-    zt("F858" + (0 == M ? re(y - 3) : "00000000")), zt("F857" + (0 == M ? re(10) : "00000000")), zt("FF")
+    zt("F858" + (0 == W ? re(y - 3) : "00000000")), zt("F857" + (0 == W ? re(10) : "00000000")), zt("FF")
   },
   sdbt1: function (t) {
     Ht("设置延时时间(分钟)", "Set delay time (minutes)", 1, 600, (function (t) {
@@ -1067,24 +1063,24 @@ Page({
   },
   onLoad: function (n) {
     var Et = this;
-    t = this, Lt = 0, Xt = 0, Nt = n.GM ? n.GM : (0, bt.GetCFG)("GM"), yt = 0;
-    var It = (0, bt.GetGIF)(1);
-    It.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
-    var Mt = RegExp.$2;
-    (It = (0, bt.GetGIF)(2)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    t = this, Lt = 0, Xt = 0, Nt = Number(n.GM), yt = 0;
+    var bt = (0, It.GetGIF)(1);
+    bt.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var Wt = RegExp.$2;
-    (It = (0, bt.GetGIF)(3)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    (bt = (0, It.GetGIF)(2)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var Ut = RegExp.$2;
-    (It = (0, bt.GetGIF)(4)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    (bt = (0, It.GetGIF)(3)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    var Mt = RegExp.$2;
+    (bt = (0, It.GetGIF)(4)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var Vt = RegExp.$2;
-    (It = (0, bt.GetGIF)(5)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    (bt = (0, It.GetGIF)(5)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var Kt = RegExp.$2;
-    N = (0, bt.GetCFG)("UEN");
-    var Pt = (0, bt.GetCFG)("ShowM");
+    N = (0, It.GetCFG)("UEN");
+    var Pt = (0, It.GetCFG)("ShowM");
     t.setData({
-      GIF1: "data:image/gif;base64," + Mt,
-      GIF2: "data:image/gif;base64," + Wt,
-      GIF3: "data:image/gif;base64," + Ut,
+      GIF1: "data:image/gif;base64," + Wt,
+      GIF2: "data:image/gif;base64," + Ut,
+      GIF3: "data:image/gif;base64," + Mt,
       GIF4: "data:image/gif;base64," + Vt,
       GIF5: "data:image/gif;base64," + Kt,
       UEN: N,
@@ -1096,8 +1092,8 @@ Page({
       GM: Nt,
       ADD: yt,
       CAN: Rt,
-      BackIMG: (0, bt.GetCFG)("BIMG", "/img/bc1.gif")
-    }), "5.33测试一" != (0, bt.GetCFG)("TVer") && Nt && ((0, bt.SetCFG)("TVer", "5.33测试一"), wx.showModal({
+      BackIMG: (0, It.GetCFG)("BIMG", "/img/bc1.gif")
+    }), "5.33测试一" != (0, It.GetCFG)("TVer") && Nt && ((0, It.SetCFG)("TVer", "5.33测试一"), wx.showModal({
       title: "有新测试固件:5.33测试一",
       editable: !1,
       confirmText: "知道了",
@@ -1106,10 +1102,10 @@ Page({
       kt.navigateBack({
         delta: 0
       })
-    })), Gt.onBLECharacteristicValueChange1((function (n, It) {
+    })), Gt.onBLECharacteristicValueChange1((function (n, bt) {
       if (!a) {
-        (0, bt.print)("MSG:", It);
-        var Gt = It;
+        (0, It.print)("MSG:", bt);
+        var Gt = bt;
         if ("EE" == Gt.substring(0, 2)) {
           e = oe(Gt.substring(20, 40)), Rt = .01 * parseInt(Gt.substring(16, 20), 16), R = 32 == (R = 16 == (R = 8 == (R = 4 == (R = 2 == (R = 1 == (R = ue(Gt, 14)) ? "Huawei" : R) ? "Increase" : R) ? "ZTE3000" : R) ? "INFY" : R) ? "EPS6020" : R) ? "ZTE4875" : R, g = "0x" + Gt.substring(2, 14), e.startsWith("Cxjdwx") && (e = "未激活"), t.setData({
             CVer: Rt.toFixed(2),
@@ -1117,8 +1113,8 @@ Page({
             ID: g,
             ACT: e
           });
-          var Mt = (0, bt.GetCFG)(g);
-          Nt && (Mt = (Number(g) + 19880914).toString(16).substring(4, 8)), Lt || zt("A0" + ie(Mt))
+          var Wt = (0, It.GetCFG)(g);
+          Nt && (Wt = (Number(g) + 19880914).toString(16).substring(4, 8)), Lt || zt("A0" + ie(Wt))
         } else if (Gt.startsWith("A101")) t.setData({
           ShowBar: 0,
           Panel: 2,
@@ -1126,8 +1122,8 @@ Page({
         });
         else if (Gt.startsWith("A001")) {
           if (Lt = 2, ("Cxjdwx" == e || "未激活" == e) && !Nt) {
-            var Wt = new Date;
-            zt("FD48" + ie(Wt.getFullYear() + "-" + (Wt.getMonth() + 1) + "-" + Wt.getDate()))
+            var Ut = new Date;
+            zt("FD48" + ie(Ut.getFullYear() + "-" + (Ut.getMonth() + 1) + "-" + Ut.getDate()))
           }
           Rt <= 5.28 && zt("FF")
         } else if (Gt.startsWith("A000")) {
@@ -1139,12 +1135,12 @@ Page({
             confirmText: N ? "YES" : "确定",
             cancelText: N ? "Observer" : "我只看看",
             success: function (t) {
-              t.confirm && ((0, bt.SetCFG)(g, t.content), zt("A0" + ie(t.content)), Lt = 0)
+              t.confirm && ((0, It.SetCFG)(g, t.content), zt("A0" + ie(t.content)), Lt = 0)
             }
           })
         } else if (Gt.startsWith("F101")) ee();
         else if (Gt.startsWith("F201")) ee();
-        else if (Gt.startsWith("F301")) Xt = 0, Jt = [], (0, bt.Toast)(N ? "Send End!" : "发送完成!");
+        else if (Gt.startsWith("F301")) Xt = 0, Jt = [], (0, It.Toast)(N ? "Send End!" : "发送完成!");
         else if (Gt.startsWith("01")) i = ce(Gt, 2), o = ce(Gt, 10), r = ce(Gt, 18), s = ce(Gt, 26), c = ue(Gt, 34), u = ue(Gt, 36), f = ue(Gt, 38), Et.data.UEN ? "0" == f ? $t = "Communication Abnormality" : 0 == i ? $t = "Charger Output Abnormality" : 4 == c ? $t = "Charger Shutdown" : 0 == c ? $t = "Waiting For Battery Connection" : 1 == c ? $t = "Charging" : 2 == c ? $t = "In The Second Stage Of Charging" : 5 == c ? $t = "Precharging" : 40 == c ? $t = "Appointment Waiting" : 3 == c ? $t = "Charging Completed" : 43 == c && ($t = "Charging Completed(Turned Off)") : "0" == f ? $t = "CAN通讯异常" : 0 == i ? $t = "充电器输出异常" : 4 == c ? $t = "充电器已关机" : 0 == c ? $t = "等待接入电池" : 1 == c ? $t = "正在充电中" : 5 == c ? $t = "正在预充" : 2 == c ? $t = "第二段充电中" : 40 == c ? $t = "预约等待中" : 3 == c ? $t = "充电完成" : 43 == c && ($t = "充电完成(已关机)"), t.setData({
           STR: $t,
           NFS: u,
@@ -1156,7 +1152,7 @@ Page({
         });
         else if (Gt.startsWith("02")) {
           F = ce(Gt, 2), h = ce(Gt, 10), d = ce(Gt, 18), S = ce(Gt, 26), l = ue(Gt, 34), T = ue(Gt, 36), p = ue(Gt, 38);
-          var Ut = Number(r / d * 100).toFixed(2),
+          var Mt = Number(r / d * 100).toFixed(2),
             Vt = Number(d - r).toFixed(2);
           t.setData({
             IV: F,
@@ -1166,7 +1162,7 @@ Page({
             ST0: l,
             ST1: T,
             ST2: p,
-            EEI: d ? Ut : "0.00",
+            EEI: d ? Mt : "0.00",
             EES: d ? Vt : "0.00"
           })
         } else if (Gt.startsWith("03")) B = ce(Gt, 2), C = ce(Gt, 10), D = ce(Gt, 18), m = ce(Gt, 26), w = ue(Gt, 34), O = ue(Gt, 36), t.setData({
@@ -1183,17 +1179,17 @@ Page({
           NSD: _t(ce(Gt, 18)),
           SOC: Number(ce(Gt, 26)).toFixed(0)
         });
-        else if (Gt.startsWith("10")) v = [ce(Gt, 2, 1), ce(Gt, 10, 1)], x = [ce(Gt, 18, 1), ce(Gt, 26, 1)], A = ue(Gt, 34), E = ue(Gt, 36), I = ue(Gt, 38), 1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0]), 3 == A ? (k = b[1], y = b[0]) : 4 == A && (k = G[1], y = G[0]), t.setData({
+        else if (Gt.startsWith("10")) v = [ce(Gt, 2, 1), ce(Gt, 10, 1)], x = [ce(Gt, 18, 1), ce(Gt, 26, 1)], A = ue(Gt, 34), E = ue(Gt, 36), b = ue(Gt, 38), 1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0]), 3 == A ? (k = I[1], y = I[0]) : 4 == A && (k = G[1], y = G[0]), t.setData({
           KS1: v,
           KS2: x,
           KSi: A,
           PON: E,
-          KON: I,
+          KON: b,
           SV: y.toFixed(2),
           SA: k.toFixed(2)
         });
-        else if (Gt.startsWith("11")) b = [ce(Gt, 2, 1), ce(Gt, 10, 1)], G = [ce(Gt, 18, 1), ce(Gt, 26, 1)], R = ue(Gt, 34), N = ue(Gt, 36), L = ue(Gt, 38), (0, bt.SetCFG)("UEN", N), 1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0]), 3 == A ? (k = b[1], y = b[0]) : 4 == A && (k = G[1], y = G[0]), t.setData({
-          KS3: b,
+        else if (Gt.startsWith("11")) I = [ce(Gt, 2, 1), ce(Gt, 10, 1)], G = [ce(Gt, 18, 1), ce(Gt, 26, 1)], R = ue(Gt, 34), N = ue(Gt, 36), L = ue(Gt, 38), (0, It.SetCFG)("UEN", N), 1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0]), 3 == A ? (k = I[1], y = I[0]) : 4 == A && (k = G[1], y = G[0]), t.setData({
+          KS3: I,
           KS4: G,
           CAN: R,
           UEN: N,
@@ -1201,11 +1197,11 @@ Page({
           SV: y.toFixed(2),
           SA: k.toFixed(2)
         });
-        else if (Gt.startsWith("12")) $ = ce(Gt, 2), M = ce(Gt, 10), W = ce(Gt, 18), U = ce(Gt, 26), V = ue(Gt, 34), K = ue(Gt, 36), P = ue(Gt, 38), t.setData({
+        else if (Gt.startsWith("12")) $ = ce(Gt, 2), W = ce(Gt, 10), U = ce(Gt, 18), M = ce(Gt, 26), V = ue(Gt, 34), K = ue(Gt, 36), P = ue(Gt, 38), t.setData({
           SV2: $,
-          SA2: M,
-          SMW: W,
-          UMW: U,
+          SA2: W,
+          SMW: U,
+          UMW: M,
           WTi: V,
           ETi: K,
           Sleep: P
