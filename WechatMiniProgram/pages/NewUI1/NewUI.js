@@ -1141,17 +1141,32 @@ Page({
         } else if (Gt.startsWith("F101")) ee();
         else if (Gt.startsWith("F201")) ee();
         else if (Gt.startsWith("F301")) Xt = 0, Jt = [], (0, It.Toast)(N ? "Send End!" : "发送完成!");
-        else if (Gt.startsWith("01")) i = ce(Gt, 2), o = ce(Gt, 10), r = ce(Gt, 18), s = ce(Gt, 26), c = ue(Gt, 34), u = ue(Gt, 36), f = ue(Gt, 38), Et.data.UEN ? "0" == f ? $t = "Communication Abnormality" : 0 == i ? $t = "Charger Output Abnormality" : 4 == c ? $t = "Charger Shutdown" : 0 == c ? $t = "Waiting For Battery Connection" : 1 == c ? $t = "Charging" : 2 == c ? $t = "In The Second Stage Of Charging" : 5 == c ? $t = "Precharging" : 40 == c ? $t = "Appointment Waiting" : 3 == c ? $t = "Charging Completed" : 43 == c && ($t = "Charging Completed(Turned Off)") : "0" == f ? $t = "CAN通讯异常" : 0 == i ? $t = "充电器输出异常" : 4 == c ? $t = "充电器已关机" : 0 == c ? $t = "等待接入电池" : 1 == c ? $t = "正在充电中" : 5 == c ? $t = "正在预充" : 2 == c ? $t = "第二段充电中" : 40 == c ? $t = "预约等待中" : 3 == c ? $t = "充电完成" : 43 == c && ($t = "充电完成(已关机)"), t.setData({
-          STR: $t,
-          NFS: u,
-          OL: f,
-          OV: i,
-          OA: o,
-          OW: r,
-          OT: s
-        });
-        else if (Gt.startsWith("02")) {
-          F = ce(Gt, 2), h = ce(Gt, 10), d = ce(Gt, 18), S = ce(Gt, 26), l = ue(Gt, 34), T = ue(Gt, 36), p = ue(Gt, 38);
+        else if (Gt.startsWith("01")) {
+          i = ce(Gt, 2)
+          o = ce(Gt, 10)
+          r = ce(Gt, 18)
+          s = ce(Gt, 26)
+          c = ue(Gt, 34)
+          u = ue(Gt, 36)
+          f = ue(Gt, 38)
+          Et.data.UEN ? "0" == f ? $t = "Communication Abnormality" : 0 == i ? $t = "Charger Output Abnormality" : 4 == c ? $t = "Charger Shutdown" : 0 == c ? $t = "Waiting For Battery Connection" : 1 == c ? $t = "Charging" : 2 == c ? $t = "In The Second Stage Of Charging" : 5 == c ? $t = "Precharging" : 40 == c ? $t = "Appointment Waiting" : 3 == c ? $t = "Charging Completed" : 43 == c && ($t = "Charging Completed(Turned Off)") : "0" == f ? $t = "CAN通讯异常" : 0 == i ? $t = "充电器输出异常" : 4 == c ? $t = "充电器已关机" : 0 == c ? $t = "等待接入电池" : 1 == c ? $t = "正在充电中" : 5 == c ? $t = "正在预充" : 2 == c ? $t = "第二段充电中" : 40 == c ? $t = "预约等待中" : 3 == c ? $t = "充电完成" : 43 == c && ($t = "充电完成(已关机)")
+          t.setData({
+            STR: $t,
+            NFS: u,
+            OL: f,
+            OV: i,
+            OA: o,
+            OW: r,
+            OT: s
+          });
+        } else if (Gt.startsWith("02")) {
+          F = ce(Gt, 2)
+          h = ce(Gt, 10)
+          d = ce(Gt, 18)
+          S = ce(Gt, 26)
+          l = ue(Gt, 34)
+          T = ue(Gt, 36)
+          p = ue(Gt, 38);
           var Mt = Number(r / d * 100).toFixed(2),
             Vt = Number(d - r).toFixed(2);
           t.setData({
@@ -1165,39 +1180,64 @@ Page({
             EEI: d ? Mt : "0.00",
             EES: d ? Vt : "0.00"
           })
-        } else if (Gt.startsWith("03")) B = ce(Gt, 2), C = ce(Gt, 10), D = ce(Gt, 18), m = ce(Gt, 26), w = ue(Gt, 34), O = ue(Gt, 36), t.setData({
-          Ah: B,
-          Wh: C,
-          AH: D,
-          WH: m,
-          SWT: w,
-          SMT: O
-        });
-        else if (Gt.startsWith("04")) t.setData({
-          Ti: _t(ce(Gt, 2)),
-          TI: _t(ce(Gt, 10)),
-          NSD: _t(ce(Gt, 18)),
-          SOC: Number(ce(Gt, 26)).toFixed(0)
-        });
-        else if (Gt.startsWith("10")) v = [ce(Gt, 2, 1), ce(Gt, 10, 1)], x = [ce(Gt, 18, 1), ce(Gt, 26, 1)], A = ue(Gt, 34), E = ue(Gt, 36), b = ue(Gt, 38), 1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0]), 3 == A ? (k = I[1], y = I[0]) : 4 == A && (k = G[1], y = G[0]), t.setData({
-          KS1: v,
-          KS2: x,
-          KSi: A,
-          PON: E,
-          KON: b,
-          SV: y.toFixed(2),
-          SA: k.toFixed(2)
-        });
-        else if (Gt.startsWith("11")) I = [ce(Gt, 2, 1), ce(Gt, 10, 1)], G = [ce(Gt, 18, 1), ce(Gt, 26, 1)], R = ue(Gt, 34), N = ue(Gt, 36), L = ue(Gt, 38), (0, It.SetCFG)("UEN", N), 1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0]), 3 == A ? (k = I[1], y = I[0]) : 4 == A && (k = G[1], y = G[0]), t.setData({
-          KS3: I,
-          KS4: G,
-          CAN: R,
-          UEN: N,
-          KRC: L,
-          SV: y.toFixed(2),
-          SA: k.toFixed(2)
-        });
-        else if (Gt.startsWith("12")) $ = ce(Gt, 2), W = ce(Gt, 10), U = ce(Gt, 18), M = ce(Gt, 26), V = ue(Gt, 34), K = ue(Gt, 36), P = ue(Gt, 38), t.setData({
+        } else if (Gt.startsWith("03")) {
+          B = ce(Gt, 2)
+          C = ce(Gt, 10)
+          D = ce(Gt, 18)
+          m = ce(Gt, 26)
+          w = ue(Gt, 34)
+          O = ue(Gt, 36)
+          t.setData({
+            Ah: B,
+            Wh: C,
+            AH: D,
+            WH: m,
+            SWT: w,
+            SMT: O
+          });
+        } else if (Gt.startsWith("04")) {
+          t.setData({
+            Ti: _t(ce(Gt, 2)),
+            TI: _t(ce(Gt, 10)),
+            NSD: _t(ce(Gt, 18)),
+            SOC: Number(ce(Gt, 26)).toFixed(0)
+          });
+        } else if (Gt.startsWith("10")) {
+          v = [ce(Gt, 2, 1), ce(Gt, 10, 1)]
+          x = [ce(Gt, 18, 1), ce(Gt, 26, 1)]
+          A = ue(Gt, 34) // solt
+          E = ue(Gt, 36) // power_on
+          b = ue(Gt, 38) // enable_custom_background
+          1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0])
+          3 == A ? (k = I[1], y = I[0]) : 4 == A && (k = G[1], y = G[0])
+          t.setData({
+            KS1: v,
+            KS2: x,
+            KSi: A,
+            PON: E,
+            KON: b,
+            SV: y.toFixed(2),
+            SA: k.toFixed(2)
+          });
+        } else if (Gt.startsWith("11")) {
+          I = [ce(Gt, 2, 1), ce(Gt, 10, 1)]
+          G = [ce(Gt, 18, 1), ce(Gt, 26, 1)]
+          R = ue(Gt, 34)
+          N = ue(Gt, 36)
+          L = ue(Gt, 38)
+          It.SetCFG("UEN", N)
+          1 == A ? (k = v[1], y = v[0]) : 2 == A && (k = x[1], y = x[0])
+          3 == A ? (k = I[1], y = I[0]) : 4 == A && (k = G[1], y = G[0])
+          t.setData({
+            KS3: I,
+            KS4: G,
+            CAN: R,
+            UEN: N,
+            KRC: L,
+            SV: y.toFixed(2),
+            SA: k.toFixed(2)
+          });
+        } else if (Gt.startsWith("12")) $ = ce(Gt, 2), W = ce(Gt, 10), U = ce(Gt, 18), M = ce(Gt, 26), V = ue(Gt, 34), K = ue(Gt, 36), P = ue(Gt, 38), t.setData({
           SV2: $,
           SA2: W,
           SMW: U,
