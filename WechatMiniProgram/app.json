@@ -7,7 +7,6 @@
     "useAuthorizePage": true
   },
   "style": "v2",
-  "debug": true,
   "subPackages": [],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,6 +19,7 @@
     "pages/device/device",
     "pages/device2/device",
     "pages/NewUI/NewUI",
-    "pages/NewUI1/NewUI"
+    "pages/NewUI1/NewUI",
+    "pages/Help/Help"
   ]
 }

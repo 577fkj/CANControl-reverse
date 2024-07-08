@@ -162,13 +162,16 @@
                     <view class="close" hidden="{{ShowBar==22}}"></view>
                 </view>
                 <button bindtap="BTHELP" class="DisTIP" onTap="BTHELP" style="width: 65%;">{{'版本更新说明'}}</button>
-                <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-06-02</button>
+                <button bindtap="BTHELP" class="DisINF" onTap="BTHELP" style="width: 35%;">2024-06-30</button>
             </view>
             <view style="display:{{ShowBar==22?'block':'none'}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
                     <button bindtap="BTUP10" class="DisINF1" onTap="BTUP10">{{UEN?'Copy Connection':'复制连接'}}</button>
                 </view>
+                <view style="height: 10px;"></view>
+                <view class="tip2" style="color: #fa0;">5.34 2024-06-30 </view>
+                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
                 <view style="height: 10px;"></view>
                 <view class="tip2" style="color: #fa0;">5.33 2024-06-02 </view>
                 <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开) </view>
@@ -662,7 +665,7 @@
     </view>
     <view style="height:5px;"></view>
 </view>
-<view style="display:{{Panel>=2?'block':'none'}}">
+<view hidden="{{Panel<2}}">
     <view style="display:{{0?'block':'none'}}">
         <view class="SetBox">
             <view class="SendLayout">
@@ -709,7 +712,7 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5?'block':'none'}}">
+    <view hidden="{{TCH>1}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTKEY" style="width: 20px; background-color: #88888850;">
@@ -739,14 +742,42 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5?'block':'none'}}">
+    <view hidden="{{TCH<1||CVer<5.34}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTTCH" style="width: 20px; background-color: #88888850;">
+                    <view class="open" hidden="{{ShowBar!=24}}"></view>
+                    <view class="close1" hidden="{{ShowBar==24}}"></view>
+                </view>
+                <button bindtap="BTTCH" class="DisTIP" onTap="BTLEDKS" style="width: 65%;">{{UEN?'Touch Screen Password':'触屏密码设置'}}</button>
+                <button bindtap="BTTCH1" class="DisINF" onTap="BTLEDKS1" style="width: 35%;">{{LKV}}</button>
+            </view>
+            <view style="display:{{ShowBar==24?'block':'none'}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Touch Screen Lock Time':'触屏锁屏时间'}}</button>
+                    <button bindtap="BTTCH2" class="DisINF1" onTap="BTLEDKS2">{{LKS+(UEN?' Second':'秒')}}</button>
+                </view>
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}The touch screen password is limited to numbers and can be between 4 and 6 digits.</view>
+                    <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to set it.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}触屏密码仅限数字,4-6位均可,锁屏后会在屏幕上显示红色锁图标,上滑或者长按屏幕开始解锁,解锁后图标变为绿色,触屏无操作{{LKS}}秒后会再次锁定。</view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}击右上角绿色数字进行设置。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{CVer<5}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTCKA" style="width: 20px; background-color: #88888850;">
                     <view class="open" hidden="{{ShowBar!=21}}"></view>
                     <view class="close1" hidden="{{ShowBar==21}}"></view>
                 </view>
-                <button bindtap="BTCKA" class="DisTIP" onTap="BTKEY" style="width: 65%;">{{UEN?'Enable Panel Buttons':'二段电流缓降'}}</button>
+                <button bindtap="BTCKA" class="DisTIP" onTap="BTKEY" style="width: 65%;">{{UEN?'Slow Current Drop':'二段电流缓降'}}</button>
                 <button bindtap="BTCKA2" class="DisINF" onTap="BTCKA2" style="width: 35%;" wx:if="{{UEN}}">{{CKA2?'Yes':'No'}}</button>
                 <button bindtap="BTCKA2" class="DisINF" onTap="BTCKA2" style="width: 35%;" wx:if="{{!UEN}}">{{CKA2?'是':'否'}}</button>
             </view>
@@ -766,7 +797,7 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.31?'block':'none'}}">
+    <view hidden="{{CVer<5.31}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTYC" style="width: 20px; background-color: #88888850;">
@@ -911,6 +942,11 @@
                 <view wx:if="{{!UEN}}">
                     <view style="display:{{ADD?'block':'none'}}">
                         <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
+                    </view>
+                    <view wx:if="{{CVer<5.34}}">
+                        <view style="height: 10px;"></view>
+                        <view class="tip2" style="color: #0f0;">5.34 2024-06-30</view>
+                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
                     </view>
                     <view wx:if="{{CVer<5.33}}">
                         <view style="height: 10px;"></view>

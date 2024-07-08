@@ -1,21 +1,32 @@
 <scroll-view class="main-container">
     <view bindtap="listViewTap" class="list-item" data-name="{{item.name}}" wx:for="{{deviceListDataShow}}" wx:key="name">
         <image class="list-item-img" src="/img/icon.png" wx:if="{{tools.strFirst(item.name)==='CAN-'||tools.strFirst(item.name)==='CAN_'||tools.StrFirst(item.name)==='@'}}"></image>
-        <image class="list-item-img" src="/img/ble.png" wx:else></image>
+        <view style="position:absolute;left:22px;top:12px;width:32px;height:32px;border-radius: 50%;background-color:#444; " wx:else>
+            <view style="position:absolute;left: 2px;top:2px;width:28px;height:28px;border-radius: 50%;background-color:#ccc; "></view>
+            <view style="position:absolute;left:15px;top:7px;transform:rotate( 45deg);background-color:#444;width: 3px;height: 17px;"></view>
+            <view style="position:absolute;left:15px;top:7px;transform:rotate(-45deg);background-color:#444;width: 3px;height: 17px;"></view>
+        </view>
         <text class="list-item-name">{{item.name}}</text>
-        <image class="list-item-rssi-img" mode="aspectFit" src="/img/s5.png" wx:if="{{item.rssi>=-65}}"></image>
-        <image class="list-item-rssi-img" mode="aspectFit" src="/img/s4.png" wx:elif="{{item.rssi>=-70}}"></image>
-        <image class="list-item-rssi-img" mode="aspectFit" src="/img/s3.png" wx:elif="{{item.rssi>=-80}}"></image>
-        <image class="list-item-rssi-img" mode="aspectFit" src="/img/s2.png" wx:elif="{{item.rssi>=-85}}"></image>
-        <image class="list-item-rssi-img" mode="aspectFit" src="/img/s1.png" wx:elif="{{item.rssi>=-90}}"></image>
+        <view class="list-item-rssi-img">
+            <view style=" display: flex; top:200px; width: 20px; height: 20px;justify-content: space-around;">
+                <view style="position:relative;top:16px;left:0px;height: 4px;width:2px;background-color:{{item.rssi>=-90?'#4d0':'#888'}};"></view>
+                <view style="position:relative;top:13px;left:0px;height: 7px;width:2px;background-color:{{item.rssi>=-85?'#4d0':'#888'}};"></view>
+                <view style="position:relative;top:10px;left:0px;height:10px;width:2px;background-color:{{item.rssi>=-80?'#4d0':'#888'}};"></view>
+                <view style="position:relative;top: 7px;left:0px;height:13px;width:2px;background-color:{{item.rssi>=-70?'#4d0':'#888'}};"></view>
+                <view style="position:relative;top: 4px;left:0px;height:16px;width:2px;background-color:{{item.rssi>=-65?'#4d0':'#888'}};"></view>
+            </view>
+        </view>
         <text class="list-item-rssi">{{item.rssi}}</text>
         <view class="list-item-line"></view>
     </view>
     <view class="notice" wx:if="{{!deviceListDataShow.length}}"> -自动搜索中,长间无设备时请确认蓝牙及定位是否打开 - </view>
     <view class="gap"></view>
 </scroll-view>
-<view class="footer" style="display:{{ShowUI?'flex':'none'}}">
-    <button bindtap="SetUI0" style="width: 50%;background-color:{{!NewUI?'#afa':'#fff'}} ;color:#000000;">酷炫版</button>
-    <button bindtap="SetUI1" style="width: 50%;background-color:{{NewUI?'#afa':'#fff'}} ;color:#000000;">专业版</button>
+<view class="footer" style="height: auto;">
+    <button bindtap="HELP" style="width: 100%;background-color:#fff ;color:#f00;">常见问题</button>
+    <view style="display:{{ShowUI?'flex':'none'}}">
+        <button bindtap="SetUI0" style="width: 50%;background-color:{{!NewUI?'#afa':'#fff'}} ;color:#000000;">酷炫版</button>
+        <button bindtap="SetUI1" style="width: 50%;background-color:{{NewUI?'#afa':'#fff'}} ;color:#000000;">专业版</button>
+    </view>
 </view>
 <wxs module="tools">var strFirst = (function (str){return(str.slice(0,4))});module.exports.strFirst = strFirst;var StrFirst = (function (str){return(str.slice(0,1))});module.exports.StrFirst = StrFirst;</wxs>
