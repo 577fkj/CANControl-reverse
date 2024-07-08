@@ -836,14 +836,58 @@ Page({
   BTOVT0: function (t) {
     this.setData({
       ShowBar: 0
-    }), wx.pageScrollTo({
+    })
+    wx.pageScrollTo({
       scrollTop: 95,
       duration: 300
-    }), i < 10 || o > 0 ? (0, It.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (zt("C1"), zt("FF"), Ht("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
-      var e = Number(t / i).toFixed(4),
-        a = Number(t / y).toFixed(4);
-      zt("C3" + re(100 * a) + re(100 * e)), 2 == R ? (zt("F876" + re(20 * a)), zt("F877" + re(100 * a))) : 1 == R ? (zt("F876" + re(41 * a)), zt("F877" + re(58.5 * a))) : 4 == R ? (zt("F876" + re(41 * a)), zt("F877" + re(59 * a))) : 16 == R ? (zt("F876" + re(44 * a)), zt("F877" + re(61 * a))) : 32 == R && (zt("F876" + re(41.2 * a)), zt("F877" + re(59.4 * a))), zt("FF"), zt("A80" + A + re(50 * a) + re(k)), zt("FF")
-    })))
+    })
+    if (i < 10 || o > 0) {
+      It.Toast(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A")
+    } else {
+      zt("C1")
+      zt("FF")
+      Ht("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+        var e = Number(t / i).toFixed(4); // 实际电压 / 读取电压 # 设置电压偏移
+        var a = Number(t / y).toFixed(4); // 实际电压 / 设置电压 # 显示电压偏移
+
+        // 保存偏移值
+        zt("C3" + re(100 * a) + re(100 * e))
+
+        // 设置最小最大电压
+        switch (R) {
+          case 1:
+            zt("F876" + re(41 * a))
+            zt("F877" + re(58.5 * a))
+            break;
+          
+          case 2:
+            zt("F876" + re(20 * a))
+            zt("F877" + re(100 * a))
+            break;
+
+          case 4:
+            zt("F876" + re(41 * a))
+            zt("F877" + re(59 * a))
+            break;
+          
+          case 16:
+            zt("F876" + re(44 * a))
+            zt("F877" + re(61 * a))
+            break;
+          
+          case 32:
+            zt("F876" + re(41.2 * a))
+            zt("F877" + re(59.4 * a))
+            break;
+        
+          default:
+            break;
+        }
+        zt("FF")
+        zt("A80" + A + re(50 * a) + re(k))
+        zt("FF")
+      }))
+    }
   },
   BTOVT1: function (t) {
     Ht("显示电压补偿", "Display voltage compensation", "0.1", "5", (function (t) {
