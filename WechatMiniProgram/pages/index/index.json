@@ -1,1 +1,5 @@
-{"usingComponents":{},"enablePullDownRefresh":true,"backgroundTextStyle":"dark"}
+{
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

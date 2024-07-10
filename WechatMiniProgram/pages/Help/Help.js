@@ -1,66 +1,76 @@
-// pages/Help/Help.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    PG: 1
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  COPY1: function (t) {
+    wx.setClipboardData({
+      data: "https://cloud.189.cn/web/share?code=FNbE3q77ZZza（访问码：prs1）"
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  COPY2: function (t) {
+    wx.setClipboardData({
+      data: "https://pan.baidu.com/s/1jBd_YuCspcfbpbW4U28xsw?pwd=8888"
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
+  TEST: function (t) {
+    wx.navigateTo({
+      url: "../NewUI1/NewUI?Test=1&GM=1"
+    }), wx.hideLoading()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  HELP1: function (t) {
+    this.setData({
+      PG: 1 != this.data.PG ? 1 : -1
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  HELP2: function (t) {
+    this.setData({
+      PG: 2 != this.data.PG ? 2 : -1
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  HELP3: function (t) {
+    this.setData({
+      PG: 3 != this.data.PG ? 3 : -1
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  HELP4: function (t) {
+    this.setData({
+      PG: 4 != this.data.PG ? 4 : -1
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
-})
+  HELP5: function (t) {
+    this.setData({
+      PG: 5 != this.data.PG ? 5 : -1
+    })
+  },
+  HELP6: function (t) {
+    this.setData({
+      PG: 6 != this.data.PG ? 6 : -1
+    })
+  },
+  HELP7: function (t) {
+    this.setData({
+      PG: 7 != this.data.PG ? 7 : -1
+    })
+  },
+  HELP8: function (t) {
+    this.setData({
+      PG: 8 != this.data.PG ? 8 : -1
+    })
+  },
+  HELP9: function (t) {
+    this.setData({
+      PG: 9 != this.data.PG ? 9 : -1
+    })
+  },
+  HELP10: function (t) {
+    this.setData({
+      PG: 10 != this.data.PG ? 10 : -1
+    })
+  },
+  HELP11: function (t) {
+    this.setData({
+      PG: 11 != this.data.PG ? 11 : -1
+    })
+  },
+  onLoad: function (t) {}
+});

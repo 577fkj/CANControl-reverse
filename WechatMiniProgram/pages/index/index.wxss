@@ -1,1 +1,140 @@
-.main-container{height:100vh;width:100vw}.list-item{height:57px;position:relative;width:100vw}.list-item-img{height:36px;left:20px;position:absolute;top:10px;width:36px}.list-item-name{font-size:22px;left:76px;line-height:56px;position:absolute;top:0}.list-item-rssi-img{top:13px}.list-item-rssi,.list-item-rssi-img{height:20px;position:absolute;right:20px;width:20px}.list-item-rssi{font-size:12px;font-weight:700;top:33px}.list-item-line{height:1px;left:20px;position:absolute;top:56px;width:100vw}.gap{height:57px;width:100vw}.canvas{height:400rpx;left:0;position:absolute;top:0;width:400rpx}.conic-progress{border-radius:50%;height:300rpx;margin:30rpx auto;position:relative;width:300rpx}.conic-progress::before{background-color:#fff;border-radius:50%;content:"";height:80%;width:80%}.conic-progress::before,.progress-value{left:50%;position:absolute;top:50%;transform:translate(-50%,-50%)}.progress-value{color:green;font-size:60rpx;font-weight:bolder}.footer{bottom:0;height:40px;left:0;position:absolute;width:100%}.btnLayout{flex-direction:row;justify-content:space-around;margin:0;text-align:center}.btnLayout,.notice{display:-webkit-flex;display:flex}.notice{align-items:center;color:#909399;font-size:13px;justify-content:center;margin-top:10px;width:100vw}page{background-color:initial;height:100%}.background{background-color:#000;background-size:100% 100%;height:100%;left:0;position:fixed;width:100%;z-index:-2}
+.main-container {
+  height: 100vh;
+  width: 100vw
+}
+
+.list-item {
+  height: 57px;
+  position: relative;
+  width: 100vw
+}
+
+.list-item-img {
+  height: 36px;
+  left: 20px;
+  position: absolute;
+  top: 10px;
+  width: 36px
+}
+
+.list-item-name {
+  font-size: 22px;
+  left: 76px;
+  line-height: 56px;
+  position: absolute;
+  top: 0
+}
+
+.list-item-rssi-img {
+  top: 13px
+}
+
+.list-item-rssi,
+.list-item-rssi-img {
+  height: 20px;
+  position: absolute;
+  right: 20px;
+  width: 20px
+}
+
+.list-item-rssi {
+  font-size: 12px;
+  font-weight: 700;
+  top: 33px
+}
+
+.list-item-line {
+  height: 1px;
+  left: 20px;
+  position: absolute;
+  top: 56px;
+  width: 100vw
+}
+
+.gap {
+  height: 57px;
+  width: 100vw
+}
+
+.canvas {
+  height: 400rpx;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 400rpx
+}
+
+.conic-progress {
+  border-radius: 50%;
+  height: 300rpx;
+  margin: 30rpx auto;
+  position: relative;
+  width: 300rpx
+}
+
+.conic-progress::before {
+  background-color: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 80%;
+  width: 80%
+}
+
+.conic-progress::before,
+.progress-value {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.progress-value {
+  color: green;
+  font-size: 60rpx;
+  font-weight: bolder
+}
+
+.footer {
+  bottom: 0;
+  height: 40px;
+  left: 0;
+  position: absolute;
+  width: 100%
+}
+
+.btnLayout {
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0;
+  text-align: center
+}
+
+.btnLayout,
+.notice {
+  display: -webkit-flex;
+  display: flex
+}
+
+.notice {
+  align-items: center;
+  color: #909399;
+  font-size: 13px;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100vw
+}
+
+page {
+  background-color: initial;
+  height: 100%
+}
+
+.background {
+  background-color: #000;
+  background-size: 100% 100%;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: -2
+}

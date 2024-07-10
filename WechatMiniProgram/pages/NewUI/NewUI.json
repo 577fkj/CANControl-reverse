@@ -1,1 +1,13 @@
-{"backgroundColorContent":"#000000ff","navigationBarBackgroundColor":"#001","navigationBarTextStyle":"white","navigationBarTitleText":"CAN-Control","backgroundColor":"#001","backgroundTextStyle":"light","backgroundColorTop":"#001","backgroundColorBottom":"#001","usingComponents":{"color-picker":"../../components/color-picker/color-picker"}}
+{
+  "backgroundColorContent": "#000000ff",
+  "navigationBarBackgroundColor": "#001",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "CAN-Control",
+  "backgroundColor": "#001",
+  "backgroundTextStyle": "light",
+  "backgroundColorTop": "#001",
+  "backgroundColorBottom": "#001",
+  "usingComponents": {
+    "color-picker": "../../components/color-picker/color-picker"
+  }
+}

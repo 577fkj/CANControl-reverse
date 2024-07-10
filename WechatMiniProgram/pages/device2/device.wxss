@@ -1,1 +1,104 @@
-.bterr{background-color:#0bce2c;border:1px solid #666665;border-radius:0;color:#121312;font-size:28rpx;height:22px;width:18%}.btnLayout{text-align:center}.SendLayout,.btnLayout{display:-webkit-flex;display:flex;flex-direction:row;justify-content:space-around;margin:0}.bt1,.bt2,.bt3{display:-webkit-flex;display:flex;height:100rpx;width:100rpx}.SendBox{border:1px solid #dcdcdc}.page{margin:0 auto;padding-bottom:60px;width:960px}.footer{background:#6cf;clear:both;height:60px}.container,.footer{bottom:0;position:absolute;width:100%}.container{box-sizing:border-box;height:100%;padding-bottom:0}footer{bottom:0;height:30px;left:0;position:absolute;width:100%}.Control{float:right;margin-left:2em;visibility:hidden}.conic-progress{border-radius:50%;height:300rpx;margin:30rpx auto;position:relative;width:300rpx}.conic-progress::before{background-color:#fff;border-radius:50%;content:"";height:80%;width:80%}.conic-progress::before,.progress-value{left:50%;position:absolute;top:50%;transform:translate(-50%,-50%)}.progress-value{color:green;font-size:60rpx;font-weight:bolder}
+.bterr {
+  background-color: #0bce2c;
+  border: 1px solid #666665;
+  border-radius: 0;
+  color: #121312;
+  font-size: 28rpx;
+  height: 22px;
+  width: 18%
+}
+
+.btnLayout {
+  text-align: center
+}
+
+.SendLayout,
+.btnLayout {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0
+}
+
+.bt1,
+.bt2,
+.bt3 {
+  display: -webkit-flex;
+  display: flex;
+  height: 100rpx;
+  width: 100rpx
+}
+
+.SendBox {
+  border: 1px solid #dcdcdc
+}
+
+.page {
+  margin: 0 auto;
+  padding-bottom: 60px;
+  width: 960px
+}
+
+.footer {
+  background: #6cf;
+  clear: both;
+  height: 60px
+}
+
+.container,
+.footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%
+}
+
+.container {
+  box-sizing: border-box;
+  height: 100%;
+  padding-bottom: 0
+}
+
+footer {
+  bottom: 0;
+  height: 30px;
+  left: 0;
+  position: absolute;
+  width: 100%
+}
+
+.Control {
+  float: right;
+  margin-left: 2em;
+  visibility: hidden
+}
+
+.conic-progress {
+  border-radius: 50%;
+  height: 300rpx;
+  margin: 30rpx auto;
+  position: relative;
+  width: 300rpx
+}
+
+.conic-progress::before {
+  background-color: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 80%;
+  width: 80%
+}
+
+.conic-progress::before,
+.progress-value {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.progress-value {
+  color: green;
+  font-size: 60rpx;
+  font-weight: bolder
+}
