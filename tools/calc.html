@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备密码计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>设备密码计算器</h1>
+        <label for="deviceId">输入设备ID:</label>
+        <input type="text" id="deviceId" placeholder="例如: 0x1234567890abcdef">
+        <button onclick="calculatePasswords()">计算密码</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        function calculatePasswords() {
+            var deviceId = document.getElementById('deviceId').value.toLowerCase().replace(/×/g, "x").replace(/[Oo]/g, "0");
+            var resultDiv = document.getElementById('result');
+
+            if (!deviceId.match(/0x[0-9a-f]{10,12}/)) {
+                resultDiv.innerText = "无效的设备ID格式。";
+                return;
+            }
+
+            // 获取设备ID
+            deviceId = deviceId.match(/0x[0-9a-f]{10,12}/)[0];
+
+            // 生成5.0之前蓝牙密码
+            var hash = CryptoJS.MD5("Check" + deviceId + "@t*s$e#T.'1)`").toString();
+            var before5Password = hash.match(/(....)$/)[1];
+
+            // 生成5.0及之后蓝牙密码
+            var modifiedHex = (Number(deviceId) + 19880914).toString(16);
+            var after5Password = modifiedHex.substring(4, 8);
+
+            // 计算5.24及之后系统密码
+            var deviceNumber = Number(deviceId);
+            var asciiSum = 0;
+            var deviceString = deviceNumber.toString();
+            for (var c = 0; c < deviceString.length; c++) {
+                asciiSum += deviceString.charCodeAt(c);
+            }
+            var truncatedValue = Math.trunc(deviceNumber / 655);
+            var systemPassword = (truncatedValue * asciiSum).toString(16);
+            var after524Password = systemPassword.substr(systemPassword.length - 6, 6);
+
+            // 显示结果
+            resultDiv.innerHTML = 
+                "设备ID: " + deviceId + "<br>" +
+                "5.0之前蓝牙密码: " + before5Password + "<br>" +
+                "5.0及之后蓝牙密码: " + after5Password + "<br>" +
+                "5.24及之后系统密码: " + after524Password;
+        }
+    </script>
+</body>
+</html>

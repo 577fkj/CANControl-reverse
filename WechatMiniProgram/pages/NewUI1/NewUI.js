@@ -852,14 +852,60 @@ Page({
   BTOVT0: function (t) {
     this.setData({
       ShowBar: 0
-    }), wx.pageScrollTo({
+    })
+    wx.pageScrollTo({
       scrollTop: 95,
       duration: 300
-    }), i < 10 || o > 0 ? (0, Mt.Toast)(R ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (Jt("C1"), Jt("FF"), qt("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
-      var e = Number(t / i).toFixed(4),
-        a = Number(t / y).toFixed(4);
-      Jt("C3" + ce(100 * a) + ce(100 * e)), 2 == M ? (Jt("F876" + ce(20 * a)), Jt("F877" + ce(100 * a))) : 1 == M ? (Jt("F876" + ce(41 * a)), Jt("F877" + ce(58.5 * a))) : 4 == M ? (Jt("F876" + ce(41 * a)), Jt("F877" + ce(59 * a))) : 16 == M ? (Jt("F876" + ce(44 * a)), Jt("F877" + ce(61 * a))) : 32 == M && (Jt("F876" + ce(41.2 * a)), Jt("F877" + ce(59.4 * a))), Jt("FF"), Jt("A80" + E + ce(50 * a) + ce(k)), Jt("FF")
-    })))
+    })
+    if (i < 10 || o > 0) {
+      Mt.Toast(R ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A")
+    } else {
+      Jt("C1")
+      Jt("FF")
+      qt("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+        var e = Number(t / i).toFixed(4); // 实际电压 / CAN读取电压 # 显示电压偏移
+        var a = Number(t / y).toFixed(4); // 实际电压 / 设置电压    # 设置电压偏移
+
+        // 保存偏移值
+        Jt("C3" + ce(100 * a) + ce(100 * e))
+
+        // 设置最小最大电压
+        switch (R) {
+          case 1:
+            zt("F876" + re(41 * a))
+            zt("F877" + re(58.5 * a))
+            break;
+
+          case 2:
+            zt("F876" + re(20 * a))
+            zt("F877" + re(100 * a))
+            break;
+
+          case 4:
+            zt("F876" + re(41 * a))
+            zt("F877" + re(59 * a))
+            break;
+
+          case 16:
+            zt("F876" + re(44 * a))
+            zt("F877" + re(61 * a))
+            break;
+
+          case 32:
+            zt("F876" + re(41.2 * a))
+            zt("F877" + re(59.4 * a))
+            break;
+
+          default:
+            break;
+        }
+
+        Jt("FF")
+        // 设置电压
+        Jt("A80" + E + ce(50 * a) + ce(k))
+        Jt("FF")
+      }))
+    }
   },
   BTOVT1: function (t) {
     qt("显示电压补偿", "Display voltage compensation", "0.1", "5", (function (t) {
@@ -894,10 +940,18 @@ Page({
     }))
   },
   BTOVT3: function (t) {
-    i < 10 || o > 0 ? (0, Mt.Toast)(R ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (Jt("C2"), Jt("FF"), qt("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
-      var e = Number(t / i).toFixed(4);
-      Jt("C4" + ce(100 * Number(t / y).toFixed(4)) + ce(100 * e)), Jt("FF")
-    })))
+    if (i < 10 || o > 0) {
+      Mt.Toast(R ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A")
+    } {
+      Jt("C2")
+      Jt("FF")
+      qt("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+        var e = Number(t / i).toFixed(4);
+        var f = Number(t / y).toFixed(4);
+        Jt("C4" + ce(100 * f) + ce(100 * e))
+        Jt("FF")
+      }))
+    }
   },
   BTOVT2: function (t) {
     qt("显示电压补偿二", "Display voltage compensation 2", "0.1", "5", (function (t) {
@@ -924,24 +978,36 @@ Page({
   BTOAT0: function (t) {
     this.setData({
       ShowBar: 1
-    }), wx.pageScrollTo({
+    })
+    wx.pageScrollTo({
       scrollTop: 145,
       duration: 300
-    }), o < 5 || y - i < .2 ? (0, Mt.Toast)(R ? "During current correction, the output current must be greater than 5A and in a constant current state" : "电流校正时输出电流必须大于5A且处于恒流状态") : (Jt("C0"), Jt("FF"), qt("输入实际测量出的输出电流", "Input the actual measured output current", "3", "100", (function (t) {
-      var e = Number(t / o).toFixed(4);
-      Jt("C5" + ce(100 * Number(t / k).toFixed(4)) + ce(100 * e)), Jt("FF")
-    })))
+    })
+    if (o < 5 || y - i < .2) { // 输出大于5A 或 设置电压-输出电压 > 0.2V
+      Mt.Toast(R ? "During current correction, the output current must be greater than 5A and in a constant current state" : "电流校正时输出电流必须大于5A且处于恒流状态")
+    } else {
+      Jt("C0")
+      Jt("FF")
+      qt("输入实际测量出的输出电流", "Input the actual measured output current", "3", "100", (function (t) {
+        var e = Number(t / o).toFixed(4); // 实际电流 / 设置电流
+        var f = Number(t / k).toFixed(4); // 实际电流 / 读取电流
+        Jt("C5" + ce(100 * f) + ce(100 * e)), Jt("FF")
+      }))
+    }
   },
   BTOAT1: function (t) {
     qt("显示电流补偿", "Display current compensation", "0.1", "5", (function (t) {
-      Jt("FB45" + ce(100 * t)), Jt("FF")
+      Jt("FB45" + ce(100 * t))
+      Jt("FF")
     }))
   },
   BTOAT2: function (t) {
-    Jt("FB45" + ce(100 * (it - .003))), Jt("FF")
+    Jt("FB45" + ce(100 * (it - .003)))
+    Jt("FF")
   },
   BTOAT3: function (t) {
-    Jt("FB45" + ce(100 * (it + .003))), Jt("FF")
+    Jt("FB45" + ce(100 * (it + .003)))
+    Jt("FF")
   },
   BTOAS1: function (t) {
     qt("设置电流跳动缓冲", "Set current jump buffer", "0.00", "1.00", (function (t) {
@@ -1303,7 +1369,7 @@ Page({
       editable: !1,
       confirmText: "知道了",
       showCancel: !1
-    })), 2 != Wt && 1 != Number(e.Test) || (this.MSG("", "EE7876EF3A7D80010216323032342D372D330000"), this.MSG("", "1000001624000001F4000016F8000005DC010101"), this.MSG("", "1100001BE4000005DC000020D0000005DC010000"), this.MSG("", "12000000000000000000061A8000061A800A013C"), this.MSG("", "13000493E000001D4C00001B580000000064FF32"), this.MSG("", "14000000640000138800001004000016DA08320A"), this.MSG("", "1500002710000027100000271000002788000100"), this.MSG("", "160000000000000000000000000000003200012D"), this.MSG("", "1700002710000027100000000500000005001FFF"), this.MSG("", "18000003E800000000000000000000471801000F"), this.MSG("", "2037383736454633413744383000000000000000"), this.MSG("", "2130303030000000000000000000000000000000"), this.MSG("", "2263786A64777800000000000000000000000000"), this.MSG("", "2335303033383139373135000000000000000000"), this.MSG("", "2430303030000000000000000000000000000000"), this.MSG("", "0100001624000001F400006EB400000BB8013703"), this.MSG("", "02000056220000008400007264000009F6000000"), this.MSG("", "0300000004000001030000010800003865000000"), this.MSG("", "0400000CE4000108740000000000002710000000")), Rt.onBLEConnectionStateChange((function () {
+    })), 2 != Wt && 1 != Number(e.Test) || (this.MSG("", "EE7876EF3A7D80200216323032342D372D330000"), this.MSG("", "1000001624000001F4000016F8000005DC010101"), this.MSG("", "1100001BE4000005DC000020D0000005DC010000"), this.MSG("", "12000000000000000000061A8000061A800A013C"), this.MSG("", "13000493E000001D4C00001B580000000064FF32"), this.MSG("", "14000000640000138800001004000016DA08320A"), this.MSG("", "1500002710000027100000271000002788000100"), this.MSG("", "160000000000000000000000000000003200012D"), this.MSG("", "1700002710000027100000000500000005001FFF"), this.MSG("", "18000003E800000000000000000000471801000F"), this.MSG("", "2037383736454633413744383000000000000000"), this.MSG("", "2130303030000000000000000000000000000000"), this.MSG("", "2263786A64777800000000000000000000000000"), this.MSG("", "2335303033383139373135000000000000000000"), this.MSG("", "2430303030000000000000000000000000000000"), this.MSG("", "0100001624000001F400006EB400000BB8013703"), this.MSG("", "02000056220000008400007264000009F6000000"), this.MSG("", "0300000004000001030000010800003865000000"), this.MSG("", "0400000CE4000108740000000000002710000000")), Rt.onBLEConnectionStateChange((function () {
       Ht.navigateBack({
         delta: 0
       })
