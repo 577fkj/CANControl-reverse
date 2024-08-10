@@ -1,0 +1,84 @@
+name: Update Firmware
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天 00:00 UTC 触发，可以根据需要调整 cron 表达式
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:                # Job-level permissions configuration starts here
+      contents: write           # 'write' access to repository contents
+      pull-requests: write      # 'write' access to pull requests
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Run your script
+      run: |
+        cd fw
+        python save_new_bin.py
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git add .
+        if git diff-index --quiet HEAD --; then
+          echo "No changes detected"
+          echo "::set-output name=changes_detected::false"
+        else
+          echo "Changes detected"
+          echo "::set-output name=changes_detected::true"
+        fi
+
+    - name: Get list of changed files
+      if: steps.check_changes.outputs.changes_detected == 'true'
+      id: get_changed_files
+      run: |
+        echo "::set-output name=files::$(git diff --name-only --cached | tr '\n' ' ')"
+
+    - name: Commit changes
+      if: steps.check_changes.outputs.changes_detected == 'true'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git commit -m "Update fw"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+
+    - name: Calculate MD5 and prepare release notes
+      if: steps.check_changes.outputs.changes_detected == 'true'
+      id: generate_md5
+      run: |
+        md5sum ${{ steps.get_changed_files.outputs.files }} > md5sums.txt
+        echo "## Changed Files and their MD5 checksums:" > release_notes.md
+        cat md5sums.txt >> release_notes.md
+  
+    - name: Create GitHub release
+      if: steps.check_changes.outputs.changes_detected == 'true'
+      uses: softprops/action-gh-release@v2
+      with:
+          files: ${{ steps.get_changed_files.outputs.files }}
+          body_path: release_notes.md  # 使用包含 MD5 校验和的文件作为 release 说明
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
