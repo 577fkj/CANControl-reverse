@@ -41,17 +41,17 @@ jobs:
         git add .
         if git diff-index --quiet HEAD --; then
           echo "No changes detected"
-          echo "::set-output name=changes_detected::false"
+          echo "changes_detected=false" >> $GITHUB_OUTPUT
         else
           echo "Changes detected"
-          echo "::set-output name=changes_detected::true"
+          echo "changes_detected=true" >> $GITHUB_OUTPUT
         fi
 
     - name: Get list of changed files
       if: steps.check_changes.outputs.changes_detected == 'true'
       id: get_changed_files
       run: |
-        echo "::set-output name=files::$(git diff --name-only --cached | tr '\n' ' ')"
+        echo "files=$(git diff --name-only --cached | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
     - name: Commit changes
       if: steps.check_changes.outputs.changes_detected == 'true'
