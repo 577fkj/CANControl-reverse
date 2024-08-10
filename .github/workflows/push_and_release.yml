@@ -73,11 +73,17 @@ jobs:
         md5sum ${{ steps.get_changed_files.outputs.files }} > md5sums.txt
         echo "## Changed Files and their MD5 checksums:" > release_notes.md
         cat md5sums.txt >> release_notes.md
+
+    - name: Get timestamp
+      id: timestamp
+      if: steps.check_changes.outputs.changes_detected == 'true'
+      run: echo "timestamp=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
   
     - name: Create GitHub release
       if: steps.check_changes.outputs.changes_detected == 'true'
       uses: softprops/action-gh-release@v2
       with:
+          tag_name: CANControl-${{ steps.timestamp.outputs.timestamp }}
           files: ${{ steps.get_changed_files.outputs.files }}
           body_path: release_notes.md  # 使用包含 MD5 校验和的文件作为 release 说明
       env:
