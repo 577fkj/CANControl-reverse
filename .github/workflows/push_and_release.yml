@@ -61,6 +61,7 @@ jobs:
         git commit -m "Update fw"
 
     - name: Push changes
+      if: steps.check_changes.outputs.changes_detected == 'true'
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
