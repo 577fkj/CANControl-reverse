@@ -13,6 +13,45 @@ page {
   z-index: -2
 }
 
+.Err {
+  font-size: 18px;
+  font-weight: 600
+}
+
+.Err,
+.UIBox1 {
+  text-align: center
+}
+
+.UIBox1 {
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  color: #000;
+  display: -webkit-flex;
+  display: flex;
+  font-size: 14px;
+  height: 30px;
+  justify-content: space-around;
+  position: absolute;
+  width: 100%
+}
+
+.RGB,
+.Test {
+  margin-left: auto;
+  width: 50%
+}
+
+.Test {
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  margin-right: auto
+}
+
 .DisINF {
   font-size: 15px;
   text-align: right

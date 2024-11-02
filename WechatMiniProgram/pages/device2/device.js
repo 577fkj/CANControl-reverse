@@ -1,15 +1,15 @@
 var t = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   e = require("../../@babel/runtime/helpers/asyncToGenerator");
 require("../../@babel/runtime/helpers/Arrayincludes");
-i(require("../../2CB821879E166AAF4ADE498014473E81.js"));
-var a = i(require("../../2F6960819E166AAF490F088621573E81.js"));
+i(require("../../FE4C2CA79E166AAF982A44A0A4719522.js"));
+var a = i(require("../../734BCE179E166AAF152DA61061819522.js"));
 
 function i(t) {
   return t && t.__esModule ? t : {
     default: t
   }
 }
-var s = require("../../680F81F39E166AAF0E69E9F490373E81.js"),
+var s = require("../../CC0EEE579E166AAFAA68865089619522.js"),
   n = "5.13",
   r = 1,
   l = null,
@@ -292,30 +292,28 @@ Page({
         }), void yt(this.data.CMD);
         if ("设置输出电流" == e) i > k || i < B ? Ut("超出限制范围") : t = "SetVA=" + gt + "," + i + ",KSi";
         else if ("设置输出电压" == e) i > Y || i < _ ? Ut("超出限制范围") : t = "SetVA=" + i + "," + Ct + ",KSi,1";
-        else if ("设置蓝牙名称" == e) s.easySendData("SetCFG=SSID," + function (t) {
-          for (var e = 0, a = "CAN-", i = 0; i < t.length; i++)
-            if (a += t[i], t[i].match(/[\u4e00-\u9fa5]/g) ? e += 3 : e++, e >= 24) return a;
-          return a
-        }(i) + "\n", !0), t = "", Ut("名称已修改 重启生效");
-        else if ("设置蓝牙密码" == e) t = "SetUPWD=" + i.toLowerCase(), jt(E, ""), Ut("密码已修改 重启生效");
-        else if ("充满延时关机" == e) i >= 0 && i < 1200 && (t = "SetUSD=" + i);
-        else if ("设置功率限制" == e) i > At || i < 100 ? Ut("超出设置范围") : t = "SetUMW=" + i;
-        else if ("设置缓启时间" == e) i < 0 || i > 20 ? Ut("设置范围0-20,单位秒") : t = "SetHQ=" + i;
-        else if ("设置预约时间" == e) i < 0 || i > 1200 ? Ut("设置范围0-1200") : t = "SetYS=" + i;
-        else if ("设置过滤电流" == e) t = "SetCLV=" + i;
-        else if ("设置二段充电" == e)
-          if (t.match(/([\d\.]+)V([\d\.]+)A/)) {
-            var S = Number(RegExp.$1),
-              o = Number(RegExp.$2);
-            0 == S || 0 == o ? t = "SetVA2=" + S + ",0" : S > Y || S < _ || o > k || o < B ? Ut("超出设置范围") : t = "SetVA2=" + S + "," + o
-          } else Ut("参数设置错误");
-        else if ("快速设置电压电流" == e)
-          if (t.match(/([\d\.]+)V([\d\.]+)A/)) {
-            var h = Number(RegExp.$1),
-              f = Number(RegExp.$2);
-            h > Y || h < _ || f > k || f < B ? Ut("超出设置范围") : t = "SetKS=" + h + "," + f + "," + Dt
-          } else Ut("参数设置错误");
-        else "系统设置" == e && (t = "CheckGPWD=" + i)
+        else {
+          if ("设置蓝牙名称" == e) return s.easySendData("SetCFG=SSID," + Xt(i) + "\n", !0), t = "", Ut("名称已修改 重启生效"), s.easySendData("SetCFG=SSID," + Xt(i) + "\n", !0), void $t("GetINF");
+          if ("设置蓝牙密码" == e) t = "SetUPWD=" + i.toLowerCase(), jt(E, ""), Ut("密码已修改 重启生效");
+          else if ("充满延时关机" == e) i >= 0 && i < 1200 && (t = "SetUSD=" + i);
+          else if ("设置功率限制" == e) i > At || i < 100 ? Ut("超出设置范围") : t = "SetUMW=" + i;
+          else if ("设置缓启时间" == e) i < 0 || i > 20 ? Ut("设置范围0-20,单位秒") : t = "SetHQ=" + i;
+          else if ("设置预约时间" == e) i < 0 || i > 1200 ? Ut("设置范围0-1200") : t = "SetYS=" + i;
+          else if ("设置过滤电流" == e) t = "SetCLV=" + i;
+          else if ("设置二段充电" == e)
+            if (t.match(/([\d\.]+)V([\d\.]+)A/)) {
+              var S = Number(RegExp.$1),
+                o = Number(RegExp.$2);
+              0 == S || 0 == o ? t = "SetVA2=" + S + ",0" : S > Y || S < _ || o > k || o < B ? Ut("超出设置范围") : t = "SetVA2=" + S + "," + o
+            } else Ut("参数设置错误");
+          else if ("快速设置电压电流" == e)
+            if (t.match(/([\d\.]+)V([\d\.]+)A/)) {
+              var h = Number(RegExp.$1),
+                f = Number(RegExp.$2);
+              h > Y || h < _ || f > k || f < B ? Ut("超出设置范围") : t = "SetKS=" + h + "," + f + "," + Dt
+            } else Ut("参数设置错误");
+          else "系统设置" == e && (t = "CheckGPWD=" + i)
+        }
       }
       $t(t), $t("GetINF"), this.setData({
         CMD: ""
@@ -697,6 +695,12 @@ function jt(t, e) {
 
 function qt(t, e) {
   return (Array(e).join(0) + t).slice(-e)
+}
+
+function Xt(t) {
+  for (var e = 0, a = "CAN-", i = 0; i < t.length; i++)
+    if (a += t[i], t[i].match(/[\u4e00-\u9fa5]/g) ? e += 3 : e++, e >= 24) return a;
+  return a
 }
 wx.getSystemInfo({
   success: function (t) {

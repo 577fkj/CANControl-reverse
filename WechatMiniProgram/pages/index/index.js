@@ -1,11 +1,11 @@
 var t, e = require("../../@babel/runtime/helpers/createForOfIteratorHelper"),
   a = require("../../@babel/runtime/helpers/regeneratorRuntime"),
-  i = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  n = (t = require("../../2CB821879E166AAF4ADE498014473E81.js")) && t.__esModule ? t : {
+  n = require("../../@babel/runtime/helpers/asyncToGenerator"),
+  i = (t = require("../../FE4C2CA79E166AAF982A44A0A4719522.js")) && t.__esModule ? t : {
     default: t
   },
-  r = require("../../F55BAF819E166AAF933DC78618273E81.js");
-var s, o = require("../../680F81F39E166AAF0E69E9F490373E81.js"),
+  r = require("../../91BD48529E166AAFF7DB205549519522.js");
+var s, o = require("../../CC0EEE579E166AAFAA68865089619522.js"),
   c = 0,
   u = 0,
   h = 0,
@@ -16,7 +16,7 @@ function w(t, e) {
 }
 
 function l() {
-  return (l = i(a().mark((function t(e, i) {
+  return (l = n(a().mark((function t(e, n) {
     return a().wrap((function (t) {
       for (;;) switch (t.prev = t.next) {
         case 0:
@@ -25,7 +25,7 @@ function l() {
             break
           }
           wx.navigateTo({
-            url: "../NewUI1/NewUI?GM=" + h
+            url: "../NewUI1/NewUI?Test=1&GM=" + h
           }), wx.hideLoading(), t.next = 11;
           break;
         case 7:
@@ -33,13 +33,13 @@ function l() {
         case 9:
           t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", !1), wx.navigateTo({
             url: "../device/device?Ver=3.47&GM=" + (h ? 1 : 0)
-          }), wx.hideLoading()) : e.startsWith("CAN-") ? i.data.NewUI ? (wx.navigateTo({
+          }), wx.hideLoading()) : e.startsWith("CAN-") ? n.data.NewUI ? (wx.navigateTo({
             url: "../device2/device?Ver=3.47&GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : (wx.navigateTo({
             url: "../NewUI/NewUI?GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : e.startsWith("CAN_") && (wx.navigateTo({
             url: "../NewUI1/NewUI?GM=" + h
-          }), wx.hideLoading()) : u < 5 ? (u += 1, w(e, i), console.log("失败！正在重新连接" + u)) : (wx.hideLoading(), v("连接失败"), i.startDiscovery());
+          }), wx.hideLoading()) : u < 5 ? (u += 1, w(e, n), console.log("失败！正在重新连接" + u)) : (wx.hideLoading(), v("连接失败"), n.startDiscovery());
         case 11:
         case "end":
           return t.stop()
@@ -73,9 +73,9 @@ Page({
     h = Number(t.GM);
     var e = wx.getAccountInfoSync();
     "trial" == e.miniProgram.envVersion && (h = 1), "develop" == e.miniProgram.envVersion && (h = 2);
-    var a, i = (a = "UI", wx.getStorageSync(a));
+    var a, n = (a = "UI", wx.getStorageSync(a));
     this.setData({
-      NewUI: 0 == i ? 0 : i
+      NewUI: 0 == n ? 0 : n
     }), this.setData({
       GM: h
     }), s = this, setInterval((function () {
@@ -102,13 +102,13 @@ Page({
     }), 1800), h && wx.getClipboardData({
       success: function (t) {
         var e = t.data.toLowerCase().replace(/×/g, "x").replace(/[Oo]/g, "0");
-        if ((e = e.match(/0x[0-9a-f]{10,12}/)[0]).startsWith("0x")) {
-          n.default.hex_md5("Check" + e + "@t*s$e#T.'1)`").match(/(....)$/);
-          for (var a = (Number(e) + 19880914).toString(16).substring(4, 8), i = RegExp.$1, r = Number(e), s = 0, o = r.toString(), c = 0; c < o.length; c++) s += o.charCodeAt(c);
-          var u = (Math.trunc(r / 655) * s).toString(16),
-            h = u.substr(u.length - 6, 6);
+        if (e = e.replace("can_", "0x").replace("can-", "0x"), (0, r.print)("Str=" + e), e = e.match(/0x[0-9a-f]{10,12}/), (0, r.print)("math=" + e), e) {
+          i.default.hex_md5("Check" + e + "@t*s$e#T.'1)`").match(/(....)$/);
+          for (var a = (Number(e) + 19880914).toString(16).substring(4, 8), n = RegExp.$1, s = Number(e), o = 0, c = s.toString(), u = 0; u < c.length; u++) o += c.charCodeAt(u);
+          var h = (Math.trunc(s / 655) * o).toString(16),
+            d = h.substr(h.length - 6, 6);
           wx.setClipboardData({
-            data: "设备ID:" + e + "\n5.0之前蓝牙密码:" + i + "\n5.0及之后蓝牙密码:" + a + "\n5.24及之后系统密码:" + h
+            data: "设备ID:" + e + "\n固件5.0之前老版本密码:" + n + "\n固件5.0及之后蓝牙密码:" + a + "\n固件5.24及之后后台密码:" + d
           })
         }
       }
@@ -127,18 +127,18 @@ Page({
   },
   listViewTap: function (t) {
     var e = this;
-    return i(a().mark((function i() {
-      var n;
+    return n(a().mark((function n() {
+      var i;
       return a().wrap((function (a) {
         for (;;) switch (a.prev = a.next) {
           case 0:
-            t.currentTarget.dataset.name.match(/^(CAN[\-\_]|@)/) ? (n = e, u = 0, o.stopBluetoothDevicesDiscovery(), c = t.currentTarget.dataset.name, wx.showToast({
+            t.currentTarget.dataset.name.match(/^(CAN[\-\_]|@)/) ? (i = e, u = 0, o.stopBluetoothDevicesDiscovery(), c = t.currentTarget.dataset.name, wx.showToast({
               title: "设备连接中",
               icon: "loading",
               duration: 46e5,
               mask: !0
-            }), w(c, n)) : (i = "未知设备", r = "不支持此蓝牙设备", wx.showModal({
-              title: i,
+            }), w(c, i)) : (n = "未知设备", r = "不支持此蓝牙设备", wx.showModal({
+              title: n,
               content: r,
               showCancel: !1
             }));
@@ -146,8 +146,8 @@ Page({
           case "end":
             return a.stop()
         }
-        var i, r
-      }), i)
+        var n, r
+      }), n)
     })))()
   },
   SetUI1: function () {
@@ -166,8 +166,8 @@ Page({
     }), wx.hideLoading()
   },
   startDiscovery: function () {
-    return i(a().mark((function t() {
-      var i;
+    return n(a().mark((function t() {
+      var n;
       return a().wrap((function (t) {
         for (;;) switch (t.prev = t.next) {
           case 0:
@@ -175,27 +175,27 @@ Page({
               ShowUI: 0
             }), t.next = 3, o.openBluetoothAdapter();
           case 3:
-            i = t.sent, 2 == h && 0 == s.data.deviceListDataShow.length && ("CAN_虚拟测试设备", "-60", s.data.deviceListData.push({
+            n = t.sent, 2 == h && 0 == s.data.deviceListDataShow.length && ("CAN_虚拟测试设备", "-60", s.data.deviceListData.push({
               name: "CAN_虚拟测试设备",
               rssi: "-60"
-            })), i.ok ? (wx.showToast({
+            })), n.ok ? (wx.showToast({
               title: "正在搜索中",
               icon: "loading",
               duration: 5e3
             }), (0, r.print)("IDX:", "Start BLE Search"), o.startBluetoothDevicesDiscovery((function (t, a) {
               d = 1;
-              var i, n = e(s.data.deviceListData);
+              var n, i = e(s.data.deviceListData);
               try {
-                for (n.s(); !(i = n.n()).done;) {
-                  var r = i.value;
+                for (i.s(); !(n = i.n()).done;) {
+                  var r = n.value;
                   if (r.name.startsWith("CAN-") && s.setData({
                       ShowUI: 1
                     }), r.name === t) return void(r.rssi = a)
                 }
               } catch (t) {
-                n.e(t)
+                i.e(t)
               } finally {
-                n.f()
+                i.f()
               }
               s.data.deviceListData.push({
                 name: t,
@@ -203,7 +203,7 @@ Page({
               }), setTimeout((function () {
                 wx.hideToast()
               }), 1e3)
-            }))) : ((0, r.print)("IDX:", i.errMsg), d = 1, wx.showModal({
+            }))) : ((0, r.print)("IDX:", n.errMsg), d = 1, wx.showModal({
               showCancel: "false",
               confirmText: "我知道了",
               title: "调用蓝牙失败",

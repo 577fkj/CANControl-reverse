@@ -1,1 +1,1 @@
-var r=require("./typeof"),e=require("./toPrimitive");module.exports=function(i){var t=e(i,"string");return"symbol"===r(t)?t:String(t)};
+var _typeof=require("./typeof"),toPrimitive=require("./toPrimitive");function _toPropertyKey(r){var t=toPrimitive(r,"string");return"symbol"===_typeof(t)?t:String(t)}module.exports=_toPropertyKey;

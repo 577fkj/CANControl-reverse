@@ -5,14 +5,28 @@
             <view class="open" hidden="{{PG!=1}}"></view>
             <view class="close" hidden="{{PG==1}}"></view>
         </view>
-        <button bindtap="HELP1" class="DisTIP" style="width: 100%;">{{'显示"设备连接异常"'}}</button>
+        <button bindtap="HELP1" class="DisTIP" style="width: 100%;">{{'电池百分比和保护板不一致'}}</button>
     </view>
     <view style="display:{{PG==1?'block':'none'}}">
+        <view class="tip2" style="color: #0f0;">　　这是由于两种百分比计算方式不同导致的差异,电池保护板计算百分比是根据库仑计方式计算实际的电池电量,而充电器这边无法直接读取到电池库仑计,所以是根据充电器输出电压来计算百分比,举例来说单节三元锂电池满电电压是4.2V,定义为100%,用完后电压是3.0V,定义为0%,那么当在3.6V的时候就定义为50%,由于电压在有电流的时候会受到电线内阻影响,所以此百分比只做参考,没有保护板所显示的百分比精确</view>
+        <view style="height:15px;"></view>
+    </view>
+</view>
+<view style="height:5px;"></view>
+<view class="SetBox">
+    <view class="SendLayout">
+        <view bindtap="HELP8" style="width: 20px; background-color: #88888850;">
+            <view class="open" hidden="{{PG!=8}}"></view>
+            <view class="close" hidden="{{PG==8}}"></view>
+        </view>
+        <button bindtap="HELP8" class="DisTIP" style="width: 100%;">{{'显示"设备连接异常"'}}</button>
+    </view>
+    <view style="display:{{PG==8?'block':'none'}}">
         <view class="tip2" style="color: #fa0;">异常原因:</view>
         <view class="tip2" style="color: #fa0;">　　手机蓝牙收不到设备端发送的数据</view>
         <view style="height:15px;"></view>
         <view class="tip2" style="color: #0f0;">解决方法:</view>
-        <view class="tip2" style="color: #0f0;">　　先关闭手机蓝牙功能后再重新打开手机蓝牙功能,或者直接重启手机</view>
+        <view class="tip2" style="color: #0f0;">　　先关闭手机蓝牙功能后再重新打开手机蓝牙功能,如果任然不行则者直接重启手机</view>
         <view style="height:15px;"></view>
     </view>
 </view>
@@ -31,7 +45,7 @@
         <view style="height:15px;"></view>
         <view class="tip2" style="color: #0f0;">解决方法:</view>
         <view class="tip2" style="color: #0f0;">　　长期出现:1.检查蓝牙通讯线是否正常连接 2.检查CAN通讯协议是否设置正确 排除掉接线问题和设置问题后就剩下蓝牙板问题或者电源问题了,此时只能用替代法测试最为快捷</view>
-        <view class="tip2" style="color: #0f0;">　　偶尔出现:如果偶尔出现此类问题是由于走线布局问题导致通讯受到电磁干扰,请优化通讯线路布局,如避开变压器等强电磁元件,剪掉通讯线多余长度等(大部分优化走线后都能解决此类问题,如任然不行还可以从蓝牙板负极(黑线)接一条线到电源模块的CAN通讯芯片负极上以提高抗干扰能力)</view>
+        <view class="tip2" style="color: #0f0;">　　偶尔出现:如果偶尔出现此类问题都是由于走线布局问题导致通讯受到电磁干扰,请优化通讯线路布局,如避开变压器等强电磁元件,特别是通讯线长了一定要剪掉通讯线多余长度,不要硬塞到里面(优化走线后都能解决此类问题,如任然不行还可以从蓝牙板负极(黑线)接一条线到电源模块的CAN通讯芯片负极上以提高抗干扰能力)</view>
         <view style="height:15px;"></view>
     </view>
 </view>
