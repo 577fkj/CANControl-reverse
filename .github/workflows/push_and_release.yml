@@ -52,6 +52,7 @@ jobs:
       id: get_changed_files
       run: |
         echo "files=$(git diff --name-only --cached | tr '\n' ' ')" >> $GITHUB_OUTPUT
+        echo "filesn=$(git diff --name-only --cached | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
     - name: Commit changes
       if: steps.check_changes.outputs.changes_detected == 'true'
@@ -85,7 +86,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
           tag_name: CANControl-${{ steps.timestamp.outputs.timestamp }}
-          files: ${{ steps.get_changed_files.outputs.files }}
+          files: ${{ steps.get_changed_files.outputs.filesn }}
           body_path: release_notes.md  # 使用包含 MD5 校验和的文件作为 release 说明
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
