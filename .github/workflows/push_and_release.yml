@@ -52,7 +52,11 @@ jobs:
       id: get_changed_files
       run: |
         echo "files=$(git diff --name-only --cached | tr '\n' ' ')" >> $GITHUB_OUTPUT
-        echo "filesn=$(git diff --name-only --cached)" >> $GITHUB_OUTPUT
+        {
+          echo 'filesn<<EOF'
+          git diff --name-only --cached
+          echo EOF
+        } >> $GITHUB_OUTPUT
 
     - name: Commit changes
       if: steps.check_changes.outputs.changes_detected == 'true'
