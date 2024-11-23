@@ -7,7 +7,7 @@ test_new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmY
 
 def get_version(data):
     # find version string '00 35 2E ? ? 00'
-    version = ''
+    version = b'Unk'
     for i in range(len(data) - 5):
         if data[i] == 0x00 and data[i + 1] == 0x35 and data[i + 2] == 0x2E and data[i + 5] == 0x00:
             version = data[i + 1:i + 5]
@@ -26,6 +26,7 @@ def download(url, file_name, save_dir, bin_id, next_bin = None):
     if os.path.exists(f'{save_dir}/{name}'):
         os.remove(f'{save_dir}/{name}')
     name = f'{file_id}_{file_name}_{version}.bin'
+    print(url.format(bin_id))
     print(f'Saving {name}')
     with open(f'{save_dir}/{name}', 'wb') as f:
         f.write(data)
