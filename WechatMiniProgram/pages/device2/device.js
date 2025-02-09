@@ -99,8 +99,8 @@ var s = require("../../AF3078509E166AAFC956105707D18510.js"),
 
 function yt(t, e) {
   wx.createSelectorQuery().select("#myCanvas").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (e) {
     var a = e[0].node,
       i = a.getContext("2d");
@@ -128,14 +128,14 @@ var Et = [],
   Kt = 0;
 
 function Bt(t) {
-  s.easySendData(Et[Kt], !1), Ut("发送进度:" + (Kt / Et.length * 100).toFixed(2) + "%"), console.log("ID=" + Kt + "  Str=" + Et[Kt]), Kt++
+  s.easySendData(Et[Kt], false), Ut("发送进度:" + (Kt / Et.length * 100).toFixed(2) + "%"), console.log("ID=" + Kt + "  Str=" + Et[Kt]), Kt++
 }
 
 function kt(t) {
   for (var e = function (e) {
       wx.createSelectorQuery().select(t[e][0]).fields({
-        node: !0,
-        size: !0
+        node: true,
+        size: true
       }).exec((function (a) {
         var i = a[0].node,
           s = i.getContext("2d"),
@@ -208,7 +208,7 @@ Page({
         var e = t.data;
         if (e.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/)) wx.showModal({
           title: "是否发送剪切板中的设置代码",
-          editable: !1,
+          editable: false,
           placeholderText: "",
           success: function (t) {
             t.confirm && function (t) {
@@ -224,7 +224,7 @@ Page({
         });
         else
           for (var a = e.split("\n"), i = 0; i < a.length; i++)
-            if (a[i].startsWith("SetMSG=")) s.easySendData(a[i] + "\n", !0), Ut("信息已发送");
+            if (a[i].startsWith("SetMSG=")) s.easySendData(a[i] + "\n", true), Ut("信息已发送");
             else if (a[i].startsWith("SetLOGO=")) {
           if (a[i].match(/SetLOGO=(.+)$/), "" != (Lt = RegExp.$1)) {
             $t("SetLOGO=S");
@@ -236,7 +236,7 @@ Page({
     }), this.data.CMD.match(/^([^=]+)=(.+)/);
     var e = RegExp.$1,
       i = RegExp.$2;
-    if (3 == this.data.ShowPan) "SetMSG" == e ? (s.easySendData(t + "\n", !0), Yt("设置已发送,重启生效!")) : (pt = this.data.CMD.toLowerCase(), jt(E, pt), $t("CheckUPWD=" + pt));
+    if (3 == this.data.ShowPan) "SetMSG" == e ? (s.easySendData(t + "\n", true), Yt("设置已发送,重启生效!")) : (pt = this.data.CMD.toLowerCase(), jt(E, pt), $t("CheckUPWD=" + pt));
     else if (4 == this.data.ShowPan) {
       if ("预览" == this.data.STX) yt(this.data.CMD), this.setData({
         STX: "发送"
@@ -282,7 +282,7 @@ Page({
           ShowPan: 4,
           CMD: "1,27,30," + i.substring(0, 2) + "|1,57,30," + i.substring(2)
         }), void yt(this.data.CMD);
-        t = t.replace("0104", ""), s.easySendData(t + "\n", !0), t = "Restart", Yt("设置已发送,设备正在重启!"), wx.navigateBack({
+        t = t.replace("0104", ""), s.easySendData(t + "\n", true), t = "Restart", Yt("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
         })
       } else {
@@ -293,7 +293,7 @@ Page({
         if ("设置输出电流" == e) i > k || i < B ? Ut("超出限制范围") : t = "SetVA=" + gt + "," + i + ",KSi";
         else if ("设置输出电压" == e) i > Y || i < _ ? Ut("超出限制范围") : t = "SetVA=" + i + "," + Ct + ",KSi,1";
         else {
-          if ("设置蓝牙名称" == e) return s.easySendData("SetCFG=SSID," + Xt(i) + "\n", !0), t = "", Ut("名称已修改 重启生效"), s.easySendData("SetCFG=SSID," + Xt(i) + "\n", !0), void $t("GetINF");
+          if ("设置蓝牙名称" == e) return s.easySendData("SetCFG=SSID," + Xt(i) + "\n", true), t = "", Ut("名称已修改 重启生效"), s.easySendData("SetCFG=SSID," + Xt(i) + "\n", true), void $t("GetINF");
           if ("设置蓝牙密码" == e) t = "SetUPWD=" + i.toLowerCase(), jt(E, ""), Ut("密码已修改 重启生效");
           else if ("充满延时关机" == e) i >= 0 && i < 1200 && (t = "SetUSD=" + i);
           else if ("设置功率限制" == e) i > At || i < 100 ? Ut("超出设置范围") : t = "SetUMW=" + i;
@@ -501,8 +501,8 @@ Page({
   },
   onLoad: function (t) {
     Pt = 1 == t.GM ? 1 : _t("GM"), Vt = 0, wx.createSelectorQuery().select("#canvas").fields({
-      node: !0,
-      size: !0
+      node: true,
+      size: true
     }).exec((function (t) {
       var e = t[0].node;
       l = e.getContext("2d");
@@ -664,7 +664,7 @@ function Ht() {
     return t().wrap((function (t) {
       for (;;) switch (t.prev = t.next) {
         case 0:
-          return t.next = 2, s.easySendData(a + "\n", !1);
+          return t.next = 2, s.easySendData(a + "\n", false);
         case 2:
         case "end":
           return t.stop()
@@ -681,7 +681,7 @@ function Yt(t) {
   wx.showModal({
     title: "MSG",
     content: t,
-    showCancel: !1
+    showCancel: false
   })
 }
 

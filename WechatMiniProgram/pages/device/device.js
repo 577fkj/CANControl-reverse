@@ -105,8 +105,8 @@ var u = require("../../AF3078509E166AAFC956105707D18510.js"),
 function js(s) {
   for (var f = function (f) {
       wx.createSelectorQuery().select(s[f][0]).fields({
-        node: !0,
-        size: !0
+        node: true,
+        size: true
       }).exec((function (a) {
         var e = a[0].node,
           t = e.getContext("2d"),
@@ -203,8 +203,8 @@ Page({
         } else {
           if ("LOGO" == f) {
             if (t = u.match(/=(0\d\d\d[\u4e00-\u9fa5\w]{4,6})$/), console.log(t), null != t) t = RegExp.$1, wx.createSelectorQuery().select("#myCanvas").fields({
-              node: !0,
-              size: !0
+              node: true,
+              size: true
             }).exec((function (f) {
               var a = f[0].node,
                 e = a.getContext("2d");
@@ -470,8 +470,8 @@ Page({
   },
   onLoad: function (s) {
     Es = 1 == s.GM ? 1 : ef("GM"), wx.createSelectorQuery().select("#canvas").fields({
-      node: !0,
-      size: !0
+      node: true,
+      size: true
     }).exec((function (s) {
       var f = s[0].node;
       i = f.getContext("2d");
@@ -596,7 +596,7 @@ var Os = [],
   Js = 0;
 
 function Xs(s) {
-  u.easySendData(Os[$s][Ks] + "\n", !1), Ks += 1, Ls += 1, s.setData({
+  u.easySendData(Os[$s][Ks] + "\n", false), Ks += 1, Ls += 1, s.setData({
     SOC: (Ls / Js * 100).toFixed(2)
   })
 }
@@ -628,7 +628,7 @@ function Us() {
     return s().wrap((function (s) {
       for (;;) switch (s.prev = s.next) {
         case 0:
-          return s.next = 2, u.easySendData(a + "\n", !1);
+          return s.next = 2, u.easySendData(a + "\n", false);
         case 2:
         case "end":
           return s.stop()
@@ -645,7 +645,7 @@ function ff(s) {
   wx.showModal({
     title: "MSG",
     content: s,
-    showCancel: !1
+    showCancel: false
   })
 }
 

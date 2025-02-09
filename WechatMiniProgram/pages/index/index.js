@@ -41,7 +41,7 @@ function v() {
         case 12:
           return t.next = 14, o.easyConnect(e, (function () {}));
         case 14:
-          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", !1), wx.navigateTo({
+          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", false), wx.navigateTo({
             url: "../device/device?Ver=3.47&GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : e.startsWith("CAN-") ? i.data.NewUI ? (wx.navigateTo({
             url: "../device2/device?Ver=3.47&GM=" + (h ? 1 : 0)
@@ -152,11 +152,11 @@ Page({
               title: "设备连接中",
               icon: "loading",
               duration: 46e5,
-              mask: !0
+              mask: true
             }), l(c, n)) : (i = "未知设备", r = "不支持此蓝牙设备", wx.showModal({
               title: i,
               content: r,
-              showCancel: !1
+              showCancel: false
             }));
           case 1:
           case "end":

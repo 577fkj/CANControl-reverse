@@ -83,7 +83,7 @@ function X() {
           }
           return q("有发送任务正在进行中"), t.abrupt("return");
         case 3:
-          return t.next = 5, h.easySendData(i + "\n", !1);
+          return t.next = 5, h.easySendData(i + "\n", false);
         case 5:
         case "end":
           return t.stop()
@@ -96,7 +96,7 @@ function tt(t, e) {
   var i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : function () {};
   wx.showModal({
     title: t,
-    editable: !0,
+    editable: true,
     placeholderText: e,
     success: function (t) {
       t.confirm && i(t.content)
@@ -109,7 +109,7 @@ var et, it, nt, at, ot, rt, lt, st, ct, ft, dt, ut, ht, St, Ft, gt, xt, mt, bt, 
 function It(t) {
   0 == Dt ? wx.showModal({
     title: "确认是否修改充电动画",
-    editable: !1,
+    editable: false,
     placeholderText: "",
     success: function (e) {
       if (e.confirm) {
@@ -124,18 +124,18 @@ function It(t) {
 }
 
 function Gt(t) {
-  h.easySendData(pt[Dt], !1), q("发送进度:" + (Dt / pt.length * 100).toFixed(2) + "%"), console.log("ID=" + Dt + "  Str=" + pt[Dt]), Dt++
+  h.easySendData(pt[Dt], false), q("发送进度:" + (Dt / pt.length * 100).toFixed(2) + "%"), console.log("ID=" + Dt + "  Str=" + pt[Dt]), Dt++
 }
 
 function Bt(t, e, i, n, a, o) {
-  o.moveTo(t + a, e), o.lineTo(t + i - a, e), o.arc(t + i - a, e + a, a, Math.PI / 180 * 270, 0, !1), o.lineTo(t + i, e + n - a), o.arc(t + i - a, e + n - a, a, 0, Math.PI / 180 * 90, 0, !1), o.lineTo(t + a, e + n), o.arc(t + a, e + n - a, a, Math.PI / 180 * 90, Math.PI / 180 * 180, !1), o.lineTo(t, e + a), o.arc(t + a, e + a, a, Math.PI / 180 * 180, Math.PI / 180 * 270, !1), o.stroke()
+  o.moveTo(t + a, e), o.lineTo(t + i - a, e), o.arc(t + i - a, e + a, a, Math.PI / 180 * 270, 0, false), o.lineTo(t + i, e + n - a), o.arc(t + i - a, e + n - a, a, 0, Math.PI / 180 * 90, 0, false), o.lineTo(t + a, e + n), o.arc(t + a, e + n - a, a, Math.PI / 180 * 90, Math.PI / 180 * 180, false), o.lineTo(t, e + a), o.arc(t + a, e + a, a, Math.PI / 180 * 180, Math.PI / 180 * 270, false), o.stroke()
 }
 
 function vt() {
   var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0;
   b || S || (S = 1, (it != N || st != T || t) && wx.createSelectorQuery().select("#btbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -148,8 +148,8 @@ function vt() {
       o.drawImage(l, 0, 0, 1, 1), o.fillStyle = T < 30 ? "rgba(250, 0, 0, 0.9)" : T < 80 ? "rgba(200, 255, 0, 0.9)" : "rgba(0, 255, 0, 0.9)", o.fillRect(.115 * i, .19 * n, .76 * i * (.01 * T), .61 * n), o.lineWidth = 6, o.strokeStyle = "#fff", Bt(.11 * i, .18 * n, .77 * i, .63 * n, 15, o), o.strokeRect(.89 * i, n / 2 - 15, 5, 27), o.fillStyle = "#fff", o.textAlign = "center", o.font = "normal bold 30px Kaiti", o.fillText(m, i / 2, n / 2 - 20), o.font = "normal bold 50px Kaiti", o.fillText(T + "%", i / 2, n / 2 + 40), o.font = "normal bold 15px Kaiti", o.fillStyle = "#666", o.fillText(a, i / 2, .95 * n), o.fillText("APP-1.08", i / 2, .12 * n)
     }
   })), (ct != y || at != A || t) && wx.createSelectorQuery().select("#nvbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -162,8 +162,8 @@ function vt() {
       a.drawImage(r, 1, 0, i, n), a.fillStyle = "#fff", a.textAlign = "center", a.font = "normal bold 30px Kaiti", a.fillText(y.toFixed(2) + "V", i / 2, 50), a.textAlign = "right", a.font = "normal bold 15px Kaiti", a.fillText(A.toFixed(2) + "V", i - 15, 80)
     }
   })), (ft != G || nt != v || t) && wx.createSelectorQuery().select("#nabt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -176,8 +176,8 @@ function vt() {
       a.drawImage(r, 1, 0, i, n), a.fillStyle = "#fff", a.textAlign = "center", a.font = "normal bold 30px Kaiti", a.fillText(G.toFixed(2) + "A", i / 2, 50), a.textAlign = "left", a.font = "normal bold 15px Kaiti", a.fillText(v.toFixed(2) + "A", 15, 80)
     }
   })), (ot != C || et != w || t) && wx.createSelectorQuery().select("#ivbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -190,8 +190,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(Math.trunc(C) + "V", i / 2, n - 28)
     }
   })), (lt != D || t) && wx.createSelectorQuery().select("#otbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -204,8 +204,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(Number(0 == D ? p : D).toFixed(1) + "℃", i / 2, n - 28)
     }
   })), (rt != I || t) && wx.createSelectorQuery().select("#owbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -218,8 +218,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(Math.trunc(I) + "W", i / 2, n - 28)
     }
   })), (dt != W || t) && wx.createSelectorQuery().select("#ahbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -232,8 +232,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(Number(W).toFixed(2), i / 2, n - 28)
     }
   })), (ut != M || t) && wx.createSelectorQuery().select("#whbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -246,8 +246,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(Number(M).toFixed(2), i / 2, n - 28)
     }
   })), (ht != V || t) && wx.createSelectorQuery().select("#tibt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -260,8 +260,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(V, i / 2, n - 28)
     }
   })), (St != B || t) && wx.createSelectorQuery().select("#hqbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -274,8 +274,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(B + "秒", i / 2, .4 * n), a.font = "normal bold 13px Kaiti", a.fillStyle = "#00deff", a.fillText("电流缓启", i / 2 + 7, .73 * n), a.arc(.25 * i, .69 * n, .08 * i, 0, 2 * Math.PI), a.fillStyle = 0 == B ? "#888" : "#0f0", a.fill(), a.lineWidth = 1.5, a.strokeStyle = "#00deff", Bt(.15 * i, .59 * n, .7 * i, .2 * n, 10, a)
     }
   })), (Ft != E || gt != K || t) && wx.createSelectorQuery().select("#sa2bt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -288,8 +288,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 18px Kaiti", a.fillStyle = "#fff", a.fillText(Number(K).toFixed(2) + "V", i / 2, .3 * n), a.fillStyle = "#fff", a.fillText(Number(E).toFixed(2) + "A", i / 2, .5 * n), a.font = "normal bold 13px Kaiti", a.fillStyle = "#00deff", a.fillText("二段功能", i / 2 + 7, .73 * n), a.arc(.25 * i, .69 * n, .08 * i, 0, 2 * Math.PI), a.fillStyle = 0 == E ? "#888" : "#0f0", a.fill(), a.lineWidth = 1.5, a.strokeStyle = "#00deff", Bt(.15 * i, .59 * n, .7 * i, .2 * n, 10, a)
     }
   })), (xt != O || mt != P || t) && wx.createSelectorQuery().select("#sdbt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -302,8 +302,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 16px Kaiti", a.fillStyle = "#fff", a.fillText(_(P), i / 2, .4 * n), a.font = "normal bold 13px Kaiti", a.fillStyle = "#00deff", a.fillText("充满关机", i / 2 + 7, .73 * n), a.arc(.25 * i, .69 * n, .08 * i, 0, 2 * Math.PI), a.fillStyle = 0 == O ? "#888" : "#0f0", a.fill(), a.lineWidth = 1.5, a.strokeStyle = "#00deff", Bt(.15 * i, .59 * n, .7 * i, .2 * n, 10, a)
     }
   })), (bt != k || wt != R || t) && wx.createSelectorQuery().select("#ks1bt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -316,8 +316,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 13px Kaiti", a.fillStyle = 1 == k ? "#fff" : "#999", a.fillText(Number(R[0]).toFixed(2) + "V", i / 2, .35 * n), a.fillText(Number(R[1]).toFixed(2) + "A", i / 2, .6 * n)
     }
   })), (bt != k || Nt != U || t) && wx.createSelectorQuery().select("#ks2bt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -330,8 +330,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 13px Kaiti", a.fillStyle = 2 == k ? "#fff" : "#999", a.fillText(Number(U[0]).toFixed(2) + "V", i / 2, .35 * n), a.fillText(Number(U[1]).toFixed(2) + "A", i / 2, .6 * n)
     }
   })), et = w, (bt != k || Tt != L || t) && wx.createSelectorQuery().select("#ks3bt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -344,8 +344,8 @@ function vt() {
       a.drawImage(r, 0, 0, i, n), a.fillStyle = "#f00", a.textAlign = "center", a.font = "normal bold 13px Kaiti", a.fillStyle = 3 == k ? "#fff" : "#999", a.fillText(Number(L[0]).toFixed(2) + "V", i / 2, .35 * n), a.fillText(Number(L[1]).toFixed(2) + "A", i / 2, .6 * n)
     }
   })), et = w, (bt != k || Ct != $ || t) && wx.createSelectorQuery().select("#ks4bt").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (t) {
     var e = t[0].node,
       i = t[0].width,
@@ -362,7 +362,7 @@ function vt() {
 Page({
   data: {
     rgb: "rgb(0,154,97)",
-    pick: !1,
+    pick: false,
     Cr0: "rgb(255,255,255)",
     Cr1: "rgb(0,255,0)",
     Cr2: "rgb(0,200,255)",
@@ -503,7 +503,7 @@ Page({
   BTCAN1: function (t) {
     wx.showModal({
       title: "确认是否切换为华为",
-      editable: !1,
+      editable: false,
       success: function (t) {
         t.confirm && (J("SetCAN=1"), MSG("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
@@ -514,7 +514,7 @@ Page({
   BTCAN2: function (t) {
     wx.showModal({
       title: "确认是否切换为英可瑞",
-      editable: !1,
+      editable: false,
       success: function (t) {
         t.confirm && (J("SetCAN=2"), MSG("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
@@ -525,7 +525,7 @@ Page({
   BTCAN4: function (t) {
     wx.showModal({
       title: "确认是否切换为中兴",
-      editable: !1,
+      editable: false,
       success: function (t) {
         t.confirm && (J("SetCAN=4"), MSG("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
@@ -536,7 +536,7 @@ Page({
   BTCAN8: function (t) {
     wx.showModal({
       title: "确认是否切换为英飞源",
-      editable: !1,
+      editable: false,
       success: function (t) {
         t.confirm && (J("SetCAN=8"), MSG("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
@@ -547,7 +547,7 @@ Page({
   BTCAN16: function (t) {
     wx.showModal({
       title: "确认是否切换为EPS6020",
-      editable: !1,
+      editable: false,
       success: function (t) {
         t.confirm && (J("SetCAN=16"), MSG("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
@@ -624,7 +624,7 @@ Page({
   },
   Cr0: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "顶部标题",
       rgb: this.data.Cr0
     })
@@ -633,54 +633,54 @@ Page({
     this.setData({
       rgb: this.data.Cr1,
       title: "输出电压",
-      pick: !0
+      pick: true
     })
   },
   Cr2: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "输出电流",
       rgb: this.data.Cr2
     })
   },
   Cr3: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "设置信息",
       rgb: this.data.Cr3
     })
   },
   Cr4: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "统计信息",
       rgb: this.data.Cr4
     })
   },
   Cr5: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "LOGO显示",
       rgb: this.data.Cr5
     })
   },
   Cr6: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "功率显示",
       rgb: this.data.Cr6
     })
   },
   Cr7: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "温度显示",
       rgb: this.data.Cr7
     })
   },
   Cr8: function () {
     this.setData({
-      pick: !0,
+      pick: true,
       title: "电量显示",
       rgb: this.data.Cr8
     })
@@ -697,7 +697,7 @@ Page({
         for (var e = 0, i = "CAN-", n = 0; n < t.length; n++)
           if (i += t[n], t[n].match(/[\u4e00-\u9fa5]/g) ? e += 3 : e++, e >= 24) return i;
         return i
-      }(t) + "\n", !0), void J("GetINF"))
+      }(t) + "\n", true), void J("GetINF"))
     }))
   },
   BTBLE2: function (t) {
@@ -717,7 +717,7 @@ Page({
   BTUP1: function (t) {
     this.data.CAN >= this.data.UPDate || wx.showModal({
       title: "确认是否开始固件升级",
-      editable: !1,
+      editable: false,
       content: "",
       success: function (t) {
         if (t.confirm) return J("UPDate=http://bin.bemfa.com/b/243BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin"), void q("已进入升级状态,请观察屏幕显示.")
@@ -727,7 +727,7 @@ Page({
   BTUP6: function (t) {
     x || this.data.CAN >= 5.25 || wx.showModal({
       title: "确认是否开始固件升级",
-      editable: !1,
+      editable: false,
       content: "升级到新版本不再支持专业版且会清除所有设置,升级后不再能退回到当前版本,所有功能已迁入炫酷版,已支持中英双语.",
       success: function (t) {
         if (t.confirm) return J("UPDate=http://bin.bemfa.com/b/3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=NewUI.bin"), void q("已进入升级状态,请观察屏幕显示.")
@@ -742,7 +742,7 @@ Page({
   BTUP0: function (t) {
     wx.showModal({
       title: "确认是否开始固件回退",
-      editable: !1,
+      editable: false,
       success: function (t) {
         if (t.confirm) return J("UPDate=http://bin.bemfa.com/b/233BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin"), void q("已进入升级状态,请观察屏幕显示.")
       }
@@ -855,7 +855,7 @@ Page({
   BTRST: function (t) {
     wx.showModal({
       title: "确认是否重置设置",
-      editable: !1,
+      editable: false,
       success: function (t) {
         t.confirm && (J("Reset"), MSG("重置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
@@ -999,8 +999,8 @@ Page({
         });
         else if (t.startsWith("User Password Check Failed!")) wx.showModal({
           title: "输入蓝牙密码",
-          editable: !0,
-          showCancel: !1,
+          editable: true,
+          showCancel: false,
           placeholderText: "设备ID:" + o,
           success: function (t) {
             t.confirm && (Y(o, t.content), J("CheckUPWD=" + t.content))

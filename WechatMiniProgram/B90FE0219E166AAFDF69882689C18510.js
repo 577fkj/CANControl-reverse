@@ -1,9 +1,9 @@
 Object.defineProperty(exports, "__esModule", {
-    value: !0
+    value: true
   }),
   (exports.CheckID = function (A) {
-    if (C.includes(" " + A + " ")) return !0;
-    if ((C = B("DEVID", C)).includes(" " + A + " ")) return !0;
+    if (C.includes(" " + A + " ")) return true;
+    if ((C = B("DEVID", C)).includes(" " + A + " ")) return true;
     new Date().getTime() - 864e5 > B("DEVTI", 0) &&
       wx.request({
         url: "https://bin.bemfa.com/b/3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=DEVID.bin",
