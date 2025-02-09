@@ -2,8 +2,8 @@ var t = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   e = require("../../@babel/runtime/helpers/defineProperty");
 require("../../@babel/runtime/helpers/Arrayincludes");
 var i, n, a, o, r, l, s, c, f, d = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  u = require("../../91BD48529E166AAFF7DB205549519522.js"),
-  h = require("../../CC0EEE579E166AAFAA68865089619522.js"),
+  u = require("../../B90FE0219E166AAFDF69882689C18510.js"),
+  h = require("../../AF3078509E166AAFC956105707D18510.js"),
   S = 0,
   F = 0,
   g = 0,
@@ -144,8 +144,8 @@ function vt() {
       r = wx.getWindowInfo().pixelRatio;
     e.width = i * r, e.height = n * r, o.scale(r, r);
     var l = e.createImage();
-    l.src = "/img/bt.png", l.onload = function () {
-      o.drawImage(l, 0, 0, i, n), o.fillStyle = T < 30 ? "rgba(250, 0, 0, 0.9)" : T < 80 ? "rgba(200, 255, 0, 0.9)" : "rgba(0, 255, 0, 0.9)", o.fillRect(.115 * i, .19 * n, .76 * i * (.01 * T), .61 * n), o.lineWidth = 6, o.strokeStyle = "#fff", Bt(.11 * i, .18 * n, .77 * i, .63 * n, 15, o), o.strokeRect(.89 * i, n / 2 - 15, 5, 27), o.fillStyle = "#fff", o.textAlign = "center", o.font = "normal bold 30px Kaiti", o.fillText(m, i / 2, n / 2 - 20), o.font = "normal bold 50px Kaiti", o.fillText(T + "%", i / 2, n / 2 + 40), o.font = "normal bold 15px Kaiti", o.fillStyle = "#666", o.fillText(a, i / 2, .95 * n), o.fillText("APP-1.08", i / 2, .12 * n)
+    l.src = "/img/set.png", l.onload = function () {
+      o.drawImage(l, 0, 0, 1, 1), o.fillStyle = T < 30 ? "rgba(250, 0, 0, 0.9)" : T < 80 ? "rgba(200, 255, 0, 0.9)" : "rgba(0, 255, 0, 0.9)", o.fillRect(.115 * i, .19 * n, .76 * i * (.01 * T), .61 * n), o.lineWidth = 6, o.strokeStyle = "#fff", Bt(.11 * i, .18 * n, .77 * i, .63 * n, 15, o), o.strokeRect(.89 * i, n / 2 - 15, 5, 27), o.fillStyle = "#fff", o.textAlign = "center", o.font = "normal bold 30px Kaiti", o.fillText(m, i / 2, n / 2 - 20), o.font = "normal bold 50px Kaiti", o.fillText(T + "%", i / 2, n / 2 + 40), o.font = "normal bold 15px Kaiti", o.fillStyle = "#666", o.fillText(a, i / 2, .95 * n), o.fillText("APP-1.08", i / 2, .12 * n)
     }
   })), (ct != y || at != A || t) && wx.createSelectorQuery().select("#nvbt").fields({
     node: !0,
@@ -715,7 +715,7 @@ Page({
     J("SetCFG=DDT," + (this.data.DDT >= 3 ? 0 : this.data.DDT + 1)), J("GetINF")
   },
   BTUP1: function (t) {
-    F ? this.BTUP6() : this.data.CAN >= this.data.UPDate || wx.showModal({
+    this.data.CAN >= this.data.UPDate || wx.showModal({
       title: "确认是否开始固件升级",
       editable: !1,
       content: "",

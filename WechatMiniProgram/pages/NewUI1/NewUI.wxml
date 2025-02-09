@@ -1,128 +1,115 @@
 <image class="background" mode="aspectFill" src="{{BGP}}"></image>
-<view hidden="{{BGI==0}}" style="position: fixed;width: 100%;height:100%;background-color: {{BGC}};"></view>
+<view hidden="{{BGI==0}}" style="position:fixed;width:100%;height:100%;background-color:{{BGC}};"></view>
 <view id="page" style="display:{{Panel==1?'block':'none'}}">
     <view style="height:10px"></view>
-    <view class="btnLayout" style="height:88px">
-        <button style="position:absolute;width:50%;left:0;height:55px;font-size:30px;top:12px;background-color:transparent;color:white;">{{OV}}V</button>
-        <view style="position:absolute;left:30%;top:72px;font-size:15px;color:white;">{{SV}}V</view>
-        <image bindtap="nvbt" id="nvbt" mode="aspectFill" src="/img/vt.png" style="left:0%; width:50%; height:88px; position:absolute;"></image>
-        <button style="position:absolute;width:50%;left:50%;height:55px;font-size:30px;top:12px;background-color:transparent;color:white;">{{OA}}A</button>
-        <view style="position:absolute;left:57%;top:72px;font-size:15px;color:white;">{{SA}}A</view>
-        <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%; width:50%; height:88px; position:absolute;"></image>
+    <view class="btnLayout" style="height:88px;font-size:15px;color:white;">
+        <view bindtap="nvbt" style="z-index:1;width:50%;">
+            <image mode="aspectFill" src="/img/vt.png" style="height:88px;width:100%;"></image>
+            <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OV}}V</view>
+            <view style="position:relative;top:-70px;text-align:right;width:85%;">{{SV}}V</view>
+        </view>
+        <view bindtap="nabt" style="z-index:1;width:50%;">
+            <image mode="aspectFill" src="/img/cu.png" style="height:88px;width:100%;"></image>
+            <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OA}}A</view>
+            <view style="position:relative;top:-70px;text-align:left;left:15%;width:85%;">{{SA}}A</view>
+        </view>
     </view>
     <view class="btnLayout" style="height:188px;">
-        <image bindtap="nvbt" id="nvbt" mode="scaleToFill" src="/img/bt.png" style="left:12.5%;top:88px; width:75%; height:188px; position:absolute;"></image>
-        <view style="position:absolute;top:95px;color:#fff8;width:100%;">APP-{{APP}}</view>
-        <view style="position:absolute;top:250px;color:#fff8;width:100%;">{{SCAN+'-'+CVer}}</view>
-        <view style=" background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};  position:absolute;left:21.2%;top:126px;height:110px;width:{{SOC*0.564}}%"></view>
-        <view style=" border-style:solid;border-width:6px;border-radius:15px;border-color:#fff;  position:absolute;left:20%;top:120px;width:56%;height:110px;"></view>
-        <view style=" border-style:solid;border-width:8px;border-radius:5px;border-color:#fff;  position:absolute;left:78%;top:160px;width:0%;height:25px;"></view>
-        <view style="position:absolute;top:135px;color:#fff;width:100%;font-size:{{UEN?15:30}}px;">{{STR}}</view>
-        <view style="position:absolute;top:180px;color:#fff;width:100%;font-size:40px;">{{SOC}}%</view>
-        <view bindtap="uset" style="left:90%; top:240px; width: 28px; height: 28px;position:absolute;">
-            <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate}}"></view>
-            <image mode="aspectFit" src="/img/set.png" style="width: 25px; height: 25px;"></image>
+        <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:56%;height:110px;">
+            <view style="position:relative;top:-30px;color:#fff8;width:100%;height:0px;">APP-{{APP}}</view>
+            <view style="height:151px;" wx:if="{{CEV==1}}">
+                <view style="background-color:#0005;position:relative;left:0px;top:0px;height:110px;width:100%"></view>
+                <image mode="aspectFit" src="/img/ev.png" style="left:0%;top:0px;width:100%;height:100%;position:absolute;"></image>
+                <view bindtap="BTVIN" style="position:relative;left:-2px;top:-15px;color:rgb(0, 255, 255);width:100%;height:0px;font-size:12px;z-index:1;">{{VIN}}</view>
+            </view>
+            <view style="height:151px;" wx:else>
+                <view style="background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};position:relative;left:0px;top:0px;height:110px;width:{{SOC}}%"></view>
+                <view style="border-style:solid;border-width:8px;border-radius:5px;border-color:#aaa;position:relative;left:100%;top:-75px;width:0%;height:25px;"></view>
+                <view style="position:relative;top:-100px;color:#fff;width:100%;height:0px;font-size:40px;">{{SOC}}%</view>
+            </view>
+            <view style="position:relative;top:-145px;color:#fff;width:100%;white-space:nowrap;height:0px;font-size:{{FSize}}px;">{{STR}}</view>
+            <view style="position:relative;top:{{CEV?'-25px':'-30px'}};color:#fff8;width:100%;">{{SCAN+'-'+CVer}}</view>
         </view>
         <view bindtap="DST1" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:195px;position:absolute;color:{{DST==0?'#0f0':'#AAAA'}};">①</view>
         <view bindtap="DST2" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:160px;position:absolute;color:{{DST==1?'#0f0':'#AAAA'}};">②</view>
         <view bindtap="DST3" hidden="{{!(DOL>2)}}" style="font-size:28px;left:90%;top:125px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">③</view>
-        <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top: 90px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">④</view>
-        <image bindtap="SetSM" mode="aspectFit" src="/img/vw.png" style="left:5%; top:240px; width: 25px; height: 25px;position:absolute;"></image>
+        <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top:90px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">④</view>
+        <view bindtap="uset" style="left:90%;top:240px;width:28px;height:28px;position:absolute;">
+            <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate}}"></view>
+            <image mode="aspectFit" src="/img/set.png" style="width:25px;height:25px;"></image>
+        </view>
+        <image bindtap="SetSM" mode="aspectFit" src="/img/vw.png" style="left:5%;top:240px;width:25px;height:25px;position:absolute;"></image>
+    </view>
+    <view class="btnLayout" style="height:0px;">
+        <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:-166px;width:56%;height:110px;"></view>
     </view>
     <view class="btnLayout" hidden="{{ShowM==0}}" style="height:240px;">
-        <view style="border-style:solid;border-width:1px;border-radius:0px;border-color:#033f;position:absolute;left:49%;top:280px;width:0px;height:215px;"></view>
-        <view style="display:{{ShowM==2?'block':'none'}}">
-            <view style="border-style:solid;border-width:2px;border-radius: 1px;border-color:#033f;position:absolute;left:3.5%;top:308px;width:91%;height:25px;"></view>
-            <view style="border-style:solid;border-width:2px;border-radius: 1px;border-color:#033f;position:absolute;left:3.5%;top:{{308+27*2}}px;width:91%;height:25px;"></view>
-            <view style="border-style:solid;border-width:2px;border-radius: 1px;border-color:#033f;position:absolute;left:3.5%;top:{{308+27*4}}px;width:91%;height:25px;"></view>
-            <view style="border-style:solid;border-width:2px;border-radius: 1px;border-color:#033f;position:absolute;left:3.5%;top:{{308+27*5}}px;width:91%;height:25px;"></view>
-            <view style="border-style:solid;border-width:3px;border-radius:12px;border-color:#055f;position:absolute;left:3.5%;top:280px;width:90.5%;height:215px;"></view>
+        <view style="display:flex;width:90%;font-size:14px;text-align:right;color:#aaa;z-index:1;line-height:1.95;white-space:nowrap;">
+            <view style="width:20%;text-align:left;">{{UEN?'IN Voltage':'输入电压'}}<view></view>{{UEN?'IN Current':'输入电流'}}<view></view>{{UEN?'IN Power':'输入功率'}}<view></view>{{UEN?'IN Temp':'输入温度'}}<view></view>{{UEN?'Efficiency':'充电效率'}}<view></view>{{UEN?'Ampere-hour':'充入容量'}}<view></view>{{UEN?'Watt-hour':'充入电量'}}<view></view>{{UEN?'Work Time':'充电时间'}}<view></view>
+            </view>
+            <view style="width:20%;color:#fff;">{{IV}}<view></view>{{IA}}<view></view>{{IW}}<view></view>{{IT}}<view></view>{{EEI}}<view></view>{{Ah}}<view></view>{{Wh}}<view></view>{{Ti}}</view>
+            <view style="width:8%;">V<view></view>A<view></view>W<view></view>℃<view></view>%<view></view>Ah<view></view>Wh</view>
+            <view style="width:3%;"></view>
+            <view style="width:2px;background-color:#aaa;height:220px;"></view>
+            <view style="width:3%;"></view>
+            <view style="width:20%;text-align:left;">{{UEN?'OUT Voltage':'输出电压'}}<view></view>{{UEN?'OUT Current':'输出电流'}}<view></view>{{UEN?'OUT Power':'输出功率'}}<view></view>{{UEN?'OUT Temp':'输出温度'}}<view></view>{{UEN?'Charge loss':'充电损耗'}}<view></view>{{UEN?'All Ah':'累计容量'}}<view></view>{{UEN?'All Wh':'累计电量'}}<view></view>{{UEN?'All Time':'累计时间'}}<view></view>
+            </view>
+            <view style="width:20%;color:#fff;">{{OV}}<view></view>{{OA}}<view style="color:{{SWT||SMT?'red':'white'}}">{{OW}}</view>
+                <view style="color:{{SMT?'red':'wgite'}}">{{OT}}</view>{{EES}}<view></view>{{AH}}<view></view>{{WH}}<view></view>{{TI}}</view>
+            <view style="width:8%;">V<view></view>A<view></view>W<view></view>℃<view></view>W<view></view>Ah<view></view>Wh</view>
         </view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:288px;width:45%;height:25px;color:#999;">{{UEN?'IN Voltage':'输入电压'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:288px;width:35.5%;height:25px;">{{IV}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:288px;width:42.5%;height:25px;color:#999;">V</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*1}}px;width:45%;height:25px;color:#999;">{{UEN?'IN Current':'输入电流'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*1}}px;width:35.5%;height:25px;">{{IA}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*1}}px;width:42.5%;height:25px;color:#999;">A</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*2}}px;width:45%;height:25px;color:#999;">{{UEN?'IN Power':'输入功率'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*2}}px;width:35.5%;height:25px;">{{IW}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*2}}px;width:42.5%;height:25px;color:#999;">W</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*3}}px;width:45%;height:25px;color:#999;">{{UEN?'IN Temp':'输入温度'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*3}}px;width:35.5%;height:25px;">{{IT}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*3}}px;width:42.5%;height:25px;color:#999;">℃</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*4}}px;width:45%;height:25px;color:#999;">{{UEN?'Efficiency':'充电效率'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*4}}px;width:35.5%;height:25px;">{{EEI}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*4}}px;width:42.5%;height:25px;color:#999;">%</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*5}}px;width:45%;height:25px;color:#999;">{{UEN?'Ampere-hour':'充入容量'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*5}}px;width:35.5%;height:25px;">{{Ah}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*5}}px;width:42.5%;height:25px;color:#999;">Ah</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*6}}px;width:45%;height:25px;color:#999;">{{UEN?'Watt-hour':'充入电量'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*6}}px;width:35.5%;height:25px;">{{Wh}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*6}}px;width:42.5%;height:25px;color:#999;">Wh</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:5.5%;top:{{288+27*7}}px;width:45%;height:25px;color:#999;">{{UEN?'Work Time':'充电时间'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*7}}px;width:35.5%;height:25px;">{{Ti}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:6%;top:{{288+27*7}}px;width:42.5%;height:25px;color:#999;"></view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:288px;width:45%;height:25px;color:#999;">{{UEN?'OUT Voltage':'输出电压'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:288px;width:35.5%;height:25px;">{{OV}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:288px;width:42.5%;height:25px;color:#999;">V</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*1}}px;width:45%;height:25px;color:#999;">{{UEN?'OUT Current':'输出电流'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*1}}px;width:35.5%;height:25px;">{{OA}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*1}}px;width:42.5%;height:25px;color:#999;">A</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*2}}px;width:45%;height:25px;color:#999;">{{UEN?'OUT Power':'输出功率'}}</view>
-        <view style="color:{{SWT||SMT?'red':'white'}};text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*2}}px;width:35.5%;height:25px;">{{OW}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*2}}px;width:42.5%;height:25px;color:#999;">W</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*3}}px;width:45%;height:25px;color:#999;">{{UEN?'OUT Temp':'输出温度'}}</view>
-        <view style="color:{{SMT?'red':'white'}};text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*3}}px;width:35.5%;height:25px;">{{OT}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*3}}px;width:42.5%;height:25px;color:#999;">℃</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*4}}px;width:45%;height:25px;color:#999;">{{UEN?'Charge loss':'充电损耗'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*4}}px;width:35.5%;height:25px;">{{EES}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*4}}px;width:42.5%;height:25px;color:#999;">W</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*5}}px;width:45%;height:25px;color:#999;">{{UEN?'All Ah':'累计容量'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*5}}px;width:35.5%;height:25px;">{{AH}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*5}}px;width:42.5%;height:25px;color:#999;">Ah</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*6}}px;width:45%;height:25px;color:#999;">{{UEN?'All Wh':'累计电量'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*6}}px;width:35.5%;height:25px;">{{WH}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*6}}px;width:42.5%;height:25px;color:#999;">Wh</view>
-        <view style="color:#fff;text-align:left;font-size:14px;position:absolute;left:50.5%;top:{{288+27*7}}px;width:45%;height:25px;color:#999;">{{UEN?'All Time':'累计时间'}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*7}}px;width:35.5%;height:25px;">{{TI}}</view>
-        <view style="color:#fff;text-align:right;font-size:14px;position:absolute;left:51%;top:{{288+27*7}}px;width:42.5%;height:25px;color:#999;"></view>
     </view>
-    <view class="btnLayout" hidden="{{ShowM!=0}}" style="height:240px;">
-        <image bindtap="pwrbt" mode="aspectFit" src="/img/{{PON==1?'iv':'iv1'}}.png" style="left:5%;top:280px;width:30%;height: 120px;position:absolute;"></image>
-        <view style="position:absolute;left:5%;top:356px;width:30%;font-size:17px;color:white;">{{IV}}</view>
-        <image bindtap="otbt" mode="aspectFit" src="/img/ot.png" style="left:35%;top:280px;width:30%;height: 120px;position:absolute;"></image>
-        <view style="position:absolute;left:35%;top:356px;width:30%;font-size:17px;color:{{SMT?'red':'white'}};">{{OT==0?IT:OT}}℃</view>
-        <image bindtap="owbt" mode="aspectFit" src="/img/ow.png" style="left:65%;top:280px;width:30%;height: 120px;position:absolute;"></image>
-        <view style="position:absolute;left:65%;top:356px;width:30%;font-size:17px;color:{{SWT||SMT?'red':'white'}};">{{OW}}</view>
-        <view style="position:absolute;left:65%;top:346px;width:30%;font-size:12px;color:gray;">{{UMW}}</view>
-        <image bindtap="ahbt" mode="aspectFit" src="/img/ah.png" style="left:5%;top:400px;width:30%;height: 120px;position:absolute;"></image>
-        <view style="position:absolute;left:5%;top:476px;width:30%;font-size:17px;color:white;">{{Ah}}</view>
-        <image bindtap="whbt" mode="aspectFit" src="/img/wh.png" style="left:35%;top:400px;width:30%;height: 120px;position:absolute;"></image>
-        <view style="position:absolute;left:35%;top:476px;width:30%;font-size:17px;color:white;">{{Wh}}</view>
-        <image bindtap="tibt" mode="aspectFit" src="/img/ti.png" style="left:65%;top:400px;width:30%;height: 120px;position:absolute;"></image>
-        <view style="position:absolute;left:65%;top:476px;width:30%;font-size:17px;color:white;">{{Ti}}</view>
+    <view class="btnLayout" hidden="{{ShowM!=0}}" style="height:240px;color:white;font-size:17px;">
+        <image bindtap="pwrbt" mode="aspectFit" src="/img/{{PON==1?'iv':'iv1'}}.png" style="left:5%;top:280px;width:30%;height:120px;position:absolute;"></image>
+        <view style="position:absolute;left:5%;top:356px;width:30%;">{{IV}}</view>
+        <image bindtap="otbt" mode="aspectFit" src="/img/ot.png" style="left:35%;top:280px;width:30%;height:120px;position:absolute;"></image>
+        <view style="position:absolute;left:35%;top:356px;width:30%;color:{{SMT?'red':'white'}};">{{OT>IT?OT:IT}}℃</view>
+        <image bindtap="{{CEV?'':'owbt'}}" mode="aspectFit" src="/img/ow.png" style="left:65%;top:280px;width:30%;height:120px;position:absolute;"></image>
+        <view style="position:absolute;left:65%;top:356px;width:30%;color:{{(SWT||SMT)&&!CEV?'red':'white'}};">{{OW}}</view>
+        <view hidden="{{CEV}}" style="position:absolute;left:65%;top:346px;width:30%;font-size:12px;color:#aaa;">{{UMW}}</view>
+        <image bindtap="ahbt" mode="aspectFit" src="/img/ah.png" style="left:5%;top:400px;width:30%;height:120px;position:absolute;"></image>
+        <view style="position:absolute;left:5%;top:476px;width:30%;">{{Ah}}</view>
+        <image bindtap="whbt" mode="aspectFit" src="/img/wh.png" style="left:35%;top:400px;width:30%;height:120px;position:absolute;"></image>
+        <view style="position:absolute;left:35%;top:476px;width:30%;">{{Wh}}</view>
+        <image bindtap="{{CEV?'':'tibt'}}" mode="aspectFit" src="/img/ti.png" style="left:65%;top:400px;width:30%;height:120px;position:absolute;"></image>
+        <view style="position:absolute;left:65%;top:476px;width:30%;">{{Ti}}</view>
     </view>
-    <view class="btnLayout" hidden="{{ShowM!=0&&(SCAN=='Increase'||SCAN=='INFY')&&!UEN}}" style="height:120px;">
-        <image mode="scaleToFill" src="/img/sb.png" style="left:5%;top:520px;width:30%;height: 120px;position:absolute;"></image>
+    <view class="btnLayout" hidden="{{ShowM!=0&&(SCAN=='Increase'||SCAN=='Huawei'&&CVer>=5.36||SCAN=='INFY'||CEV==1)&&!UEN}}" style="height:120px;">
         <view>
-            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:9%;top:590px;width:20px;height:20px;background-color:{{UHQ==0?'#999':'#0f0'}};"></view>
-            <view style="position:absolute;left:15%;top:595px;width:15%;height:20px;color:white;text-align:center;font-size:12px;">{{UEN?'Soft start':'电流缓启'}}</view>
-            <view bindtap="hqbt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:9%;top:590px;width:22%;height:20px;color:white;"></view>
+            <image mode="scaleToFill" src="/img/sb.png" style="left:5%;top:520px;width:30%;height:120px;position:absolute;"></image>
+            <view bindtap="hqbt1" style="position:absolute;left:5%;top:550px;width:30%;font-size:17px;color:white;" wx:if="{{!CEV}}">{{UHQ+(UEN?'S':'秒')}}</view>
+            <view wx:else>
+                <view bindtap="BTOST" style="position:absolute;left:5%;top:540px;width:30%;font-size:17px;color:white;">{{OST+'℃'}}</view>
+                <view bindtap="hqbt1" style="position:absolute;left:5%;top:563px;width:30%;font-size:17px;color:white;">{{UHQ+(UEN?'S':'秒')}}</view>
+            </view>
+            <view bindtap="hqbt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:9%;top:590px;width:22%;height:20px;">
+                <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{UHQ==0?'#999':'#0f0'}};"></view>
+                <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?CEV?'Protection':'Soft start':CEV?'超温关机':'电流缓启'}}</view>
+            </view>
         </view>
-        <view bindtap="hqbt1" style="position:absolute;left:5%;top:550px;width:30%;font-size:17px;color:white;">{{UHQ+(UEN?'S':'秒')}}</view>
-        <image mode="scaleToFill" src="/img/sb.png" style="left:35%;top:520px;width:30%;height: 120px;position:absolute;"></image>
         <view>
-            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:20px;height:20px;background-color:{{SA2==0?'#999':'#0f0'}};"></view>
-            <view style="position:absolute;left:45%;top:595px;width:15%;height:20px;color:white;text-align:center;font-size:12px;">{{UEN?'Two stage':'二段功能'}}</view>
-            <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;"></view>
+            <image mode="scaleToFill" src="/img/sb.png" style="left:35%;top:520px;width:30%;height:120px;position:absolute;"></image>
+            <view wx:if="{{CEV&&(CVer<5.39||SV>126)}}">
+                <view bindtap="sa2bt3" style="position:absolute;left:35%;top:550px;width:30%;font-size:17px;color:white;">{{YS}}</view>
+                <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
+                    <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{YS=='00:00:00'?'#999':'#0f0'}};"></view>
+                    <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?'Timed':'定时关机'}}</view>
+                </view>
+            </view>
+            <view wx:else>
+                <view bindtap="sa2bt1" style="position:absolute;left:35%;top:540px;width:30%;font-size:17px;color:white;">{{SV2}}V</view>
+                <view bindtap="sa2bt2" style="position:absolute;left:35%;top:563px;width:30%;font-size:17px;color:white;">{{SA2}}A</view>
+                <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
+                    <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{SA2==0?'#999':'#0f0'}};"></view>
+                    <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?'Two stage':'二段功能'}}</view>
+                </view>
+            </view>
         </view>
-        <view bindtap="sa2bt1" style="position:absolute;left:35%;top:540px;width:30%;font-size:17px;color:white;">{{SV2}}V</view>
-        <view bindtap="sa2bt2" style="position:absolute;left:35%;top:563px;width:30%;font-size:17px;color:white;">{{SA2}}A</view>
-        <image mode="scaleToFill" src="/img/sb.png" style="left:65%;top:520px;width:30%;height: 120px;position:absolute;"></image>
-        <view>
-            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:20px;height:20px;background-color:{{USD==0?'#999':'#0f0'}};"></view>
-            <view style="position:absolute;left:75%;top:595px;width:15%;height:20px;color:white;text-align:center;font-size:12px;">{{UEN?'Shutdown':'充满关机'}}</view>
-            <view bindtap="sdbt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:22%;height:20px;color:white;"></view>
+        <image mode="scaleToFill" src="/img/sb.png" style="left:65%;top:520px;width:30%;height:120px;position:absolute;"></image>
+        <view bindtap="sdbt0">
+            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:20px;height:20px;background-color:{{USD==0?'#999':'#0f0'}};z-index:1;"></view>
+            <view style="position:absolute;left:75%;top:593px;width:15%;height:20px;color:white;text-align:center;font-size:12px;">{{UEN?'Shutdown':'充满关机'}}</view>
+            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:22%;height:20px;color:white;"></view>
         </view>
         <view wx:if="{{CVer>=5.27}}">
             <view bindtap="sdbt1" style="position:absolute;left:65%;top:540px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
@@ -132,73 +119,73 @@
             <view bindtap="sdbt1" style="position:absolute;left:65%;top:550px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
         </view>
     </view>
-    <view class="Err" hidden="{{ShowM==0||SCAN!='Increase'||UEN}}" style="position: relative;top: -10px;height:120px;">
+    <view class="Err" hidden="{{ShowM==0||SCAN!='Increase'||UEN}}" style="position:relative;top:-10px;height:120px;">
         <view class="btnLayout" style="height:50px;">
-            <view style="width: 2%;"></view>
-            <view style="width: 15%;color:{{ST0&16?'#f90':'#888'}};">输入<view></view>过压</view>
-            <view style="width: 15%;color:{{ST0&64?'#f90':'#888'}};">输出<view></view>过压</view>
-            <view style="width: 15%;color:{{ST0==0?'#f90':'#888'}};">恒压<view></view>状态</view>
-            <view style="width: 15%;color:{{ST1&2?'#f90':'#888'}};">过热<view></view>保护</view>
-            <view style="width: 15%;color:{{ST0&8?'#f90':'#888'}};">风机<view></view>故障</view>
-            <view style="width: 15%;color:{{ST0&1?'#f90':'#888'}};">模块<view></view>关机</view>
-            <view style="width: 2%;"></view>
+            <view style="width:2%;"></view>
+            <view style="width:15%;color:{{ST0&16?'#f90':'#888'}};">输入<view></view>过压</view>
+            <view style="width:15%;color:{{ST0&64?'#f90':'#888'}};">输出<view></view>过压</view>
+            <view style="width:15%;color:{{ST0==0?'#f90':'#888'}};">恒压<view></view>状态</view>
+            <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">过热<view></view>保护</view>
+            <view style="width:15%;color:{{ST0&8?'#f90':'#888'}};">风机<view></view>故障</view>
+            <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">模块<view></view>关机</view>
+            <view style="width:2%;"></view>
         </view>
         <view style="height:15px;"></view>
         <view class="btnLayout" style="height:50px;">
-            <view style="width: 2%;"></view>
-            <view style="width: 15%;color:{{ST0&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-            <view style="width: 15%;color:{{ST0&128?'#f90':'#888'}};">输出<view></view>欠压</view>
-            <view style="width: 15%;color:{{ST0&4?'#f90':'#888'}};">恒流<view></view>状态</view>
-            <view style="width: 15%;color:{{ST1&1?'#f90':'#888'}};">过流<view></view>保护</view>
-            <view style="width: 15%;color:{{ST0&2?'#f90':'#888'}};">模块<view></view>故障</view>
-            <view style="width: 15%;color:{{ST1&4?'#f90':'#888'}};">设置<view></view>关机</view>
-            <view style="width: 2%;"></view>
+            <view style="width:2%;"></view>
+            <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">输入<view></view>欠压</view>
+            <view style="width:15%;color:{{ST0&128?'#f90':'#888'}};">输出<view></view>欠压</view>
+            <view style="width:15%;color:{{ST0&4?'#f90':'#888'}};">恒流<view></view>状态</view>
+            <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">过流<view></view>保护</view>
+            <view style="width:15%;color:{{ST0&2?'#f90':'#888'}};">模块<view></view>故障</view>
+            <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">设置<view></view>关机</view>
+            <view style="width:2%;"></view>
         </view>
     </view>
-    <view class="Err" hidden="{{ShowM==0||SCAN!='INFY'||UEN}}" style="position: relative;top: -10px;height:120px;">
+    <view class="Err" hidden="{{ShowM==0||SCAN!='INFY'||UEN}}" style="position:relative;top:-10px;height:120px;">
         <view class="btnLayout" style="height:50px;">
-            <view style="width: 2%;"></view>
-            <view style="width: 15%;color:{{ST2&64?'#f90':'#888'}};">输入<view></view>过压</view>
-            <view style="width: 15%;color:{{ST1&32?'#f90':'#888'}};">输出<view></view>过压</view>
-            <view style="width: 15%;color:{{ST2&8?'#f90':'#888'}};">三相<view></view>缺相</view>
-            <view style="width: 15%;color:{{ST1&16?'#f90':'#888'}};">过热<view></view>警告</view>
-            <view style="width: 15%;color:{{ST1&8?'#f90':'#888'}};">风机<view></view>故障</view>
-            <view style="width: 15%;color:{{ST1&1?'#f90':'#888'}};">模块<view></view>关机</view>
-            <view style="width: 2%;"></view>
+            <view style="width:2%;"></view>
+            <view style="width:15%;color:{{ST2&64?'#f90':'#888'}};">输入<view></view>过压</view>
+            <view style="width:15%;color:{{ST1&32?'#f90':'#888'}};">输出<view></view>过压</view>
+            <view style="width:15%;color:{{ST2&8?'#f90':'#888'}};">三相<view></view>缺相</view>
+            <view style="width:15%;color:{{ST1&16?'#f90':'#888'}};">过热<view></view>警告</view>
+            <view style="width:15%;color:{{ST1&8?'#f90':'#888'}};">风机<view></view>故障</view>
+            <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">模块<view></view>关机</view>
+            <view style="width:2%;"></view>
         </view>
         <view style="height:15px;"></view>
         <view class="btnLayout" style="height:50px;">
-            <view style="width: 2%;"></view>
-            <view style="width: 15%;color:{{ST2&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-            <view style="width: 15%;color:{{ST0&1?'#f90':'#888'}};">输出<view></view>短路</view>
-            <view style="width: 15%;color:{{ST2&1?'#f90':'#888'}};">功率<view></view>限制</view>
-            <view style="width: 15%;color:{{ST1&4?'#f90':'#888'}};">模块<view></view>保护</view>
-            <view style="width: 15%;color:{{ST1&2?'#f90':'#888'}};">模块<view></view>故障</view>
-            <view style="width: 15%;color:{{ST0&32?'#f90':'#888'}};">放电<view></view>异常</view>
-            <view style="width: 2%;"></view>
+            <view style="width:2%;"></view>
+            <view style="width:15%;color:{{ST2&32?'#f90':'#888'}};">输入<view></view>欠压</view>
+            <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">输出<view></view>短路</view>
+            <view style="width:15%;color:{{ST2&1?'#f90':'#888'}};">功率<view></view>限制</view>
+            <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">模块<view></view>保护</view>
+            <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">模块<view></view>故障</view>
+            <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">放电<view></view>异常</view>
+            <view style="width:2%;"></view>
         </view>
     </view>
-    <view class="Err" hidden="{{ShowM==0||SCAN!='INFY1'||UEN}}" style="position: relative;top: -10px;height:120px;">
-        <view class="btnLayout" style="height:50px;">
-            <view style="width: 2%;"></view>
-            <view style="width: 15%;color:{{ST2&64?'#f90':'#888'}};">输入<view></view>过压</view>
-            <view style="width: 15%;color:{{ST1&32?'#f90':'#888'}};">输出<view></view>过压</view>
-            <view style="width: 15%;color:{{ST2&8?'#f90':'#888'}};">三相<view></view>缺相</view>
-            <view style="width: 15%;color:{{ST1&16?'#f90':'#888'}};">过热<view></view>警告</view>
-            <view style="width: 15%;color:{{ST1&8?'#f90':'#888'}};">风机<view></view>故障</view>
-            <view style="width: 15%;color:{{ST1&1?'#f90':'#888'}};">模块<view></view>关机</view>
-            <view style="width: 2%;"></view>
+    <view class="Err" style="position:relative;top:-10px;height:120px;" wx:if="{{ShowM==1&&UEN==0&&(SCAN=='Huawei'&&CVer>=5.36||CEV==1)}}">
+        <view class="btnLayout" style="height:50px;color:#f00;">
+            <view style="width:2%;"></view>
+            <view style="width:15%;color:{{E1S==0?'#888':E1S==1?'#f00':'#f90'}};">{{E1A}}<view></view>{{E1B}}</view>
+            <view style="width:15%;color:{{E2S==0?'#888':E2S==1?'#f00':'#f90'}};">{{E2A}}<view></view>{{E2B}}</view>
+            <view style="width:15%;color:{{E3S==0?'#888':E3S==1?'#f00':'#f90'}};">{{E3A}}<view></view>{{E3B}}</view>
+            <view style="width:15%;color:{{E4S==0?'#888':E4S==1?'#f00':'#f90'}};">{{E4A}}<view></view>{{E4B}}</view>
+            <view style="width:15%;color:{{E5S==0?'#888':E5S==1?'#f00':'#f90'}};">{{E5A}}<view></view>{{E5B}}</view>
+            <view style="width:15%;color:{{E6S==0?'#888':E6S==1?'#f00':'#f90'}};">{{E6A}}<view></view>{{E6B}}</view>
+            <view style="width:2%;"></view>
         </view>
         <view style="height:15px;"></view>
         <view class="btnLayout" style="height:50px;">
-            <view style="width: 2%;"></view>
-            <view style="width: 15%;color:{{ST2&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-            <view style="width: 15%;color:{{ST0&1?'#f90':'#888'}};">输出<view></view>短路</view>
-            <view style="width: 15%;color:{{ST2&1?'#f90':'#888'}};">功率<view></view>限制</view>
-            <view style="width: 15%;color:{{ST1&4?'#f90':'#888'}};">模块<view></view>保护</view>
-            <view style="width: 15%;color:{{ST1&2?'#f90':'#888'}};">模块<view></view>故障</view>
-            <view style="width: 15%;color:{{ST0&32?'#f90':'#888'}};">放电<view></view>异常</view>
-            <view style="width: 2%;"></view>
+            <view style="width:2%;"></view>
+            <view style="width:15%;color:{{E7S==0?'#888':E7S==1?'#f00':'#f90'}};">{{E7A}}<view></view>{{E7B}}</view>
+            <view style="width:15%;color:{{E8S==0?'#888':E8S==1?'#f00':'#f90'}};">{{E8A}}<view></view>{{E8B}}</view>
+            <view style="width:15%;color:{{E9S==0?'#888':E9S==1?'#f00':'#f90'}};">{{E9A}}<view></view>{{E9B}}</view>
+            <view style="width:15%;color:{{EAS==0?'#888':EAS==1?'#f00':'#f90'}};">{{EAA}}<view></view>{{EAB}}</view>
+            <view style="width:15%;color:{{EBS==0?'#888':EBS==1?'#f00':'#f90'}};">{{EBA}}<view></view>{{EBB}}</view>
+            <view style="width:15%;color:{{ECS==0?'#888':ECS==1?'#f00':'#f90'}};">{{ECA}}<view></view>{{ECB}}</view>
+            <view style="width:2%;"></view>
         </view>
     </view>
     <view class="btnLayout" style="position:relative;left:2.5%;width:95%;height:0px">
@@ -215,145 +202,149 @@
     </view>
 </view>
 <view style="display:{{Panel==2?'block':'none'}}">
-    <view class="SetBox" style="position: fixed;background-color: #000;z-index: 1;">
+    <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
-            <button bindtap="BTGPWD" class="DisINF" style="width: 33.33%;text-align:center;color:orange">{{UEN?'SYS Password':'后台密码'}}</button>
-            <button bindtap="BTRST" class="DisINF" style="width: 33.33%;text-align:center;color:orange">{{UEN?'Reset':'重置设置'}}</button>
-            <button bindtap="BTBC" class="DisINF" style="width: 33.33%;text-align:center;color:orange">{{UEN?'Go Back':'返回上级'}}</button>
+            <button bindtap="BTGPWD" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'SYS Password':'后台密码'}}</button>
+            <button bindtap="BTRST" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Reset':'重置设置'}}</button>
+            <button bindtap="BTBC" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Go Back':'返回上级'}}</button>
         </view>
     </view>
-    <view style="height: 45px;"></view>
-    <view style="display:{{!UEN?'block':'none'}}">
+    <view style="height:45px;"></view>
+    <view hidden="{{UEN}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTHELP" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=22}}"></view>
-                    <view class="close" hidden="{{ShowBar==22}}"></view>
+                <view bindtap="BTHELP" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==22?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTHELP" class="DisTIP" style="width: 65%;">{{'版本更新说明'}}</button>
-                <button bindtap="BTHELP" class="DisINF" style="width: 35%;">2024-10-06</button>
+                <button bindtap="BTHELP" class="DisTIP" style="width:65%;">{{'版本更新说明'}}</button>
+                <button bindtap="BTHELP" class="DisINF" style="width:35%;">2025-01-04</button>
             </view>
-            <view style="display:{{ShowBar==22?'block':'none'}}">
+            <view hidden="{{ShowBar!=22}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
                     <button bindtap="BTUP10" class="DisINF1">{{UEN?'Copy Connection':'复制连接'}}</button>
                 </view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">1.21 2024-10-06(小程序更新)</view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}小程序加入背景图片设置</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.35 2024-10-01 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 加入了超温关机保护功能 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.34 2024-06-30 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.33 2024-06-02 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开) </view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.32 2024-05-25 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.31 2024-05-16 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.30 2024-04-21 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复长按加减按键会重启问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 修复部分屏幕会显示错乱问题</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.29 2024-04-14 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力 优化电流范围设置(比如设置最大50A 以前必须输入1-50 现在可以直接输入50) 优化校正微调设置(直接按加减微调 不用再每次输入) 加入输出电压电流缓冲设置(以前默认都有开启且不能修改设置 有反映说这样在微调时看不到真实数据 所以现在改为可设置) </view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.28 2024-04-07 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复中兴4875改高压后功率显示错误 加入中兴4875二次电压校正功能(修复上个版本电压校正后偏差较大问题) 修改中兴4875最低电流为2(以前未测试最低电流 实测2A起调) 修复二段电流缓降功能在部分情况下电流异常问题 修复快速设置重启后记忆错误和设置错误的问题</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.27 2024-03-29 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴"ZXEPS R4875F1"电源支持(专用版本 普通版本无法切换) 风机初始风速设置最大值由120改为150(中兴4875初始风速默认为120,低了会停转) 加入了关机电流设置(以前是默认0.5A开始启动倒计时 不能设置) 重新打开5.24及之前版本升级5.25之后通道(用户设置中不能升级 仅限小程序系统设置中升级 且会重置所有设置)</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">1.10 2024-03-22(小程序更新) </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}由于最近5.25版本底层数据改动较大,导致部分用户升级后出现屏幕黑屏,电压范围异常,风速异常等情况,为避免大量异常导致机器返工问题所以决定关闭老版本升级5.25及之后的升级通道,由于APP端升级管理较为复杂,从此版本开始关闭安卓APP升级,只能小程序升级.更改更新日志为倒序.</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.26 2024-03-18 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复固件升级后不能自动重启问题(下次更新才生效) 修复5.25校正电压后不能立刻设置电压问题 修复5.25升级后部分机器电压范围错误问题 修改重置设置不再删除文字LOGO 修复了启动时按键跳过后偶尔会重启问题 加入允许用户设置LOGO选项 加入输出电压缓冲器(用于优化部分机器波纹偏大导致输出电压跳动频繁问题) 加入版本更新说明(涉及部分改机专业问题 所以仅在中文状态下系统设置中展示 切换至英文时不予显示)</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.25 2024-03-07 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}本次版本大量代码优化重写 重写小程序与控制板通讯协议 重写小程序UI绘制方法(以前UI部分会抖动) 加入详细数据显示功能 微信小程序加入英文支持 正式推出APP(从支持蓝牙开始历史所有版本均支持) 修复了ZXD3000一个Bug导致的电压设置和显示出现误差 重置设置后会清除所有设置图片了 优化苹果手机设置LOGO卡顿问题 优化传输图片中途退出导致死机问题 重新加入二段电流缓降功能 由于两个小程序更新比较麻烦 且改过蓝牙通讯后专业版需要重写才能使用 加上专业版代码过于老旧 所以正式放弃专业版 所有功能已搬迁至炫酷版 炫酷板加入导入图片代码方法(由于微信因安全及隐私等限制小程序访问手机图片 所以只能以代码形式发送 代码由PC端程序转换图片得到 复制好需要设置的图片代码 在点击设置电压后留空别粘贴 然后点确定即可识别 识别时会提示"CAN蓝牙读取了你的剪切板" 正确识别到图片代码后会弹出确认发送框 如无弹出请检查图片代码是否复制完整)</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.24 2024-01-19 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}优化部分代码 重写了升级界面 加入系统密码查询(一机一码永久有效) 加入英文显示支持(小程序暂不支持英文) 修复数据清零问题</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.23 2023-12-31 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入上下键同时按下开关机 修复4875低温异常问题 修复设置低于10A时会错误显示A</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.22 2023-11-16 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.21风速异常 修复部分手机不能连接专业版小程序</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.21 2023-11-12 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}提高显示刷新率 加入自动息屏默认60秒亮度50 支持GIF图片上传和JPG欢迎页面上传</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.20 2023-10-18 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}去除OVF和OAF,改为设置系数OVD和OAD,显示系数OVT和OAT设置</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.19 2023-10-12 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}部分显示信息修复 屏幕方向蓝牙名称和蓝牙密码移至用户设置</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.18 2023-10-05</view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修改开机提示倒计根据CAN通讯变色 加入充电动画 修复1个BUG导致缓启开启后部分英可瑞不能进入充电状态 加入按键交换功能</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.17 2023-09-29 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入OTA功能 部分UI调整 加入开机提示 移除驱动选择 受文件大小限制移除SSD1306和SH1106两个驱动 不再支持黑白屏</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.16 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}重写电流电压修正功能 现在按系数修正 优化电流采样显示 加入设置电压系数 OAF电流系数 </view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.15 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}由于部分电源异常 默认关闭电压电流修正功能</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.14 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复二段进入异常问题 二段电流缓降功能部分电源异常暂时移除二段电流缓降</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.13 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}重写电压电流自动修正功能 优化缓启显示 修复不能延时关机问题</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.12 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入重置所有设置 修改初始蓝牙密码为0000</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.11 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入英可瑞自动修正输出电压高于设置电压</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.10 </view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复屏幕统计数据问题 修改充电识别模式</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.09</view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入liteffs文件系统 以及ST7789V240*240高分屏 正式推出彩屏版本</view>
-                <view style="height: 10px;"></view>
-                <view class="tip2" style="color: #fa0;">5.08</view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入彩屏驱动GC9A01支持 128*128LCD屏幕</view>
-                <view class="tip2" style="color: #fa0;">5.07</view>
-                <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.06不能正确进入温度限制</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">固件:5.39 APP:1.24 2025-01-04</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要是针对5.37故障修复 修复部分取电器在低压桩时提前显示就绪问题 修复取电器升压电压跳动过大问题 修复5.37充电器在部分情况下最大电流变100问题 修复中兴和华为充在温度零下时不能正确识别问题 修复充电器小程序二段开关问题 增加了取电器兼容性 增加了保护关机倒计时设置 增加了取电器二段充电功能(仅限于低压直冲 所以设置电压126V以内才会显示) 增加了一个新的"数据异常修复"功能 (升级后会重置掉部分用户个性化设置,比如屏幕颜色等)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">固件:5.37 APP:1.23 2024-12-01</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}本次更新主要加入新产品取电器支持 底层代码有大量改动 充电器升级后如有问题可降级至5.35稳定版</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">固件:5.36 APP:1.22 2024-11-11</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入华为模块故障显示功能 小程序加入背景图片设置</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.35 2024-10-01</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 加入了超温关机保护功能 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.34 2024-06-30</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.33 2024-06-02</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.32 2024-05-25</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.31 2024-05-16</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.30 2024-04-21</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复长按加减按键会重启问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 修复部分屏幕会显示错乱问题</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.29 2024-04-14</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力 优化电流范围设置(比如设置最大50A 以前必须输入1-50 现在可以直接输入50) 优化校正微调设置(直接按加减微调 不用再每次输入) 加入输出电压电流缓冲设置(以前默认都有开启且不能修改设置 有反映说这样在微调时看不到真实数据 所以现在改为可设置)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.28 2024-04-07</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复中兴4875改高压后功率显示错误 加入中兴4875二次电压校正功能(修复上个版本电压校正后偏差较大问题) 修改中兴4875最低电流为2(以前未测试最低电流 实测2A起调) 修复二段电流缓降功能在部分情况下电流异常问题 修复快速设置重启后记忆错误和设置错误的问题</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.27 2024-03-29</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入中兴"ZXEPS R4875F1"电源支持(专用版本 普通版本无法切换) 风机初始风速设置最大值由120改为150(中兴4875初始风速默认为120,低了会停转) 加入了关机电流设置(以前是默认0.5A开始启动倒计时 不能设置) 重新打开5.24及之前版本升级5.25之后通道(用户设置中不能升级 仅限小程序系统设置中升级 且会重置所有设置)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">1.10 2024-03-22(小程序更新)</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}由于最近5.25版本底层数据改动较大,导致部分用户升级后出现屏幕黑屏,电压范围异常,风速异常等情况,为避免大量异常导致机器返工问题所以决定关闭老版本升级5.25及之后的升级通道,由于APP端升级管理较为复杂,从此版本开始关闭安卓APP升级,只能小程序升级.更改更新日志为倒序.</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.26 2024-03-18</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复固件升级后不能自动重启问题(下次更新才生效) 修复5.25校正电压后不能立刻设置电压问题 修复5.25升级后部分机器电压范围错误问题 修改重置设置不再删除文字LOGO 修复了启动时按键跳过后偶尔会重启问题 加入允许用户设置LOGO选项 加入输出电压缓冲器(用于优化部分机器波纹偏大导致输出电压跳动频繁问题) 加入版本更新说明(涉及部分改机专业问题 所以仅在中文状态下系统设置中展示 切换至英文时不予显示)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.25 2024-03-07</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}本次版本大量代码优化重写 重写小程序与控制板通讯协议 重写小程序UI绘制方法(以前UI部分会抖动) 加入详细数据显示功能 微信小程序加入英文支持 正式推出APP(从支持蓝牙开始历史所有版本均支持) 修复了ZXD3000一个Bug导致的电压设置和显示出现误差 重置设置后会清除所有设置图片了 优化苹果手机设置LOGO卡顿问题 优化传输图片中途退出导致死机问题 重新加入二段电流缓降功能 由于两个小程序更新比较麻烦 且改过蓝牙通讯后专业版需要重写才能使用 加上专业版代码过于老旧 所以正式放弃专业版 所有功能已搬迁至炫酷版 炫酷板加入导入图片代码方法(由于微信因安全及隐私等限制小程序访问手机图片 所以只能以代码形式发送 代码由PC端程序转换图片得到 复制好需要设置的图片代码 在点击设置电压后留空别粘贴 然后点确定即可识别 识别时会提示"CAN蓝牙读取了你的剪切板" 正确识别到图片代码后会弹出确认发送框 如无弹出请检查图片代码是否复制完整)</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.24 2024-01-19</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}优化部分代码 重写了升级界面 加入系统密码查询(一机一码永久有效) 加入英文显示支持(小程序暂不支持英文) 修复数据清零问题</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.23 2023-12-31</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入上下键同时按下开关机 修复4875低温异常问题 修复设置低于10A时会错误显示A</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.22 2023-11-16</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.21风速异常 修复部分手机不能连接专业版小程序</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.21 2023-11-12</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}提高显示刷新率 加入自动息屏默认60秒亮度50 支持GIF图片上传和JPG欢迎页面上传</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.20 2023-10-18</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}去除OVF和OAF,改为设置系数OVD和OAD,显示系数OVT和OAT设置</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.19 2023-10-12</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}部分显示信息修复 屏幕方向蓝牙名称和蓝牙密码移至用户设置</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.18 2023-10-05</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修改开机提示倒计根据CAN通讯变色 加入充电动画 修复1个BUG导致缓启开启后部分英可瑞不能进入充电状态 加入按键交换功能</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.17 2023-09-29</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入OTA功能 部分UI调整 加入开机提示 移除驱动选择 受文件大小限制移除SSD1306和SH1106两个驱动 不再支持黑白屏</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.16</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}重写电流电压修正功能 现在按系数修正 优化电流采样显示 加入设置电压系数 OAF电流系数</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.15</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}由于部分电源异常 默认关闭电压电流修正功能</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.14</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复二段进入异常问题 二段电流缓降功能部分电源异常暂时移除二段电流缓降</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.13</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}重写电压电流自动修正功能 优化缓启显示 修复不能延时关机问题</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.12</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入重置所有设置 修改初始蓝牙密码为0000</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.11</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入英可瑞自动修正输出电压高于设置电压</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.10</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复屏幕统计数据问题 修改充电识别模式</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.09</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入liteffs文件系统 以及ST7789V240*240高分屏 正式推出彩屏版本</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">5.08</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入彩屏驱动GC9A01支持 128*128LCD屏幕</view>
+                <view class="tip2" style="color:#fa0;">5.07</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.06不能正确进入温度限制</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
     </view>
-    <view style="display:{{CVer>=5.1?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTOVT" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=0}}"></view>
-                    <view class="close" hidden="{{ShowBar==0}}"></view>
+                <view bindtap="BTOVT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==0?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTOVT" class="DisTIP" id="BTOVT" style="width: 65%;">{{UEN?'OUT Voltage Correction':'输出电压校正'}}</button>
-                <button bindtap="BTOVT0" class="DisINF" style="width: 35%;">{{UEN?'Start':'开始校正'}}</button>
+                <button bindtap="BTOVT" class="DisTIP" id="BTOVT" style="width:65%;">{{UEN?'OUT Voltage Correction':'输出电压校正'}}</button>
+                <button bindtap="BTOVT0" class="DisINF" style="width:35%;">{{UEN?'Start':'开始校正'}}</button>
             </view>
             <view hidden="{{ShowBar!=0}}">
-                <view style="background-color: #88888850;height:88px">
+                <view style="background-color:#88888850;height:88px">
                     <button style="position:absolute;width:50%;left:0;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OV}}V</button>
                     <view style="position:absolute;left:30%;top:105px;font-size:15px;color:white;">{{SV}}V</view>
-                    <image bindtap="nvbt" id="nvbt" mode="aspectFill" src="/img/vt.png" style="left:0%; width:50%; height:88px; position:absolute;"></image>
+                    <image bindtap="nvbt" id="nvbt" mode="aspectFill" src="/img/vt.png" style="left:0%;width:50%;height:88px;position:absolute;"></image>
                     <button style="position:absolute;width:50%;left:50%;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OA}}A</button>
                     <view style="position:absolute;left:57%;top:105px;font-size:15px;color:white;">{{SA}}A</view>
-                    <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%; width:50%; height:88px; position:absolute;"></image>
+                    <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%;width:50%;height:88px;position:absolute;"></image>
                 </view>
                 <view class="btnLayout" wx:if="{{CVer>=5.29}}">
                     <button class="DisTIP1">{{UEN?'Voltage jump buffer':'电压跳动缓冲'}}</button>
@@ -361,32 +352,32 @@
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Display compensation':'显示补偿值'}}</button>
-                    <button bindtap="BTOVTD" class="DisINF1" style="width: 10%;text-align:center;">-</button>
-                    <button bindtap="BTOVT1" class="DisINF1" style="width: 25%;text-align:center;">{{OVT}}</button>
-                    <button bindtap="BTOVTU" class="DisINF1" style="width: 10%;text-align:center;">+</button>
+                    <button bindtap="BTOVTD" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                    <button bindtap="BTOVT1" class="DisINF1" style="width:25%;text-align:center;">{{OVT}}</button>
+                    <button bindtap="BTOVTU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Set compensation':'设置补偿值'}}</button>
-                    <button bindtap="BTOVDD" class="DisINF1" style="width: 10%;text-align:center;">-</button>
-                    <button bindtap="BTOVD1" class="DisINF1" style="width: 25%;text-align:center;">{{OVD}}</button>
-                    <button bindtap="BTOVDU" class="DisINF1" style="width: 10%;text-align:center;">+</button>
+                    <button bindtap="BTOVDD" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                    <button bindtap="BTOVD1" class="DisINF1" style="width:25%;text-align:center;">{{OVD}}</button>
+                    <button bindtap="BTOVDU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
                 <view style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">
                     <view class="btnLayout">
-                        <button class="DisTIP" style="width: 65%;">{{UEN?'Output voltage correction two':'输出电压校正二'}}</button>
+                        <button class="DisTIP" style="width:65%;">{{UEN?'Output voltage correction two':'输出电压校正二'}}</button>
                         <button bindtap="BTOVT3" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
                     </view>
                     <view class="btnLayout">
                         <button class="DisTIP1">{{UEN?'Display compensation 2':'显示补偿值二'}}</button>
-                        <button bindtap="BTO2TD" class="DisINF1" style="width: 10%;text-align:center;">-</button>
-                        <button bindtap="BTOVT2" class="DisINF1" style="width: 25%;text-align:center;">{{O2T}}</button>
-                        <button bindtap="BTO2TU" class="DisINF1" style="width: 10%;text-align:center;">+</button>
+                        <button bindtap="BTO2TD" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                        <button bindtap="BTOVT2" class="DisINF1" style="width:25%;text-align:center;">{{O2T}}</button>
+                        <button bindtap="BTO2TU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                     </view>
                     <view class="btnLayout">
                         <button class="DisTIP1">{{UEN?'Set compensation 2':'设置补偿值二'}}</button>
-                        <button bindtap="BTO2DD" class="DisINF1" style="width: 10%;text-align:center;">-</button>
-                        <button bindtap="BTOVD2" class="DisINF1" style="width: 25%;text-align:center;">{{O2D}}</button>
-                        <button bindtap="BTO2DU" class="DisINF1" style="width: 10%;text-align:center;">+</button>
+                        <button bindtap="BTO2DD" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                        <button bindtap="BTOVD2" class="DisINF1" style="width:25%;text-align:center;">{{O2D}}</button>
+                        <button bindtap="BTO2DU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                     </view>
                 </view>
                 <view class="btnLayout">
@@ -409,25 +400,24 @@
             </view>
         </view>
     </view>
-    <view style="display:{{CVer>=5.1?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTOAT" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=1}}"></view>
-                    <view class="close" hidden="{{ShowBar==1}}"></view>
+                <view bindtap="BTOAT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==1?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTOAT" class="DisTIP" style="width: 65%;">{{UEN?'OUT Current Correction':'输出电流校正'}}</button>
-                <button bindtap="BTOAT0" class="DisINF" style="width: 35%;">{{UEN?'Start':'开始校正'}}</button>
+                <button bindtap="BTOAT" class="DisTIP" style="width:65%;">{{UEN?'OUT Current Correction':'输出电流校正'}}</button>
+                <button bindtap="BTOAT0" class="DisINF" style="width:35%;">{{UEN?'Start':'开始校正'}}</button>
             </view>
-            <view style="display:{{ShowBar==1?'block':'none'}}">
-                <view style="background-color: #88888850;height:88px">
+            <view hidden="{{ShowBar!=1}}">
+                <view style="background-color:#88888850;height:88px">
                     <button style="position:absolute;width:50%;left:0;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OV}}V</button>
                     <view style="position:absolute;left:30%;top:105px;font-size:15px;color:white;">{{SV}}V</view>
-                    <image bindtap="nvbt" id="nvbt" mode="aspectFill" src="/img/vt.png" style="left:0%; width:50%; height:88px; position:absolute;"></image>
+                    <image bindtap="nvbt" id="nvbt" mode="aspectFill" src="/img/vt.png" style="left:0%;width:50%;height:88px;position:absolute;"></image>
                     <button style="position:absolute;width:50%;left:50%;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OA}}A</button>
                     <view style="position:absolute;left:57%;top:105px;font-size:15px;color:white;">{{SA}}A</view>
-                    <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%; width:50%; height:88px; position:absolute;"></image>
+                    <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%;width:50%;height:88px;position:absolute;"></image>
                 </view>
                 <view class="btnLayout" wx:if="{{CVer>=5.29}}">
                     <button class="DisTIP1">{{UEN?'Current jump buffer':'电流跳动缓冲'}}</button>
@@ -439,15 +429,15 @@
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Display compensation':'显示补偿值'}}</button>
-                    <button bindtap="BTOAT2" class="DisINF1" style="width: 10%;text-align:center;">-</button>
-                    <button bindtap="BTOAT1" class="DisINF1" style="width: 25%;text-align:center;">{{OAT}}</button>
-                    <button bindtap="BTOAT3" class="DisINF1" style="width: 10%;text-align:center;">+</button>
+                    <button bindtap="BTOAT2" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                    <button bindtap="BTOAT1" class="DisINF1" style="width:25%;text-align:center;">{{OAT}}</button>
+                    <button bindtap="BTOAT3" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Set compensation':'设置补偿值'}}</button>
-                    <button bindtap="BTOAD2" class="DisINF1" style="width: 10%;text-align:center;">-</button>
-                    <button bindtap="BTOAD1" class="DisINF1" style="width: 25%;text-align:center;">{{OAD}}</button>
-                    <button bindtap="BTOAD3" class="DisINF1" style="width: 10%;text-align:center;">+</button>
+                    <button bindtap="BTOAD2" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                    <button bindtap="BTOAD1" class="DisINF1" style="width:25%;text-align:center;">{{OAD}}</button>
+                    <button bindtap="BTOAD3" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
                 <view style="display:{{CVer>=5.2?'block':'none'}}">
                     <view class="btnLayout">
@@ -473,23 +463,20 @@
             </view>
         </view>
     </view>
-    <view style="display:{{CVer>=5.07?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTSMW" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=18}}"></view>
-                    <view class="close" hidden="{{ShowBar==18}}"></view>
+                <view bindtap="BTSMW" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==18?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTSMW" class="DisTIP" style="width: 65%;">{{UEN?'SYS Power Limit':'系统功率限制'}}</button>
-                <button bindtap="BTSMW1" class="DisINF" style="width: 35%;">{{SMW}}</button>
+                <button bindtap="BTSMW" class="DisTIP" style="width:65%;">{{UEN?'SYS Power Limit':'系统功率限制'}}</button>
+                <button bindtap="BTSMW1" class="DisINF" style="width:35%;">{{SMW}}</button>
             </view>
-            <view style="display:{{ShowBar==18?'block':'none'}}">
-                <view style="display:{{CVer>=5.2?'block':'none'}}">
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'Setting range':'电流设置范围'}}</button>
-                        <button bindtap="BTOAS" class="DisINF1">{{LSA+'-'+HSA}}</button>
-                    </view>
+            <view hidden="{{ShowBar!=18}}">
+                <view class="btnLayout" hidden="{{CEV==1}}">
+                    <button class="DisTIP1">{{UEN?'Setting range':'电流设置范围'}}</button>
+                    <button bindtap="BTOAS" class="DisINF1">{{LSA+'-'+HSA}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}Set the maximum output power limit of the power system, and once it is set, the user cannot exceed this value.</view>
@@ -503,18 +490,17 @@
             </view>
         </view>
     </view>
-    <view style="display:{{CVer>=5.1?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTUMT" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=5}}"></view>
-                    <view class="close" hidden="{{ShowBar==5}}"></view>
+                <view bindtap="BTUMT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==5?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTUMT" class="DisTIP" style="width: 65%;">{{UEN?'Set Over Temp Limit':'设置超温限制'}}</button>
-                <button bindtap="BTUMT" class="DisINF" style="width: 35%;">{{UMT+'℃'+TMW+'W'}}</button>
+                <button bindtap="BTUMT" class="DisTIP" style="width:65%;">{{UEN?'Set Over Temp Limit':'设置超温限制'}}</button>
+                <button bindtap="BTUMT" class="DisINF" style="width:35%;">{{UMT+'℃'+TMW+'W'}}</button>
             </view>
-            <view style="display:{{ShowBar==5?'block':'none'}}">
+            <view hidden="{{ShowBar!=5}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Over Temp  Entry Value':'超温进入值'}}</button>
                     <button bindtap="BTTMC" class="DisINF1">{{UMT}}</button>
@@ -537,18 +523,17 @@
             </view>
         </view>
     </view>
-    <view class="BTFAN" style="display:{{CVer>=5.07?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTFAN" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=6}}"></view>
-                    <view class="close" hidden="{{ShowBar==6}}"></view>
+                <view bindtap="BTFAN" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==6?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTFAN" class="DisTIP" style="width: 65%;">{{UEN?'Set Fan Speed':'设置风机速度'}}</button>
-                <button bindtap="BTLFS" class="DisINF" style="width: 35%;">{{NFS}}</button>
+                <button bindtap="BTFAN" class="DisTIP" style="width:65%;">{{UEN?'Set Fan Speed':'设置风机速度'}}</button>
+                <button bindtap="BTLFS" class="DisINF" style="width:35%;">{{NFS}}</button>
             </view>
-            <view style="display:{{ShowBar==6?'block':'none'}}">
+            <view hidden="{{ShowBar!=6}}">
                 <view class="btnLayout" wx:if="{{CVer>=5.31}}">
                     <button class="DisTIP1">{{UEN?'Maximum wind speed value':'最大风速值'}}</button>
                     <button bindtap="BTMFS" class="DisINF1">{{MFS}}</button>
@@ -594,31 +579,30 @@
             </view>
         </view>
     </view>
-    <view style="display:{{CVer>=5.07?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTCAN" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=16}}"></view>
-                    <view class="close" hidden="{{ShowBar==16}}"></view>
+                <view bindtap="BTCAN" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==16?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTCAN" class="DisTIP" style="width: 65%;">{{UEN?'Set Power Protocol':'设置电源协议'}}</button>
-                <button bindtap="BTCAN" class="DisINF" style="width: 35%;">{{SCAN}}</button>
+                <button bindtap="BTCAN" class="DisTIP" style="width:65%;">{{UEN?'Set Power Protocol':'设置电源协议'}}</button>
+                <button bindtap="BTCAN" class="DisINF" style="width:35%;">{{SCAN}}</button>
             </view>
-            <view style="display:{{ShowBar==16?'block':'none'}}">
+            <view hidden="{{ShowBar!=16}}">
                 <view class="btnLayout">
-                    <button bindtap="BTCAN1" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">{{UEN?'Huawei':'华为'}}</button>
-                    <button bindtap="BTCAN2" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">{{UEN?'Increase':'英可瑞'}}</button>
-                    <button bindtap="BTCAN4" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">{{UEN?'ZTE3000':'中兴3000'}}</button>
+                    <button bindtap="BTCAN1" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'Huawei':'华为'}}</button>
+                    <button bindtap="BTCAN2" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'Increase':'英可瑞'}}</button>
+                    <button bindtap="BTCAN4" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'ZTE3000':'中兴3000'}}</button>
                 </view>
                 <view class="btnLayout" wx:if="{{UCN&32||GM==2}}">
-                    <button bindtap="BTCAN8" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">{{UEN?'INFY':'英飞源'}}</button>
-                    <button bindtap="BTCAN16" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">EPS6020</button>
-                    <button bindtap="BTCAN32" style="text-align:center;width: 33.33%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">{{UEN?'ZTE4875':'中兴4875'}}</button>
+                    <button bindtap="BTCAN8" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'INFY':'英飞源'}}</button>
+                    <button bindtap="BTCAN16" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">EPS6020</button>
+                    <button bindtap="BTCAN32" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'ZTE4875':'中兴4875'}}</button>
                 </view>
                 <view class="btnLayout" wx:else>
-                    <button bindtap="BTCAN8" style="text-align:center;width: 50%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">{{UEN?'INFY':'英飞源'}}</button>
-                    <button bindtap="BTCAN16" style="text-align:center;width: 50%;font-size: 15px;color: rgba(67, 180, 255, 0.938);background-color: #88888850;">EPS6020</button>
+                    <button bindtap="BTCAN8" style="text-align:center;width:50%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'INFY':'英飞源'}}</button>
+                    <button bindtap="BTCAN16" style="text-align:center;width:50%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">EPS6020</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}Huawei supports R4815, R4830, R4850, R4875, and R48100.</view>
@@ -626,7 +610,7 @@
                     <view class="tip2">{{nbsp}}ZTE supports ZXD3000 V5.5 V5.6 V5.7 V5.8. (ZXD4000 can control voltage, some cannot control current)</view>
                     <view class="tip2" wx:if="{{UCN&32}}">{{nbsp}}ZTE 4875 supports "ZXEPS 4875F1" (theoretically supporting "ZXEPS 4850F1" and "ZXD3000 V6.6")</view>
                     <view class="tip2">{{nbsp}}Infy has only tested REG50010S. (Theoretically, other models can support it)</view>
-                    <view class="tip2">{{nbsp}}EPS6020 supports EPS4820, EPS6020, and EPS7220. </view>
+                    <view class="tip2">{{nbsp}}EPS6020 supports EPS4820, EPS6020, and EPS7220.</view>
                     <view class="tip2">{{nbsp}}Click on the corresponding power brand to switch.</view>
                     <view class="tip2" style="color:#f00">{{nbsp}}After setting up, it will automatically reset the settings and restart</view>
                 </view>
@@ -636,7 +620,7 @@
                     <view class="tip2">{{nbsp}}{{nbsp}}中兴3000支持ZXD3000 V5.5 V5.6 V5.7 V5.8。(ZXD4000可控制电压,部分不能控制电流)</view>
                     <view class="tip2" wx:if="{{UCN&32}}">{{nbsp}}{{nbsp}}中兴4875支持"ZXEPS 4875F1" (理论上支持"ZXEPS 4850F1"和"ZXD3000 V6.6")</view>
                     <view class="tip2">{{nbsp}}{{nbsp}}英飞源目前只测试了REG50010S。(理论上其他的型号均可支持)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}EPS6020这个支持EPS4820 EPS6020 EPS7220。 </view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}EPS6020这个支持EPS4820 EPS6020 EPS7220。</view>
                     <view class="tip2">{{nbsp}}{{nbsp}}点击对应电源品牌即可切换。</view>
                     <view class="tip2" style="color:#f00">{{nbsp}}{{nbsp}}设置后会自动重置设置并重启</view>
                 </view>
@@ -644,19 +628,18 @@
             </view>
         </view>
     </view>
-    <view style="display:{{CVer>=5.23?'block':'none'}}">
+    <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTNTC" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=17}}"></view>
-                    <view class="close" hidden="{{ShowBar==17}}"></view>
+                <view bindtap="BTNTC" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==17?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTNTC" class="DisTIP" style="width: 65%;">{{UEN?'Output Temp Collection':'输出温度采集'}}</button>
-                <button bindtap="BTNTC1" class="DisINF" style="width: 35%;" wx:if="{{UEN}}">{{NTC?'Control':'Power'}}</button>
-                <button bindtap="BTNTC1" class="DisINF" style="width: 35%;" wx:if="{{!UEN}}">{{NTC?'控制':'电源'}}</button>
+                <button bindtap="BTNTC" class="DisTIP" style="width:65%;">{{UEN?'Output Temp Collection':'输出温度采集'}}</button>
+                <button bindtap="BTNTC1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{NTC?'Control':'Power'}}</button>
+                <button bindtap="BTNTC1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{NTC?'控制':'电源'}}</button>
             </view>
-            <view style="display:{{ShowBar==17?'block':'none'}}">
+            <view hidden="{{ShowBar!=17}}">
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}Set the output temperature collection point. The original Huawei power supply comes with an output temperature, while other power supplies do not.</view>
                     <view class="tip2">{{nbsp}}Power: The system temperature read using CAN communication.</view>
@@ -673,14 +656,104 @@
             </view>
         </view>
     </view>
+    <view hidden="{{CEV==0}}">
+        <view style="height:5px;"></view>
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTOVT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==0?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTOVT" class="DisTIP" style="width:65%;">{{UEN?'Maximum Voltage Limit':'最高电压限制'}}</button>
+                <button bindtap="BTMMV" class="DisINF" style="width:35%;">{{MMV}}V</button>
+            </view>
+            <view hidden="{{ShowBar!=0}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}Set the maximum allowable voltage limit to avoid exceeding the required voltage of the device due to incorrect adjustment.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}设置最高允许设置电压限制,避免调错导致超过设备需求电压。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view hidden="{{CEV==0}}">
+        <view style="height:5px;"></view>
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTOAT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==1?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTOAT" class="DisTIP" style="width:65%;">{{UEN?'Maximum Current Limit':'最高电流限制'}}</button>
+                <button bindtap="BTMMA" class="DisINF" style="width:35%;">{{MMA}}A</button>
+            </view>
+            <view hidden="{{ShowBar!=1}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}Set the maximum allowable current to avoid overcurrent damage to the equipment.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}设置最高允许电流,避免过流损坏设备。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view hidden="{{CEV==0||CVer<5.38}}">
+        <view style="height:5px;"></view>
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTCAN" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==16?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTCAN" class="DisTIP" style="width:65%;">{{UEN?'Maximum Current Limit':'就绪电压范围'}}</button>
+                <button bindtap="BTRDY" class="DisINF" style="width:35%;">±{{RDY}}V</button>
+            </view>
+            <view hidden="{{ShowBar!=16}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}When the output voltage of the charging station reaches the set voltage, it is ready. However, there may be errors in the output voltage of different charging stations. It is ready when the default and set voltages are ± 5V. If the error of the charging station exceeds the default range and it is still not ready, you can modify this range yourself.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}当充电桩输出电压后到达设置电压时就准备就绪了,但是不同电桩输出电压有误差,默认和设置电压±5V时就绪,如电桩误差超过默认范围时一直不就绪可自己修改此范围。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
+    <view hidden="{{CEV==0}}">
+        <view style="height:5px;"></view>
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTNTC" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==17?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTNTC" class="DisTIP" style="width:65%;">{{UEN?'High Voltage Boost Test':'高压升压测试'}}</button>
+                <button bindtap="SetSGK" class="DisINF" style="width:35%;">{{(CVer>=5.39?SGK:SA2)>0?'251.5V':UEN?'Close':'关闭'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=17}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Boost compensation value':'升压补偿值'}}</button>
+                    <button bindtap="BTOVTD" class="DisINF1" style="width:10%;text-align:center;">-</button>
+                    <button bindtap="BTOVT1" class="DisINF1" style="width:25%;text-align:center;">{{OVT}}</button>
+                    <button bindtap="BTOVTU" class="DisINF1" style="width:10%;text-align:center;">+</button>
+                </view>
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}The charging station needs to detect the battery voltage. Here, the simulated voltage of the battery is boosted and reported to the charging station. A multimeter is needed to test the voltage at around 251. Due to the accuracy errors of the sampling resistor and ADC, each may have errors. Currently, manual correction is required. If the deviation is large, please adjust the "boost compensation value" to 251V (within plus or minus 1V).</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}充电桩需要检测电池电压,此处模拟电池电压升压后上报给充电桩的电压,需要万用表测试电压在251左右,由于取样电阻和ADC有精度误差,所以每个可能都有误差,目前需要手动校正,如偏差较大请调整"升压补偿值"修正到251V(正负1V内)。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
     <view style="height:5px;"></view>
 </view>
 <view wx:if="{{Panel==3}}">
-    <view class="SetBox" style="position: fixed;background-color: #000;z-index: 1;">
+    <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
-            <button bindtap="BTBLE2" class="DisINF" style="width: 33.33%;text-align:center;color:orange">{{UEN?'BLE Password':'蓝牙密码'}}</button>
-            <button bindtap="BTClean" class="DisINF" style="width: 33.33%;text-align:center;color:orange">{{UEN?'Clean':'累计清零'}}</button>
-            <button bindtap="BTBC" class="DisINF" style="width: 33.33%;text-align:center;color:orange">{{UEN?'Go Back':'返回上级'}}</button>
+            <button bindtap="BTBLE2" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'BLE Password':'蓝牙密码'}}</button>
+            <button bindtap="BTClean" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Clean':'累计清零'}}</button>
+            <button bindtap="BTBC" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Go Back':'返回上级'}}</button>
         </view>
     </view>
     <view style="height:48px;"></view>
@@ -688,15 +761,13 @@
 <view wx:if="{{UEG&&Panel==3||Panel==2}}">
     <view class="SetBox">
         <view class="SendLayout">
-            <view bindtap="BTLOGO" style="width: 20px; background-color: #88888850;">
-                <view class="open" hidden="{{ShowBar!=20}}"></view>
-                <view class="close" hidden="{{ShowBar==20}}" wx:if="{{!UEG}}"></view>
-                <view class="close1" hidden="{{ShowBar==20}}" wx:else></view>
+            <view bindtap="BTLOGO" style="width:20px;background-color:#88888850;">
+                <view class="{{ShowBar==20?'open':UEG?'close1':'close'}}"></view>
             </view>
-            <button bindtap="BTLOGO" class="DisTIP" style="width: 65%;">{{UEN?'Set LOGO':'设置LOGO文字'}}</button>
-            <button bindtap="BTLOGO0" class="DisINF" style="width: 35%;">{{LOGO}}</button>
+            <button bindtap="BTLOGO" class="DisTIP" style="width:65%;">{{UEN?'Set LOGO':'设置LOGO文字'}}</button>
+            <button bindtap="BTLOGO0" class="DisINF" style="width:35%;">{{LOGO}}</button>
         </view>
-        <view style="display:{{ShowBar==20?'block':'none'}}">
+        <view hidden="{{ShowBar!=20}}">
             <view class="btnLayout" wx:if="{{CVer>=5.26&&Panel==2}}">
                 <button class="DisTIP1">{{UEN?'Allow users to set logo':'允许用户设置LOGO'}}</button>
                 <button bindtap="BTLOGO3" class="DisINF1">{{UEN?UEG?'Yes':'No':UEG?'是':'否'}}</button>
@@ -718,21 +789,21 @@
                 <view class="tip2">{{nbsp}}Set parameter descriptions (separated by commas):</view>
                 <view class="btnLayout">
                     <view style="width:70%;text-align:left">
-                        <view class="tip2">{{nbsp}}1:Left margin of text (0-60). <view></view>{{nbsp}}2:Top margin of text (0-60). <view></view>{{nbsp}}3:Text font size (10-30). <view></view>{{nbsp}}4:The text to be displayed.</view>
+                        <view class="tip2">{{nbsp}}1:Left margin of text (0-60).<view></view>{{nbsp}}2:Top margin of text (0-60).<view></view>{{nbsp}}3:Text font size (10-30).<view></view>{{nbsp}}4:The text to be displayed.</view>
                     </view>
-                    <view style="width:73px;height:73px;top:20px;background-color: #000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
-                        <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left: 6px;" type="2d"></canvas>
+                    <view style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
+                        <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
                     </view>
                 </view>
             </view>
             <view wx:if="{{!UEN}}">
-                <view class="tip2">{{nbsp}}{{nbsp}}如果刚好就四个中文那么就只需要在弹出输入框中输入中文即可,否则需要自行调整字体及位置。 <view></view>{{nbsp}}{{nbsp}}设置参数说明(中间以逗号隔开):</view>
+                <view class="tip2">{{nbsp}}{{nbsp}}如果刚好就四个中文那么就只需要在弹出输入框中输入中文即可,否则需要自行调整字体及位置。<view></view>{{nbsp}}{{nbsp}}设置参数说明(中间以逗号隔开):</view>
                 <view class="btnLayout">
                     <view style="width:70%;text-align:left">
-                        <view class="tip2">{{nbsp}} 1:文字离左边框距离(0-60)。 <view></view>{{nbsp}} 2:文字离顶边框距离(0-60)。 <view></view>{{nbsp}} 3:文字字体大小(10-30)。 <view></view>{{nbsp}} 4:要显示的文本文字。</view>
+                        <view class="tip2">{{nbsp}} 1:文字离左边框距离(0-60)。<view></view>{{nbsp}} 2:文字离顶边框距离(0-60)。<view></view>{{nbsp}} 3:文字字体大小(10-30)。<view></view>{{nbsp}} 4:要显示的文本文字。</view>
                     </view>
-                    <view style="width:73px;height:73px;top:20px;background-color: #000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
-                        <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left: 6px;" type="2d"></canvas>
+                    <view style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
+                        <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
                     </view>
                 </view>
             </view>
@@ -745,34 +816,33 @@
     <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTBGP" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=25}}"></view>
-                    <view class="close1" hidden="{{ShowBar==25}}"></view>
+                <view bindtap="BTBGP" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==25?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTBGP" class="DisTIP" style="width: 65%;">{{UEN?'Background Image':'背景图片设置'}}</button>
-                <button bindtap="BTBGP0" class="DisINF" style="width: 35%;">{{BGI?(UEN?'Image ':'图片')+BGI:UEN?'Default':'默认'}}</button>
+                <button bindtap="BTBGP" class="DisTIP" style="width:65%;">{{UEN?'Background Image':'背景图片设置'}}</button>
+                <button bindtap="BTBGP0" class="DisINF" style="width:35%;">{{BGI?(UEN?'Image ':'图片')+BGI:UEN?'Default':'默认'}}</button>
             </view>
             <view hidden="{{ShowBar!=25}}">
                 <view class="btnLayout">
                     <button class="DisTIP1" style="width:20%;">{{UEN?'Image 1':'图片一'}}</button>
-                    <button bindtap="BTBGP1" class="DisINF1" style="width: 80%;white-space:pre;">{{BGP1}}</button>
+                    <button bindtap="BTBGP1" class="DisINF1" style="width:80%;white-space:pre;">{{BGP1}}</button>
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1" style="width:20%;">{{UEN?'Image 2':'图片二'}}</button>
-                    <button bindtap="BTBGP2" class="DisINF1" style="width: 80%;white-space:pre;">{{BGP2}}</button>
+                    <button bindtap="BTBGP2" class="DisINF1" style="width:80%;white-space:pre;">{{BGP2}}</button>
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1" style="width:20%;">{{UEN?'Image 3':'图片三'}}</button>
-                    <button bindtap="BTBGP3" class="DisINF1" style="width: 80%;white-space:pre;">{{BGP3}}</button>
+                    <button bindtap="BTBGP3" class="DisINF1" style="width:80%;white-space:pre;">{{BGP3}}</button>
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1" style="width:20%;">{{UEN?'Image 4':'图片四'}}</button>
-                    <button bindtap="BTBGP4" class="DisINF1" style="width: 80%;white-space:pre;">{{BGP4}}</button>
+                    <button bindtap="BTBGP4" class="DisINF1" style="width:80%;white-space:pre;">{{BGP4}}</button>
                 </view>
                 <view class="btnLayout" hidden="{{BGI==0}}">
                     <button class="DisTIP1" style="width:20%;">{{UEN?'Transparency':'透明度'}}</button>
-                    <button bindtap="BTKEY2" class="DisINF1" style="width: 80%;height:40px;">
-                        <slider activeColor="transparent" backgroundColor="#fff" bindchanging="CTC1" class="ribbon" max="220" min="80" onChanging="CTC1" style="position: relative;top: -10px;" value="{{BGT}}"></slider>
+                    <button bindtap="BTKEY2" class="DisINF1" style="width:80%;height:40px;">
+                        <slider activeColor="transparent" backgroundColor="#fff" bindchanging="CTC1" class="ribbon" max="220" min="80" onChanging="CTC1" style="position:relative;top:-10px;" value="{{BGT}}"></slider>
                     </button>
                 </view>
                 <view wx:if="{{UEN}}">
@@ -786,18 +856,40 @@
         </view>
         <view style="height:5px;"></view>
     </view>
+    <view hidden="{{CVer<5.39}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTRST0" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==26?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTRST0" class="DisTIP" style="width:65%;">{{UEN?'Data Anomaly Repair':'数据异常修复'}}</button>
+                <button bindtap="BTRST1" class="DisINF" style="width:35%;">{{UEN?'Repair':'修复'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=26}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}There is a very small probability that there will be some screen display numerical abnormalities during use, such as setting voltage and current to 0 or battery level exceeding 100%, or accidentally setting certain parameters incorrectly but not clearly. If the abnormality is caused by the Bluetooth control board, click "Repair" in the upper right corner.</view>
+                    <view class="tip2">{{nbsp}}Abnormal repair will detect the setting data and reset some personalized settings (such as screen color, etc.). After the repair is completed, the device will automatically restart (if unable to restart automatically, please power off and manually restart)</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}在使用过程中有极小概率会出现一些屏幕显示数字异常 比如设置电压和设置电流均显示为0 或者电池电量显示超过100%等 又或者在无意间设置错了某些参数但是又不清楚怎么设置了 只要是蓝牙控制板导致的异常 此时点击右上角"修复"即可。</view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}异常修复会检测设置数据并重置掉部分个性化设置(比如屏幕颜色等) 修复完成后会自动重启设备(如未能自动重启请断电手动重启)。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
     <view hidden="{{TCH>1}}">
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTKEY" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=8}}"></view>
-                    <view class="close1" hidden="{{ShowBar==8}}"></view>
+                <view bindtap="BTKEY" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==8?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTKEY" class="DisTIP" style="width: 65%;">{{UEN?'Enable Panel Buttons':'面板按键启用'}}</button>
-                <button bindtap="BTKEY1" class="DisINF" style="width: 35%;" wx:if="{{UEN}}">{{KON?'Yes':'No'}}</button>
-                <button bindtap="BTKEY1" class="DisINF" style="width: 35%;" wx:if="{{!UEN}}">{{KON?'是':'否'}}</button>
+                <button bindtap="BTKEY" class="DisTIP" style="width:65%;">{{UEN?'Enable Panel Buttons':'面板按键启用'}}</button>
+                <button bindtap="BTKEY1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{KON?'Yes':'No'}}</button>
+                <button bindtap="BTKEY1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{KON?'是':'否'}}</button>
             </view>
-            <view style="display:{{ShowBar==8?'block':'none'}}">
+            <view hidden="{{ShowBar!=8}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Swap Up and Down':'对调加减位置'}}</button>
                     <button bindtap="BTKEY2" class="DisINF1" wx:if="{{UEN}}">{{KRC?'Yes':'No'}}</button>
@@ -805,11 +897,11 @@
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}The panel buttons can be swapped or turned on or off according to your own needs.</view>
-                    <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to switch.</view>
+                    <view class="tip2">{{nbsp}}Tip: Long press the up and down keys at the same time to switch on and off. Long press the middle key to enter quick switching (which is the 4 sets of voltage and current settings displayed at the bottom of the mini program). Long press the middle key to enter and then press the up and down keys to switch</view>
                 </view>
                 <view wx:if="{{!UEN}}">
                     <view class="tip2">{{nbsp}}{{nbsp}}面板按键可以按自己需求打开或者关闭。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字进行切换。</view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}小提示:同时长按上下键可开关机 长按中键可进入快捷切换(就是小程序底部显示的4组设置电压电流) 按上下键切换</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -819,14 +911,13 @@
     <view hidden="{{TCH<1||CVer<5.34}}">
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTTCH" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=24}}"></view>
-                    <view class="close1" hidden="{{ShowBar==24}}"></view>
+                <view bindtap="BTTCH" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==24?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTTCH" class="DisTIP" style="width: 65%;">{{UEN?'Touch Screen Password':'触屏密码设置'}}</button>
-                <button bindtap="BTTCH1" class="DisINF" style="width: 35%;">{{LKV}}</button>
+                <button bindtap="BTTCH" class="DisTIP" style="width:65%;">{{UEN?'Touch Screen Password':'触屏密码设置'}}</button>
+                <button bindtap="BTTCH1" class="DisINF" style="width:35%;">{{LKV}}</button>
             </view>
-            <view style="display:{{ShowBar==24?'block':'none'}}">
+            <view hidden="{{ShowBar!=24}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Touch Screen Lock Time':'触屏锁屏时间'}}</button>
                     <button bindtap="BTTCH2" class="DisINF1">{{LKS+(UEN?' Second':'秒')}}</button>
@@ -844,18 +935,17 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{CVer<5}}">
+    <view hidden="{{CVer<5||CEV==1}}">
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTCKA" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=21}}"></view>
-                    <view class="close1" hidden="{{ShowBar==21}}"></view>
+                <view bindtap="BTCKA" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==21?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTCKA" class="DisTIP" style="width: 65%;">{{UEN?'Slow Current Drop':'二段电流缓降'}}</button>
-                <button bindtap="BTCKA2" class="DisINF" style="width: 35%;" wx:if="{{UEN}}">{{CKA2?'ON':'OFF'}}</button>
-                <button bindtap="BTCKA2" class="DisINF" style="width: 35%;" wx:if="{{!UEN}}">{{CKA2?'打开':'关闭'}}</button>
+                <button bindtap="BTCKA" class="DisTIP" style="width:65%;">{{UEN?'Slow Current Drop':'二段电流缓降'}}</button>
+                <button bindtap="BTCKA2" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{CKA2?'ON':'OFF'}}</button>
+                <button bindtap="BTCKA2" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{CKA2?'打开':'关闭'}}</button>
             </view>
-            <view style="display:{{ShowBar==21?'block':'none'}}">
+            <view hidden="{{ShowBar!=21}}">
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}The internal resistance of some batteries and connecting wires is extremely low, which can cause the charging voltage to be almost full and the current to not decrease. After enabling this function, the current will slowly decrease after entering the second stage of charging, better protecting the battery.</view>
                     <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to switch.</view>
@@ -871,17 +961,16 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{CVer<5.31}}">
+    <view hidden="{{CVer<5.31||CEV==1}}">
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTYC" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=23}}"></view>
-                    <view class="close1" hidden="{{ShowBar==23}}"></view>
+                <view bindtap="BTYC" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==23?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTYC" class="DisTIP" style="width: 65%;">{{UEN?'Set Pre Charge Voltage':'设置预充功能'}}</button>
-                <button bindtap="BTYC1" class="DisINF" style="width: 35%;">{{YCV!='0.00'?YCV+'V':UEN?'OFF':'关闭'}}</button>
+                <button bindtap="BTYC" class="DisTIP" style="width:65%;">{{UEN?'Set Pre Charge Voltage':'设置预充功能'}}</button>
+                <button bindtap="BTYC1" class="DisINF" style="width:35%;">{{YCV!='0.00'?YCV+'V':UEN?'OFF':'关闭'}}</button>
             </view>
-            <view style="display:{{ShowBar==23?'block':'none'}}">
+            <view hidden="{{ShowBar!=23}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Set Pre Charge Current':'设置预充电流'}}</button>
                     <button bindtap="BTYC2" class="DisINF1">{{YCA}}A</button>
@@ -898,17 +987,16 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.24?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTEN" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=19}}"></view>
-                    <view class="close1" hidden="{{ShowBar==19}}"></view>
+                <view bindtap="BTEN" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==19?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTEN" class="DisTIP" style="width: 65%;">语言/Language</button>
-                <button bindtap="BTEN1" class="DisINF" style="width: 35%;">{{UEN?'English':'中文'}}</button>
+                <button bindtap="BTEN" class="DisTIP" style="width:65%;">语言/Language</button>
+                <button bindtap="BTEN1" class="DisINF" style="width:35%;">{{UEN?'English':'中文'}}</button>
             </view>
-            <view style="display:{{ShowBar==19?'block':'none'}}">
+            <view hidden="{{ShowBar!=19}}">
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}Set display language, support bilingual selection in Chinese and English, synchronize power screen and mini program switching, and take effect immediately after switching.</view>
                     <view class="tip2">{{nbsp}}All current English translations come from machine translation. If you have any better suggestions, please send an email to cxjdwx@live.com Contact the author.</view>
@@ -922,22 +1010,19 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.19?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTBLE" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=9}}"></view>
-                    <view class="close1" hidden="{{ShowBar==9}}"></view>
+                <view bindtap="BTBLE" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==9?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTBLE" class="DisTIP" style="width: 60%;">{{UEN?'Set Bluetooth Name':'设置蓝牙名称'}}</button>
-                <button bindtap="BTBLE1" class="DisINF" style="width: 40%;">{{SSID}}</button>
+                <button bindtap="BTBLE" class="DisTIP" style="width:60%;">{{UEN?'Set Bluetooth Name':'设置蓝牙名称'}}</button>
+                <button bindtap="BTBLE1" class="DisINF" style="width:40%;">{{SSID}}</button>
             </view>
-            <view style="display:{{ShowBar==9?'block':'none'}}">
-                <view style="display:{{CVer>=5.18?'block':'none'}}">
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'Bluetooth password':'设置蓝牙密码'}}</button>
-                        <button bindtap="BTBLE2" class="DisINF1">{{UPWD}}</button>
-                    </view>
+            <view hidden="{{ShowBar!=9}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Bluetooth password':'设置蓝牙密码'}}</button>
+                    <button bindtap="BTBLE2" class="DisINF1">{{UPWD}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}Set the Bluetooth name and password to a maximum of 18 characters. If it is a Chinese character, each Chinese character occupies three characters, which is a maximum of 6 Chinese characters. (Restart takes effect)</view>
@@ -952,52 +1037,49 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.17?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTUP" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=4}}"></view>
-                    <view class="close1" hidden="{{ShowBar==4}}"></view>
+                <view bindtap="BTUP" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==4?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTUP" class="DisTIP" style="width: 65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
-                <button bindtap="BTUP1" class="DisINF" style="width: 35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate>CVer?'Start Upgrade':'No Available'}}</button>
-                <button bindtap="BTUP1" class="DisINF" style="width: 35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate>CVer?'开始升级':'已最新版'}}</button>
+                <button bindtap="BTUP" class="DisTIP" style="width:65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
+                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate>CVer?'Start Upgrade':'No Available'}}</button>
+                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate>CVer?'开始升级':'已最新版'}}</button>
                 <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate}}"></view>
             </view>
-            <view style="display:{{ShowBar==4?'block':'none'}}">
-                <view style="display:{{CVer>=5.18?'block':'none'}}">
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'WIFI hotspot name':'WIFI热点名'}}</button>
-                        <button bindtap="BTUP6" class="DisINF1">{{WID}}</button>
-                    </view>
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'WIFI hotspot password':'WIFI热点密码'}}</button>
-                        <button bindtap="BTUP7" class="DisINF1">{{WPD}}</button>
-                    </view>
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'Device ID':'设备ID'}}</button>
-                        <button bindtap="BTUP2" class="DisINF1">{{ID}}</button>
-                    </view>
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'Firmware version':'固件版本'}}</button>
-                        <button bindtap="BTUP3" class="DisINF1" style="color:gray;">{{CVer}}</button>
-                    </view>
-                    <view class="btnLayout" wx:if="{{GM}}">
-                        <button class="DisTIP1">{{UEN?'Test Firmware':'测试版固件'}}</button>
-                        <button bindtap="BTUP9" class="DisINF1">{{TestV}}</button>
-                    </view>
-                    <view class="btnLayout" wx:if="{{!ADD&&CVer>RollV}}">
-                        <button class="DisTIP1">{{UEN?'Firmware rollback':'固件回滚'}}</button>
-                        <button bindtap="BTUP0" class="DisINF1">{{(UEN?'Rollback':'回退')+RollV}}</button>
-                    </view>
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'APP version':'APP版本'}}</button>
-                        <button bindtap="BTUP4" class="DisINF1" style="color:gray;">{{APP}}</button>
-                    </view>
-                    <view class="btnLayout">
-                        <button class="DisTIP1">{{UEN?'Activation date':'激活日期'}}</button>
-                        <button bindtap="BTUP5" class="DisINF1" style="color:gray;">{{ACT}}</button>
-                    </view>
+            <view hidden="{{ShowBar!=4}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'WIFI hotspot name':'WIFI热点名'}}</button>
+                    <button bindtap="BTUP6" class="DisINF1">{{WID}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'WIFI hotspot password':'WIFI热点密码'}}</button>
+                    <button bindtap="BTUP7" class="DisINF1">{{WPD}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Device ID':'设备ID'}}</button>
+                    <button bindtap="BTUP2" class="DisINF1">{{ID}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Firmware version':'固件版本'}}</button>
+                    <button bindtap="BTUP3" class="DisINF1" style="color:gray;">{{CVer}}</button>
+                </view>
+                <view class="btnLayout" wx:if="{{GM}}">
+                    <button class="DisTIP1">{{UEN?'Test Firmware':'测试版固件'}}</button>
+                    <button bindtap="BTUP9" class="DisINF1">{{TestV}}</button>
+                </view>
+                <view class="btnLayout" wx:if="{{!ADD&&CVer>(CEV?RoCEV:RollV)}}">
+                    <button class="DisTIP1">{{UEN?'Firmware rollback':'固件降级'}}</button>
+                    <button bindtap="BTUP0" class="DisINF1">{{CEV?RoCEV:RollV}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'APP version':'APP版本'}}</button>
+                    <button bindtap="BTUP4" class="DisINF1" style="color:gray;">{{APP}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Activation date':'激活日期'}}</button>
+                    <button bindtap="BTUP5" class="DisINF1" style="color:gray;">{{ACT}}</button>
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP Android':'安卓APP'}}</button>
@@ -1005,64 +1087,79 @@
                 </view>
                 <view wx:if="{{UEN}}">
                     <view style="display:{{ADD?'block':'none'}}">
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}Check for version updates, please move to the WeChat mini program end.</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}Check for version updates, please move to the WeChat mini program end.</view>
                     </view>
                     <view class="tip2">{{nbsp}}Firmware upgrade requires connecting the router or mobile hotspot via WIFI and ensuring that the connected router or mobile hotspot is connected to the network</view>
-                    <view class="tip2">{{nbsp}}1.Hotspot name:{{WID}} <view></view>{{nbsp}}2.Password:{{WPD}} <view></view>{{nbsp}}3.Frequency band:2.4G <view></view>{{nbsp}}After following the above settings, click the "Start Upgrade" button in the upper right corner to start the upgrade program. <view></view>{{nbsp}}If there is an unexpected power outage or network outage during remote upgrades, it will not affect the current version and can be used with confidence.</view>
+                    <view class="tip2">{{nbsp}}1.Hotspot name:{{WID}}<view></view>{{nbsp}}2.Password:{{WPD}}<view></view>{{nbsp}}3.Frequency band:2.4G<view></view>{{nbsp}}After following the above settings, click the "Start Upgrade" button in the upper right corner to start the upgrade program.<view></view>{{nbsp}}If there is an unexpected power outage or network outage during remote upgrades, it will not affect the current version and can be used with confidence.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
                     <view style="display:{{ADD?'block':'none'}}">
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
+                    </view>
+                    <view wx:if="{{CVer<5.37}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.39 APP:1.24 2025-01-04</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要是针对5.37故障修复 修复部分取电器在低压桩时提前显示就绪问题 修复取电器升压电压跳动过大问题 修复5.37充电器在部分情况下最大电流变100问题 修复中兴和华为充在温度零下时不能正确识别问题 修复充电器小程序二段开关问题 增加了取电器兼容性 增加了保护关机倒计时设置 增加了取电器二段充电功能(仅限于低压直冲 所以设置电压126V以内才会显示) 增加了一个新的"数据异常修复"功能 (升级后会重置掉部分用户个性化设置,比如屏幕颜色等)</view>
+                    </view>
+                    <view wx:if="{{CVer<5.37}}">
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.37 APP:1.23 2024-12-01</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}本次更新主要加入新产品取电器支持 底层代码有大量改动 充电器升级后如有问题可降级至5.35稳定版</view>
+                    </view>
+                    <view wx:if="{{CVer<5.36}}">
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.36 APP:1.22 2024-11-11</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入华为模块故障显示功能</view>
                     </view>
                     <view wx:if="{{CVer<5.35}}">
-                        <view style="height: 10px;"></view>
-                        <view class="tip2" style="color: #0f0;">5.35 2024-10-01</view>
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.35(稳定版) 2024-10-01</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
                     </view>
                     <view wx:if="{{CVer<5.34}}">
-                        <view style="height: 10px;"></view>
-                        <view class="tip2" style="color: #0f0;">5.34 2024-06-30</view>
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.34 2024-06-30</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
                     </view>
                     <view wx:if="{{CVer<5.33}}">
-                        <view style="height: 10px;"></view>
-                        <view class="tip2" style="color: #0f0;">5.33 2024-06-02</view>
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.33 2024-06-02</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
                     </view>
                     <view wx:if="{{CVer<5.32}}">
-                        <view style="height: 10px;"></view>
-                        <view class="tip2" style="color: #0f0;">5.32 2024-05-25</view>
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.32 2024-05-25</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
                     </view>
                     <view wx:if="{{CVer<5.31}}">
-                        <view style="height: 10px;"></view>
-                        <view class="tip2" style="color: #0f0;">5.31 2024-05-16</view>
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.31 2024-05-16</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
                     </view>
                     <view wx:if="{{CVer<5.3}}">
-                        <view style="height: 10px;"></view>
-                        <view class="tip2" style="color: #0f0;">5.30 2024-04-21 </view>
-                        <view class="tip2" style="color: #0f0;">{{nbsp}}{{nbsp}}修复5.29版本长按加减按键会重启问题 修复5.29版本部分屏幕会显示错乱问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.30 2024-04-21</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.29版本长按加减按键会重启问题 修复5.29版本部分屏幕会显示错乱问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力</view>
                     </view>
-                    <view style="height: 10px;"></view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态. <view></view>{{nbsp}}{{nbsp}}1.热点名:{{WID}} <view></view>{{nbsp}}{{nbsp}}2.密码:{{WPD}} <view></view>{{nbsp}}{{nbsp}}3.频段:2.4G <view></view>{{nbsp}}{{nbsp}}按上述设置后点击右上角"开始升级"按钮启动升级程序。 <view></view>{{nbsp}}{{nbsp}}远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view style="height:10px;"></view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>{{nbsp}}{{nbsp}}1.热点名:{{WID}}<view></view>{{nbsp}}{{nbsp}}2.密码:{{WPD}}<view></view>{{nbsp}}{{nbsp}}3.频段:2.4G<view></view>{{nbsp}}{{nbsp}}按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>{{nbsp}}{{nbsp}}远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.19?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTDDT" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=7}}"></view>
-                    <view class="close1" hidden="{{ShowBar==7}}"></view>
+                <view bindtap="BTDDT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==7?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTDDT" class="DisTIP" style="width: 65%;">{{UEN?'Set Screen Orientation':'设置屏幕方向'}}</button>
-                <button bindtap="BTDDT1" class="DisINF" style="width: 35%;">{{DDT}}</button>
+                <button bindtap="BTDDT" class="DisTIP" style="width:65%;">{{UEN?'Set Screen Orientation':'设置屏幕方向'}}</button>
+                <button bindtap="BTDDT1" class="DisINF" style="width:35%;">{{DDT}}</button>
             </view>
-            <view style="display:{{ShowBar==7?'block':'none'}}">
+            <view hidden="{{ShowBar!=7}}">
                 <view wx:if="{{UEN}}">
                     <view class="tip2">{{nbsp}}The screen display orientation can be adjusted in four directions.</view>
                     <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to switch.</view>
@@ -1076,17 +1173,16 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.19?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTLEDK" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=11}}"></view>
-                    <view class="close1" hidden="{{ShowBar==11}}"></view>
+                <view bindtap="BTLEDK" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==11?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTLEDK" class="DisTIP" style="width: 65%;">{{UEN?'Set Screen Brightness':'设置屏幕亮度'}}</button>
-                <button bindtap="BTLEDK1" class="DisINF" style="width: 35%;">{{LEDK1}}</button>
+                <button bindtap="BTLEDK" class="DisTIP" style="width:65%;">{{UEN?'Set Screen Brightness':'设置屏幕亮度'}}</button>
+                <button bindtap="BTLEDK1" class="DisINF" style="width:35%;">{{LEDK1}}</button>
             </view>
-            <view style="display:{{ShowBar==11?'block':'none'}}">
+            <view hidden="{{ShowBar!=11}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Set shutdown brightness':'设置关机亮度'}}</button>
                     <button bindtap="BTLEDK2" class="DisINF1">{{LEDK0}}</button>
@@ -1104,18 +1200,17 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.21?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTLEDKS" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=12}}"></view>
-                    <view class="close1" hidden="{{ShowBar==12}}"></view>
+                <view bindtap="BTLEDKS" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==12?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTLEDKS" class="DisTIP" style="width: 65%;">{{UEN?'Set Screen Rest ':'屏幕息屏设置'}}</button>
-                <button bindtap="BTLEDKS1" class="DisINF" style="width: 35%;" wx:if="{{UEN}}">{{Sleep==0?'OFF':Sleep+' Second'}}</button>
-                <button bindtap="BTLEDKS1" class="DisINF" style="width: 35%;" wx:if="{{!UEN}}">{{Sleep==0?'关闭':Sleep+'秒'}}</button>
+                <button bindtap="BTLEDKS" class="DisTIP" style="width:65%;">{{UEN?'Set Screen Rest ':'屏幕息屏设置'}}</button>
+                <button bindtap="BTLEDKS1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{Sleep==0?'OFF':Sleep+' Second'}}</button>
+                <button bindtap="BTLEDKS1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{Sleep==0?'关闭':Sleep+'秒'}}</button>
             </view>
-            <view style="display:{{ShowBar==12?'block':'none'}}">
+            <view hidden="{{ShowBar!=12}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Set Screen Brightness':'设置屏幕亮度'}}</button>
                     <button bindtap="BTLEDKS2" class="DisINF1">{{LEDK2}}</button>
@@ -1135,17 +1230,16 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.21?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTStart" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=13}}"></view>
-                    <view class="close1" hidden="{{ShowBar==13}}"></view>
+                <view bindtap="BTStart" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==13?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTStart" class="DisTIP" style="width: 65%;">{{UEN?'Initial Page Time':'初始页面时间'}}</button>
-                <button bindtap="BTStart1" class="DisINF" style="width: 35%;">{{WTi+(UEN?' Second':'秒')}}</button>
+                <button bindtap="BTStart" class="DisTIP" style="width:65%;">{{UEN?'Initial Page Time':'初始页面时间'}}</button>
+                <button bindtap="BTStart1" class="DisINF" style="width:35%;">{{WTi+(UEN?' Second':'秒')}}</button>
             </view>
-            <view style="display:{{ShowBar==13?'block':'none'}}">
+            <view hidden="{{ShowBar!=13}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Show countdown':'是否显示倒计时'}}</button>
                     <button bindtap="BTStart2" class="DisINF1" wx:if="{{UEN}}">{{ETi?'Yes':'No'}}</button>
@@ -1164,43 +1258,41 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.21?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTGIF" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=14}}"></view>
-                    <view class="close1" hidden="{{ShowBar==14}}"></view>
+                <view bindtap="BTGIF" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==14?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTGIF" class="DisTIP" style="width: 65%;">{{UEN?'Enable GIF':'充电动图显示'}}</button>
-                <button bindtap="BTGIF1" class="DisINF" style="width: 35%;" wx:if="{{UEN}}">{{GIF?'ON':'OFF'}}</button>
-                <button bindtap="BTGIF1" class="DisINF" style="width: 35%;" wx:if="{{!UEN}}">{{GIF?'打开':'关闭'}}</button>
+                <button bindtap="BTGIF" class="DisTIP" style="width:65%;">{{UEN?'Enable GIF':'充电动图显示'}}</button>
+                <button bindtap="BTGIF1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{GIF?'ON':'OFF'}}</button>
+                <button bindtap="BTGIF1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{GIF?'打开':'关闭'}}</button>
             </view>
-            <view style="display:{{ShowBar==14?'block':'none'}}">
-                <view class="btnLayout" style=" height: 73px;">
-                    <image bindtap="BT_GIF1" mode="aspectFit" src="{{GIF1}}" style="height: 73px;"></image>
-                    <image bindtap="BT_GIF2" mode="aspectFit" src="{{GIF2}}" style="height: 73px;"></image>
-                    <image bindtap="BT_GIF3" mode="aspectFit" src="{{GIF3}}" style="height: 73px;"></image>
-                    <image bindtap="BT_GIF4" mode="aspectFit" src="{{GIF4}}" style="height: 73px;"></image>
-                    <image bindtap="BT_GIF5" mode="aspectFit" src="{{GIF5}}" style="height: 73px;"></image>
+            <view hidden="{{ShowBar!=14}}">
+                <view class="btnLayout" style="height:73px;">
+                    <image bindtap="BT_GIF1" mode="aspectFit" src="{{GIF1}}" style="height:73px;"></image>
+                    <image bindtap="BT_GIF2" mode="aspectFit" src="{{GIF2}}" style="height:73px;"></image>
+                    <image bindtap="BT_GIF3" mode="aspectFit" src="{{GIF3}}" style="height:73px;"></image>
+                    <image bindtap="BT_GIF4" mode="aspectFit" src="{{GIF4}}" style="height:73px;"></image>
+                    <image bindtap="BT_GIF5" mode="aspectFit" src="{{GIF5}}" style="height:73px;"></image>
                 </view>
                 <view class="tip2" wx:if="{{UEN}}">{{nbsp}}Set the position of the screen logo box to play a dynamic image during the charging process. (After modifying the animation, it may restart)</view>
-                <view class="tip2" wx:if="{{!UEN}}">{{nbsp}}{{nbsp}}设置在充电过程中屏幕LOGO框位置播放动图。(修改动画完成后可能会重启)</view>
+                <view class="tip2" wx:if="{{!UEN}}">{{nbsp}}{{nbsp}}点击上面动图即可设置在充电过程中屏幕LOGO框位置播放动图。</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view style="display:{{CVer>=5.19?'block':'none'}}">
+    <view>
         <view class="SetBox">
             <view class="SendLayout">
-                <view bindtap="BTCr" style="width: 20px; background-color: #88888850;">
-                    <view class="open" hidden="{{ShowBar!=10}}"></view>
-                    <view class="close1" hidden="{{ShowBar==10}}"></view>
+                <view bindtap="BTCr" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==10?'open':'close1'}}"></view>
                 </view>
-                <button bindtap="BTCr" class="DisTIP" style="width: 65%;">{{UEN?'Set Screen Color':'设置屏幕颜色'}}</button>
-                <button bindtap="BTCr1" class="DisINF" style="width: 35%;">{{UEN?'Send':'发送'}}</button>
+                <button bindtap="BTCr" class="DisTIP" style="width:65%;">{{UEN?'Set Screen Color':'设置屏幕颜色'}}</button>
+                <button bindtap="BTCr1" class="DisINF" style="width:35%;">{{UEN?'Send':'发送'}}</button>
             </view>
-            <view style="display:{{ShowBar==10?'block':'none'}}">
+            <view hidden="{{ShowBar!=10}}">
                 <view class="btnLayout" hidden="{{CVer<=5.34}}">
                     <button class="DisTIP1">{{UEN?'Screen display style':'屏幕显示风格'}}</button>
                     <button bindtap="BTUI" class="DisINF1">{{UI?UEN?'Simplicity':'简约':UEN?'Classics':'经典'}}</button>
@@ -1211,59 +1303,59 @@
                     <button bindtap="Scr3" class="DisINF1" style="text-align:center;">{{UEN?'Color 3':'配色三'}}</button>
                     <button bindtap="Scr4" class="DisINF1" style="text-align:center;">{{UEN?'Color 4':'配色四'}}</button>
                 </view>
-                <view style="position:relative;height:260px;width: 100%;">
-                    <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;;">
+                <view style="position:relative;height:260px;width:100%;">
+                    <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;">
                         <view hidden="{{UI==1}}">
                             <view bindtap="CK0" class="UIBox1" style="z-index:1;border-color:{{Cr0}};left:2%;top:2px;width:95%;height:20px;color:{{Cr0}};">{{STR}}</view>
                             <view class="UIBox1" style="left:2.5%;width:62%;border-style:none;">
                                 <view bindtap="CK1" class="UIBox1" style="top:27px;width:100%;border-color:{{Cr1}};">
                                     <view style="border-radius:6px 0px 0px 6px;width:25%;background-color:{{Cr1}};line-height:1.1;">输出电压</view>
-                                    <view style="width: 75%;height: 30px;font-size:23px;color: {{Cr1}};">{{OV}}</view>
+                                    <view style="width:75%;height:30px;font-size:23px;color:{{Cr1}};">{{OV}}</view>
                                 </view>
                                 <view bindtap="CK2" class="UIBox1" style="top:61px;width:100%;border-color:{{Cr2}};">
                                     <view style="border-radius:6px 0px 0px 6px;width:25%;background-color:{{Cr2}};line-height:1.1;">输出电流</view>
-                                    <view style="width: 75%;height: 30px;font-size:23px;color: {{Cr2}};">{{OA}}</view>
+                                    <view style="width:75%;height:30px;font-size:23px;color:{{Cr2}};">{{OA}}</view>
                                 </view>
                                 <view bindtap="CK3" class="UIBox1" style="top:94px;width:100%;border-color:{{Cr3}};display:block;line-height:1.1;">
                                     <view style="border-radius:6px 6px 0px 0px;width:100%;height:15px;background-color:{{Cr3}};">设置电压　设置电流</view>
-                                    <view style="width:100%;color: {{Cr3}};">{{'  '+SV+'V　　'+SA+'A'}}</view>
+                                    <view style="width:100%;color:{{Cr3}};">{{'  '+SV+'V　　'+SA+'A'}}</view>
                                 </view>
                                 <view bindtap="CK4" class="UIBox1" style="height:60px;top:129px;width:100%;border-color:{{Cr4}};line-height:1.1;">
-                                    <view style="width: 22%;">
+                                    <view style="width:22%;">
                                         <view style="border-radius:6px 0px 0px 6px;width:100%;background-color:{{Cr4}};line-height:1.1;">　　电量容量时常</view>
                                     </view>
-                                    <view style="width: 78%;font-size: 12px;">
+                                    <view style="width:78%;font-size:12px;">
                                         <view style="border-radius:0px 6px 0px 0px;width:100%;height:15px;background-color:{{Cr4}};">本次数据 累计数据</view>
-                                        <view style="display: flex;text-align: right;">
-                                            <view style="width: 50%;">
-                                                <view style="width:100%;height: 15px;color: {{Cr4}};">{{Wh}}</view>
-                                                <view style="width:100%;height: 15px;color: {{Cr4}};">{{Ah}}</view>
-                                                <view style="width:100%;height: 15px;color: {{Cr4}};">{{Ti}}</view>
+                                        <view style="display:flex;text-align:right;">
+                                            <view style="width:50%;">
+                                                <view style="width:100%;height:15px;color:{{Cr4}};">{{Wh}}</view>
+                                                <view style="width:100%;height:15px;color:{{Cr4}};">{{Ah}}</view>
+                                                <view style="width:100%;height:15px;color:{{Cr4}};">{{Ti}}</view>
                                             </view>
-                                            <view style="width: 50%;">
-                                                <view style="width:100%;height: 15px;color: {{Cr4}};">{{WH}}</view>
-                                                <view style="width:100%;height: 15px;color: {{Cr4}};">{{AH}}</view>
-                                                <view style="width:100%;height: 15px;color: {{Cr4}};">{{TI}}</view>
+                                            <view style="width:50%;">
+                                                <view style="width:100%;height:15px;color:{{Cr4}};">{{WH}}</view>
+                                                <view style="width:100%;height:15px;color:{{Cr4}};">{{AH}}</view>
+                                                <view style="width:100%;height:15px;color:{{Cr4}};">{{TI}}</view>
                                             </view>
                                         </view>
                                     </view>
                                 </view>
-                                <view class="UIBox1" style="top:194px;width: 100%;height:20px;border-style:none;">
+                                <view class="UIBox1" style="top:194px;width:100%;height:20px;border-style:none;">
                                     <view bindtap="CK7" class="UIBox1" style="height:18px;position:static;width:49%;border-color:{{Cr7}};">
-                                        <view style="border-radius:6px 0px 0px 6px;width:25%;height: 18px;background-color:{{Cr7}};line-height:1.5;">T</view>
-                                        <view style="width: 75%;height: 20px;font-size:12px;color:{{Cr7}};line-height:1.6;">{{OT}}</view>
+                                        <view style="border-radius:6px 0px 0px 6px;width:25%;height:18px;background-color:{{Cr7}};line-height:1.5;">T</view>
+                                        <view style="width:75%;height:20px;font-size:12px;color:{{Cr7}};line-height:1.6;">{{OT}}</view>
                                     </view>
                                     <view style="width:2%;"></view>
                                     <view bindtap="CK6" class="UIBox1" style="height:18px;position:static;width:49%;border-color:{{Cr6}};">
-                                        <view style="border-radius:6px 0px 0px 6px;width:25%;height: 18px;background-color:{{Cr6}};line-height:1.5;">W</view>
-                                        <view style="width: 75%;height: 20px;font-size:12px;color:{{Cr6}};line-height:1.6;">{{OW}}</view>
+                                        <view style="border-radius:6px 0px 0px 6px;width:25%;height:18px;background-color:{{Cr6}};line-height:1.5;">W</view>
+                                        <view style="width:75%;height:20px;font-size:12px;color:{{Cr6}};line-height:1.6;">{{OW}}</view>
                                     </view>
                                 </view>
                             </view>
                             <view class="UIBox1" style="left:68%;width:29%;border-style:none;">
                                 <view bindtap="CK5" class="UIBox1" style="line-height:1.2;border-color:{{Cr5}};top:27px;height:64px;font-size:25px;color:{{Cr5}};">欢迎使用</view>
                                 <view bindtap="CK8" class="UIBox1" style="border-radius:2px 2px 0px 0px;border-color:{{Cr8}};left:40%;top:100px;width:20%;height:4px;background-color:{{Cr8}}"></view>
-                                <view bindtap="CK8" class="UIBox1" style="border-color:{{Cr8}};background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};line-height: 3.5;text-align:center;top:105px;height:87px ;font-size:25px;color:{{Cr8}};">{{SOC}}</view>
+                                <view bindtap="CK8" class="UIBox1" style="border-color:{{Cr8}};background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};line-height:3.5;text-align:center;top:105px;height:87px ;font-size:25px;color:{{Cr8}};">{{SOC}}</view>
                                 <view class="UIBox1" style="border-color:#888;top:200px;height:14px;font-size:10px;color:#888;">Ver {{CVer+'-'+CAN}}</view>
                             </view>
                         </view>
@@ -1274,23 +1366,23 @@
                             </view>
                             <view bindtap="CK11" class="UIBox1" style="top:25px;width:95%;border:none;">
                                 <view style="width:15%;color:{{Cr11}};line-height:1.1;">输出电压</view>
-                                <view style="width:55%;font-size:30px;color: {{Cr11}};line-height:1;letter-spacing: 2px;">0084.00</view>
-                                <view style="width:5%;font-size:20px;color: {{Cr11}};line-height:1.8;">V</view>
+                                <view style="width:55%;font-size:30px;color:{{Cr11}};line-height:1;letter-spacing:2px;">0084.00</view>
+                                <view style="width:5%;font-size:20px;color:{{Cr11}};line-height:1.8;">V</view>
                             </view>
                             <view bindtap="CK12" class="UIBox1" style="top:70px;width:95%;border:none;">
                                 <view style="width:15%;color:{{Cr12}};line-height:1.1;">输出电流</view>
-                                <view style="width:55%;font-size:30px;color: {{Cr12}};line-height:1;letter-spacing: 2px;">0030.00</view>
-                                <view style="width:5%;font-size:20px;color: {{Cr12}};line-height:1.8;">A</view>
+                                <view style="width:55%;font-size:30px;color:{{Cr12}};line-height:1;letter-spacing:2px;">0030.00</view>
+                                <view style="width:5%;font-size:20px;color:{{Cr12}};line-height:1.8;">A</view>
                             </view>
                             <view bindtap="CK13" class="UIBox1" style="top:115px;width:95%;border:none;">
                                 <view style="width:15%;color:{{Cr13}};line-height:1.1;">输出功率</view>
-                                <view style="width:55%;font-size:30px;color: {{Cr13}};line-height:1;letter-spacing: 2px;">2520.00</view>
-                                <view style="width:5%;font-size:16px;color: {{Cr13}};line-height:2.4;">W</view>
+                                <view style="width:55%;font-size:30px;color:{{Cr13}};line-height:1;letter-spacing:2px;">2520.00</view>
+                                <view style="width:5%;font-size:16px;color:{{Cr13}};line-height:2.4;">W</view>
                             </view>
                             <view bindtap="CK14" class="UIBox1" style="top:160px;width:95%;border:none;">
                                 <view style="width:15%;color:{{Cr14}};line-height:1.1;">输入电压</view>
-                                <view style="width:55%;font-size:30px;color: {{Cr14}};line-height:1;letter-spacing: 2px;">0220.00</view>
-                                <view style="width:5%;font-size:20px;color: {{Cr14}};line-height:1.8;">V</view>
+                                <view style="width:55%;font-size:30px;color:{{Cr14}};line-height:1;letter-spacing:2px;">0220.00</view>
+                                <view style="width:5%;font-size:20px;color:{{Cr14}};line-height:1.8;">V</view>
                             </view>
                             <view class="UIBox1" style="top:195px;width:95%;border:none;">
                                 <view bindtap="CK16" style="left:8px;width:40%;height:15px;color:{{Cr16}};text-align:left;">温度　30℃</view>

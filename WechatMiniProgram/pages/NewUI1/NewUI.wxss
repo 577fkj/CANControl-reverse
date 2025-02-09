@@ -218,7 +218,7 @@ view button.DisINF1 {
 }
 
 view.SetBox {
-  border: 3px solid #555;
+  border: 3px solid #888;
   border-radius: 10px;
   color: #fc9104;
   left: 5%;

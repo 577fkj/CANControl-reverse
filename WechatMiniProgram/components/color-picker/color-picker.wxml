@@ -1,8 +1,8 @@
-<view class="dialog {{show?'dialog_show':''}}" style="background: black;">
+<view class="dialog {{show?'dialog_show':''}}" style="background:black;">
     <view catchtap="close" catchtouchmove="close" class="weui-mask" wx:if="{{mask}}"></view>
-    <view catchtouchmove="preventdefault" class="weui-actionsheet {{show?'weui-actionsheet_toggle':''}}" style="background: rgba(85, 114, 146, 0.685);">
+    <view catchtouchmove="preventdefault" class="weui-actionsheet {{show?'weui-actionsheet_toggle':''}}" style="background:rgba(85, 114, 146, 0.685);">
         <view class="weui-half-screen-dialog__hd">
-            <button style="width: 100%;background: transparent;color: {{colorRes}};">设置"{{title}}"颜色</button>
+            <button style="width:100%;background:transparent;color:{{colorRes}};">设置"{{title}}"颜色</button>
         </view>
         <movable-area bindtap="areaTap" class="target" style="background-color:{{hueColor}}">
             <movable-view animation="{{false}}" bindchange="changeSV" bindtouchend="onEnd" class="iconfont icon-ios-locate-outline" direction="all" x="{{x}}" y="{{y}}"></movable-view>

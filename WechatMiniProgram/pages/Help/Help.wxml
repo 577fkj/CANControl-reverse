@@ -1,98 +1,142 @@
 <image class="background" mode="aspectFill" src="/img/bc1.gif"></image>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP1" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP1" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=1}}"></view>
             <view class="close" hidden="{{PG==1}}"></view>
         </view>
-        <button bindtap="HELP1" class="DisTIP" style="width: 100%;">{{'电池百分比和保护板不一致'}}</button>
+        <button bindtap="HELP1" class="DisTIP" style="width:100%;">{{'密码不记得了'}}</button>
     </view>
     <view style="display:{{PG==1?'block':'none'}}">
-        <view class="tip2" style="color: #0f0;">　　这是由于两种百分比计算方式不同导致的差异,电池保护板计算百分比是根据库仑计方式计算实际的电池电量,而充电器这边无法直接读取到电池库仑计,所以是根据充电器输出电压来计算百分比,举例来说单节三元锂电池满电电压是4.2V,定义为100%,用完后电压是3.0V,定义为0%,那么当在3.6V的时候就定义为50%,由于电压在有电流的时候会受到电线内阻影响,所以此百分比只做参考,没有保护板所显示的百分比精确</view>
+        <view class="tip2" style="color:#0f0;">　　请截图密码输入框中的设备ID发送给设备经销商处理</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP8" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP10" style="width:20px;background-color:#88888850;">
+            <view class="open" hidden="{{PG!=10}}"></view>
+            <view class="close" hidden="{{PG==10}}"></view>
+        </view>
+        <button bindtap="HELP10" class="DisTIP" style="width:100%;">{{'温度越热风速越低'}}</button>
+    </view>
+    <view style="display:{{PG==10?'block':'none'}}">
+        <view class="tip2" style="color:#0f0;">　　请使用套件原装风机控制小板,勿使用第三方风机控制小板.本产品风机小板有考虑故障冗余设计,异常后直接最大风速避免充电器过热,第三方小板异常会直接导致风机停转,极限情况下会温度热失控.</view>
+        <view style="height:15px;"></view>
+    </view>
+</view>
+<view style="height:5px;"></view>
+<view class="SetBox">
+    <view class="SendLayout">
+        <view bindtap="HELP11" style="width:20px;background-color:#88888850;">
+            <view class="open" hidden="{{PG!=11}}"></view>
+            <view class="close" hidden="{{PG==11}}"></view>
+        </view>
+        <button bindtap="HELP11" class="DisTIP" style="width:100%;">{{'显示"调用蓝牙失败"'}}</button>
+    </view>
+    <view style="display:{{PG==11?'block':'none'}}">
+        <view class="tip2" style="color:#fa0;">异常原因:<view></view>　　1.首次打开小程序时弹出授权未点击允许<view></view>　　2.手机下拉控制中心里面的蓝牙和定位未打开<view></view>　　3.微信软件权限中蓝牙或附近设备和定位权限未打开</view>
+        <view style="height:15px;"></view>
+        <view class="tip2" style="color:#0f0;">解决方法:<view></view>　　1.删除小程序后重新打开会再次弹出授权<view></view>　　2.打开控制中心里面的蓝牙和定位功能<view></view>　　3.微信软件权限中打开蓝牙或附近设备和定位</view>
+        <view style="height:15px;"></view>
+    </view>
+</view>
+<view style="height:5px;"></view>
+<view class="SetBox">
+    <view class="SendLayout">
+        <view bindtap="HELP12" style="width:20px;background-color:#88888850;">
+            <view class="open" hidden="{{PG!=12}}"></view>
+            <view class="close" hidden="{{PG==12}}"></view>
+        </view>
+        <button bindtap="HELP12" class="DisTIP" style="width:100%;">{{'电池百分比和保护板不一致'}}</button>
+    </view>
+    <view style="display:{{PG==12?'block':'none'}}">
+        <view class="tip2" style="color:#0f0;">　　这是由于两种百分比计算方式不同导致的差异,电池保护板计算百分比是根据库仑计方式计算实际的电池电量,而充电器这边无法直接读取到电池库仑计,所以是根据充电器输出电压来计算百分比,举例来说单节三元锂电池满电电压是4.2V,定义为100%,用完后电压是3.0V,定义为0%,那么当在3.6V的时候就定义为50%,由于电压在有电流的时候会受到电线内阻影响,所以此百分比只做参考,没有保护板所显示的百分比精确</view>
+        <view style="height:15px;"></view>
+    </view>
+</view>
+<view style="height:5px;"></view>
+<view class="SetBox">
+    <view class="SendLayout">
+        <view bindtap="HELP8" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=8}}"></view>
             <view class="close" hidden="{{PG==8}}"></view>
         </view>
-        <button bindtap="HELP8" class="DisTIP" style="width: 100%;">{{'显示"设备连接异常"'}}</button>
+        <button bindtap="HELP8" class="DisTIP" style="width:100%;">{{'显示"设备连接异常"'}}</button>
     </view>
     <view style="display:{{PG==8?'block':'none'}}">
-        <view class="tip2" style="color: #fa0;">异常原因:</view>
-        <view class="tip2" style="color: #fa0;">　　手机蓝牙收不到设备端发送的数据</view>
+        <view class="tip2" style="color:#fa0;">异常原因:</view>
+        <view class="tip2" style="color:#fa0;">　　手机蓝牙收不到设备端发送的数据</view>
         <view style="height:15px;"></view>
-        <view class="tip2" style="color: #0f0;">解决方法:</view>
-        <view class="tip2" style="color: #0f0;">　　先关闭手机蓝牙功能后再重新打开手机蓝牙功能,如果任然不行则者直接重启手机</view>
+        <view class="tip2" style="color:#0f0;">解决方法:</view>
+        <view class="tip2" style="color:#0f0;">　　先退出重新连接不行再重启小程序,如果任然不行则者直接重启手机</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP3" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP3" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=3}}"></view>
             <view class="close" hidden="{{PG==3}}"></view>
         </view>
-        <button bindtap="HELP3" class="DisTIP" style="width: 100%;">{{'显示"CAN通讯异常"'}}</button>
+        <button bindtap="HELP3" class="DisTIP" style="width:100%;">{{'显示"CAN通讯异常"'}}</button>
     </view>
     <view style="display:{{PG==3?'block':'none'}}">
-        <view class="tip2" style="color: #fa0;">异常原因:</view>
-        <view class="tip2" style="color: #fa0;">　　蓝牙板和电源模块之间是有CAN通讯的,蓝牙板没有读取到电源模块发送的通讯数据</view>
+        <view class="tip2" style="color:#fa0;">异常原因:</view>
+        <view class="tip2" style="color:#fa0;">　　蓝牙板和电源模块之间是有CAN通讯的,蓝牙板没有读取到电源模块发送的通讯数据</view>
         <view style="height:15px;"></view>
-        <view class="tip2" style="color: #0f0;">解决方法:</view>
-        <view class="tip2" style="color: #0f0;">　　长期出现:1.检查蓝牙通讯线是否正常连接 2.检查CAN通讯协议是否设置正确 排除掉接线问题和设置问题后就剩下蓝牙板问题或者电源问题了,此时只能用替代法测试最为快捷</view>
-        <view class="tip2" style="color: #0f0;">　　偶尔出现:如果偶尔出现此类问题都是由于走线布局问题导致通讯受到电磁干扰,请优化通讯线路布局,如避开变压器等强电磁元件,特别是通讯线长了一定要剪掉通讯线多余长度,不要硬塞到里面(优化走线后都能解决此类问题,如任然不行还可以从蓝牙板负极(黑线)接一条线到电源模块的CAN通讯芯片负极上以提高抗干扰能力)</view>
+        <view class="tip2" style="color:#0f0;">解决方法:</view>
+        <view class="tip2" style="color:#0f0;">　　长期出现:1.检查蓝牙通讯线是否正常连接 2.检查CAN通讯协议是否设置正确 排除掉接线问题和设置问题后就剩下蓝牙板问题或者电源问题了,此时只能用替代法测试最为快捷</view>
+        <view class="tip2" style="color:#0f0;">　　偶尔出现:如果偶尔出现此类问题都是由于走线布局问题导致通讯受到电磁干扰,请优化通讯线路布局,如避开变压器等强电磁元件,特别是通讯线长了一定要剪掉通讯线多余长度,不要硬塞到里面(优化走线后都能解决此类问题,如任然不行还可以从蓝牙板负极(黑线)接一条线到电源模块的CAN通讯芯片负极上以提高抗干扰能力)</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP2" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP2" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=2}}"></view>
             <view class="close" hidden="{{PG==2}}"></view>
         </view>
-        <button bindtap="HELP2" class="DisTIP" style="width: 100%;">{{'显示"充电器输出异常"'}}</button>
+        <button bindtap="HELP2" class="DisTIP" style="width:100%;">{{'显示"充电器输出异常"'}}</button>
     </view>
     <view style="display:{{PG==2?'block':'none'}}">
-        <view class="tip2" style="color: #fa0;">异常原因:</view>
-        <view class="tip2" style="color: #fa0;">　　蓝牙板通过CAN协议读取不到输出电压</view>
+        <view class="tip2" style="color:#fa0;">异常原因:</view>
+        <view class="tip2" style="color:#fa0;">　　蓝牙板通过CAN协议读取不到输出电压</view>
         <view style="height:15px;"></view>
-        <view class="tip2" style="color: #0f0;">解决方法:</view>
-        <view class="tip2" style="color: #0f0;">　　万用表检查充电器是否有正常的输出电压,如无输出则充电器故障,有输出请检查电源协议设置是否设置正确</view>
+        <view class="tip2" style="color:#0f0;">解决方法:</view>
+        <view class="tip2" style="color:#0f0;">　　万用表检查充电器是否有正常的输出电压,如无输出则充电器故障,有输出请检查电源协议设置是否设置正确</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP4" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP4" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=4}}"></view>
             <view class="close" hidden="{{PG==4}}"></view>
         </view>
-        <button bindtap="HELP4" class="DisTIP" style="width: 100%;">{{'正常连接后不定时闪退'}}</button>
+        <button bindtap="HELP4" class="DisTIP" style="width:100%;">{{'正常连接后不定时闪退'}}</button>
     </view>
     <view style="display:{{PG==4?'block':'none'}}">
-        <view class="tip2" style="color: #fa0;">异常原因:</view>
-        <view class="tip2" style="color: #fa0;">　　充电器和手机之间的蓝牙通讯被干扰导致连接中断</view>
+        <view class="tip2" style="color:#fa0;">异常原因:</view>
+        <view class="tip2" style="color:#fa0;">　　充电器和手机之间的蓝牙通讯被干扰导致连接中断</view>
         <view style="height:15px;"></view>
-        <view class="tip2" style="color: #0f0;">解决方法:</view>
-        <view class="tip2" style="color: #0f0;">　　充电器在大电流的是时候电磁干扰是很大的,CNC壳子的充电器更容易出现此类故障,请尽量靠近充电器前端进行连接设置,还有此类问题走线布局不好或者电源变压器漏磁太大或者输出电容滤波效果不佳都有可能,可以更换变压器或电容和优化走线尝试(信号线尽量避开变压器电感等强电磁元件然后靠近边框走,边框铁或者铝合金都可以反射电磁波减少干扰,而且越短越好,所以如有多余请剪掉)</view>
+        <view class="tip2" style="color:#0f0;">解决方法:</view>
+        <view class="tip2" style="color:#0f0;">　　充电器在大电流的是时候电磁干扰是很大的,CNC壳子的充电器更容易出现此类故障,请尽量靠近充电器前端进行连接设置,还有此类问题走线布局不好或者电源变压器漏磁太大或者输出电容滤波效果不佳都有可能,可以更换变压器或电容和优化走线尝试(信号线尽量避开变压器电感等强电磁元件然后靠近边框走,边框铁或者铝合金都可以反射电磁波减少干扰,而且越短越好,所以如有多余请剪掉)</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP5" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP5" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=5}}"></view>
             <view class="close" hidden="{{PG==5}}"></view>
         </view>
-        <button bindtap="HELP5" class="DisTIP" style="width: 100%;">{{'有没有APP下载'}}</button>
+        <button bindtap="HELP5" class="DisTIP" style="width:100%;">{{'有没有APP下载'}}</button>
     </view>
     <view style="display:{{PG==5?'block':'none'}}">
         <view class="btnLayout">
@@ -103,36 +147,36 @@
             <button class="DisTIP1">百度网盘连接</button>
             <button bindtap="COPY2" class="DisINF1">复制连接</button>
         </view>
-        <view class="tip2" style="color: #0f0;">　　有的,但只有安卓APP,苹果手机就只有用小程序了,小程序会优先于APP更新,而且大部分用户反馈说苹果手机连接比安卓手机稳定,安卓用户点击"复制连接"后打开浏览器粘贴进去下载,天翼网盘下载比较快,百度网盘嘛就是充钱就快</view>
+        <view class="tip2" style="color:#0f0;">　　有的,但只有安卓APP,苹果手机就只有用小程序了,小程序会优先于APP更新,而且大部分用户反馈说苹果手机连接比安卓手机稳定,安卓用户点击"复制连接"后打开浏览器粘贴进去下载,天翼网盘下载比较快,百度网盘嘛就是充钱就快</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP6" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP6" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=6}}"></view>
             <view class="close" hidden="{{PG==6}}"></view>
         </view>
-        <button bindtap="HELP6" class="DisTIP" style="width: 100%;">{{'为什么评分都说是很差'}}</button>
+        <button bindtap="HELP6" class="DisTIP" style="width:100%;">{{'为什么评分都说是很差'}}</button>
     </view>
     <view style="display:{{PG==6?'block':'none'}}">
-        <view class="tip2" style="color: #0f0;">　　其实这就是典型的幸存者偏见了,截至2024-07-05已经有2.5万用户了(来自微信小程序的官方后台数据,每个用户进入了这个小程序就算,同一用户多次进入不算),然后其实大部分人都是正常使用的,小程序这边也经常在做优化,但是也不能避免少数个别会出现问题,而正常使用的人基本不会去给好评说好用的,这很正常,但是有问题了就很容易去说不好用了.....</view>
+        <view class="tip2" style="color:#0f0;">　　其实这就是典型的幸存者偏见了,截至2024-07-05已经有2.5万用户了(来自微信小程序的官方后台数据,每个用户进入了这个小程序就算,同一用户多次进入不算),然后其实大部分人都是正常使用的,小程序这边也经常在做优化,但是也不能避免少数个别会出现问题,而正常使用的人基本不会去给好评说好用的,这很正常,但是有问题了就很容易去说不好用了.....</view>
         <view style="height:15px;"></view>
     </view>
 </view>
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
-        <view bindtap="HELP7" style="width: 20px; background-color: #88888850;">
+        <view bindtap="HELP7" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=7}}"></view>
             <view class="close" hidden="{{PG==7}}"></view>
         </view>
-        <button bindtap="HELP7" class="DisTIP" style="width: 65%;">{{'虚拟体验设备'}}</button>
-        <button bindtap="TEST" class="DisINF" style="width: 35%;">进入</button>
+        <button bindtap="HELP7" class="DisTIP" style="width:65%;">{{'虚拟体验设备'}}</button>
+        <button bindtap="TEST" class="DisINF" style="width:35%;">进入</button>
     </view>
     <view style="display:{{PG==7?'block':'none'}}">
-        <view class="tip2" style="color: #0f0;">　　在没有充电器设备的情况下体验或测试小程序所用,只能查看页面及功能,修改参数无效</view>
+        <view class="tip2" style="color:#0f0;">　　在没有充电器设备的情况下体验或测试小程序所用,只能查看页面及功能,修改参数无效</view>
         <view style="height:15px;"></view>
     </view>
 </view>

@@ -72,5 +72,15 @@ Page({
       PG: 11 != this.data.PG ? 11 : -1
     })
   },
+  HELP12: function (t) {
+    this.setData({
+      PG: 12 != this.data.PG ? 12 : -1
+    })
+  },
+  HELP13: function (t) {
+    this.setData({
+      PG: 13 != this.data.PG ? 13 : -1
+    })
+  },
   onLoad: function (t) {}
 });
