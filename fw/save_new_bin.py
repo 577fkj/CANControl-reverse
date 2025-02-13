@@ -4,6 +4,7 @@ import os
 url = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin'
 new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=NewUI.bin'
 test_new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=NewTest.bin'
+test2_new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=Test2.bin'
 
 devid = 'https://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=DEVID.bin'
 
@@ -46,31 +47,39 @@ def download_bin(bin_id, next_bin = None):
 def download_test_new_ui(bin_id, next_bin = None):
     return download(test_new_ui, 'NewTest', 'bin_test', bin_id, next_bin)
 
+def download_test2_new_ui(bin_id, next_bin = None):
+    return download(test2_new_ui, 'Test2', 'bin_test2', bin_id, next_bin)
+
 def download_devid(bin_id, next_bin = None):
     return download(devid, 'DEVID', 'devid', bin_id, next_bin, False)
 
 new_files = os.listdir('bin_new')
 test_files = os.listdir('bin_test')
+test2_files = os.listdir('bin_test2')
 files = os.listdir('bin')
 devid_files = os.listdir('devid')
 
 new_files = [int(f.split('_')[0]) for f in new_files]
 test_files = [int(f.split('_')[0]) for f in test_files]
+test2_files = [int(f.split('_')[0]) for f in test2_files]
 files = [int(f.split('_')[0]) for f in files]
 devid_files = [int(f.split('_')[0]) for f in devid_files]
 
 new_files.sort()
 test_files.sort()
+test2_files.sort()
 files.sort()
 devid_files.sort()
 
 new_start = new_files[-1] if new_files else 1
 test_start = test_files[-1] if test_files else 1
+test2_start = test2_files[-1] if test2_files else 1
 start = files[-1] if files else 1
 devid_start = devid_files[-1] if devid_files else 1
 
 print(f'New start: {new_start}')
 print(f'Test start: {test_start}')
+print(f'Test2 start: {test2_start}')
 print(f'Bin start: {start}')
 print(f'Devid start: {devid_start}')
 
@@ -87,6 +96,11 @@ for i in range(new_start, 999):
 for i in range(test_start, 999):
     if not download_test_new_ui(i):
         download_test_new_ui('', i)
+        break
+
+for i in range(test2_start, 999):
+    if not download_test2_new_ui(i):
+        download_test2_new_ui('', i)
         break
 
 for i in range(devid_start, 999):
