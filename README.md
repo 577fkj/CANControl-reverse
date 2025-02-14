@@ -92,6 +92,15 @@
 | IO16  | D/C  |
 | IO14  | BLK  |
 
+### LCD Touch CST816
+
+| ESP32 | LCD |
+| ----- | --- |
+| IO26  | SDA |
+| IO25  | SCL |
+| IO32  | RST |
+| IO27  | INT |
+
 ### CAN
 
 | ESP32 | CAN |
@@ -115,6 +124,12 @@ Low level trigger
 | ----- | -------- |
 | IO27  | PCB      |
 | IO13  | FAN PCB  |
+
+### NTC
+
+- IO38
+- IO33
+- IO35
 
 ## Tips
 
