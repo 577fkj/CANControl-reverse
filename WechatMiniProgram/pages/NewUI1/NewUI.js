@@ -1,278 +1,250 @@
-var t, e, a, n, i, o, r, s, c, f, u, F, S, h, l, d, C, B, E, g, T, p, D, A, m, G, w, v, b, O, I, x, M, N, U, R, W, P, V, L, K, y, $, k, Y, H, j, _, q, z, Z, Q, J, X, tt, et, at, nt, it, ot, rt, st, ct, ft, ut, Ft, St, ht, lt, dt, Ct, Bt, Et, gt, Tt, pt, Dt, At, mt, Gt, wt, vt, bt, Ot, It, xt, Mt, Nt, Ut, Rt, Wt = require("../../@babel/runtime/helpers/regeneratorRuntime"),
-  Pt = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  Vt = require("../../B90FE0219E166AAFDF69882689C18510.js"),
-  Lt = require("../../AF3078509E166AAFC956105707D18510.js"),
-  Kt = 10,
-  yt = 0,
-  $t = 0,
-  kt = 0,
-  Yt = 0,
-  Ht = 0,
-  jt = "设备连接成功",
-  _t = 0,
-  qt = 30,
-  zt = "欢迎使用",
-  Zt = "1,27,30,欢迎",
-  Qt = "1,57,30,使用",
-  Jt = 0,
-  Xt = "ff",
-  te = "ff",
-  ee = "ff",
-  ae = ["/img/bc1.gif", "", "", "", ""],
+var t, e, a, n, i, r, o, s, c, f, u, F, S, h, l, C, d, g, B, T, E, p, D, m, A, G, w, v, b, O, I, U, x, N, M, V, W, R, P, L, K, y, k, $, Y, H, j, _, z, Z, q, Q, J, X, tt, et, at, nt, it, rt, ot, st, ct, ft, ut, Ft, St, ht, lt, Ct, dt, gt, Bt, Tt, Et, pt, Dt, mt, At, Gt, wt, vt, bt, Ot, It, Ut, xt, Nt, Mt, Vt, Wt, Rt, Pt, Lt, Kt, yt, kt, $t, Yt, Ht, jt, _t, zt = require("../../@babel/runtime/helpers/regeneratorRuntime"),
+  Zt = require("../../@babel/runtime/helpers/asyncToGenerator"),
+  qt = require("../../4E08A4649E166AAF286ECC635736D4C0.js"),
+  Qt = require("../../1C192C069E166AAF7A7F4401A546D4C0.js"),
+  Jt = 10,
+  Xt = 0,
+  te = 0,
+  ee = 0,
+  ae = 0,
   ne = 0,
-  ie = "80",
-  oe = 0,
-  re = wx,
-  se = "#ffffff",
-  ce = ["1", "2", "3", "4"],
-  fe = ["模块 保护", "风机 异常", "输入 欠压", "输入 过压", "输入 停电", "温度 异常", "模块 故障", "输出 过流", "输出 欠压", "输出 过压", "输出 短路", "模块 关机"],
-  ue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  ie = "设备连接成功",
+  re = 0,
+  oe = 30,
+  se = 1,
+  ce = "欢迎使用",
+  fe = "1,27,30,欢迎",
+  ue = "1,57,30,使用",
+  Fe = 0,
+  Se = "ff",
+  he = "ff",
+  le = "ff",
+  Ce = ["/img/bc1.gif", "", "", "", ""],
+  de = 0,
+  ge = "80",
+  Be = 0,
+  Te = wx,
+  Ee = "#ffffff",
+  pe = ["1", "2", "3", "4"],
+  De = ["模块 保护", "风机 异常", "输入 欠压", "输入 过压", "输入 停电", "温度 异常", "模块 故障", "输出 过流", "输出 欠压", "输出 过压", "输出 短路", "模块 关机"],
+  me = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-function Fe(t, e) {
+function Ae(t, e) {
   var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : function () {};
-  re.showModal({
+  Te.showModal({
     title: t,
     editable: true,
     placeholderText: e,
-    confirmText: N ? "YES" : "确定",
-    cancelText: N ? "NO" : "取消",
+    confirmText: k ? "YES" : "确定",
+    cancelText: k ? "NO" : "取消",
     success: function (t) {
       t.confirm && a(t.content)
     }
   })
 }
 
-function Se(t, e, a, n) {
+function Ge(t, e, a, n) {
   var i = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : function () {};
-  re.showModal({
-    title: N ? e : t,
+  Te.showModal({
+    title: k ? e : t,
     editable: true,
-    placeholderText: (N ? "Range:" : "范围:") + a + "-" + n,
-    confirmText: N ? "YES" : "确定",
-    cancelText: N ? "NO" : "取消",
+    placeholderText: (k ? "Range:" : "范围:") + a + "-" + n,
+    confirmText: k ? "YES" : "确定",
+    cancelText: k ? "NO" : "取消",
     success: function (t) {
       if (t.confirm) {
         var e = parseFloat(t.content);
-        if ((e > Number(n) || e < Number(a) || !isFinite(e)) && 2 != Yt) return void(0, Vt.Toast)(N ? "Beyond the set range!" : "超出设置范围!");
+        if ((e > Number(n) || e < Number(a) || !isFinite(e)) && 2 != ae) return void(0, qt.Toast)(k ? "Beyond the set range!" : "超出设置范围!");
         i(e)
       }
     }
   })
 }
 
-function he(t, e, a, n) {
+function we(t, e, a, n) {
   var i = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : function () {};
-  re.showModal({
-    title: N ? e : t,
+  Te.showModal({
+    title: k ? e : t,
     editable: true,
-    placeholderText: N ? n : a,
-    confirmText: N ? "YES" : "确定",
-    cancelText: N ? "NO" : "取消",
+    placeholderText: k ? n : a,
+    confirmText: k ? "YES" : "确定",
+    cancelText: k ? "NO" : "取消",
     success: function (t) {
       if (t.confirm) {
         var e = t.content.trim();
-        if ("" == e) return void(0, Vt.Toast)(N ? "Input Cannot Be Empty!" : "输入不能为空!");
+        if ("" == e) return void(0, qt.Toast)(k ? "Input Cannot Be Empty!" : "输入不能为空!");
         i(e)
       }
     }
   })
 }
 
-function le(t, e) {
+function ve(t, e) {
   var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "",
     n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : "",
     i = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : function () {};
-  re.showModal({
-    title: N ? e : t,
-    content: N ? n : a,
-    confirmText: N ? "YES" : "确定",
-    cancelText: N ? "NO" : "取消",
+  Te.showModal({
+    title: k ? e : t,
+    content: k ? n : a,
+    confirmText: k ? "YES" : "确定",
+    cancelText: k ? "NO" : "取消",
     success: function (t) {
       t.confirm && i(t)
     }
   })
 }
 
-function de(t) {
+function be(t) {
   return t.match(/#(..)(..)(..)/), ((parseInt(RegExp.$1, 16) >> 3 << 11) + (parseInt(RegExp.$2, 16) >> 2 << 5) + (parseInt(RegExp.$3, 16) >> 3)).toString(16).padStart(4, "0")
 }
 
-function Ce(t) {
+function Oe(t) {
   var e = Math.floor(t / 3600),
     a = Math.floor(t % 3600 / 60),
     n = Math.floor(t % 60);
   return String(e).padStart(2, "0") + ":" + String(a).padStart(2, "0") + ":" + String(n).padStart(2, "0")
 }
 
-function Be(t) {
-  return Ee.apply(this, arguments)
+function Ie(t) {
+  return Ue.apply(this, arguments)
 }
 
-function Ee() {
-  return (Ee = Pt(Wt().mark((function t(e) {
-    return Wt().wrap((function (t) {
+function Ue() {
+  return (Ue = Zt(zt().mark((function t(e) {
+    return zt().wrap((function (t) {
       for (;;) switch (t.prev = t.next) {
         case 0:
-          if (0 == Te) {
-            t.next = 3;
+          if (1 == ee && console.log("Send", e), 0 == Ne) {
+            t.next = 4;
             break
           }
-          return (0, Vt.Toast)(N ? "There Are Unfinished Sending Tasks" : "有发送任务未完成"), t.abrupt("return");
-        case 3:
-          return e = e.substring(0, 40), t.next = 6, Lt.easySendData1(e, true);
-        case 6:
+          return (0, qt.Toast)(k ? "There Are Unfinished Sending Tasks" : "有发送任务未完成"), t.abrupt("return");
+        case 4:
+          return e = e.substring(0, 40), t.next = 7, Qt.easySendData1(e, true);
+        case 7:
         case "end":
           return t.stop()
       }
     }), t)
   })))).apply(this, arguments)
 }
-var ge = [""],
-  Te = 0;
+var xe = [""],
+  Ne = 0;
 
-function pe(t) {
-  var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
-  0 == Te ? re.showModal({
-    title: N ? "Confirm Whether To Send" : "确认是否发送",
+function Me(t) {
+  var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0,
+    a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 0;
+  0 == Ne ? Te.showModal({
+    title: k ? "Confirm Whether To Send" : "确认是否发送",
     editable: false,
-    confirmText: N ? "YES" : "确定",
-    cancelText: N ? "NO" : "取消",
-    success: function (a) {
-      if (a.confirm) {
-        t.match(/DataStart=([^{]+){(.+)}(DataEnd)/), Te = 0, (ge = [])[0] = "F1" + Ge(RegExp.$1);
-        for (var n = e ? RegExp.$2 : Ae(RegExp.$2), i = 0; i < n.length; i += 240) Te++, ge[Te] = "F2" + n.slice(i, i + 240);
-        ge[ge.length] = "F3", Te = 0, De()
+    confirmText: k ? "YES" : "确定",
+    cancelText: k ? "NO" : "取消",
+    success: function (n) {
+      if (n.confirm) {
+        t.match(/DataStart=([^{]+){(.+)}(DataEnd)/), Ne = 0, (xe = [])[0] = "F1" + (a ? RegExp.$1 : Re(RegExp.$1));
+        for (var i = e ? RegExp.$2 : We(RegExp.$2), r = 0; r < i.length; r += 240) Ne++, xe[Ne] = "F2" + i.slice(r, r + 240);
+        xe[xe.length] = "F3", Ne = 0, Ve()
       }
     }
-  }) : (0, Vt.Toast)(N ? "There Are Unfinished Sending Tasks" : "有发送任务未完成")
+  }) : (0, qt.Toast)(k ? "There Are Unfinished Sending Tasks" : "有发送任务未完成")
 }
 
-function De(t) {
-  var e = ge[Te];
-  Lt.easySendData1(e, true), (0, Vt.Toast)((N ? "Sending:" : "发送进度:") + (Te / ge.length * 100).toFixed(2) + "%"), Te++
+function Ve(t) {
+  var e = xe[Ne];
+  Qt.easySendData1(e, true), (0, qt.Toast)((k ? "Sending:" : "发送进度:") + (Ne / xe.length * 100).toFixed(2) + "%"), Ne++
 }
 
-function Ae(t) {
+function We(t) {
   if (!t) return t;
-  var e, a, n, i, o, r, s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+  var e, a, n, i, r, o, s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
     c = 0,
     f = 0,
     u = [];
   t += "";
   do {
-    e = (r = s.indexOf(t.charAt(c++)) << 18 | s.indexOf(t.charAt(c++)) << 12 | (i = s.indexOf(t.charAt(c++))) << 6 | (o = s.indexOf(t.charAt(c++)))) >> 16 & 255, a = r >> 8 & 255, n = 255 & r, u[f++] = 64 === i ? e.toString(16).padStart(2, "0") : 64 === o ? e.toString(16).padStart(2, "0") + a.toString(16).padStart(2, "0") : e.toString(16).padStart(2, "0") + a.toString(16).padStart(2, "0") + n.toString(16).padStart(2, "0")
+    e = (o = s.indexOf(t.charAt(c++)) << 18 | s.indexOf(t.charAt(c++)) << 12 | (i = s.indexOf(t.charAt(c++))) << 6 | (r = s.indexOf(t.charAt(c++)))) >> 16 & 255, a = o >> 8 & 255, n = 255 & o, u[f++] = 64 === i ? e.toString(16).padStart(2, "0") : 64 === r ? e.toString(16).padStart(2, "0") + a.toString(16).padStart(2, "0") : e.toString(16).padStart(2, "0") + a.toString(16).padStart(2, "0") + n.toString(16).padStart(2, "0")
   } while (c < t.length);
   return u.join("")
 }
 
-function me() {
-  0 == t.data.UI && Jt >= 10 && (Jt = 0), 1 == t.data.UI && Jt < 10 && (Jt = 10), 0 == Jt ? t.setData({
-    Cr0: "#" + Xt + te + ee
-  }) : 1 == Jt ? t.setData({
-    Cr1: "#" + Xt + te + ee
-  }) : 2 == Jt ? t.setData({
-    Cr2: "#" + Xt + te + ee
-  }) : 3 == Jt ? t.setData({
-    Cr3: "#" + Xt + te + ee
-  }) : 4 == Jt ? t.setData({
-    Cr4: "#" + Xt + te + ee
-  }) : 5 == Jt ? t.setData({
-    Cr5: "#" + Xt + te + ee
-  }) : 6 == Jt ? t.setData({
-    Cr6: "#" + Xt + te + ee
-  }) : 7 == Jt ? t.setData({
-    Cr7: "#" + Xt + te + ee
-  }) : 8 == Jt ? t.setData({
-    Cr8: "#" + Xt + te + ee
-  }) : 10 == Jt ? t.setData({
-    Cr10: "#" + Xt + te + ee
-  }) : 11 == Jt ? t.setData({
-    Cr11: "#" + Xt + te + ee
-  }) : 12 == Jt ? t.setData({
-    Cr12: "#" + Xt + te + ee
-  }) : 13 == Jt ? t.setData({
-    Cr13: "#" + Xt + te + ee
-  }) : 14 == Jt ? t.setData({
-    Cr14: "#" + Xt + te + ee
-  }) : 15 == Jt ? t.setData({
-    Cr15: "#" + Xt + te + ee
-  }) : 16 == Jt ? t.setData({
-    Cr16: "#" + Xt + te + ee
-  }) : 17 == Jt && t.setData({
-    Cr17: "#" + Xt + te + ee
-  })
-}
-
-function Ge(t) {
+function Re(t) {
   var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
   t = String(t);
   for (var a = "", n = 0; n < t.length; n++) a += t.charCodeAt(n).toString(16).padStart(2, "0");
   return e && (a = a.padEnd(2 * e, "0")), a
 }
 
-function we(t) {
+function Pe(t) {
   for (var e = "", a = 0, n = "", i = 0; i < t.length / 2; i++) {
-    var o = t.substr(2 * i, 2),
-      r = parseInt(o, 16);
-    a && r ? (n += "%" + o, (a -= 1) || (e += decodeURIComponent(n), n = "")) : r >= 224 & r <= 239 ? (n += "%" + o, a = 2) : r && (e += String.fromCharCode(r))
+    var r = t.substr(2 * i, 2),
+      o = parseInt(r, 16);
+    if (0 == o) break;
+    a && o ? (n += "%" + r, (a -= 1) || (e += decodeURIComponent(n), n = "")) : o >= 224 & o <= 239 ? (n += "%" + r, a = 2) : o && (e += String.fromCharCode(o))
   }
   return e
 }
 
-function ve(t) {
+function Le(t) {
   return Math.floor(100 * t).toString(16).padStart(8, "0")
 }
 
-function be(t) {
+function Ke(t) {
   return Math.floor(t).toString(16).padStart(4, "0")
 }
 
-function Oe(t) {
+function ye(t) {
   return Math.floor(t).toString(16).padStart(2, "0")
 }
 
-function Ie(t, e) {
+function ke(t, e) {
+  var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 2,
+    n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 0,
+    i = t.getFloat32(e, true).toFixed(a);
+  return n ? parseFloat(i) : i
+}
+
+function $e(t, e) {
   var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 0,
     n = (.01 * parseInt(t.substring(e, e + 8), 16)).toFixed(2);
   return a ? parseFloat(n) : n
 }
 
-function xe(t, e) {
+function Ye(t, e) {
   return parseInt(t.substring(e, e + 2), 16)
 }
 
-function Me(t) {
+function He(t) {
   for (var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 2, a = 0, n = 0; n < 12; n++)
-    if (fe[n] == t) {
-      ue[n] = e, a = 1;
+    if (De[n] == t) {
+      me[n] = e, a = 1;
       break
     } if (!a && e)
     for (var i = 1; i < 11; i++)
-      if (6 != i && 0 == ue[i]) {
-        fe[i] = t, ue[i] = e;
+      if (6 != i && 0 == me[i]) {
+        De[i] = t, me[i] = e;
         break
       }
 }
 Page({
   data: {
     nbsp: "　",
-    Cr0: se,
+    Cr0: Ee,
     Cr1: "#00ff00",
     Cr2: "#00c8ff",
-    Cr3: se,
+    Cr3: Ee,
     Cr4: "#60ffc8",
-    Cr5: se,
+    Cr5: Ee,
     Cr6: "#ff9430",
     Cr7: "#f80ca0",
-    Cr8: se,
-    Cr10: se,
+    Cr8: Ee,
+    Cr10: Ee,
     Cr11: "#00ff00",
     Cr12: "#00c8ff",
     Cr13: "#ff9430",
     Cr14: "#60ffc8",
-    Cr15: se,
+    Cr15: Ee,
     Cr16: "#f80ca0",
-    Cr17: se,
+    Cr17: Ee,
     Cri: 0,
     CR: 255,
     CG: 255,
@@ -281,6 +253,7 @@ Page({
     CG1: 0,
     CB1: 0,
     CT1: 160,
+    Crs: 1,
     LOGO: "欢迎使用",
     LOGO1: "1,27,30,欢迎",
     LOGO2: "1,57,30,使用",
@@ -487,11 +460,21 @@ Page({
       ShowBar: 26 != this.data.ShowBar ? 26 : -1
     })
   },
+  BTUCF: function (t) {
+    this.setData({
+      ShowBar: 27 != this.data.ShowBar ? 27 : -1
+    })
+  },
+  BTKT: function (t) {
+    this.setData({
+      ShowBar: 28 != this.data.ShowBar ? 28 : -1
+    })
+  },
   uset: function (t) {
-    Be("FF01"), (2 == Ht || Yt) && this.setData({
-      Panel: Yt ? 2 : 3,
-      ShowBar: Yt ? 0 : Kt < Number("5.39") ? 4 : 25,
-      LOGO: N ? "Preview" : "预览"
+    Ie("FF01"), (2 == ne || ae) && this.setData({
+      Panel: ae ? 2 : 3,
+      ShowBar: ae ? 0 : Jt < Number("5.40") ? 4 : 25,
+      LOGO: k ? "Preview" : "预览"
     })
   },
   SetSM: function (t) {
@@ -499,37 +482,37 @@ Page({
       ShowM: 1
     }) : (this.data.ShowM, this.setData({
       ShowM: 0
-    })), (0, Vt.SetCFG)("ShowM", this.data.ShowM)
+    })), (0, qt.SetCFG)("ShowM", this.data.ShowM)
   },
   BTGPWD: function (t) {
-    he("设置系统密码", "Set System password", "最多18个字符", "Up to 18 characters", (function (t) {
-      Be("FA75" + Ge(t))
+    we("设置系统密码", "Set System password", "最多18个字符", "Up to 18 characters", (function (t) {
+      Ie("FA75" + Re(t))
     }))
   },
   BTRST: function (t) {
-    le("确认是否重置设置", "Confirm whether to restart control", "将会清除所有图片和设置", "All images and settings will be cleared", (function (t) {
-      Be("F60100"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否重置设置", "Confirm whether to restart control", "将会清除所有图片和设置", "All images and settings will be cleared", (function (t) {
+      Ie("F60100"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTRST1: function (t) {
-    le("异常修复确认", "Abnormal repair confirmation", "异常修复会检测并重置掉某些设置并重启", "Exception repair will detect and reset certain settings", (function (t) {
-      Be("F60001"), (0, Vt.Toast)(N ? "Repair completed, device is restarting!" : "修复完成,设备正在重启!"), re.navigateBack({
+    ve("异常修复确认", "Abnormal repair confirmation", "异常修复会检测并重置掉某些设置并重启", "Exception repair will detect and reset certain settings", (function (t) {
+      Ie("F60001"), (0, qt.Toast)(k ? "Repair completed, device is restarting!" : "修复完成,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTRstart: function (t) {
-    le("确认是否重启设备", "Confirm whether to restart the device", "", "", (function (t) {
-      Be("F001"), (0, Vt.Toast)(N ? "The device is restarting" : "设备正在重启!"), re.navigateBack({
+    ve("确认是否重启设备", "Confirm whether to restart the device", "", "", (function (t) {
+      Ie("F001"), (0, qt.Toast)(k ? "The device is restarting" : "设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTClean: function (t) {
-    le("确认是否清除数据", "Confirm whether to clear data", "将会清零累计安时瓦时和工作时间", "Accumulated ampere hours, watt hours, and working hours will be reset to zero", (function (t) {
-      Be("AA01"), (0, Vt.Toast)(N ? "Data cleared to zero" : "数据已清零!"), re.navigateBack({
+    ve("确认是否清除数据", "Confirm whether to clear data", "将会清零累计安时瓦时和工作时间", "Accumulated ampere hours, watt hours, and working hours will be reset to zero", (function (t) {
+      Ie("AA01"), (0, qt.Toast)(k ? "Data cleared to zero" : "数据已清零!"), Te.navigateBack({
         delta: 0
       })
     }))
@@ -540,260 +523,265 @@ Page({
     })
   },
   DST1: function (t) {
-    Be("AC00"), Be("FF18")
+    Ie("AC00"), Ie("FF18")
   },
   DST2: function (t) {
-    Be("AC01"), Be("FF18")
+    Ie("AC01"), Ie("FF18")
   },
   DST3: function (t) {
-    Be("AC02"), Be("FF18")
+    Ie("AC02"), Ie("FF18")
   },
   DST4: function (t) {
-    Be("AC03"), Be("FF18")
+    Ie("AC03"), Ie("FF18")
+  },
+  BTKT1: function (t) {
+    Ie("A4" + ye(1 - H))
   },
   BTSMW1: function (t) {
     this.setData({
       ShowBar: 18
-    }), Se("设置输出最大功率", "Set maximum output power", "500", "10000", (function (t) {
-      Be("F84E" + ve(t)), Be("F84D" + ve(t)), Be("FF12")
+    }), Ge("设置输出最大功率", "Set maximum output power", "500", "10000", (function (t) {
+      Ie("F84E" + Le(t)), Ie("F84D" + Le(t)), Ie("FF12")
     }))
   },
-  BTLOGO0: function (e) {
-    if ("预览" == t.data.LOGO || "Preview" == t.data.LOGO) re.showToast({
+  BTLOGO0: function (t) {
+    if ("预览" == a.data.LOGO || "Preview" == a.data.LOGO) Te.showToast({
       content: "正在生成预览",
       title: "正在生成预览",
       type: "loading",
       icon: "loading",
       duration: 46e5,
       mask: true
-    }), t.SetLOGO(Zt + "|" + Qt, t);
-    else if ("发送" == t.data.LOGO || "Send" == t.data.LOGO) {
-      return pe(n, 1), void Be("FAD2" + Ge(unescape(encodeURIComponent(zt))))
+    }), a.SetLOGO(fe + "|" + ue, a);
+    else if ("发送" == a.data.LOGO || "Send" == a.data.LOGO) {
+      return Me(o, 1), void Ie("FAD2" + Re(unescape(encodeURIComponent(ce))))
     }
-    t.setData({
+    a.setData({
       ShowBar: 20,
-      LOGO: N ? "Preview" : "预览"
+      LOGO: k ? "Preview" : "预览"
     })
   },
-  BTLOGO1: function (e) {
-    he("设置第一行LOGO", "Set the first line logo", Zt, Zt, (function (e) {
-      if (e.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) Zt = e;
-      else if (e.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) Zt = "1,27,30," + RegExp.$1, Qt = "1,57,30," + RegExp.$2;
+  BTLOGO1: function (t) {
+    we("设置第一行LOGO", "Set the first line logo", fe, fe, (function (t) {
+      if (t.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) fe = t;
+      else if (t.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) fe = "1,27,30," + RegExp.$1, ue = "1,57,30," + RegExp.$2;
       else {
-        if (!e.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, Vt.Toast)(N ? "Input format error" : "输入格式错误");
-        Zt = "1,27,30," + RegExp.$1
+        if (!t.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, qt.Toast)(k ? "Input format error" : "输入格式错误");
+        fe = "1,27,30," + RegExp.$1
       }
-      t.setData({
-        LOGO1: Zt,
-        LOGO2: Qt,
-        LOGO: N ? "Preview" : "预览"
+      a.setData({
+        LOGO1: fe,
+        LOGO2: ue,
+        LOGO: k ? "Preview" : "预览"
       })
     }))
   },
-  BTLOGO2: function (e) {
-    he("设置第二行LOGO", "Set second line logo", Qt, Qt, (function (e) {
-      if (e.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) Qt = e;
-      else if (e.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) Zt = "1,27,30," + RegExp.$1, Qt = "1,57,30," + RegExp.$2;
+  BTLOGO2: function (t) {
+    we("设置第二行LOGO", "Set second line logo", ue, ue, (function (t) {
+      if (t.match(/(^\d{1,2}),(\d{1,2}),(\d{1,2}),(.{1,10})$/)) ue = t;
+      else if (t.match(/^([\u4e00-\u9fa5]{2})([\u4e00-\u9fa5]{2})$/)) fe = "1,27,30," + RegExp.$1, ue = "1,57,30," + RegExp.$2;
       else {
-        if (!e.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, Vt.Toast)(N ? "Input format error" : "输入格式错误");
-        Qt = "1,57,30," + RegExp.$1
+        if (!t.match(/^([\u4e00-\u9fa5]{2})$/)) return void(0, qt.Toast)(k ? "Input format error" : "输入格式错误");
+        ue = "1,57,30," + RegExp.$1
       }
-      t.setData({
-        LOGO1: Zt,
-        LOGO2: Qt,
-        LOGO: N ? "Preview" : "预览"
+      a.setData({
+        LOGO1: fe,
+        LOGO2: ue,
+        LOGO: k ? "Preview" : "预览"
       })
     }))
   },
   BTLOGO3: function (t) {
-    Be("F9C0" + Oe(1 - pt)), Be("FF17")
+    Ie("F9C0" + ye(1 - xt)), Ie("FF17")
   },
   BTLOGO4: function (t) {
-    he("设置简约模式文字", "Set the first line logo", "最多6个汉字或者12个英文", Zt, (function (t) {
-      Be("FAD2" + Ge(t = unescape(encodeURIComponent(t)))), Be("F7")
+    we("设置简约模式文字", "Set the first line logo", "最多6个汉字或者12个英文", fe, (function (t) {
+      Ie("FAD2" + Re(t = unescape(encodeURIComponent(t)))), Ie("F7")
     }))
   },
   SetLOGO: function (t, e) {
-    re.createSelectorQuery().select("#LOGO").fields({
+    Te.createSelectorQuery().select("#LOGO").fields({
       node: true,
       size: true
     }).exec((function (a) {
-      var i = a[0].node,
-        o = i.getContext("2d");
-      i.width = 60, i.height = 60, o.fillStyle = "#000", o.scale(1, 1), o.fillRect(0, 0, 60, 60), o.fillStyle = "#fff";
+      var n = a[0].node,
+        i = n.getContext("2d");
+      n.width = 60, n.height = 60, i.fillStyle = "#000", i.scale(1, 1), i.fillRect(0, 0, 60, 60), i.fillStyle = "#fff";
       var r = t.split("|");
-      zt = "";
+      ce = "";
       for (var s = 0; s < r.length; s += 1) {
         var c = r[s].split(",");
-        zt += c[3];
+        ce += c[3];
         var f = c[0],
           u = c[1],
           F = c[2],
           S = c[3];
-        o.font = "normal " + F + "px Kaiti", o.fillText(S, f, u)
+        i.font = "normal " + F + "px Kaiti", i.fillText(S, f, u)
       }
       var h = [0],
         l = -1;
-      n = "DataStart=LOGO{";
-      for (var d = 0; d < 60; d += 1) {
-        for (var C = o.getImageData(0, d, 60, 1).data, B = 0; B < 60; B += 1) {
-          B % 8 == 0 && (B && (n += h[l].toString(16).padStart(2, "0")), l += 1);
-          var E = .299 * C[4 * B] + .587 * C[4 * B + 1] + .114 * C[4 * B + 2];
-          h[l] = h[l] >> 1, h[l] = h[l] | (E < 100 ? 0 : 128)
+      o = "DataStart=LOGO{";
+      for (var C = 0; C < 60; C += 1) {
+        for (var d = i.getImageData(0, C, 60, 1).data, g = 0; g < 60; g += 1) {
+          g % 8 == 0 && (g && (o += h[l].toString(16).padStart(2, "0")), l += 1);
+          var B = .299 * d[4 * g] + .587 * d[4 * g + 1] + .114 * d[4 * g + 2];
+          h[l] = h[l] >> 1, h[l] = h[l] | (B < 100 ? 0 : 128)
         }
-        n += (h[l] >> 4).toString(16).padStart(2, "0")
+        o += (h[l] >> 4).toString(16).padStart(2, "0")
       }
-      n += "}DataEnd", re.hideToast(), e.setData({
-        LOGO: N ? "Send" : "发送"
+      o += "}DataEnd", Te.hideToast(), e.setData({
+        LOGO: k ? "Send" : "发送"
       })
     }))
   },
   BTNTC1: function (t) {
-    Be("F962" + Oe(1 - lt)), Be("FF16")
+    Ie("F962" + ye(1 - Gt)), Ie("FF16")
   },
   BTCAN1: function (t) {
-    le("确认是否切换为华为", "Switch to Huawei", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      Be("FC530101"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否切换为华为", "Switch to Huawei", "将会清除所有设置", "All settings will be cleared", (function (t) {
+      Ie("FC530101"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN2: function (t) {
-    le("确认是否切换为英可瑞", "Switch to Increase", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      Be("FC530201"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否切换为英可瑞", "Switch to Increase", "将会清除所有设置", "All settings will be cleared", (function (t) {
+      Ie("FC530201"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN4: function (t) {
-    le("确认是否切换为中兴3000", "Switch to ZTE3000", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      Be("FC530401"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否切换为中兴3000", "Switch to ZTE3000", "将会清除所有设置", "All settings will be cleared", (function (t) {
+      Ie("FC530401"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN8: function (t) {
-    le("确认是否切换为英飞源", "Switch to Infy", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      Be("FC530801"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否切换为英飞源", "Switch to Infy", "将会清除所有设置", "All settings will be cleared", (function (t) {
+      Ie("FC530801"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN16: function (t) {
-    le("确认是否切换为EPS6020", "Switch to EPS6020", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      Be("FC531001"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否切换为EPS6020", "Switch to EPS6020", "将会清除所有设置", "All settings will be cleared", (function (t) {
+      Ie("FC531001"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTCAN32: function (t) {
-    le("确认是否切换为中兴4875", "Switch to ZTE4875", "将会清除所有设置", "All settings will be cleared", (function (t) {
-      if (2 == Yt) {
-        for (var e = parseInt(E, 16), a = e.toString(), n = 0, i = 0; i < a.length; i++) n += a.charCodeAt(i);
-        Be("C83F" + Math.floor(Math.floor(e / 611) * n).toString(16).slice(-6)), Be("FC532001")
-      } else Be("FC532001"), (0, Vt.Toast)(N ? "The device is restarting" : "重置已发送,设备正在重启!"), re.navigateBack({
+    ve("确认是否切换为中兴4875", "Switch to ZTE4875", "将会清除所有设置", "All settings will be cleared", (function (t) {
+      if (2 == ae) {
+        for (var e = parseInt(p, 16), a = e.toString(), n = 0, i = 0; i < a.length; i++) n += a.charCodeAt(i);
+        Ie("C83F" + Math.floor(Math.floor(e / 611) * n).toString(16).slice(-6)), Ie("FC532001")
+      } else Ie("FC532001"), (0, qt.Toast)(k ? "The device is restarting" : "重置已发送,设备正在重启!"), Te.navigateBack({
         delta: 0
       })
     }))
   },
   BTLEDK2: function (t) {
-    Se("设置关机屏幕亮度", "Set shutdown screen brightness", "0", "255", (function (t) {
-      Be("F968" + Oe(t)), Be("FF13")
+    Ge("设置关机屏幕亮度", "Set shutdown screen brightness", "0", "255", (function (t) {
+      Ie("F968" + ye(t)), Ie("FF13")
     }))
   },
   BTLEDK1: function (t) {
-    Se("设置开机屏幕亮度", "Set the brightness of the startup screen", "10", "255", (function (t) {
-      Be("F969" + Oe(t)), Be("FF13")
+    Ge("设置开机屏幕亮度", "Set the brightness of the startup screen", "10", "255", (function (t) {
+      Ie("F969" + ye(t)), Ie("FF13")
     }))
   },
   BTLEDKS1: function (t) {
-    Se("设置息屏时间", "Set screen rest time", "0", "255", (function (t) {
-      Be("F96D" + Oe(t)), Be("FF12")
+    Ge("设置息屏时间", "Set screen rest time", "0", "255", (function (t) {
+      Ie("F96D" + ye(t)), Ie("FF12")
     }))
   },
   BTLEDKS2: function (t) {
-    Se("设置息屏屏幕亮度", "Set the brightness of the breath screen", "0", "255", (function (t) {
-      Be("F96A" + Oe(t)), Be("FF13")
+    Ge("设置息屏屏幕亮度", "Set the brightness of the breath screen", "0", "255", (function (t) {
+      Ie("F96A" + ye(t)), Ie("FF13")
     }))
   },
   BTStart1: function (t) {
-    Se("设置初始页面时间", "Set initial page time", "3", "15", (function (t) {
-      Be("F96B" + Oe(t)), Be("FF12")
+    Ge("设置初始页面时间", "Set initial page time", "3", "15", (function (t) {
+      Ie("F96B" + ye(t)), Ie("FF12")
     }))
   },
   BTStart2: function (t) {
-    Be("F96C" + Oe(1 - K)), Be("FF12")
+    Ie("F96C" + ye(1 - Q)), Ie("FF12")
   },
   BTGIF1: function (t) {
-    Be("F96F" + Oe(1 - ct)), Be("FF15")
+    Ie("F96F" + ye(1 - Tt)), Ie("FF15")
   },
   BT_GIF1: function (t) {
-    pe((0, Vt.GetGIF)(1))
+    Me((0, qt.GetGIF)(1))
   },
   BT_GIF2: function (t) {
-    pe((0, Vt.GetGIF)(2))
+    Me((0, qt.GetGIF)(2))
   },
   BT_GIF3: function (t) {
-    pe((0, Vt.GetGIF)(3))
+    Me((0, qt.GetGIF)(3))
   },
   BT_GIF4: function (t) {
-    pe((0, Vt.GetGIF)(4))
+    Me((0, qt.GetGIF)(4))
   },
   BT_GIF5: function (t) {
-    pe((0, Vt.GetGIF)(5))
+    Me((0, qt.GetGIF)(5))
   },
-  BTUI: function (a) {
-    t.setData({
-      CVer: Kt.toFixed(2),
-      SCAN: M,
-      ID: E,
-      ACT: e
-    }), Be("F9C8" + Oe(1 - Nt)), Be("FF19")
+  BTUI: function (t) {
+    a.setData({
+      CVer: Jt.toFixed(2),
+      SCAN: y,
+      ID: p,
+      ACT: n
+    }), Ie("F9C8" + ye(1 - Yt)), Ie("FF19")
   },
-  Scr1: function (e) {
-    t.setData({
-      Cr0: se,
+  Scr1: function (t) {
+    se = 1, a.setData({
+      Cr0: Ee,
       Cr1: "#00ff00",
       Cr2: "#00c8ff",
-      Cr3: se,
+      Cr3: Ee,
       Cr4: "#60ffc8",
-      Cr5: se,
+      Cr5: Ee,
       Cr6: "#ff9430",
       Cr7: "#f80ca0",
-      Cr8: se,
-      Cr10: se,
+      Cr8: Ee,
+      Cr10: Ee,
       Cr11: "#00ff00",
       Cr12: "#00c8ff",
       Cr13: "#ff9430",
       Cr14: "#60ffc8",
-      Cr15: se,
+      Cr15: Ee,
       Cr16: "#f80ca0",
-      Cr17: se
+      Cr17: Ee,
+      Crs: se
     })
   },
-  Scr2: function (e) {
-    t.setData({
-      Cr0: se,
-      Cr1: se,
-      Cr2: se,
-      Cr3: se,
-      Cr4: se,
-      Cr5: se,
-      Cr6: se,
-      Cr7: se,
-      Cr8: se,
-      Cr10: se,
-      Cr11: se,
-      Cr12: se,
-      Cr13: se,
-      Cr14: se,
-      Cr15: se,
-      Cr16: se,
-      Cr17: se
+  Scr2: function (t) {
+    se = 2, a.setData({
+      Cr0: Ee,
+      Cr1: Ee,
+      Cr2: Ee,
+      Cr3: Ee,
+      Cr4: Ee,
+      Cr5: Ee,
+      Cr6: Ee,
+      Cr7: Ee,
+      Cr8: Ee,
+      Cr10: Ee,
+      Cr11: Ee,
+      Cr12: Ee,
+      Cr13: Ee,
+      Cr14: Ee,
+      Cr15: Ee,
+      Cr16: Ee,
+      Cr17: Ee,
+      Crs: se
     })
   },
-  Scr3: function (e) {
-    t.setData({
+  Scr3: function (t) {
+    se = 3, a.setData({
       Cr0: "#ffffff",
       Cr1: "#00ff00",
       Cr2: "#ffbbff",
@@ -810,302 +798,346 @@ Page({
       Cr14: "#aaeecc",
       Cr15: "#aaeecc",
       Cr16: "#eeccaa",
-      Cr17: "#bbeeff"
+      Cr17: "#bbeeff",
+      Crs: se
     })
   },
-  Scr4: function (e) {
-    t.setData({
-      Cr0: "#ffff00",
-      Cr1: "#00ffff",
-      Cr2: "#ff00aa",
-      Cr3: "#00ff00",
-      Cr4: "#ccaaff",
-      Cr5: "#00ff00",
-      Cr6: "#ff8000",
-      Cr7: "#ff0000",
-      Cr8: "#ffffff",
-      Cr10: "#00ffff",
-      Cr11: "#00ff00",
-      Cr12: "#0000ff",
-      Cr13: "#ff0000",
-      Cr14: "#ffff00",
-      Cr15: "#aaeecc",
-      Cr16: "#eeccaa",
-      Cr17: "#bbeeff"
+  Scr4: function (t) {
+    se = 0, a.setData({
+      Cr0: (0, qt.GetCFG)("Cr0", Ee),
+      Cr1: (0, qt.GetCFG)("Cr1", "#00ff00"),
+      Cr2: (0, qt.GetCFG)("Cr2", "#00c8ff"),
+      Cr3: (0, qt.GetCFG)("Cr3", Ee),
+      Cr4: (0, qt.GetCFG)("Cr4", "#60ffc8"),
+      Cr5: (0, qt.GetCFG)("Cr5", Ee),
+      Cr6: (0, qt.GetCFG)("Cr6", "#ff9430"),
+      Cr7: (0, qt.GetCFG)("Cr7", "#f80ca0"),
+      Cr8: (0, qt.GetCFG)("Cr8", Ee),
+      Cr10: (0, qt.GetCFG)("Cr10", Ee),
+      Cr11: (0, qt.GetCFG)("Cr11", "#00ff00"),
+      Cr12: (0, qt.GetCFG)("Cr12", "#00c8ff"),
+      Cr13: (0, qt.GetCFG)("Cr13", "#ff9430"),
+      Cr14: (0, qt.GetCFG)("Cr14", "#60ffc8"),
+      Cr15: (0, qt.GetCFG)("Cr15", Ee),
+      Cr16: (0, qt.GetCFG)("Cr16", "#f80ca0"),
+      Cr17: (0, qt.GetCFG)("Cr17", Ee),
+      Crs: se
     })
   },
-  BTCr1: function (e) {
-    0 == t.data.UI ? (Be("F53000" + de(this.data.Cr0) + "0000f01c"), Be("F53100" + de(this.data.Cr1) + "00209F26"), Be("F53200" + de(this.data.Cr2) + "00479F26"), Be("F53300" + de(this.data.Cr3) + "006e9F27"), Be("F53400" + de(this.data.Cr4) + "00969F3f"), Be("F53500" + de(this.data.Cr5) + "A3204d4d"), Be("F53600" + de(this.data.Cr6) + "50d64f1A"), Be("F53700" + de(this.data.Cr7) + "00d64f1A"), Be("F53801" + de(this.data.Cr8) + "A3774d68")) : 1 == t.data.UI && (Be("F52000" + de(this.data.Cr10) + "0000781c"), Be("F52100" + de(this.data.Cr11) + "001cf02e"), Be("F52200" + de(this.data.Cr12) + "004af02e"), Be("F52300" + de(this.data.Cr13) + "0078f02e"), Be("F52400" + de(this.data.Cr14) + "00a6f02e"), Be("F52500" + de(this.data.Cr15) + "7800781c"), Be("F52600" + de(this.data.Cr16) + "00d4781b"), Be("F52701" + de(this.data.Cr17) + "78d4781b"))
+  BTCr1: function (t) {
+    0 == a.data.UI ? (Ie("F53000" + be(this.data.Cr0) + "0000f01c"), Ie("F53100" + be(this.data.Cr1) + "00209F26"), Ie("F53200" + be(this.data.Cr2) + "00479F26"), Ie("F53300" + be(this.data.Cr3) + "006e9F27"), Ie("F53400" + be(this.data.Cr4) + "00969F3f"), Ie("F53500" + be(this.data.Cr5) + "A3204d4d"), Ie("F53600" + be(this.data.Cr6) + "50d64f1A"), Ie("F53700" + be(this.data.Cr7) + "00d64f1A"), Ie("F53801" + be(this.data.Cr8) + "A3774d68")) : 1 == a.data.UI && (Ie("F52000" + be(this.data.Cr10) + "0000781c"), Ie("F52100" + be(this.data.Cr11) + "001cf02e"), Ie("F52200" + be(this.data.Cr12) + "004af02e"), Ie("F52300" + be(this.data.Cr13) + "0078f02e"), Ie("F52400" + be(this.data.Cr14) + "00a6f02e"), Ie("F52500" + be(this.data.Cr15) + "7800781c"), Ie("F52600" + be(this.data.Cr16) + "00d4781b"), Ie("F52701" + be(this.data.Cr17) + "78d4781b"))
   },
   CK0: function (t) {
-    Jt = 0, this.CRSet(this.data.Cr0)
+    Fe = 0, this.CRSet(this.data.Cr0)
   },
   CK1: function (t) {
-    Jt = 1, this.CRSet(this.data.Cr1)
+    Fe = 1, this.CRSet(this.data.Cr1)
   },
   CK2: function (t) {
-    Jt = 2, this.CRSet(this.data.Cr2)
+    Fe = 2, this.CRSet(this.data.Cr2)
   },
   CK3: function (t) {
-    Jt = 3, this.CRSet(this.data.Cr3)
+    Fe = 3, this.CRSet(this.data.Cr3)
   },
   CK4: function (t) {
-    Jt = 4, this.CRSet(this.data.Cr4)
+    Fe = 4, this.CRSet(this.data.Cr4)
   },
   CK5: function (t) {
-    Jt = 5, this.CRSet(this.data.Cr5)
+    Fe = 5, this.CRSet(this.data.Cr5)
   },
   CK6: function (t) {
-    Jt = 6, this.CRSet(this.data.Cr6)
+    Fe = 6, this.CRSet(this.data.Cr6)
   },
   CK7: function (t) {
-    Jt = 7, this.CRSet(this.data.Cr7)
+    Fe = 7, this.CRSet(this.data.Cr7)
   },
   CK8: function (t) {
-    Jt = 8, this.CRSet(this.data.Cr8)
+    Fe = 8, this.CRSet(this.data.Cr8)
   },
   CK10: function (t) {
-    Jt = 10, this.CRSet(this.data.Cr10)
+    Fe = 10, this.CRSet(this.data.Cr10)
   },
   CK11: function (t) {
-    Jt = 11, this.CRSet(this.data.Cr11)
+    Fe = 11, this.CRSet(this.data.Cr11)
   },
   CK12: function (t) {
-    Jt = 12, this.CRSet(this.data.Cr12)
+    Fe = 12, this.CRSet(this.data.Cr12)
   },
   CK13: function (t) {
-    Jt = 13, this.CRSet(this.data.Cr13)
+    Fe = 13, this.CRSet(this.data.Cr13)
   },
   CK14: function (t) {
-    Jt = 14, this.CRSet(this.data.Cr14)
+    Fe = 14, this.CRSet(this.data.Cr14)
   },
   CK15: function (t) {
-    Jt = 15, this.CRSet(this.data.Cr15)
+    Fe = 15, this.CRSet(this.data.Cr15)
   },
   CK16: function (t) {
-    Jt = 16, this.CRSet(this.data.Cr16)
+    Fe = 16, this.CRSet(this.data.Cr16)
   },
   CK17: function (t) {
-    Jt = 17, this.CRSet(this.data.Cr17)
+    Fe = 17, this.CRSet(this.data.Cr17)
   },
   CRSet: function (t) {
-    t.match(/#(..)(..)(..)/), Xt = RegExp.$1, te = RegExp.$2, ee = RegExp.$3, this.setData({
-      CR: parseInt(Xt, 16),
-      CG: parseInt(te, 16),
-      CB: parseInt(ee, 16)
+    t.match(/#(..)(..)(..)/), Se = RegExp.$1, he = RegExp.$2, le = RegExp.$3, this.setData({
+      CR: parseInt(Se, 16),
+      CG: parseInt(he, 16),
+      CB: parseInt(le, 16)
     })
+  },
+  SetCr: function () {
+    0 == a.data.UI && Fe >= 10 && (Fe = 0), 1 == a.data.UI && Fe < 10 && (Fe = 10), 0 == Fe ? a.setData({
+      Cr0: "#" + Se + he + le
+    }) : 1 == Fe ? a.setData({
+      Cr1: "#" + Se + he + le
+    }) : 2 == Fe ? a.setData({
+      Cr2: "#" + Se + he + le
+    }) : 3 == Fe ? a.setData({
+      Cr3: "#" + Se + he + le
+    }) : 4 == Fe ? a.setData({
+      Cr4: "#" + Se + he + le
+    }) : 5 == Fe ? a.setData({
+      Cr5: "#" + Se + he + le
+    }) : 6 == Fe ? a.setData({
+      Cr6: "#" + Se + he + le
+    }) : 7 == Fe ? a.setData({
+      Cr7: "#" + Se + he + le
+    }) : 8 == Fe ? a.setData({
+      Cr8: "#" + Se + he + le
+    }) : 10 == Fe ? a.setData({
+      Cr10: "#" + Se + he + le
+    }) : 11 == Fe ? a.setData({
+      Cr11: "#" + Se + he + le
+    }) : 12 == Fe ? a.setData({
+      Cr12: "#" + Se + he + le
+    }) : 13 == Fe ? a.setData({
+      Cr13: "#" + Se + he + le
+    }) : 14 == Fe ? a.setData({
+      Cr14: "#" + Se + he + le
+    }) : 15 == Fe ? a.setData({
+      Cr15: "#" + Se + he + le
+    }) : 16 == Fe ? a.setData({
+      Cr16: "#" + Se + he + le
+    }) : 17 == Fe && a.setData({
+      Cr17: "#" + Se + he + le
+    })
+  },
+  CSC: function (t) {
+    0 == se && (0, qt.SetCFG)("Cr" + Fe, "#" + Se + he + le)
   },
   CRC: function (t) {
-    Xt = t.detail.value.toString(16).padStart(2, "0"), me()
+    Se = t.detail.value.toString(16).padStart(2, "0"), this.SetCr()
   },
   CGC: function (t) {
-    te = t.detail.value.toString(16).padStart(2, "0"), me()
+    he = t.detail.value.toString(16).padStart(2, "0"), this.SetCr()
   },
   CBC: function (t) {
-    ee = t.detail.value.toString(16).padStart(2, "0"), me()
+    le = t.detail.value.toString(16).padStart(2, "0"), this.SetCr()
   },
-  CTC1: function (e) {
-    ie = e.detail.value.toString(16).padStart(2, "0"), (0, Vt.SetCFG)("BGT", ie), t.setData({
-      BGC: "#000000" + ie
+  CTC1: function (t) {
+    ge = t.detail.value.toString(16).padStart(2, "0"), (0, qt.SetCFG)("BGT", ge), a.setData({
+      BGC: "#000000" + ge
     })
   },
-  BTBGP1: function (e) {
-    he("输入图片连接", "Display voltage compensation", "", "", (function (e) {
-      (0, Vt.SetCFG)("BGI", 1), (0, Vt.SetCFG)("BGP1", e), t.setData({
-        BGP1: e,
-        BGP: e,
+  BTBGP1: function (t) {
+    we("输入图片连接", "Display voltage compensation", "", "", (function (t) {
+      (0, qt.SetCFG)("BGI", 1), (0, qt.SetCFG)("BGP1", t), a.setData({
+        BGP1: t,
+        BGP: t,
         BGI: 1
       })
     }))
   },
-  BTBGP2: function (e) {
-    he("输入图片连接", "Display voltage compensation", "", "", (function (e) {
-      (0, Vt.SetCFG)("BGI", 2), (0, Vt.SetCFG)("BGP2", e), t.setData({
-        BGP2: e,
-        BGP: e,
+  BTBGP2: function (t) {
+    we("输入图片连接", "Display voltage compensation", "", "", (function (t) {
+      (0, qt.SetCFG)("BGI", 2), (0, qt.SetCFG)("BGP2", t), a.setData({
+        BGP2: t,
+        BGP: t,
         BGI: 2
       })
     }))
   },
-  BTBGP3: function (e) {
-    he("输入图片连接", "Display voltage compensation", "", "", (function (e) {
-      (0, Vt.SetCFG)("BGI", 3), (0, Vt.SetCFG)("BGP3", e), t.setData({
-        BGP3: e,
-        BGP: e,
+  BTBGP3: function (t) {
+    we("输入图片连接", "Display voltage compensation", "", "", (function (t) {
+      (0, qt.SetCFG)("BGI", 3), (0, qt.SetCFG)("BGP3", t), a.setData({
+        BGP3: t,
+        BGP: t,
         BGI: 3
       })
     }))
   },
-  BTBGP4: function (e) {
-    he("输入图片连接", "Display voltage compensation", "", "", (function (e) {
-      (0, Vt.SetCFG)("BGI", 4), (0, Vt.SetCFG)("BGP4", e), t.setData({
-        BGP4: e,
-        BGP: e,
+  BTBGP4: function (t) {
+    we("输入图片连接", "Display voltage compensation", "", "", (function (t) {
+      (0, qt.SetCFG)("BGI", 4), (0, qt.SetCFG)("BGP4", t), a.setData({
+        BGP4: t,
+        BGP: t,
         BGI: 4
       })
     }))
   },
-  BTBGP0: function (e) {
-    5 == ++ne && (ne = 0), t.setData({
-      BGP: ae[ne],
-      BGI: ne
-    }), (0, Vt.SetCFG)("BGI", ne)
+  BTBGP0: function (t) {
+    5 == ++de && (de = 0), a.setData({
+      BGP: Ce[de],
+      BGI: de
+    }), (0, qt.SetCFG)("BGI", de)
   },
   BTCKA2: function (t) {
-    Be("F972" + Oe(1 - ft)), Be("FF15")
+    Ie("F972" + ye(1 - Et)), Ie("FF15")
   },
   BTEN1: function (t) {
-    $t && this.MSG("", "1100001BE4000005DC000020D0000005DC010" + (1 - N) + "00"), (0, Vt.SetCFG)("UEN", 1 - N), Be("F970" + Oe(1 - N)), Be("FF11")
+    te && this.MSG("", "1100001BE4000005DC000020D0000005DC010" + (1 - k) + "00"), (0, qt.SetCFG)("UEN", 1 - k), Ie("F970" + ye(1 - k)), Ie("FF11")
   },
   BTBLE1: function (t) {
-    he("设置蓝牙名称", "Set Bluetooth name", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
-      Be("FA73" + Ge(t = unescape(encodeURIComponent(t)))), Be("FF20")
+    we("设置蓝牙名称", "Set Bluetooth name", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
+      Ie("FA73" + Re(t = unescape(encodeURIComponent(t)))), Ie("FF20")
     }))
   },
   BTBLE2: function (t) {
-    he("设置蓝牙密码", "Set Bluetooth password", "最多18个字符", "Up to 18 characters", (function (t) {
-      Be("FA74" + Ge(t)), Be("FF21")
+    we("设置蓝牙密码", "Set Bluetooth password", "最多18个字符", "Up to 18 characters", (function (t) {
+      Ie("FA74" + Re(t)), Ie("FF21")
     }))
   },
   BTVIN: function (t) {
-    he("设置取电器VIN码", "Set VIN", "标准17位英文和数字", "Up to 17 characters", (function (t) {
-      return (t = t.toUpperCase()).match(/^[A-HJ-NPR-Z0-9]{14}\d\d\d$/) ? (Be("FAD3" + Ge(t = unescape(encodeURIComponent(t)))), void Be("FF25")) : void(0, Vt.Toast)(N ? "Incorrect VIN input!" : "输入VIN不正确!")
+    we("设置取电器VIN码", "Set VIN", "标准17位英文和数字", "Up to 17 characters", (function (t) {
+      return (t = t.toUpperCase()).match(/^[A-HJ-NPR-Z0-9]{14}\d\d\d$/) ? (Ie("FAD3" + Re(t = unescape(encodeURIComponent(t)))), void Ie("FF25")) : void(0, qt.Toast)(k ? "Incorrect VIN input!" : "输入VIN不正确!")
     }))
   },
   BTTCH1: function (t) {
-    he("设置触屏密码", "Set touch screen password", "仅限4-6个数字", "Only 4-6 digits", (function (t) {
-      if ((t = String(t)).match(/^[0-9]{4,6}$/)) return Be("FAD1" + Ge(t)), void Be("FF24");
-      (0, Vt.Toast)(N ? "input error" : "输入错误")
+    we("设置触屏密码", "Set touch screen password", "仅限4-6个数字", "Only 4-6 digits", (function (t) {
+      if ((t = String(t)).match(/^[0-9]{4,6}$/)) return Ie("FAD1" + Re(t)), void Ie("FF24");
+      (0, qt.Toast)(k ? "input error" : "输入错误")
     }))
   },
   BTTCH2: function (t) {
-    Se("设置触屏锁屏时间", "Set touch screen lock time", "5", "255", (function (t) {
-      Be("F9C7" + Oe(t)), Be("FF18")
+    Ge("设置触屏锁屏时间", "Set touch screen lock time", "5", "255", (function (t) {
+      Ie("F9C7" + ye(t)), Ie("FF18")
     }))
   },
   BTKEY1: function (t) {
-    Be("F967" + Oe(1 - O)), Be("FF10")
+    Ie("F967" + ye(1 - W)), Ie("FF10")
   },
   BTKEY2: function (t) {
-    Be("F966" + Oe(1 - U)), Be("FF11")
+    Ie("F966" + ye(1 - $)), Ie("FF11")
   },
   BTDDT1: function (t) {
-    Be("F96E" + Oe(dt >= 3 ? 0 : dt + 1)), Be("FF16")
+    Ie("F96E" + ye(wt >= 3 ? 0 : wt + 1)), Ie("FF16")
   },
   BTUP6: function (t) {
-    he("设置WIFI热点名称", "Set WIFI name", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
-      (0, Vt.SetCFG)("WID", t), Be("AB00" + Ge(t = unescape(encodeURIComponent(t)))), Be("FF22")
+    we("设置WIFI热点名称", "Set WIFI name", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
+      (0, qt.SetCFG)("WID", t), Ie("AB00" + Re(t = unescape(encodeURIComponent(t)))), Ie("FF22")
     }))
   },
   BTUP7: function (t) {
-    he("设置WIFI热点密码", "Set WIFI password", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
-      (0, Vt.SetCFG)("WPD", t), Be("AB01" + Ge(t = unescape(encodeURIComponent(t)))), Be("FF23")
+    we("设置WIFI热点密码", "Set WIFI password", "最多6个汉字或18个字符", "Up to 18 characters", (function (t) {
+      (0, qt.SetCFG)("WPD", t), Ie("AB01" + Re(t = unescape(encodeURIComponent(t)))), Ie("FF23")
     }))
   },
   BTUP1: function (t) {
-    oe || this.data.CVer >= this.data.UPDate && !Yt || re.showModal({
-      title: N ? "Start Upgrade" : "开始升级",
+    Be || this.data.CVer >= this.data.UPDate && !ae || Te.showModal({
+      title: k ? "Start Upgrade" : "开始升级",
       editable: false,
-      confirmText: N ? "YES" : "确定",
-      cancelText: N ? "NO" : "取消",
+      confirmText: k ? "YES" : "确定",
+      cancelText: k ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return Be("A700000000" + Ge("NewUI")), void(0, Vt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return Ie("A700000000" + Re("NewUI")), void(0, qt.Toast)(k ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
   BTUP5: function (t) {
-    2 == Yt && Be("FD48" + Ge("Cxjdwx"))
+    2 == ae && ve("确认清除日期", "Confirm clearance date", "", "", (function (t) {
+      Ie("FD48" + Re("Cxjdwx"))
+    }))
   },
   BTUP8: function (t) {
-    re.setClipboardData({
+    Te.setClipboardData({
       data: "https://pan.baidu.com/s/1jBd_YuCspcfbpbW4U28xsw?pwd=8888"
     })
   },
   BTUP10: function (t) {
-    re.setClipboardData({
+    Te.setClipboardData({
       data: "https://pan.baidu.com/s/13F3LDHDZiUg2BGerHsMUMw?pwd=8888"
     })
   },
   BTUP2: function (t) {
-    re.setClipboardData({
-      data: "设备ID:" + E
+    Te.setClipboardData({
+      data: "设备ID:" + p
     })
   },
   BTUP0: function (t) {
-    re.showModal({
-      title: N ? "Firmware rollback" : "固件回退",
+    Te.showModal({
+      title: k ? "Firmware rollback" : "固件回退",
       editable: false,
-      confirmText: N ? "YES" : "确定",
-      cancelText: N ? "NO" : "取消",
+      confirmText: k ? "YES" : "确定",
+      cancelText: k ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return Be("A7" + Ge(yt ? "37" : "22", 4) + Ge("NewUI")), void(0, Vt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return Xt && Ie("A700000000" + Re("CEVRollBack")), Xt || Ie("A700000000" + Re("CANRollBack")), void(0, qt.Toast)(k ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
   BTUP9: function (t) {
-    re.showModal({
-      title: N ? "Write Test Firmware" : "刷入测试固件",
+    Te.showModal({
+      title: k ? "Write Test Firmware" : "刷入测试固件",
       editable: false,
-      confirmText: N ? "YES" : "确定",
-      cancelText: N ? "NO" : "取消",
+      confirmText: k ? "YES" : "确定",
+      cancelText: k ? "NO" : "取消",
       success: function (t) {
-        if (t.confirm) return Be("A700000000" + Ge("NewTest")), void(0, Vt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+        if (t.confirm) return Ie("A700000000" + Re("NewTest")), void(0, qt.Toast)(k ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
       }
     })
   },
   BTUFS: function (t) {
-    Se("设置温度加速值", "Set temperature acceleration value", "2", "20", (function (t) {
-      Be("F963" + Oe(t)), Be("FF14")
+    Ge("设置温度加速值", "Set temperature acceleration value", "2", "20", (function (t) {
+      Ie("F963" + ye(t)), Ie("FF14")
     }))
   },
   BTAFS: function (t) {
-    Se("设置电流加速值", "Set current acceleration value", "0.1", "3.0", (function (t) {
-      Be("F964" + Oe(10 * t)), Be("FF14")
+    Ge("设置电流加速值", "Set current acceleration value", "0.1", "3.0", (function (t) {
+      Ie("F964" + ye(10 * t)), Ie("FF14")
     }))
   },
   BTLFS: function (t) {
-    Se("设置初始风速值", "Set initial wind speed value", "20", "200", (function (t) {
-      Be("F965" + Oe(t)), Be("FF14")
+    Ge("设置初始风速值", "Set initial wind speed value", "20", "200", (function (t) {
+      Ie("F965" + ye(t)), Ie("FF14")
     }))
   },
   BTMFS: function (t) {
-    Se("设置最大风速值", "Set Maximum wind speed value", "200", "255", (function (t) {
-      Be("F9C5" + Oe(t)), Be("FF14")
+    Ge("设置最大风速值", "Set Maximum wind speed value", "200", "255", (function (t) {
+      Ie("F9C5" + ye(t)), Ie("FF14")
     }))
   },
   BTTMC: function (t) {
-    Se("设置超温进入温度", "Set over temperature limit temperature", "40", "90", (function (t) {
-      Be("F84A" + ve(t)), Be("FF13")
+    Ge("设置超温进入温度", "Set over temperature limit temperature", "40", "90", (function (t) {
+      Ie("F84A" + Le(t)), Ie("FF13")
     }))
   },
   BTTMC1: function (t) {
-    Se("设置超温退出温度", "Set the exit temperature for over temperature", "40", "90", (function (t) {
-      Be("F84B" + ve(t)), Be("FF13")
+    Ge("设置超温退出温度", "Set the exit temperature for over temperature", "40", "90", (function (t) {
+      Ie("F84B" + Le(t)), Ie("FF13")
     }))
   },
   BTOST: function (t) {
-    Se("设置超温关机温度", "Set the exit temperature for over temperature", "50", "120", (function (t) {
-      Be("F8F7" + ve(t)), Be("FF18")
+    Ge("设置超温关机温度", "Set the exit temperature for over temperature", "50", "120", (function (t) {
+      Ie("F8F7" + Le(t)), Ie("FF18")
     }))
   },
   BTTMW: function (t) {
-    Se("设置超温限制功率", "Set over temperature limit power", "500", "4000", (function (t) {
-      Be("F84C" + ve(t)), Be("FF13")
+    Ge("设置超温限制功率", "Set over temperature limit power", "500", "4000", (function (t) {
+      Ie("F84C" + Le(t)), Ie("FF13")
     }))
   },
   BTMMV: function (t) {
-    Se("设置最高电压限制", "Set maximum voltage limit", "100", "1000", (function (t) {
-      Be("F8FA" + ve(t)), Be("FF19"), Be("FF14")
+    Ge("设置最高电压限制", "Set maximum voltage limit", "100", "1000", (function (t) {
+      Ie("F8FA" + Le(t)), Ie("FF19"), Ie("FF14")
     }))
   },
   BTMMA: function (t) {
-    Se("设置最高电流限制", "Set maximum current limit", "10", "400", (function (t) {
-      Be("F8F9" + ve(t)), Be("FF19"), Be("FF14")
+    Ge("设置最高电流限制", "Set maximum current limit", "10", "400", (function (t) {
+      Ie("F8F9" + Le(t)), Ie("FF19"), Ie("FF14")
     }))
   },
   BTRDY: function (t) {
-    Se("设置就绪电压范围", "Set the ready voltage range", "1", "20", (function (t) {
-      Be("F9CD" + Oe(t)), Be("FF19")
+    Ge("设置就绪电压范围", "Set the ready voltage range", "1", "20", (function (t) {
+      Ie("F9CD" + ye(t)), Ie("FF19")
     }))
   },
   BTOVT0: function (t) {
@@ -1114,77 +1146,87 @@ Page({
     }), wx.pageScrollTo({
       scrollTop: 95,
       duration: 300
-    }), o > 0 && o < 5 ? le("检测到输出电流", "Detected output current", "如有负载请点取消后断开负载再开始校正,如无负载则为空载电流,点击确定将会设置为最小电流过滤(可在输出电流校正页面中设置).", "If there is a load detected in the output current, please click NO and disconnect the load before starting the calibration. If there is no load, Click YES will set it as the minimum current filter (which can be set on the output current calibration page)", (function (t) {
-      Be("F848" + ve(Number(o) + .05)), Be("FF16")
-    })) : i < 10 || o > 0 ? (0, Vt.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (Be("C1"), Be("FF"), Se("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
-      var e = Number(t / i).toFixed(4),
-        a = Number(t / $).toFixed(4);
-      Be("C3" + ve(100 * a) + ve(100 * e)), 2 == M ? (Be("F876" + ve(20 * a)), Be("F877" + ve(100 * a))) : 1 == M ? (Be("F876" + ve(41 * a)), Be("F877" + ve(58.5 * a))) : 4 == M ? (Be("F876" + ve(41 * a)), Be("F877" + ve(59 * a))) : 16 == M ? (Be("F876" + ve(44 * a)), Be("F877" + ve(61 * a))) : 32 == M && (Be("F876" + ve(41.2 * a)), Be("F877" + ve(59.4 * a))), Be("FF"), Be("A80" + v + ve(50 * a) + ve(k)), Be("FF")
+    }), c > 0 && c < 5 ? ve("检测到输出电流", "Detected output current", "如有负载请点取消后断开负载再开始校正,如无负载则为空载电流,点击确定将会设置为最小电流过滤(可在输出电流校正页面中设置).", "If there is a load detected in the output current, please click NO and disconnect the load before starting the calibration. If there is no load, Click YES will set it as the minimum current filter (which can be set on the output current calibration page)", (function (t) {
+      Ie("F848" + Le(Number(c) + .05)), Ie("FF16")
+    })) : s < 10 || c > 0 ? (0, qt.Toast)(k ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (Ie("C1"), Ie("FF"), Ge("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+      var e = Number(t / s).toFixed(4),
+        a = Number(t / X).toFixed(4);
+      Ie("C3" + Le(100 * a) + Le(100 * e)), 2 == y ? (Ie("F876" + Le(20 * a)), Ie("F877" + Le(100 * a))) : 1 == y ? (Ie("F876" + Le(41 * a)), Ie("F877" + Le(58.5 * a))) : 4 == y ? (Ie("F876" + Le(41 * a)), Ie("F877" + Le(59 * a))) : 16 == y ? (Ie("F876" + Le(44 * a)), Ie("F877" + Le(61 * a))) : 32 == y && (Ie("F876" + Le(41.2 * a)), Ie("F877" + Le(59.4 * a))), Ie("FF"), Ie("A80" + M + Le(50 * a) + Le(tt)), Ie("FF")
     })))
   },
   BTOVT1: function (t) {
-    yt ? Se("升压采样补偿", "Boost voltage compensation", "0.1", "1", (function (t) {
-      t > 999.99 ? t *= 1e-4 : t > 99.99 && (t *= .001), Be("FB47" + ve(100 * t)), Be("FF")
-    })) : Se("显示电压补偿", "Display voltage compensation", "0.1", "5", (function (t) {
-      Be("FB47" + ve(100 * t)), Be("FF")
+    Xt ? Ge("升压采样补偿", "Boost voltage compensation", "0.1", "1", (function (t) {
+      t > 999.99 ? t *= 1e-4 : t > 99.99 && (t *= .001), Ie("FB47" + Le(100 * t)), Ie("FF")
+    })) : Ge("显示电压补偿", "Display voltage compensation", "0.1", "5", (function (t) {
+      Ie("FB47" + Le(100 * t)), Ie("FF")
     }))
   },
   BTOVTU: function (t) {
-    Be("FB47" + ve(100 * (nt + 5e-4))), Be("FF")
+    Ie("FB47" + Le(100 * (Number(lt) + 5e-4))), Ie("FF")
   },
   BTOVTD: function (t) {
-    Be("FB47" + ve(100 * (nt - 5e-4))), Be("FF")
+    Ie("FB47" + Le(100 * (Number(lt) - 5e-4))), Ie("FF")
   },
   BTOVD1: function (t) {
-    yt ? Se("基础电压补偿", "Basic voltage compensation", "10", "40", (function (t) {
-      Be("FB46" + ve(100 * t)), Be("FF")
-    })) : Se("设置电压补偿", "Set voltage compensation", "0.1", "5", (function (t) {
-      Be("FB46" + ve(100 * t)), Be("FF")
+    Xt ? Ge("基础电压补偿", "Basic voltage compensation", "10", "40", (function (t) {
+      Ie("FB46" + Le(100 * t)), Ie("FF")
+    })) : Ge("设置电压补偿", "Set voltage compensation", "0.1", "5", (function (t) {
+      Ie("FB46" + Le(100 * t)), Ie("FF")
     }))
   },
   BTOVDU: function (t) {
-    Be("FB46" + ve(100 * (ot + .001))), Be("FF")
+    Ie("FB46" + Le(100 * (Number(dt) + .001))), Ie("FF")
   },
   BTOVDD: function (t) {
-    Be("FB46" + ve(100 * (ot - .001))), Be("FF")
+    Ie("FB46" + Le(100 * (Number(dt) - .001))), Ie("FF")
   },
   BTOVS: function (t) {
-    Fe(N ? "Set voltage range" : "设置电压范围", (N ? "Now:" : "当前范围:") + this.data.LSV + "-" + this.data.HSV, (function (t) {
-      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (Be("F876" + ve(Number(RegExp.$1))), Be("F877" + ve(Number(RegExp.$2))), Be("FF")) : (0, Vt.Toast)(N ? "Input format error" : "输入格式错误!")
+    Ae(k ? "Set voltage range" : "设置电压范围", (k ? "Now:" : "当前范围:") + this.data.LSV + "-" + this.data.HSV, (function (t) {
+      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (Ie("F876" + Le(Number(RegExp.$1))), Ie("F877" + Le(Number(RegExp.$2))), Ie("FF")) : (0, qt.Toast)(k ? "Input format error" : "输入格式错误!")
     }))
   },
   BTOVS1: function (t) {
-    Se("设置电压跳动缓冲", "Set voltage jump buffer", "0.00", "1.00", (function (t) {
-      Be("F8F3" + ve(t)), Be("FF")
+    Ge("设置电压跳动缓冲", "Set voltage jump buffer", "0.00", "1.00", (function (t) {
+      Ie("F8F3" + Le(t)), Ie("FF")
     }))
   },
   BTOVT3: function (t) {
-    i < 10 || o > 0 ? (0, Vt.Toast)(N ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (Be("C2"), Be("FF"), Se("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
-      var e = Number(t / i).toFixed(4);
-      Be("C4" + ve(100 * Number(t / $).toFixed(4)) + ve(100 * e)), Be("FF")
+    s < 10 || c > 0 ? (0, qt.Toast)(k ? "Voltage correction must have an output voltage higher than 10V and an output current of 0A" : "电压校正必须要输出电压高于10V且输出电流为0A") : (Ie("C2"), Ie("FF"), Ge("输入实际测量出的输出电压", "Input the actual measured output voltage", "10", "1000", (function (t) {
+      var e = Number(t / s).toFixed(4);
+      Ie("C4" + Le(100 * Number(t / X).toFixed(4)) + Le(100 * e)), Ie("FF")
     })))
   },
   BTOVT2: function (t) {
-    Se("显示电压补偿二", "Display voltage compensation 2", "0.1", "5", (function (t) {
-      Be("FBF2" + ve(100 * t)), Be("FF")
+    Ge("显示电压补偿二", "Display voltage compensation 2", "0.1", "5", (function (t) {
+      Ie("FBF2" + Le(100 * t)), Ie("FF")
     }))
   },
   BTO2TU: function (t) {
-    Be("FBF2" + ve(100 * (Bt + .003))), Be("FF")
+    Ie("FBF2" + Le(100 * (Number(bt) + .001))), Ie("FF")
   },
   BTO2TD: function (t) {
-    Be("FBF2" + ve(100 * (Bt - .003))), Be("FF")
+    Ie("FBF2" + Le(100 * (Number(bt) - .001))), Ie("FF")
   },
   BTOVD2: function (t) {
-    Se("设置电压补偿二", "Set voltage compensation 2", "0.1", "5", (function (t) {
-      Be("FBF1" + ve(100 * t)), Be("FF")
+    Ge("设置电压补偿二", "Set voltage compensation 2", "0.1", "5", (function (t) {
+      Ie("FBF1" + Le(100 * t)), Ie("FF")
     }))
   },
   BTO2DU: function (t) {
-    Be("FBF1" + ve(100 * (Et + .003))), Be("FF")
+    Ie("FBF1" + Le(100 * (Number(Ot) + .001))), Ie("FF")
   },
   BTO2DD: function (t) {
-    Be("FBF1" + ve(100 * (Et - .003))), Be("FF")
+    Ie("FBF1" + Le(100 * (Number(Ot) - .001))), Ie("FF")
+  },
+  BTIVD1: function (t) {
+    Ge("输入电压补偿值", "Input voltage compensation value", "0.1", "5", (function (t) {
+      Ie("F8FB" + Le(t)), Ie("FF")
+    }))
+  },
+  BTIVD2: function (t) {
+    Ie("F8FB" + Le(1)), Ie("FF"), Ge("输入实际测量出的输入电压", "Input the actual measured input voltage", "10", "1000", (function (t) {
+      Ie("F8FB" + Le(Number(t / l))), Ie("FF")
+    }))
   },
   BTOAT0: function (t) {
     this.setData({
@@ -1192,198 +1234,322 @@ Page({
     }), wx.pageScrollTo({
       scrollTop: 145,
       duration: 300
-    }), o < 5 || $ - i < .2 ? (0, Vt.Toast)(N ? "During current correction, the output current must be greater than 5A and in a constant current state" : "电流校正时输出电流必须大于5A且处于恒流状态") : (Be("C0"), Be("FF"), Se("输入实际测量出的输出电流", "Input the actual measured output current", "3", "100", (function (t) {
-      var e = Number(t / o).toFixed(4);
-      Be("C5" + ve(100 * Number(t / k).toFixed(4)) + ve(100 * e)), Be("FF")
+    }), c < 5 || X - s < .2 ? (0, qt.Toast)(k ? "During current correction, the output current must be greater than 5A and in a constant current state" : "电流校正时输出电流必须大于5A且处于恒流状态") : (Ie("C0"), Ie("FF"), Ge("输入实际测量出的输出电流", "Input the actual measured output current", "3", "100", (function (t) {
+      var e = Number(t / c).toFixed(4);
+      Ie("C5" + Le(100 * Number(t / tt).toFixed(4)) + Le(100 * e)), Ie("FF")
     })))
   },
   BTOAT1: function (t) {
-    Se("显示电流补偿", "Display current compensation", "0.1", "5", (function (t) {
-      Be("FB45" + ve(100 * t)), Be("FF")
+    Ge("显示电流补偿", "Display current compensation", "0.1", "5", (function (t) {
+      Ie("FB45" + Le(100 * t)), Ie("FF")
     }))
   },
   BTOAT2: function (t) {
-    Be("FB45" + ve(100 * (it - .003))), Be("FF")
+    Ie("FB45" + Le(100 * (Number(Ct) - .001))), Ie("FF")
   },
   BTOAT3: function (t) {
-    Be("FB45" + ve(100 * (it + .003))), Be("FF")
+    Ie("FB45" + Le(100 * (Number(Ct) + .003))), Ie("FF")
   },
   BTOAS1: function (t) {
-    Se("设置电流跳动缓冲", "Set current jump buffer", "0.00", "1.00", (function (t) {
-      Be("F8F4" + ve(t)), Be("FF")
+    Ge("设置电流跳动缓冲", "Set current jump buffer", "0.00", "1.00", (function (t) {
+      Ie("F8F4" + Le(t)), Ie("FF")
     }))
   },
   BTCLV: function (t) {
-    Se("设置最小电流过滤", "Set minimum current filtering", "0.00", "3.00", (function (t) {
-      Be("F848" + ve(t)), Be("FF")
+    Ge("设置最小电流过滤", "Set minimum current filtering", "0.00", "3.00", (function (t) {
+      Ie("F848" + Le(t)), Ie("FF")
     }))
   },
   BTOAD1: function (t) {
-    Se("设置电流补偿", "Set current compensation", "0.1", "5", (function (t) {
-      Be("FB44" + ve(100 * t)), Be("FF")
+    Ge("设置电流补偿", "Set current compensation", "0.1", "5", (function (t) {
+      Ie("FB44" + Le(100 * t)), Ie("FF")
     }))
   },
   BTOAD2: function (t) {
-    Be("FB44" + ve(100 * (rt - .003))), Be("FF")
+    Ie("FB44" + Le(100 * (Number(gt) - .001))), Ie("FF")
   },
   BTOAD3: function (t) {
-    Be("FB44" + ve(100 * (rt + .003))), Be("FF")
+    Ie("FB44" + Le(100 * (Number(gt) + .001))), Ie("FF")
   },
   BTOAS: function (t) {
-    Fe(N ? "Set current range" : "设置电流范围", (N ? "Now:" : "当前范围:") + Z + "-" + Q, (function (t) {
-      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (Be("F878" + ve(Number(RegExp.$1))), Be("F879" + ve(Number(RegExp.$2))), Be("FF")) : (t = parseFloat(t), isFinite(t) && t > 1 ? (Be("F879" + ve(t)), Be("FF")) : (0, Vt.Toast)(N ? "Input format error" : "输入格式错误!"))
+    Ae(k ? "Set current range" : "设置电流范围", (k ? "Now:" : "当前范围:") + st + "-" + ct, (function (t) {
+      (t = t.trim()).match(/([\d\.]+)-([\d\.]+)/) ? (Ie("F878" + Le(Number(RegExp.$1))), Ie("F879" + Le(Number(RegExp.$2))), Ie("FF")) : (t = parseFloat(t), isFinite(t) && t > 1 ? (Ie("F879" + Le(t)), Ie("FF")) : (0, qt.Toast)(k ? "Input format error" : "输入格式错误!"))
     }))
   },
   pwrbt: function (t) {
-    Be("A6" + Oe(1 - b)), Be("FF10")
+    Ie("A6" + ye(1 - V)), Ie("FF10")
+  },
+  BTUCF1: function (t) {
+    Ie("F9CF" + ye(1 - _t)), Ie("FF10")
   },
   owbt: function (t) {
-    Se("设置输出功率限制", "Set output power limit", "300", P, (function (t) {
-      Be("F84D" + ve(t)), Be("FF")
+    Ge("设置输出功率限制", "Set output power limit", "300", z, (function (t) {
+      Ie("F84D" + Le(t)), Ie("FF")
     }))
   },
   tibt: function (t) {
-    Se("设置预约时间", "Set appointment time", "0", 1200, (function (t) {
-      Be("A9" + be(t)), Be("FF")
+    Ge("设置预约时间", "Set appointment time", "0", 1200, (function (t) {
+      Ie("A9" + Ke(t)), Ie("FF")
     }))
   },
   BTYC1: function (t) {
-    Se("设置预充电压", "Set pre charge voltage", "0", X, (function (t) {
-      Be("F8F6" + ve(t)), Be("FF")
+    Ge("设置预充电压", "Set pre charge voltage", "0", ut, (function (t) {
+      Ie("F8F6" + Le(t)), Ie("FF")
     }))
   },
   BTYC2: function (t) {
-    Se("设置预充电流", "Set pre charge current", Z, Q, (function (t) {
-      Be("F8F5" + ve(t)), Be("FF")
+    Ge("设置预充电流", "Set pre charge current", st, ct, (function (t) {
+      Ie("F8F5" + Le(t)), Ie("FF")
     }))
   },
+  SetVA: function (t, e, a) {
+    M != t && (e > ut || e < ft ? Ge("设置输出电压", "Set output voltage", ft, ut, (function (e) {
+      Ie("A80" + (M = t) + Le(e) + Le(a)), Ie(t <= 2 ? "FF10" : "FF11")
+    })) : ve("快捷设置电压电流切换", "Switch confirmation", "为避免误触,请确认切换电压电流", "To avoid accidental contact, please confirm the switching voltage and current", (function (n) {
+      Ie("A80" + (M = t) + Le(e) + Le(a)), Ie(t <= 2 ? "FF10" : "FF11")
+    })))
+  },
   ks1bt: function (t) {
-    var e = G[0],
-      a = G[1] > Q ? Q : G[1];
-    e > X || e < J ? Se("设置输出电压", "Set output voltage", J, X, (function (t) {
-      Be("A80" + (v = 1) + ve(t) + ve(a)), Be("FF")
-    })) : (Be("A80" + (v = 1) + ve(e) + ve(a)), Be("FF"))
+    this.SetVA(1, x[0], x[1] > ct ? ct : x[1])
   },
   ks2bt: function (t) {
-    var e = w[0],
-      a = w[1] > Q ? Q : w[1];
-    e > X || e < J ? Se("设置输出电压", "Set output voltage", J, X, (function (t) {
-      Be("A80" + (v = 2) + ve(t) + ve(a)), Be("FF")
-    })) : (Be("A80" + (v = 2) + ve(e) + ve(a)), Be("FF"))
+    this.SetVA(2, N[0], N[1] > ct ? ct : N[1])
   },
   ks3bt: function (t) {
-    var e = I[0],
-      a = I[1] > Q ? Q : I[1];
-    e > X || e < J ? Se("设置输出电压", "Set output voltage", J, X, (function (t) {
-      Be("A80" + (v = 3) + ve(t) + ve(a)), Be("FF")
-    })) : (Be("A80" + (v = 3) + ve(e) + ve(a)), Be("FF"))
+    this.SetVA(3, L[0], L[1] > ct ? ct : L[1])
   },
   ks4bt: function (t) {
-    var e = x[0],
-      a = x[1] > Q ? Q : x[1];
-    e > X || e < J ? Se("设置输出电压", "Set output voltage", J, X, (function (t) {
-      Be("A80" + (v = 4) + ve(t) + ve(a)), Be("FF")
-    })) : (Be("A80" + (v = 4) + ve(e) + ve(a)), Be("FF"))
+    this.SetVA(4, K[0], K[1] > ct ? ct : K[1])
   },
   hqbt1: function (t) {
-    yt ? Kt >= 5.39 ? Se("设置超温关机倒计时", "设置超温关机倒计时", 3, 60, (function (t) {
-      Be("F961" + Oe(t)), Be("FF15")
-    })) : (0, Vt.Toast)(N ? "The current firmware version is not adjustable. If you need to modify it, please upgrade the firmware!" : "当前固件版本不可调,如需修改请升级固件!") : Se("设置软启时间", "Set soft start time", 5, 20, (function (t) {
-      Be("F961" + Oe(t)), Be("FF15")
+    Xt ? Jt >= 5.39 ? Ge("设置超温关机倒计时", "设置超温关机倒计时", 3, 60, (function (t) {
+      Ie("F961" + ye(t)), Ie("FF15")
+    })) : (0, qt.Toast)(k ? "The current firmware version is not adjustable. If you need to modify it, please upgrade the firmware!" : "当前固件版本不可调,如需修改请升级固件!") : Ge("设置软启时间", "Set soft start time", 5, 20, (function (t) {
+      Ie("F961" + ye(t)), Ie("FF15")
     }))
   },
   hqbt0: function (t) {
-    Be("F961" + Oe(0 == st ? yt ? 30 : 10 : 0)), Be("FF15")
+    Ie("F961" + ye(0 == Bt ? Xt ? 30 : 10 : 0)), Ie("FF15")
   },
   nvbt: function (t) {
-    Fe(N ? "Set Output Voltage" : "设置输出电压", (N ? "Range:" : "范围:") + J + "-" + X, (function (t) {
+    Ae(k ? "Set Output Voltage" : "设置输出电压", (k ? "Range:" : "范围:") + ft + "-" + ut, (function (t) {
       if (t)
-        if (t.startsWith("FFF8")) Be(t.substr(2, 4) + ve(t.substr(6))), Be("FF");
+        if (t.startsWith("FFF8")) Ie(t.substr(2, 4) + Le(t.substr(6))), Ie("FF");
         else {
-          if (t.startsWith("FFF9")) return Be(t.substr(2)), void Be("FF");
-          if ("DEBUG=0" == t)(0, Vt.SetCFG)("DEBUG", 0), kt = 0, Be("F9C900"), Be("F9CA01"), Be("F9CB01");
-          else if ("DEBUG=1" == t)(0, Vt.SetCFG)("DEBUG", 1), kt = 1, Be("F9C900"), Be("F9CA01"), Be("F9CB01");
-          else if ("DEBUG=2" == t)(0, Vt.SetCFG)("DEBUG", 2), kt = 2, Be("F9C9FF"), Be("F9CA01"), Be("F9CB01");
-          else if (t.startsWith("FFC8")) Be(t.substr(2, 4) + t.substr(6)), Be("FF");
-          else if ("异常修复" == t && Kt >= 5.39) le("异常修复确认", "Abnormal repair confirmation", "异常修复会检测并重置掉某些设置", "Exception repair will detect and reset certain settings", (function (t) {
-            Be("F60001"), (0, Vt.Toast)(N ? "Repair completed, device is restarting!" : "修复完成,设备正在重启!"), re.navigateBack({
+          if (t.startsWith("FFF9")) return Ie(t.substr(2)), void Ie("FF");
+          if ("DEBUG=0" == t)(0, qt.SetCFG)("DEBUG", 0), ee = 0, Ie("F9C900"), Ie("F9CA01"), Ie("F9CB01"), Ie("F9CC01");
+          else if ("DEBUG=1" == t)(0, qt.SetCFG)("DEBUG", 1), ee = 1, Ie("F9C900"), Ie("F9CA01"), Ie("F9CB01"), Ie("F9CC01");
+          else if ("DEBUG=2" == t)(0, qt.SetCFG)("DEBUG", 2), ee = 2, Ie("F9C9FF"), Ie("F9CA01"), Ie("F9CB01"), Ie("F9CC01");
+          else if ("DEBUG=3" == t)(0, qt.SetCFG)("DEBUG", 2), ee = 2, Ie("F9C9FF"), Ie("F9CA01"), Ie("F9CB01"), Ie("F9CC00");
+          else if (t.startsWith("FFC8")) Ie(t.substr(2, 4) + t.substr(6)), Ie("FF");
+          else if ("异常修复" == t && Jt >= 5.39) ve("异常修复确认", "Abnormal repair confirmation", "异常修复会检测并重置掉某些设置", "Exception repair will detect and reset certain settings", (function (t) {
+            Ie("F60001"), (0, qt.Toast)(k ? "Repair completed, device is restarting!" : "修复完成,设备正在重启!"), Te.navigateBack({
               delta: 0
             })
           }));
-          else if ("强制升级" == t || "测试版" == t) re.showModal({
-            title: N ? "Start Upgrade" : "开始升级",
+          else if ("强制升级" == t || "测试版" == t) Te.showModal({
+            title: k ? "Start Upgrade" : "开始升级",
             editable: false,
-            confirmText: N ? "YES" : "确定",
-            cancelText: N ? "NO" : "取消",
+            confirmText: k ? "YES" : "确定",
+            cancelText: k ? "NO" : "取消",
             success: function (e) {
-              if (e.confirm) return Be("A700000000" + Ge("测试版" == t ? "NewTest" : "NewUI")), void(0, Vt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+              if (e.confirm) return Ie("A700000000" + Re("测试版" == t ? "NewTest" : "NewUI")), void(0, qt.Toast)(k ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
             }
           });
-          else if ("测试二" == t) re.showModal({
-            title: N ? "Start Upgrade" : "开始升级",
+          else if ("测试二" == t) Te.showModal({
+            title: k ? "Start Upgrade" : "开始升级",
             editable: false,
-            confirmText: N ? "YES" : "确定",
-            cancelText: N ? "NO" : "取消",
+            confirmText: k ? "YES" : "确定",
+            cancelText: k ? "NO" : "取消",
             success: function (t) {
-              if (t.confirm) return Be("A700000000" + Ge("Test2")), void(0, Vt.Toast)(N ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+              if (t.confirm) return Ie("A700000000" + Re("Test2")), void(0, qt.Toast)(k ? "Upgrading, please pay attention to the screen display" : "已进入升级状态,请观察屏幕显示.")
+            }
+          });
+          else if (t.startsWith("DataStart=")) wx.getClipboardData({
+            success: function (t) {
+              var e = t.data;
+              e.match(/(DataStart=[^\{]+)\{([A-Za-z0-9+=\/]+)\}DataEnd/) && Me(e)
             }
           });
           else {
-            if (Be("A1" + Ge(t)), (t = parseFloat(t)) > X || t < J || !isFinite(t)) return void(0, Vt.Toast)(N ? "Beyond the set range!" : "超出设置范围!");
-            Be("A80" + v + ve(t) + ve(k)), Be("FF")
+            if (Ie("A1" + Re(t)), (t = parseFloat(t)) > ut || t < ft && 0 == _t || !isFinite(t)) return void(0, qt.Toast)(k ? "Beyond the set range!" : "超出设置范围!");
+            Ie("A80" + M + Le(t) + Le(tt)), Ie("FF")
           }
         }
       else wx.getClipboardData({
         success: function (t) {
           var e = t.data;
-          e.match(/(DataStart=[^\{]+)\{([A-Za-z0-9+=\/]+)\}DataEnd/) && pe(e)
+          e.match(/(DataStart=[^\{]+)\{([A-Za-z0-9+=\/]+)\}DataEnd/) && Me(e)
         }
       })
     }))
   },
   nabt: function (t) {
-    Se("设置输出电流", "Set output current", Z, Q, (function (t) {
-      Be("A80" + v + ve($) + ve(t)), Be("FF")
+    Ge("设置输出电流", "Set output current", st, ct, (function (t) {
+      Ie("A80" + M + Le(X) + Le(t)), Ie("FF")
     }))
   },
   sa2bt3: function (t) {
-    Se("设置充电时间(分钟)", "Set charging time(Minute)", 0, 600, (function (t) {
-      Be("A9" + be(t)), Be("FF")
+    Ge("设置充电时间(分钟)", "Set charging time(Minute)", 0, 600, (function (t) {
+      Ie("A9" + Ke(t)), Ie("FF")
     }))
   },
   SetSGK: function () {
-    Kt >= 5.39 ? (Be("A50" + (0 == Rt ? "1" : "0")), Be("FF19")) : (Be("F857" + ve(0 == W ? 1 : 0)), Be("FF12"))
+    if (Jt >= 5.39) {
+      var t = 0 == jt ? "1" : "0";
+      Ie("A50" + t), Ie("A40" + t), Ie("FF19")
+    } else Ie("F857" + Le(0 == _ ? 1 : 0)), Ie("FF12")
   },
   sa2bt2: function (t) {
-    Se("设置二段电流", "Set second stage current", Z, Q, (function (t) {
-      Be("F857" + ve(t)), Be("FF12")
+    Ge("设置二段电流", "Set second stage current", st, ct, (function (t) {
+      Ie("F857" + Le(t)), Ie("FF12")
     }))
   },
   sa2bt1: function (t) {
-    Se("设置二段电压", "Set second stage voltage", J, X, (function (t) {
-      Be("F858" + ve(t)), Be("FF12")
+    Ge("设置二段电压", "Set second stage voltage", ft, ut, (function (t) {
+      Ie("F858" + Le(t)), Ie("FF12")
     }))
   },
   sa2bt0: function (t) {
-    yt && (Kt < 5.39 || $ > 126) ? Be("A9" + be(_t ? 0 : 60)) : (Be("F858" + (0 == W ? ve($ - 3) : "00000000")), Be("F857" + (0 == W ? ve(10) : "00000000")), Be("FF12"))
+    Xt && (Jt < 5.39 || X > 126) ? Ie("A9" + Ke(re ? 0 : 60)) : (Ie("F858" + (0 == _ ? Le(X - 3) : "00000000")), Ie("F857" + (0 == _ ? Le(10) : "00000000")), Ie("FF12"))
   },
   sdbt1: function (t) {
-    Se("设置延时时间(分钟)", "Set delay time (Minutes)", 1, 600, (function (t) {
-      Be("F859" + ve(t)), Be("FF16")
+    Ge("设置延时时间(分钟)", "Set delay time (Minutes)", 1, 600, (function (t) {
+      Ie("F859" + Le(t)), Ie("FF16")
     }))
   },
   sdbt2: function (t) {
-    Se("设置关机电流", "SSet startup delay current", "0.00", "10.00", (function (t) {
-      Be("F8F0" + ve(t)), Be("FF")
+    Ge("设置关机电流", "SSet startup delay current", "0.00", "10.00", (function (t) {
+      Ie("F8F0" + Le(t)), Ie("FF")
     }))
   },
   sdbt0: function (t) {
-    Be("F859" + (0 == St ? ve(1) : "00000000")), Be("FF16")
+    Ie("F859" + (0 == mt ? Le(1) : "00000000")), Ie("FF16")
   },
-  MSG: function (n, Wt) {
-    if (!a)
-      if (1 != kt || Wt.startsWith("D") || (0, Vt.print)("MSG:", Wt), "EE" == Wt.substring(0, 2)) {
-        e = we(Wt.substring(20, 40)), Kt = .01 * parseInt(Wt.substring(16, 20), 16), M = xe(Wt, 14), yt = 0, 1 == M ? M = "Huawei" : 2 == M ? M = "Increase" : 4 == M ? M = "ZTE3000" : 8 == M ? M = "INFY" : 12 == M ? (M = "EV_Station", yt = 2) : 14 == M ? (M = "EV_Charger", yt = 1) : 16 == M ? M = "EPS6020" : 32 == M ? M = "ZTE4875" : 64 == M && (M = "Sinexcel"), "EV_Charger" == M ? t.setData({
+  MSG: function (t, e) {
+    if (!i)
+      if (1 != ee || e.startsWith("D") || (0, qt.print)("MSG:", e), e.startsWith("A101")) a.setData({
+        ShowBar: 0,
+        Panel: 2,
+        LOGO: k ? "Preview" : "预览"
+      });
+      else if (e.startsWith("A001")) {
+      if (ne = 2, ("Cxjdwx" == n || "未激活" == n) && !ae) {
+        var o = new Date;
+        Ie("FD48" + Re(o.getFullYear() + "-" + (o.getMonth() + 1) + "-" + o.getDate()))
+      }
+      Jt <= 5.28 && Ie("FF")
+    } else if (e.startsWith("A000")) {
+      if (ne) return;
+      ne = 1, (0, qt.Toast)(k ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3), setTimeout((function () {
+        Te.showModal({
+          title: k ? "Enter Bluetooth password" : "输入蓝牙密码",
+          editable: true,
+          placeholderText: "ID:" + p,
+          confirmText: k ? "YES" : "确定",
+          cancelText: k ? "Observer" : "我只看看",
+          success: function (t) {
+            t.confirm && ((0, qt.SetCFG)(p, t.content), Ie("A0" + Re(t.content)), ne = 0)
+          }
+        })
+      }), 1e3)
+    } else if (e.startsWith("F101")) Ve();
+    else if (e.startsWith("F201")) Ve();
+    else if (e.startsWith("F301")) Ne = 0, xe = [], (0, qt.Toast)(k ? "Send End!" : "发送完成!");
+    else if (e.startsWith("FF")) {
+      var zt = new DataView(t);
+      if (zt.getUint8(1)) {
+        if (2 != ne && (ne = 2, ("Cxjdwx" == n || "未激活" == n) && !ae)) {
+          var Zt = new Date;
+          Ie("FD48" + Re(Zt.getFullYear() + "-" + (Zt.getMonth() + 1) + "-" + Zt.getDate()))
+        }
+      } else(0, qt.Toast)(k ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3), setTimeout((function () {
+        Te.showModal({
+          title: k ? "Enter Bluetooth password" : "输入蓝牙密码",
+          editable: true,
+          placeholderText: "ID:" + p,
+          confirmText: k ? "YES" : "确定",
+          cancelText: k ? "Observer" : "我只看看",
+          success: function (t) {
+            t.confirm && ((0, qt.SetCFG)(p, t.content), Ie("FF" + Re(t.content)), ne = 0)
+          }
+        })
+      }), 1e3);
+      V = zt.getUint8(2), W = zt.getUint8(3), y = zt.getUint8(4), k = zt.getUint8(5), $ = zt.getUint8(6), q = zt.getUint8(7), J = zt.getUint8(8), it = zt.getUint8(9), rt = zt.getUint8(10), ot = zt.getUint8(11), Ft = zt.getUint8(12), St = zt.getUint8(13), ht = zt.getUint8(14) / 10, Bt = zt.getUint8(15), Tt = zt.getUint8(16), Et = zt.getUint8(17), Gt = zt.getUint8(18), wt = zt.getUint8(19), vt = .01 * zt.getUint8(20), xt = zt.getUint8(21), Nt = zt.getUint8(22), Mt = zt.getUint8(23), Lt = zt.getUint8(24), Kt = zt.getUint8(25), yt = zt.getUint8(26), Yt = zt.getUint8(27), Ht = zt.getUint8(28), jt = zt.getUint8(29), Q = zt.getUint8(30), M = zt.getUint8(31), _t = zt.getUint8(32), Pt = zt.getUint8(33);
+      var Qt = 51;
+      x = [ke(zt, Qt, 2, 1), ke(zt, Qt + 4, 2, 1)], N = [ke(zt, Qt += 8, 2, 1), ke(zt, Qt + 4, 2, 1)], L = [ke(zt, Qt += 8, 2, 1), ke(zt, Qt + 4, 2, 1)], K = [ke(zt, Qt += 8, 2, 1), ke(zt, Qt + 4, 2, 1)], j = ke(zt, Qt += 8), _ = ke(zt, Qt += 4), z = ke(zt, Qt += 4), Z = ke(zt, Qt += 4), et = ke(zt, Qt += 4), at = ke(zt, Qt += 4), nt = ke(zt, Qt += 4), R = ke(zt, Qt += 4), st = ke(zt, Qt += 4), ct = ke(zt, Qt += 4), ft = ke(zt, Qt += 4), ut = ke(zt, Qt += 4), lt = ke(zt, Qt += 4, 4), Ct = ke(zt, Qt += 4, 4), dt = ke(zt, Qt += 4, 4), gt = ke(zt, Qt += 4, 4), pt = ke(zt, Qt += 4), Dt = ke(zt, Qt += 4), mt = ke(zt, Qt += 4), At = ke(zt, Qt += 4), bt = ke(zt, Qt += 4, 4), Ot = ke(zt, Qt += 4, 4), It = ke(zt, Qt += 4), Ut = ke(zt, Qt += 4), Vt = ke(zt, Qt += 4), Wt = ke(zt, Qt += 4), Rt = ke(zt, Qt += 4), kt = ke(zt, Qt += 4), $t = ke(zt, Qt += 4), P = ke(zt, Qt += 4, 4), Qt += 4, 1 == M ? (tt = x[1], X = x[0]) : 2 == M ? (tt = N[1], X = N[0]) : 3 == M ? (tt = L[1], X = L[0]) : 4 == M && (tt = K[1], X = K[0]), a.setData({
+        PON: V,
+        KON: W,
+        CAN: y,
+        UEN: k,
+        KRC: $,
+        SV: X.toFixed(2),
+        SA: tt.toFixed(2),
+        WTi: q,
+        Sleep: J,
+        LEDK0: it,
+        LEDK1: rt,
+        LEDK2: ot,
+        IVD: P,
+        UFS: Ft,
+        LFS: St,
+        AFS: ht,
+        UHQ: Bt,
+        GIF: Tt,
+        CKA2: Et,
+        NTC: Gt,
+        DDT: wt,
+        CLV: vt,
+        UEG: xt,
+        UCN: Nt,
+        MFS: Mt,
+        DOL: Lt,
+        DST: Kt,
+        LKS: yt,
+        UI: Yt,
+        RDY: Ht,
+        SGK: jt,
+        ETi: Q,
+        KSi: M,
+        UCF: _t,
+        TCH: Pt,
+        KS1: x,
+        KS2: N,
+        KS3: L,
+        KS4: K,
+        SV2: j,
+        SA2: _,
+        SMW: z,
+        UMW: Z,
+        TMW: et,
+        UMT: at,
+        OMT: nt,
+        MA: R,
+        LSA: st,
+        HSA: ct,
+        LSV: ft,
+        HSV: ut,
+        OVT: lt,
+        OAT: Ct,
+        OVD: dt,
+        OAD: gt,
+        L2V: pt,
+        H2V: Dt,
+        USD: mt,
+        SDU: At,
+        O2T: bt,
+        O2D: Ot,
+        OVS: It,
+        OAS: Ut,
+        YCA: Vt,
+        YCV: Wt,
+        OST: Rt,
+        MMA: kt,
+        MMV: $t
+      })
+    } else if (e.startsWith("FE") || e.startsWith("EE")) {
+      if (0 == y) {
+        n = Pe(e.substring(20, 40)), Jt = .01 * parseInt(e.substring(16, 20), 16), y = Ye(e, 14), Xt = 0, p = e.substring(2, 14), 1 == y ? r = "Huawei" : 2 == y ? r = "Increase" : 4 == y ? r = "ZTE3000" : 8 == y ? r = "INFY" : 12 == y ? (r = "EV_Station", Xt = 2) : 14 == y ? (r = "EV_Charger", Xt = 1) : 16 == y ? r = "EPS6020" : 32 == y ? r = "ZTE4875" : 64 == y && (r = "Sinexcel"), "EV_Charger" == r ? a.setData({
           E1S: 0,
           E1A: "正常",
           E1B: "中止",
@@ -1420,7 +1586,7 @@ Page({
           ECS: 0,
           ECA: "参数",
           ECB: "异常"
-        }) : "Huawei" == M && t.setData({
+        }) : "Huawei" == r && a.setData({
           E1S: 0,
           E1A: "模块",
           E1B: "保护",
@@ -1457,253 +1623,286 @@ Page({
           ECS: 0,
           ECA: "模块",
           ECB: "关机"
-        }), E = Wt.substring(2, 14), e.startsWith("Cxjdwx") && (e = "未激活"), (new Date).getTime() > 17486208e5 && (Date.parse(e) < 17486208e5 || (0, Vt.CheckID)(E) || (a = 1, re.showModal({
-          title: N ? "Abnormal device authorization" : "设备授权异常",
+        }), n.startsWith("Cxjdwx") && (n = "未激活"), (new Date).getTime() > 17486208e5 && (Date.parse(n) < 17486208e5 || (0, qt.CheckID)(p) || (i = 1, Te.showModal({
+          title: k ? "Abnormal device authorization" : "设备授权异常",
           content: "",
-          confirmText: N ? "Yes I Kown" : "我知道了",
+          confirmText: k ? "Yes I Kown" : "我知道了",
           showCancel: false,
           success: function (t) {
-            re.navigateBack({
+            Te.navigateBack({
               delta: 0
             })
           }
-        }))), E = "0x" + E, t.setData({
-          CVer: Kt.toFixed(2),
-          CEV: yt,
-          SCAN: M,
-          ID: E,
-          ACT: e
+        }))), p = "0x" + p, a.setData({
+          CVer: Jt.toFixed(2),
+          CEV: Xt,
+          SCAN: r,
+          ID: p,
+          ACT: n
         });
-        var Pt = (0, Vt.GetCFG)(E, "0000");
-        Yt && (Pt = (Number(E) + 19880914).toString(16).substring(4, 8)), 0 != Ht && 3 != Ht || Be("A0" + Ge(Pt))
-      } else if (Wt.startsWith("A101")) t.setData({
-      ShowBar: 0,
-      Panel: 2,
-      LOGO: N ? "Preview" : "预览"
-    });
-    else if (Wt.startsWith("A001")) {
-      if (Ht = 2, ("Cxjdwx" == e || "未激活" == e) && !Yt) {
-        var Lt = new Date;
-        Be("FD48" + Ge(Lt.getFullYear() + "-" + (Lt.getMonth() + 1) + "-" + Lt.getDate()))
+        var te = (0, qt.GetCFG)(p, "0000");
+        ae && (te = (Number(p) + 19880914).toString(16).substring(4, 8)), e.startsWith("EE") ? 0 != ne && 3 != ne || Ie("A0" + Re(te)) : (Ie("FF" + Re(te)), setTimeout((function () {
+          3 == ne && (ne = 0, Ie("FF" + Re(te)))
+        }), 1500))
       }
-      Kt <= 5.28 && Be("FF")
-    } else if (Wt.startsWith("A000")) {
-      if (Ht) return;
-      Ht = 1, (0, Vt.Toast)(N ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3), setTimeout((function () {
-        re.showModal({
-          title: N ? "Enter Bluetooth password" : "输入蓝牙密码",
-          editable: true,
-          placeholderText: "ID:" + E,
-          confirmText: N ? "YES" : "确定",
-          cancelText: N ? "Observer" : "我只看看",
-          success: function (t) {
-            t.confirm && ((0, Vt.SetCFG)(E, t.content), Be("A0" + Ge(t.content)), Ht = 0)
-          }
-        })
-      }), 1e3)
-    } else if (Wt.startsWith("F101")) De();
-    else if (Wt.startsWith("F201")) De();
-    else if (Wt.startsWith("F301")) Te = 0, ge = [], (0, Vt.Toast)(N ? "Send End!" : "发送完成!");
-    else if (Wt.startsWith("01")) {
-      i = Ie(Wt, 2), o = Ie(Wt, 10), r = Ie(Wt, 18), s = Ie(Wt, 26), c = xe(Wt, 34), f = xe(Wt, 36), "0" == (u = xe(Wt, 38)) ? jt = N ? "Communication Abnormality" : "CAN通讯异常" : 50 == c ? jt = N ? "Stop Charging" : "中 止 充 电" : 51 == c ? jt = N ? "Charging Error" : "充 电 错 误" : 52 == c ? jt = N ? "Seting Handshake Information" : "配置握手信息" : 53 == c ? jt = N ? "Seting Charging Information" : "配置充电信息" : 54 == c ? jt = N ? "Waiting Output Set Voltage" : "等待输出设定电压" : 55 == c ? jt = N ? "Ready For Use" : "已准备就绪" : 56 == c ? jt = N ? "Charging" : "正在充电中" : 57 == c ? jt = N ? "Charging Completed" : "充电完成" : 58 == c ? jt = N ? "Overtemperature shutdown" : "超温关机(" + qt + ")" : 0 == i ? jt = N ? "Charger Output Abnormality" : "充电器输出异常" : 4 == c ? jt = N ? "Charger Shutdown" : "充电器已关机" : 0 == c ? jt = N ? "Waiting For Battery Connection" : "等待接入电池" : 1 == c ? jt = N ? "Charging" : "正在充电中" : 2 == c ? jt = N ? "In The Second Stage Of Charging" : "第二段充电中" : 5 == c ? jt = N ? "Precharging" : "正在预充" : 40 == c ? jt = N ? "Appointment Waiting" : "预约等待中" : 3 == c ? jt = N ? "Charging Completed" : "充电完成" : 43 == c ? jt = N ? "Charging Completed(Turned Off)" : "充电完成(已关机)" : 44 == c && (jt = N ? "Over Temperature Shutdown" : "超温保护关机");
-      var $t = .65 * wx.getWindowInfo().windowWidth,
-        zt = Math.max(15, Math.min(30, $t / (N ? jt.length : 1.8 * jt.length) * 1.5));
-      t.setData({
-        STR: jt,
-        NFS: f,
-        OL: u,
-        OV: i,
-        OA: o,
-        OW: r,
-        OT: s,
-        FSize: zt
+      e.startsWith("FE") && a.setData({
+        VIN: Pe(e.substring(100, 140)),
+        SSID: Pe(e.substring(140, 180)),
+        UPWD: Pe(e.substring(180, 220)),
+        LKV: Pe(e.substring(220, 260))
       })
-    } else if (Wt.startsWith("02")) {
-      F = Ie(Wt, 2), S = Ie(Wt, 10), h = Ie(Wt, 18), l = Ie(Wt, 26), d = xe(Wt, 34), C = xe(Wt, 36), B = xe(Wt, 38);
-      var Zt = Number(r / h * 100).toFixed(2),
-        Qt = Number(h - r).toFixed(2);
-      t.setData({
-        IV: F,
-        IA: S,
-        IW: h,
-        IT: l,
-        ST0: d,
-        ST1: C,
-        ST2: B,
-        EEI: h ? Zt : "0.00",
-        EES: h ? Qt : "0.00"
+    } else if (e.startsWith("FA")) {
+      var se = new DataView(t);
+      s = ke(se, 1), c = ke(se, 5), f = ke(se, 9), l = ke(se, 13), C = ke(se, 17), d = ke(se, 21), a.setData({
+        IV: l,
+        IA: C,
+        IW: d,
+        OV: s,
+        OA: c,
+        OW: f
       })
-    } else if (Wt.startsWith("03")) g = Ie(Wt, 2), T = Ie(Wt, 10), p = Ie(Wt, 18), D = Ie(Wt, 26), A = xe(Wt, 34), m = xe(Wt, 36), t.setData({
-      Ah: g,
-      Wh: T,
-      AH: p,
-      WH: D,
-      SWT: A,
-      SMT: m
-    });
-    else if (Wt.startsWith("04")) _t = xe(Wt, 34), _t += xe(Wt, 36) << 8, qt = xe(Wt, 38), t.setData({
-      YS: Ce(_t),
-      Ti: Ce(Ie(Wt, 2)),
-      TI: Ce(Ie(Wt, 10)),
-      NSD: Ce(Ie(Wt, 18)),
-      SOC: Number(Ie(Wt, 26)).toFixed(0)
-    });
-    else if (Wt.startsWith("10")) G = [Ie(Wt, 2, 1), Ie(Wt, 10, 1)], w = [Ie(Wt, 18, 1), Ie(Wt, 26, 1)], v = xe(Wt, 34), b = xe(Wt, 36), O = xe(Wt, 38), 1 == v ? (k = G[1], $ = G[0]) : 2 == v && (k = w[1], $ = w[0]), 3 == v ? (k = I[1], $ = I[0]) : 4 == v && (k = x[1], $ = x[0]), t.setData({
-      KS1: G,
-      KS2: w,
-      KSi: v,
-      PON: b,
-      KON: O,
-      SV: $.toFixed(2),
-      SA: k.toFixed(2)
-    });
-    else if (Wt.startsWith("11")) I = [Ie(Wt, 2, 1), Ie(Wt, 10, 1)], x = [Ie(Wt, 18, 1), Ie(Wt, 26, 1)], M = xe(Wt, 34), N = xe(Wt, 36), U = xe(Wt, 38), (0, Vt.SetCFG)("UEN", N), 1 == v ? (k = G[1], $ = G[0]) : 2 == v && (k = w[1], $ = w[0]), 3 == v ? (k = I[1], $ = I[0]) : 4 == v && (k = x[1], $ = x[0]), t.setData({
-      KS3: I,
-      KS4: x,
-      CAN: M,
-      UEN: N,
-      KRC: U,
-      SV: $.toFixed(2),
-      SA: k.toFixed(2)
-    });
-    else if (Wt.startsWith("12")) R = Ie(Wt, 2), W = Ie(Wt, 10), P = Ie(Wt, 18), V = Ie(Wt, 26), L = xe(Wt, 34), K = xe(Wt, 36), y = xe(Wt, 38), t.setData({
-      SV2: R,
-      SA2: W,
-      SMW: P,
-      UMW: V,
-      WTi: L,
-      ETi: K,
-      Sleep: y
-    });
-    else if (Wt.startsWith("13")) {
-      Y = Ie(Wt, 2), H = Ie(Wt, 10), j = Ie(Wt, 18);
-      Ie(Wt, 26);
-      _ = xe(Wt, 34), q = xe(Wt, 36), z = xe(Wt, 38), t.setData({
-        TMW: Y,
-        UMT: H,
-        OMT: j,
-        LEDK0: _,
-        LEDK1: q,
-        LEDK2: z
+    } else if (e.startsWith("FB")) {
+      var ce = new DataView(t);
+      F = ce.getUint8(1), S = ce.getUint8(2), h = ce.getUint8(3), B = ce.getUint8(4), T = ce.getUint8(5), E = ce.getUint8(6), w = ce.getUint8(7), v = ce.getUint8(8), Y = ce.getUint8(9), re = ce.getUint8(10), re += ce.getUint8(11) << 8, oe = ce.getUint8(12), H = ce.getUint8(13);
+      var fe = 31;
+      s = ke(ce, fe), c = ke(ce, fe += 4), f = ke(ce, fe += 4), u = ke(ce, fe += 4), l = ke(ce, fe += 4), C = ke(ce, fe += 4), d = ke(ce, fe += 4), g = ke(ce, fe += 4), D = ke(ce, fe += 4), m = ke(ce, fe += 4), A = ke(ce, fe += 4), G = ke(ce, fe += 4), b = ke(ce, fe += 4), O = ke(ce, fe += 4), I = ke(ce, fe += 4), U = ke(ce, fe += 4), fe += 4;
+      var ue = Number(f / d * 100).toFixed(2),
+        Fe = Number(d - f).toFixed(2);
+      60 == F ? ie = k ? "Simulate high voltage anomaly" : "模拟电池升压异常" : "0" == h ? ie = 0 == Y ? k ? "Communication Abnormality" : "CAN通讯异常" : 39 == Y ? k ? "Abnormal Insulation Test" : "绝缘测试未通过" : Y < 6 ? k ? "Handshake message failed" : "握手信息未通过" : Y < 9 ? k ? "Vehicle information not pass" : "车辆信息未通过" : 16 == Y ? k ? "Charging station not ready" : "电压检测未通过" : k ? "Other abnormal interruptions" : "其它异常中止" : 50 == F ? ie = k ? "Stop Charging" : "中 止 充 电" : 51 == F ? ie = k ? "Charging Error" : "充 电 错 误" : 52 == F ? ie = k ? "Seting Handshake Information" : "配置握手信息" : 53 == F ? ie = k ? "Seting Charging Information" : "配置充电信息" : 54 == F ? ie = k ? "Waiting Output Set Voltage" : "等待输出设定电压" : 55 == F ? ie = k ? "Ready For Use" : "已准备就绪" : 56 == F ? ie = k ? "Charging" : "正在充电中" : 57 == F ? ie = k ? "Charging Completed" : "充电完成" : 58 == F ? ie = k ? "Overtemperature shutdown" : "超温关机(" + oe + ")" : 59 == F ? ie = k ? "Insulation testing" : "绝缘测试" : 0 == s ? ie = k ? "Charger Output Abnormality" : "充电器输出异常" : 4 == F ? ie = k ? "Charger Shutdown" : "充电器已关机" : 0 == F ? ie = k ? "Waiting For Battery Connection" : "等待接入电池" : 1 == F ? ie = k ? "Charging" : "正在充电中" : 2 == F ? ie = k ? "In The Second Stage Of Charging" : "第二段充电中" : 5 == F ? ie = k ? "Precharging" : "正在预充" : 40 == F ? ie = k ? "Appointment Waiting" : "预约等待中" : 3 == F ? ie = k ? "Charging Completed" : "充电完成" : 43 == F ? ie = k ? "Charging Completed(Turned Off)" : "充电完成(已关机)" : 44 == F && (ie = k ? "Over Temperature Shutdown" : "超温保护关机");
+      var Se = .65 * wx.getWindowInfo().windowWidth,
+        he = Math.max(15, Math.min(30, Se / (k ? ie.length : 1.8 * ie.length) * 1.5));
+      a.setData({
+        Ah: D,
+        Wh: m,
+        AH: A,
+        WH: G,
+        SWT: w,
+        SMT: v,
+        IV: l,
+        IA: C,
+        IW: d,
+        IT: g,
+        ST0: B,
+        ST1: T,
+        ST2: E,
+        EEI: d ? ue : "0.00",
+        EES: d ? Fe : "0.00",
+        YS: Oe(re),
+        STR: ie,
+        NFS: S,
+        OL: h,
+        OV: s,
+        OA: c,
+        OW: f,
+        OT: u,
+        FSize: he,
+        KT1: H,
+        Ti: Oe(b),
+        TI: Oe(O),
+        NSD: Oe(I),
+        SOC: Number(U).toFixed(0)
       })
-    } else if (Wt.startsWith("14")) Z = Ie(Wt, 2), Q = Ie(Wt, 10), J = Ie(Wt, 18), X = Ie(Wt, 26), tt = xe(Wt, 34), et = xe(Wt, 36), at = .1 * xe(Wt, 38), t.setData({
-      LSA: Z,
-      HSA: Q,
-      LSV: J,
-      HSV: X,
-      UFS: tt,
-      LFS: et,
-      AFS: at.toFixed(1)
-    }), Z = Number(Z), J = Number(J), Q = Number(Q), X = Number(X);
-    else if (Wt.startsWith("15")) nt = .01 * Ie(Wt, 2), it = .01 * Ie(Wt, 10), ot = .01 * Ie(Wt, 18), rt = .01 * Ie(Wt, 26), st = xe(Wt, 34), ct = xe(Wt, 36), ft = xe(Wt, 38), t.setData({
-      OVT: nt.toFixed(4),
-      OAT: it.toFixed(4),
-      OVD: ot.toFixed(4),
-      OAD: rt.toFixed(4),
-      UHQ: st,
-      GIF: ct,
-      CKA2: ft
-    });
-    else if (Wt.startsWith("16")) ut = Ie(Wt, 2), Ft = Ie(Wt, 10), St = Ie(Wt, 18), ht = Ie(Wt, 26), lt = xe(Wt, 34), dt = xe(Wt, 36), Ct = .01 * xe(Wt, 38), t.setData({
-      L2V: ut,
-      H2V: Ft,
-      USD: St,
-      NTC: lt,
-      DDT: dt,
-      CLV: Ct,
-      SDU: ht
-    });
-    else if (Wt.startsWith("17")) Bt = .01 * Ie(Wt, 2), Et = .01 * Ie(Wt, 10), gt = Ie(Wt, 18), Tt = Ie(Wt, 26), pt = xe(Wt, 34), Dt = xe(Wt, 36), At = xe(Wt, 38), t.setData({
-      O2D: Et.toFixed(4),
-      O2T: Bt.toFixed(4),
-      OVS: gt,
-      OAS: Tt,
-      UEG: pt,
-      UCN: Dt,
-      MFS: At
-    });
-    else if (Wt.startsWith("18")) mt = Ie(Wt, 2), Gt = Ie(Wt, 10), wt = Ie(Wt, 18), vt = Ie(Wt, 26), bt = xe(Wt, 34), Ot = xe(Wt, 36), It = xe(Wt, 38), t.setData({
-      YCA: mt,
-      YCV: Gt,
-      DOL: bt,
-      DST: Ot,
-      LKS: It,
-      TCH: vt,
-      OST: wt
-    });
-    else if (Wt.startsWith("19")) xt = Ie(Wt, 2), Mt = Ie(Wt, 10), Nt = xe(Wt, 34), Ut = xe(Wt, 36), Rt = xe(Wt, 38), t.setData({
-      UI: Nt,
-      MMA: xt,
-      MMV: Mt,
-      RDY: Ut,
-      SGK: Rt
-    });
-    else if (Wt.startsWith("20")) {
-      var Jt = we(Wt.substring(2, 40));
-      t.setData({
-        SSID: Jt
+    } else if (e.startsWith("01")) {
+      s = $e(e, 2), c = $e(e, 10), f = $e(e, 18), u = $e(e, 26), F = Ye(e, 34), S = Ye(e, 36), h = Ye(e, 38), 60 == F ? ie = k ? "Simulate high voltage anomaly" : "模拟电池升压异常" : "0" == h ? ie = k ? "Communication Abnormality" : "CAN通讯异常" : 50 == F ? ie = k ? "Stop Charging" : "中 止 充 电" : 51 == F ? ie = k ? "Charging Error" : "充 电 错 误" : 52 == F ? ie = k ? "Seting Handshake Information" : "配置握手信息" : 53 == F ? ie = k ? "Seting Charging Information" : "配置充电信息" : 54 == F ? ie = k ? "Waiting Output Set Voltage" : "等待输出设定电压" : 55 == F ? ie = k ? "Ready For Use" : "已准备就绪" : 56 == F ? ie = k ? "Charging" : "正在充电中" : 57 == F ? ie = k ? "Charging Completed" : "充电完成" : 58 == F ? ie = k ? "Overtemperature shutdown" : "超温关机(" + oe + ")" : 59 == F ? ie = k ? "Insulation testing" : "绝缘测试" : 0 == s ? ie = k ? "Charger Output Abnormality" : "充电器输出异常" : 4 == F ? ie = k ? "Charger Shutdown" : "充电器已关机" : 0 == F ? ie = k ? "Waiting For Battery Connection" : "等待接入电池" : 1 == F ? ie = k ? "Charging" : "正在充电中" : 2 == F ? ie = k ? "In The Second Stage Of Charging" : "第二段充电中" : 5 == F ? ie = k ? "Precharging" : "正在预充" : 40 == F ? ie = k ? "Appointment Waiting" : "预约等待中" : 3 == F ? ie = k ? "Charging Completed" : "充电完成" : 43 == F ? ie = k ? "Charging Completed(Turned Off)" : "充电完成(已关机)" : 44 == F && (ie = k ? "Over Temperature Shutdown" : "超温保护关机");
+      var le = .65 * wx.getWindowInfo().windowWidth;
+      he = Math.max(15, Math.min(30, le / (k ? ie.length : 1.8 * ie.length) * 1.5));
+      a.setData({
+        STR: ie,
+        NFS: S,
+        OL: h,
+        OV: s,
+        OA: c,
+        OW: f,
+        OT: u,
+        FSize: he
       })
-    } else if (Wt.startsWith("21")) t.setData({
-      UPWD: we(Wt.substring(2, 40))
-    });
-    else if (Wt.startsWith("22")) {
-      var Xt = we(Wt.substring(2, 40)),
-        te = (0, Vt.GetCFG)("WID", Xt);
-      Xt != te && Be("AB00" + Ge(Xt = unescape(encodeURIComponent(te)))), t.setData({
-        WID: te
+    } else if (e.startsWith("02")) {
+      l = $e(e, 2), C = $e(e, 10), d = $e(e, 18), g = $e(e, 26), B = Ye(e, 34), T = Ye(e, 36), E = Ye(e, 38);
+      var Ce = Number(f / d * 100).toFixed(2),
+        de = Number(d - f).toFixed(2);
+      a.setData({
+        IV: l,
+        IA: C,
+        IW: d,
+        IT: g,
+        ST0: B,
+        ST1: T,
+        ST2: E,
+        EEI: d ? Ce : "0.00",
+        EES: d ? de : "0.00"
       })
-    } else if (Wt.startsWith("23")) {
-      var ee = we(Wt.substring(2, 40)),
-        ae = (0, Vt.GetCFG)("WPD", ee);
-      ee != ae && Be("AB01" + Ge(ee = unescape(encodeURIComponent(ae)))), t.setData({
-        WPD: ae
+    } else if (e.startsWith("03")) D = $e(e, 2), m = $e(e, 10), A = $e(e, 18), G = $e(e, 26), w = Ye(e, 34), v = Ye(e, 36), a.setData({
+      Ah: D,
+      Wh: m,
+      AH: A,
+      WH: G,
+      SWT: w,
+      SMT: v
+    });
+    else if (e.startsWith("04")) re = Ye(e, 34), re += Ye(e, 36) << 8, oe = Ye(e, 38), a.setData({
+      YS: Oe(re),
+      Ti: Oe($e(e, 2)),
+      TI: Oe($e(e, 10)),
+      NSD: Oe($e(e, 18)),
+      SOC: Number($e(e, 26)).toFixed(0)
+    });
+    else if (e.startsWith("10")) x = [$e(e, 2, 1), $e(e, 10, 1)], N = [$e(e, 18, 1), $e(e, 26, 1)], M = Ye(e, 34), V = Ye(e, 36), W = Ye(e, 38), 1 == M ? (tt = x[1], X = x[0]) : 2 == M && (tt = N[1], X = N[0]), 3 == M ? (tt = L[1], X = L[0]) : 4 == M && (tt = K[1], X = K[0]), a.setData({
+      KS1: x,
+      KS2: N,
+      KSi: M,
+      PON: V,
+      KON: W,
+      SV: X.toFixed(2),
+      SA: tt.toFixed(2)
+    });
+    else if (e.startsWith("11")) L = [$e(e, 2, 1), $e(e, 10, 1)], K = [$e(e, 18, 1), $e(e, 26, 1)], k = Ye(e, 36), $ = Ye(e, 38), (0, qt.SetCFG)("UEN", k), 1 == M ? (tt = x[1], X = x[0]) : 2 == M && (tt = N[1], X = N[0]), 3 == M ? (tt = L[1], X = L[0]) : 4 == M && (tt = K[1], X = K[0]), a.setData({
+      KS3: L,
+      KS4: K,
+      CAN: y,
+      UEN: k,
+      KRC: $,
+      SV: X.toFixed(2),
+      SA: tt.toFixed(2),
+      KSi: M
+    });
+    else if (e.startsWith("12")) j = $e(e, 2), _ = $e(e, 10), z = $e(e, 18), Z = $e(e, 26), q = Ye(e, 34), Q = Ye(e, 36), J = Ye(e, 38), a.setData({
+      SV2: j,
+      SA2: _,
+      SMW: z,
+      UMW: Z,
+      WTi: q,
+      ETi: Q,
+      Sleep: J
+    });
+    else if (e.startsWith("13")) {
+      et = $e(e, 2), at = $e(e, 10), nt = $e(e, 18);
+      $e(e, 26);
+      it = Ye(e, 34), rt = Ye(e, 36), ot = Ye(e, 38), a.setData({
+        TMW: et,
+        UMT: at,
+        OMT: nt,
+        LEDK0: it,
+        LEDK1: rt,
+        LEDK2: ot
       })
-    } else if (Wt.startsWith("24")) t.setData({
-      LKV: we(Wt.substring(2, 40))
+    } else if (e.startsWith("14")) st = $e(e, 2), ct = $e(e, 10), ft = $e(e, 18), ut = $e(e, 26), Ft = Ye(e, 34), St = Ye(e, 36), ht = .1 * Ye(e, 38), a.setData({
+      LSA: st,
+      HSA: ct,
+      LSV: ft,
+      HSV: ut,
+      UFS: Ft,
+      LFS: St,
+      AFS: ht.toFixed(1)
+    }), st = Number(st), ft = Number(ft), ct = Number(ct), ut = Number(ut);
+    else if (e.startsWith("15")) lt = .01 * $e(e, 2), Ct = .01 * $e(e, 10), dt = .01 * $e(e, 18), gt = .01 * $e(e, 26), Bt = Ye(e, 34), Tt = Ye(e, 36), Et = Ye(e, 38), a.setData({
+      OVT: lt.toFixed(4),
+      OAT: Ct.toFixed(4),
+      OVD: dt.toFixed(4),
+      OAD: gt.toFixed(4),
+      UHQ: Bt,
+      GIF: Tt,
+      CKA2: Et
     });
-    else if (Wt.startsWith("25")) t.setData({
-      VIN: we(Wt.substring(2, 40))
+    else if (e.startsWith("16")) pt = $e(e, 2), Dt = $e(e, 10), mt = $e(e, 18), At = $e(e, 26), Gt = Ye(e, 34), wt = Ye(e, 36), vt = .01 * Ye(e, 38), a.setData({
+      L2V: pt,
+      H2V: Dt,
+      USD: mt,
+      NTC: Gt,
+      DDT: wt,
+      CLV: vt,
+      SDU: At
     });
-    else if (Wt.startsWith("50")) {
+    else if (e.startsWith("17")) bt = .01 * $e(e, 2), Ot = .01 * $e(e, 10), It = $e(e, 18), Ut = $e(e, 26), xt = Ye(e, 34), Nt = Ye(e, 36), Mt = Ye(e, 38), a.setData({
+      O2D: Ot.toFixed(4),
+      O2T: bt.toFixed(4),
+      OVS: It,
+      OAS: Ut,
+      UEG: xt,
+      UCN: Nt,
+      MFS: Mt
+    });
+    else if (e.startsWith("18")) Vt = $e(e, 2), Wt = $e(e, 10), Rt = $e(e, 18), Pt = $e(e, 26), Lt = Ye(e, 34), Kt = Ye(e, 36), yt = Ye(e, 38), a.setData({
+      YCA: Vt,
+      YCV: Wt,
+      DOL: Lt,
+      DST: Kt,
+      LKS: yt,
+      TCH: Pt,
+      OST: Rt
+    });
+    else if (e.startsWith("19")) kt = $e(e, 2), $t = $e(e, 10), Yt = Ye(e, 34), Ht = Ye(e, 36), jt = Ye(e, 38), a.setData({
+      UI: Yt,
+      MMA: kt,
+      MMV: $t,
+      RDY: Ht,
+      SGK: jt
+    });
+    else if (e.startsWith("20")) {
+      var ge = Pe(e.substring(2, 40));
+      a.setData({
+        SSID: ge
+      })
+    } else if (e.startsWith("21")) a.setData({
+      UPWD: Pe(e.substring(2, 40))
+    });
+    else if (e.startsWith("22")) {
+      var Be = Pe(e.substring(2, 40)),
+        Ee = (0, qt.GetCFG)("WID", Be);
+      Be != Ee && Ie("AB00" + Re(Be = unescape(encodeURIComponent(Ee)))), a.setData({
+        WID: Ee
+      })
+    } else if (e.startsWith("23")) {
+      var pe = Pe(e.substring(2, 40)),
+        Ae = (0, qt.GetCFG)("WPD", pe);
+      pe != Ae && Ie("AB01" + Re(pe = unescape(encodeURIComponent(Ae)))), a.setData({
+        WPD: Ae
+      })
+    } else if (e.startsWith("24")) a.setData({
+      LKV: Pe(e.substring(2, 40))
+    });
+    else if (e.startsWith("25")) a.setData({
+      VIN: Pe(e.substring(2, 40))
+    });
+    else if (e.startsWith("50")) {
       0;
-      var ne = xe(Wt, 2);
-      3 & ne ? t.setData({
+      var Ge = Ye(e, 2);
+      3 & Ge ? a.setData({
         E1A: "正常",
-        E1S: 3 & ne
-      }) : ne >> 2 & 3 ? t.setData({
+        E1S: 3 & Ge
+      }) : Ge >> 2 & 3 ? a.setData({
         E1A: "人工",
-        E1S: ne >> 2 & 3
-      }) : ne >> 4 & 3 ? t.setData({
+        E1S: Ge >> 2 & 3
+      }) : Ge >> 4 & 3 ? a.setData({
         E1A: "故障",
-        E1S: ne >> 4 & 3
-      }) : ne >> 6 & 3 && t.setData({
+        E1S: Ge >> 4 & 3
+      }) : Ge >> 6 & 3 && a.setData({
         E1A: "车辆",
-        E1S: ne >> 6 & 3
-      }), 3 & (ne = xe(Wt, 4)) ? t.setData({
-        E2S: 3 & ne
-      }) : ne >> 2 & 3 ? t.setData({
-        E3S: ne >> 2 & 3
-      }) : ne >> 4 & 3 ? t.setData({
-        E4S: ne >> 4 & 3
-      }) : ne >> 6 & 3 && t.setData({
-        E5S: ne >> 6 & 3
-      }), 3 & (ne = xe(Wt, 6)) ? t.setData({
-        E6S: 3 & ne
-      }) : ne >> 2 & 3 ? t.setData({
-        E7S: ne >> 2 & 3
-      }) : ne >> 4 & 3 ? t.setData({
-        E8S: ne >> 4 & 3
-      }) : ne >> 6 & 3 && t.setData({
-        E9S: ne >> 6 & 3
-      }), 3 & (ne = xe(Wt, 8)) ? t.setData({
-        EAS: 3 & ne
-      }) : ne >> 2 & 3 ? t.setData({
-        EBS: ne >> 2 & 3
-      }) : ne >> 4 & 3 && t.setData({
-        ECS: ne >> 4 & 3
+        E1S: Ge >> 6 & 3
+      }), 3 & (Ge = Ye(e, 4)) ? a.setData({
+        E2S: 3 & Ge
+      }) : Ge >> 2 & 3 ? a.setData({
+        E3S: Ge >> 2 & 3
+      }) : Ge >> 4 & 3 ? a.setData({
+        E4S: Ge >> 4 & 3
+      }) : Ge >> 6 & 3 && a.setData({
+        E5S: Ge >> 6 & 3
+      }), 3 & (Ge = Ye(e, 6)) ? a.setData({
+        E6S: 3 & Ge
+      }) : Ge >> 2 & 3 ? a.setData({
+        E7S: Ge >> 2 & 3
+      }) : Ge >> 4 & 3 ? a.setData({
+        E8S: Ge >> 4 & 3
+      }) : Ge >> 6 & 3 && a.setData({
+        E9S: Ge >> 6 & 3
+      }), 3 & (Ge = Ye(e, 8)) ? a.setData({
+        EAS: 3 & Ge
+      }) : Ge >> 2 & 3 ? a.setData({
+        EBS: Ge >> 2 & 3
+      }) : Ge >> 4 & 3 && a.setData({
+        ECS: Ge >> 4 & 3
       })
-    } else if (Wt.startsWith("51")) {
-      t.setData({
+    } else if (e.startsWith("51")) {
+      a.setData({
         E1S: 0,
         E1A: "正常",
         E1B: "中止",
@@ -1741,169 +1940,180 @@ Page({
         ECA: "其他",
         ECB: "超时"
       });
-      var ie = xe(Wt, 2);
-      3 & ie && t.setData({
-        E4S: 3 & ie
-      }), 3 & (ie = xe(Wt, 4)) && t.setData({
-        E5S: 3 & ie
-      }), ie >> 2 & 3 && t.setData({
-        E6S: ie >> 2 & 3
-      }), 3 & (ie = xe(Wt, 6)) && t.setData({
-        E7S: 3 & ie
-      }), ie >> 2 & 3 && t.setData({
-        E8S: ie >> 2 & 3
-      }), ie >> 4 & 3 && t.setData({
-        E9S: ie >> 4 & 3
-      }), 3 & (ie = xe(Wt, 8)) && t.setData({
-        EAS: 3 & ie
-      }), ie >> 2 & 3 && (ie >> 2 & 3) < 3 && t.setData({
-        EBS: ie >> 2 & 3
-      }), ie >> 4 & 3 && (ie >> 4 & 3) < 3 && t.setData({
-        ECS: ie >> 4 & 3
+      var we = Ye(e, 2);
+      3 & we && a.setData({
+        E4S: 3 & we
+      }), 3 & (we = Ye(e, 4)) && a.setData({
+        E5S: 3 & we
+      }), we >> 2 & 3 && a.setData({
+        E6S: we >> 2 & 3
+      }), 3 & (we = Ye(e, 6)) && a.setData({
+        E7S: 3 & we
+      }), we >> 2 & 3 && a.setData({
+        E8S: we >> 2 & 3
+      }), we >> 4 & 3 && a.setData({
+        E9S: we >> 4 & 3
+      }), 3 & (we = Ye(e, 8)) && a.setData({
+        EAS: 3 & we
+      }), we >> 2 & 3 && (we >> 2 & 3) < 3 && a.setData({
+        EBS: we >> 2 & 3
+      }), we >> 4 & 3 && (we >> 4 & 3) < 3 && a.setData({
+        ECS: we >> 4 & 3
       })
-    } else if (Wt.startsWith("40")) {
-      fe = ["模块 保护", "风机 异常", "输入 欠压", "输入 过压", "输入 停电", "内部 过温", "模块 故障", "输出 过流", "输出 欠压", "输出 过压", "输出 短路", "模块 关机"], ue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      var oe = xe(Wt, 2);
-      128 & oe && Me("测试 模式"), 64 & oe && Me("负载 震荡"), 32 & oe && Me("输出 继电器"), 16 & oe && Me("放电 电路"), 8 & oe && Me("继电器 电路"), 4 & oe && Me("短路 锁死"), 2 & oe && Me("硬件 地址"), 1 & oe && Me("放电 电路"), 128 & (oe = xe(Wt, 4)) && Me("更换 地址"), 64 & oe && Me("地址 冲突"), 32 & oe && Me("均流 屏蔽"), 16 & oe && Me("通讯 异常"), 8 & oe && Me("电容 电压"), 4 & oe && Me("输出 过压"), 2 & oe && Me("输出 模式"), 1 & oe && Me("插座 异常"), 128 & (oe = xe(Wt, 6)) && Me("母线 电压"), 64 & oe && Me("母线 平衡"), 32 & oe && Me("输入 停电"), 16 & oe && Me("恒流 状态"), 8 & oe && Me("输出 短路"), 4 & oe && Me("内部 通讯"), 2 & oe && Me("效率 寻优"), 1 & oe && Me("均流 异常"), 128 & (oe = xe(Wt, 8)) && Me("PFC 故障"), 64 & oe && Me("输入 过压"), 32 & oe && Me("ID 重复"), 16 & oe && Me("严重 均流"), 8 & oe && Me("交流 缺相"), 4 & oe && Me("三项 平衡"), 2 & oe && Me("输入 欠压"), 1 & oe && Me("顺序 启机"), 128 & (oe = xe(Wt, 10)) && Me("通讯 质量"), 64 & oe && Me("自动 模式"), 32 & oe && Me("地址 重排"), 16 & oe && Me("内部 过温"), 4 & oe && Me("风机 异常"), 2 & oe && Me("模块 关机"), 1 & oe && Me("低温 保护"), 128 & (oe = xe(Wt, 12)) && Me("输出 欠压"), 64 & oe && Me("输出 过流"), 32 & oe && Me("存储 芯片"), 16 & oe && Me("风机 故障"), 8 & oe && Me("模块 保护"), 4 & oe && Me("模块 故障"), 2 & oe && Me("超温 保护"), 1 & oe && Me("过压 锁死");
-      var se = [fe[0].split(" "), fe[1].split(" "), fe[2].split(" "), fe[3].split(" "), fe[4].split(" "), fe[5].split(" "), fe[6].split(" "), fe[7].split(" "), fe[8].split(" "), fe[9].split(" "), fe[10].split(" "), fe[11].split(" ")];
-      t.setData({
-        E1S: ue[0],
-        E1A: se[0][0],
-        E1B: se[0][1],
-        E2S: ue[1],
-        E2A: se[1][0],
-        E2B: se[1][1],
-        E3S: ue[2],
-        E3A: se[2][0],
-        E3B: se[2][1],
-        E4S: ue[3],
-        E4A: se[3][0],
-        E4B: se[3][1],
-        E5S: ue[4],
-        E5A: se[4][0],
-        E5B: se[4][1],
-        E6S: ue[5],
-        E6A: se[5][0],
-        E6B: se[5][1],
-        E7S: ue[6],
-        E7A: se[6][0],
-        E7B: se[6][1],
-        E8S: ue[7],
-        E8A: se[7][0],
-        E8B: se[7][1],
-        E9S: ue[8],
-        E9A: se[8][0],
-        E9B: se[8][1],
-        EAS: ue[9],
-        EAA: se[9][0],
-        EAB: se[9][1],
-        EBS: ue[10],
-        EBA: se[10][0],
-        EBB: se[10][1],
-        ECS: ue[11],
-        ECA: se[11][0],
-        ECB: se[11][1]
+    } else if (e.startsWith("40")) {
+      De = ["模块 保护", "风机 异常", "输入 欠压", "输入 过压", "输入 停电", "内部 过温", "模块 故障", "输出 过流", "输出 欠压", "输出 过压", "输出 短路", "模块 关机"], me = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var ve = Ye(e, 2);
+      128 & ve && He("测试 模式"), 64 & ve && He("负载 震荡"), 32 & ve && He("输出 继电器"), 16 & ve && He("放电 电路"), 8 & ve && He("继电器 电路"), 4 & ve && He("短路 锁死"), 2 & ve && He("硬件 地址"), 1 & ve && He("放电 电路"), 128 & (ve = Ye(e, 4)) && He("更换 地址"), 64 & ve && He("地址 冲突"), 32 & ve && He("均流 屏蔽"), 16 & ve && He("通讯 异常"), 8 & ve && He("电容 电压"), 4 & ve && He("输出 过压"), 2 & ve && He("输出 模式"), 1 & ve && He("插座 异常"), 128 & (ve = Ye(e, 6)) && He("母线 电压"), 64 & ve && He("母线 平衡"), 32 & ve && He("输入 停电"), 16 & ve && He("恒流 状态"), 8 & ve && He("输出 短路"), 4 & ve && He("内部 通讯"), 2 & ve && He("效率 寻优"), 1 & ve && He("均流 异常"), 128 & (ve = Ye(e, 8)) && He("PFC 故障"), 64 & ve && He("输入 过压"), 32 & ve && He("ID 重复"), 16 & ve && He("严重 均流"), 8 & ve && He("交流 缺相"), 4 & ve && He("三项 平衡"), 2 & ve && He("输入 欠压"), 1 & ve && He("顺序 启机"), 128 & (ve = Ye(e, 10)) && He("通讯 质量"), 64 & ve && He("自动 模式"), 32 & ve && He("地址 重排"), 16 & ve && He("内部 过温"), 4 & ve && He("风机 异常"), 2 & ve && He("模块 关机"), 1 & ve && He("低温 保护"), 128 & (ve = Ye(e, 12)) && He("输出 欠压"), 64 & ve && He("输出 过流"), 32 & ve && He("存储 芯片"), 16 & ve && He("风机 故障"), 8 & ve && He("模块 保护"), 4 & ve && He("模块 故障"), 2 & ve && He("超温 保护"), 1 & ve && He("过压 锁死");
+      var be = [De[0].split(" "), De[1].split(" "), De[2].split(" "), De[3].split(" "), De[4].split(" "), De[5].split(" "), De[6].split(" "), De[7].split(" "), De[8].split(" "), De[9].split(" "), De[10].split(" "), De[11].split(" ")];
+      a.setData({
+        E1S: me[0],
+        E1A: be[0][0],
+        E1B: be[0][1],
+        E2S: me[1],
+        E2A: be[1][0],
+        E2B: be[1][1],
+        E3S: me[2],
+        E3A: be[2][0],
+        E3B: be[2][1],
+        E4S: me[3],
+        E4A: be[3][0],
+        E4B: be[3][1],
+        E5S: me[4],
+        E5A: be[4][0],
+        E5B: be[4][1],
+        E6S: me[5],
+        E6A: be[5][0],
+        E6B: be[5][1],
+        E7S: me[6],
+        E7A: be[6][0],
+        E7B: be[6][1],
+        E8S: me[7],
+        E8A: be[7][0],
+        E8B: be[7][1],
+        E9S: me[8],
+        E9A: be[8][0],
+        E9B: be[8][1],
+        EAS: me[9],
+        EAA: be[9][0],
+        EAB: be[9][1],
+        EBS: me[10],
+        EBA: be[10][0],
+        EBB: be[10][1],
+        ECS: me[11],
+        ECA: be[11][0],
+        ECB: be[11][1]
       })
-    } else if (Wt.startsWith("D1") || Wt.startsWith("D0")) {
-      if (2 != kt) return;
-      var ce = Wt.substring(2, 10),
-        Fe = [Wt.substring(10, 12), Wt.substring(12, 14), Wt.substring(14, 16), Wt.substring(16, 18), Wt.substring(18, 20), Wt.substring(20, 22), Wt.substring(22, 24), Wt.substring(24, 26)],
-        Se = parseInt(ce, 16);
-      if (405206102 == Se) 38, console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "握手信息");
-      else if (402781270 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "车辆识别" + Fe[0]);
-      else if (485291094 == Se) "11" == Fe[0] ? console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "同意收包" + Fe[6]) : "13" == Fe[0] && console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "收包完成" + Fe[6]);
-      else if (403174486 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "同步时间" + Fe[0] + Fe[1]);
-      else if (403240022 == Se) 9, X = parseInt(Fe[1] + Fe[0], 16), J = parseInt(Fe[3] + Fe[2], 16), Q = parseInt(Fe[5] + Fe[4], 16), Z = parseInt(Fe[7] + Fe[6], 16), console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "充电范围:电压" + J + "-" + X + " 电流" + Z + "-" + Q);
-      else if (269153366 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "准备就绪" + Fe[0]);
-      else if (403895382 == Se) {
-        var he = parseInt(Fe[1] + Fe[0], 16),
-          le = parseInt(Fe[3] + Fe[2], 16),
-          de = parseInt(Fe[5] + Fe[4], 16);
-        console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "输出信息:V" + he + " A" + le + " T" + de)
-      } else if (270201942 == Se) 26, console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "中止充电");
-      else if (136311894 == Se) 31, console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "电桩", "充电器错");
-      else if (405231348 == Se) {
-        var Ee = parseInt(Fe[1] + Fe[0], 16);
-        console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "取电器", "绝缘信息:" + Ee)
-      } else if (269047540 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "取电器", "电池就绪:" + Fe[0]);
-      else if (403724020 == Se) {
-        var pe = .1 * parseInt(Fe[1] + Fe[0], 16),
-          Ae = .1 * parseInt(Fe[3] + Fe[2], 16);
-        console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "取电器", "需求信息:V" + pe + " A" + Ae)
-      } else if (485250804 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "取电器", "请求多包:" + Fe[6]);
-      else if (485185268 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "取电器", "多包数据");
-      else if (403920628 == Se) console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], "取电器", "车辆状态");
+    } else if (e.startsWith("D1") || e.startsWith("D0")) {
+      if (2 != ee) return;
+      var Ue = e.substring(2, 10),
+        Me = [e.substring(10, 12), e.substring(12, 14), e.substring(14, 16), e.substring(16, 18), e.substring(18, 20), e.substring(20, 22), e.substring(22, 24), e.substring(24, 26)],
+        We = parseInt(Ue, 16);
+      if (405206102 == We) 38, console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "握手信息");
+      else if (402781270 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "车辆识别" + Me[0]);
+      else if (485291094 == We) "11" == Me[0] ? console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "同意收包" + Me[6]) : "13" == Me[0] && console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "收包完成" + Me[6]);
+      else if (403174486 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "同步时间" + Me[0] + Me[1]);
+      else if (403240022 == We) {
+        9;
+        var Le = parseInt(Me[1] + Me[0], 16),
+          Ke = parseInt(Me[3] + Me[2], 16),
+          ye = parseInt(Me[5] + Me[4], 16),
+          je = parseInt(Me[7] + Me[6], 16);
+        console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "充电范围:电压" + Ke + "-" + Le + " 电流" + je + "-" + ye)
+      } else if (269153366 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "准备就绪" + Me[0]);
+      else if (403895382 == We) {
+        var _e = parseInt(Me[1] + Me[0], 16),
+          ze = parseInt(Me[3] + Me[2], 16),
+          Ze = parseInt(Me[5] + Me[4], 16);
+        console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "输出信息:V" + _e + " A" + ze + " T" + Ze)
+      } else if (270201942 == We) 26, console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "中止充电");
+      else if (136311894 == We) 31, console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "电桩", "充电器错");
+      else if (405231348 == We) {
+        var qe = parseInt(Me[1] + Me[0], 16);
+        console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "取电器", "绝缘信息:" + qe)
+      } else if (269047540 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "取电器", "电池就绪:" + Me[0]);
+      else if (403724020 == We) {
+        var Qe = .1 * parseInt(Me[1] + Me[0], 16),
+          Je = .1 * parseInt(Me[3] + Me[2], 16);
+        console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "取电器", "需求信息:V" + Qe + " A" + Je)
+      } else if (485250804 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "取电器", "请求多包:" + Me[6]);
+      else if (485185268 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "取电器", "多包数据");
+      else if (403920628 == We) console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], "取电器", "车辆状态");
       else {
-        var me = 244 == (255 & Se) ? "取电器" : "电桩";
-        console.log(ce, Fe[0], Fe[1], Fe[2], Fe[3], Fe[4], Fe[5], Fe[6], Fe[7], me, "未知")
+        var Xe = 244 == (255 & We) ? "取电器" : "电桩";
+        console.log(Ue, Me[0], Me[1], Me[2], Me[3], Me[4], Me[5], Me[6], Me[7], Xe, "未知")
       }
     }
   },
-  onLoad: function (e) {
-    t = this, Ht = 0, Te = 0, a = 0, $t = Number(e.Test), Yt = Number(e.GM), yt = Number(e.CEV), oe = 0;
-    var n = (0, Vt.GetGIF)(1);
-    n.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
-    var i = RegExp.$2;
-    (n = (0, Vt.GetGIF)(2)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+  onLoad: function (n) {
+    a = this, ne = 0, Ne = 0, i = 0, y = 0, te = Number(n.Test), ae = Number(n.GM), Xt = Number(n.CEV), Be = 0;
+    var r = (0, qt.GetGIF)(1);
+    r.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var o = RegExp.$2;
-    (n = (0, Vt.GetGIF)(3)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
-    var r = RegExp.$2;
-    (n = (0, Vt.GetGIF)(4)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    (r = (0, qt.GetGIF)(2)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var s = RegExp.$2;
-    (n = (0, Vt.GetGIF)(5)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    (r = (0, qt.GetGIF)(3)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
     var c = RegExp.$2;
-    N = (0, Vt.GetCFG)("UEN"), kt = (0, Vt.GetCFG)("DEBUG"), ne = (0, Vt.GetCFG)("BGI", 0), ie = (0, Vt.GetCFG)("BGT", "80"), ae[1] = (0, Vt.GetCFG)("BGP1", "https://dingyue.ws.126.net/2022/0808/701db340g00rg9pym02h5d200cs00leg00it00vh.gif"), ae[2] = (0, Vt.GetCFG)("BGP2", "https://img2.baidu.com/it/u=2215745416,4118415336&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1422"), ae[3] = (0, Vt.GetCFG)("BGP3", "https://c-ssl.dtstatic.com/uploads/item/201912/08/20191208175320_skjmi.thumb.1000_0.jpg"), ae[4] = (0, Vt.GetCFG)("BGP4", "https://wx4.sinaimg.cn/mw690/9f2299eegy1hqwec2a3ncj21kw2dcx6p.jpg");
-    var f = (0, Vt.GetCFG)("ShowM");
-    t.setData({
-      GIF1: "data:image/gif;base64," + i,
-      GIF2: "data:image/gif;base64," + o,
-      GIF3: "data:image/gif;base64," + r,
-      GIF4: "data:image/gif;base64," + s,
-      GIF5: "data:image/gif;base64," + c,
-      UEN: N,
-      ShowM: f,
+    (r = (0, qt.GetGIF)(4)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    var f = RegExp.$2;
+    (r = (0, qt.GetGIF)(5)).match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/);
+    var u = RegExp.$2;
+    k = (0, qt.GetCFG)("UEN"), ee = (0, qt.GetCFG)("DEBUG"), de = (0, qt.GetCFG)("BGI", 0), ge = (0, qt.GetCFG)("BGT", "80"), t = (0, qt.GetCFG)("WID", "config"), e = (0, qt.GetCFG)("WPD", "88888888"), a.setData({
+      WID: t,
+      WPD: e
+    }), Ce[1] = (0, qt.GetCFG)("BGP1", "https://dingyue.ws.126.net/2022/0808/701db340g00rg9pym02h5d200cs00leg00it00vh.gif"), Ce[2] = (0, qt.GetCFG)("BGP2", "https://img2.baidu.com/it/u=2215745416,4118415336&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1422"), Ce[3] = (0, qt.GetCFG)("BGP3", "https://c-ssl.dtstatic.com/uploads/item/201912/08/20191208175320_skjmi.thumb.1000_0.jpg"), Ce[4] = (0, qt.GetCFG)("BGP4", "https://wx4.sinaimg.cn/mw690/9f2299eegy1hqwec2a3ncj21kw2dcx6p.jpg");
+    var F = (0, qt.GetCFG)("ShowM");
+    a.setData({
+      GIF1: "data:image/gif;base64," + o,
+      GIF2: "data:image/gif;base64," + s,
+      GIF3: "data:image/gif;base64," + c,
+      GIF4: "data:image/gif;base64," + f,
+      GIF5: "data:image/gif;base64," + u,
+      UEN: k,
+      ShowM: F,
       RollV: "5.35(稳定版)",
-      TestV: "5.39(测试一)",
-      RoCEV: "5.38",
-      UPDate: "5.39",
-      APP: "1.24",
-      GM: Yt,
-      ADD: oe,
-      CAN: Kt,
-      CEV: yt,
-      BGI: ne,
-      BGT: parseInt(ie, 16),
-      BGC: "#000000" + ie,
-      BGP: ae[ne],
-      BGP1: ae[1],
-      BGP2: ae[2],
-      BGP3: ae[3],
-      BGP4: ae[4]
-    }), $t && (ce[0] = "1", ce[1] = "2", ce[2] = "3", ce[3] = "4", yt ? this.MSG("", "EEA47210A4AE300E0" + 535..toString(16) + "43786A64777800000000") : this.MSG("", "EEA47210A4AE30010" + 535..toString(16) + "323032342D372D330000"), this.MSG("", "1000001624000001F4000016F8000005DC010101"), this.MSG("", "1100001BE4000005DC000020D0000005DC010000"), this.MSG("", "12000000000000000000061A8000061A800A013C"), this.MSG("", "13000493E000001D4C00001B580000000064FF32"), this.MSG("", "14000000640000138800001004000016DA08320A"), this.MSG("", "1500002710000027100000271000002788000100"), this.MSG("", "160000000000000000000000000000003200012D"), this.MSG("", "1700002710000027100000000500000005001FFF"), this.MSG("", "18000003E800000000000021340000471801000F"), this.MSG("", "2037383736454633413744383000000000000000"), this.MSG("", "2130303030000000000000000000000000000000"), this.MSG("", "2263786A64777800000000000000000000000000"), this.MSG("", "2335303033383139373135000000000000000000"), this.MSG("", "2430303030000000000000000000000000000000"), this.MSG("", "0100001624000001F400006EB400000BB8013703"), this.MSG("", "02000056220000008400007264000009F6000000"), this.MSG("", "0300000004000001030000010800003865000000"), this.MSG("", "0400000CE4000108740000000000002710000000")), Lt.onBLEConnectionStateChange((function () {
-      a || (a = 1, re.showModal({
-        title: N ? "Bluetooth Disconnected" : "蓝牙信号丢失",
-        content: N ? "Blue abnormal interruption is usually caused by shutdown, weak signal, or significant signal interference" : "通常是关机或信号弱或干扰大导致",
-        confirmText: N ? "Yes I Kown" : "我知道了",
+      TestV: "5.41(测试一)",
+      RoCEV: "5.39",
+      UPDate: "5.40",
+      APP: "1.26",
+      GM: ae,
+      ADD: Be,
+      CAN: Jt,
+      CEV: Xt,
+      BGI: de,
+      BGT: parseInt(ge, 16),
+      BGC: "#000000" + ge,
+      BGP: Ce[de],
+      BGP1: Ce[1],
+      BGP2: Ce[2],
+      BGP3: Ce[3],
+      BGP4: Ce[4]
+    }), te && (pe[0] = "1", pe[1] = "2", pe[2] = "3", pe[3] = "4", Xt ? this.MSG("", "EEA47210A4AE300E0" + 541..toString(16) + "43786A64777800000000") : this.MSG("", "EEA47210A4AE30010" + 541..toString(16) + "323032342D372D330000"), this.MSG("", "1000001624000001F4000016F8000005DC010101"), this.MSG("", "1100001BE4000005DC000020D0000005DC010000"), this.MSG("", "12000000000000000000061A8000061A800A013C"), this.MSG("", "13000493E000001D4C00001B580000000064FF32"), this.MSG("", "14000000640000138800001004000016DA08320A"), this.MSG("", "1500002710000027100000271000002788000100"), this.MSG("", "160000000000000000000000000000003200012D"), this.MSG("", "1700002710000027100000000500000005001FFF"), this.MSG("", "18000003E800000000000021340000471801000F"), this.MSG("", "2037383736454633413744383000000000000000"), this.MSG("", "2130303030000000000000000000000000000000"), this.MSG("", "2263786A64777800000000000000000000000000"), this.MSG("", "2335303033383139373135000000000000000000"), this.MSG("", "2430303030000000000000000000000000000000"), this.MSG("", "0100001624000001F400006EB400000BB8013703"), this.MSG("", "02000056220000008400007264000009F6000000"), this.MSG("", "0300000004000001030000010800003865000000"), this.MSG("", "0400000CE4000108740000000000002710000000")), Qt.onBLEConnectionStateChange((function () {
+      i || (i = 1, Te.showModal({
+        title: k ? "Bluetooth Disconnected" : "蓝牙信号丢失",
+        content: k ? "Blue abnormal interruption is usually caused by shutdown, weak signal, or significant signal interference" : "通常是关机或信号弱或干扰大导致",
+        confirmText: k ? "Yes I Kown" : "我知道了",
         showCancel: false,
         success: function (t) {
-          re.navigateBack({
+          Te.navigateBack({
             delta: 0
           })
         }
-      })), re.navigateBack({
+      })), Te.navigateBack({
         delta: 0
       })
-    })), Lt.onBLECharacteristicValueChange1(this.MSG), Ht = 3, Be("A0" + Ge("0000")), setTimeout((function () {
-      3 == Ht && (Ht = 0, Be("A0" + Ge((0, Vt.GetCFG)(E, "0000"))), console.log("Re login:1"))
-    }), 1500)
+    })), Qt.onBLECharacteristicValueChange1(this.MSG), ne = 3, Ie("A0" + Re("0000")), Ie("EE"), setTimeout((function () {
+      3 == ne && (ne = 0, Ie("A0" + Re((0, qt.GetCFG)(p, "0000"))), console.log("Re login:1")), "0" == y && Ie("EE")
+    }), 1500), setTimeout((function () {
+      3 == ne && (ne = 0, Ie("A0" + Re((0, qt.GetCFG)(p, "0000"))), console.log("Re login:1")), "0" == y && Ie("EE")
+    }), 2500)
   },
   onUnload: function () {
-    a = 1, Lt.closeBLEConnection()
+    i = 1, Qt.closeBLEConnection()
   },
   onShow: function (t) {
-    a = 0
+    i = 0
   },
   onHide: function () {
-    a = 1
+    i = 1
   }
 });

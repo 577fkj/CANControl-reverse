@@ -7,7 +7,12 @@
     "useAuthorizePage": true
   },
   "style": "v2",
-  "subPackages": [],
+  "componentFramework": {
+    "allUsed": [
+      "exparser"
+    ],
+    "default": "exparser"
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

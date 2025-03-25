@@ -1,5 +1,9 @@
 App({
-  onLaunch: function () {},
+  onLaunch: function () {
+    wx.setKeepScreenOn({
+      keepScreenOn: true
+    })
+  },
   onShow: function () {
     console.log("App Show")
   },

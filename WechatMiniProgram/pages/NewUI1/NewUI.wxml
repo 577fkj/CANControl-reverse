@@ -218,13 +218,19 @@
                     <view class="{{ShowBar==22?'open':'close'}}"></view>
                 </view>
                 <button bindtap="BTHELP" class="DisTIP" style="width:65%;">{{'版本更新说明'}}</button>
-                <button bindtap="BTHELP" class="DisINF" style="width:35%;">2025-01-04</button>
+                <button bindtap="BTHELP" class="DisINF" style="width:35%;">2025-03-21</button>
             </view>
             <view hidden="{{ShowBar!=22}}">
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
                     <button bindtap="BTUP10" class="DisINF1">{{UEN?'Copy Connection':'复制连接'}}</button>
                 </view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">固件:5.41 APP:1.26 2025-03-21</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}为避免误触,小程序快捷切换电压电流添加了一个确认框,添加颜色设置中一个自定义配色,此配色修改后会保存至手机,下次打开选中后就可以调出上次设置,添加华为输入电压校正(用于修改过PFC电阻的机器,正常情况无需设置).</view>
+                <view style="height:10px;"></view>
+                <view class="tip2" style="color:#fa0;">固件:5.40 APP:1.25 2025-03-06</view>
+                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}此版本细分了取电器失败提示 取电失败后不再只显示'CAN通讯异常' 会细分显示为'CAN通讯异常' '绝缘测试未通过' '握手信息未通过' '车辆信息未通过' '电压检测未通过' '模拟电池升压异常' 以便分析故障,加入一个电桩限压策略设置,加入手动开关继电器功能,修复5.39部分华为风扇不受控问题,修复5.39华为外置传感器温度跳动问题.</view>
                 <view style="height:10px;"></view>
                 <view class="tip2" style="color:#fa0;">固件:5.39 APP:1.24 2025-01-04</view>
                 <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要是针对5.37故障修复 修复部分取电器在低压桩时提前显示就绪问题 修复取电器升压电压跳动过大问题 修复5.37充电器在部分情况下最大电流变100问题 修复中兴和华为充在温度零下时不能正确识别问题 修复充电器小程序二段开关问题 增加了取电器兼容性 增加了保护关机倒计时设置 增加了取电器二段充电功能(仅限于低压直冲 所以设置电压126V以内才会显示) 增加了一个新的"数据异常修复"功能 (升级后会重置掉部分用户个性化设置,比如屏幕颜色等)</view>
@@ -345,6 +351,11 @@
                     <button style="position:absolute;width:50%;left:50%;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OA}}A</button>
                     <view style="position:absolute;left:57%;top:105px;font-size:15px;color:white;">{{SA}}A</view>
                     <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%;width:50%;height:88px;position:absolute;"></image>
+                </view>
+                <view class="btnLayout" wx:if="{{CVer>=5.41}}">
+                    <button class="DisTIP1">{{UEN?'Input voltage correction':'输入电压校正'}}</button>
+                    <button bindtap="BTIVD1" class="DisINF1">{{IVD}}</button>
+                    <button bindtap="BTIVD2" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
                 </view>
                 <view class="btnLayout" wx:if="{{CVer>=5.29}}">
                     <button class="DisTIP1">{{UEN?'Voltage jump buffer':'电压跳动缓冲'}}</button>
@@ -656,6 +667,28 @@
             </view>
         </view>
     </view>
+    <view hidden="{{CEV==0||CVer<5.4}}">
+        <view style="height:5px;"></view>
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTUCF" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==27?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTUCF" class="DisTIP" style="width:65%;">{{UEN?'Voltage limitation strategy':'电桩限压策略'}}</button>
+                <button bindtap="BTUCF1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{UCF?'设置电压':'最低电压'}}</button>
+                <button bindtap="BTUCF1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{UCF?'Set voltage':'Minimum voltage'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=27}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}This value determines the requested output voltage when the charging station does not match the set voltage. For example, if the current set voltage is 84V and the current charging station displays a range of 200-750, the 'lowest voltage', which is 200V, will be used as the requested output voltage to be sent to the charging station by default. If most charging stations send the current set voltage value of 84V, it will cause the charging station to disconnect due to the charging station not supporting this voltage. However, there are a few charging stations that can support the normal use of 84V even though the lower limit is 200V. At this time, changing the voltage limiting strategy to 'set voltage' will send a request for the current set voltage of 84V (only for special situations, use 'lowest voltage' can be used in normal situations, but when modified to 'set voltage'). Setting the minimum voltage range is no longer limited, and it is not recommended to modify this value.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}此值决定了电桩不匹配设置电压时的请求输出电压,例如当前设置电压为84V,而当前充电桩显示范围为200-750,此时默认使用'最低电压'也就是200V作为请求输出电压发送给充电桩,大部分电桩如果将当前设置电压值84V发送过去的话会由于充电桩不支持此电压而导致充电桩断开,但是有极个别少数充电桩虽然下限是200V,却可以支持设置84V正常使用,此时将限压策略改为'设置电压'则会发送请求当前设置84V电压(仅限特殊情况使用,正常情况使用'最低电压'即可,当修改为'设置电压'时设置最低电压范围不再受限制,不推荐修改此值)。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+    </view>
     <view hidden="{{CEV==0}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
@@ -727,7 +760,7 @@
                     <view class="{{ShowBar==17?'open':'close'}}"></view>
                 </view>
                 <button bindtap="BTNTC" class="DisTIP" style="width:65%;">{{UEN?'High Voltage Boost Test':'高压升压测试'}}</button>
-                <button bindtap="SetSGK" class="DisINF" style="width:35%;">{{(CVer>=5.39?SGK:SA2)>0?'251.5V':UEN?'Close':'关闭'}}</button>
+                <button bindtap="SetSGK" class="DisINF" style="width:35%;">{{(CVer>=5.39?SGK:SA2)>0?'251.5V':UEN?'OFF':'关闭'}}</button>
             </view>
             <view hidden="{{ShowBar!=17}}">
                 <view class="btnLayout">
@@ -873,6 +906,27 @@
                 <view wx:if="{{!UEN}}">
                     <view class="tip2">{{nbsp}}{{nbsp}}在使用过程中有极小概率会出现一些屏幕显示数字异常 比如设置电压和设置电流均显示为0 或者电池电量显示超过100%等 又或者在无意间设置错了某些参数但是又不清楚怎么设置了 只要是蓝牙控制板导致的异常 此时点击右上角"修复"即可。</view>
                     <view class="tip2">{{nbsp}}{{nbsp}}异常修复会检测设置数据并重置掉部分个性化设置(比如屏幕颜色等) 修复完成后会自动重启设备(如未能自动重启请断电手动重启)。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{CEV==0||CVer<5.4}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTKT" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==28?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTKT" class="DisTIP" style="width:65%;">{{UEN?'Voltage limitation strategy':'继电器状态'}}</button>
+                <button bindtap="BTKT1" class="DisINF" style="width:35%;">{{KT1?UEN?'ON':'打开':UEN?'OFF':'关闭'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=28}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">{{nbsp}}Normally, after displaying 'Ready', the relay will automatically turn on to start outputting voltage. However, due to some user requirements, manual opening or closing of the relay is set here Be careful not to manually turn on the relay before it is ready, otherwise there may be high voltage output directly causing damage to the downstream electrical equipment or battery, and even fire and explosion (Normally does not require manual opening or closing)<view></view>{{nbsp}}Click on the green text in the upper right corner to manually turn on or off the relay.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">{{nbsp}}{{nbsp}}正常在显示'已准备就绪'后会自动打开继电器开始输出电压,因部分用户要求所以在此处设置手动打开或关闭继电器.注意请勿在准备就绪前手动打开继电器,否则可能会有高压直接输出导致损坏用后级用电设备或电池甚至起火爆炸.(正常不需要手动打开或关闭)<view></view>{{nbsp}}{{nbsp}}点击右上角绿色文字可手动打开或关闭继电器。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1029,7 +1083,7 @@
                     <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to make the settings.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}设置蓝牙名称和密码,最长18个字符,如果是汉字则每个汉字占三个字符,也就是最长6个汉字。(重启生效)</view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}设置蓝牙名称,支持表情符号,最长18个字符,如果是汉字则每个汉字占三个字符,也就是最长6个汉字。(重启生效,设备需要要断电重启,小程序需要关闭后台进程后再打开,不懂杀后台的直接重启手机即可)</view>
                     <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
@@ -1096,7 +1150,13 @@
                     <view style="display:{{ADD?'block':'none'}}">
                         <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
                     </view>
-                    <view wx:if="{{CVer<5.37}}">
+                    <view wx:if="{{CVer<5.4}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.40 APP:1.25 2025-03-06</view>
+                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}此版本细分了取电器失败提示 取电失败后不再只显示'CAN通讯异常' 会细分显示为'CAN通讯异常' '绝缘测试未通过' '握手信息未通过' '车辆信息未通过' '电压检测未通过' '模拟电池升压异常' 以便分析故障,加入一个电桩限压策略设置,加入手动开关继电器功能,修复5.39部分华为风扇不受控问题,修复5.39华为外置传感器温度跳动问题.</view>
+                    </view>
+                    <view wx:if="{{CVer<5.39}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">固件:5.39 APP:1.24 2025-01-04</view>
@@ -1298,10 +1358,10 @@
                     <button bindtap="BTUI" class="DisINF1">{{UI?UEN?'Simplicity':'简约':UEN?'Classics':'经典'}}</button>
                 </view>
                 <view class="btnLayout" hidden="{{CVer<5.19}}">
-                    <button bindtap="Scr1" class="DisINF1" style="text-align:center;">{{UEN?'Color 1':'配色一'}}</button>
-                    <button bindtap="Scr2" class="DisINF1" style="text-align:center;">{{UEN?'Color 2':'配色二'}}</button>
-                    <button bindtap="Scr3" class="DisINF1" style="text-align:center;">{{UEN?'Color 3':'配色三'}}</button>
-                    <button bindtap="Scr4" class="DisINF1" style="text-align:center;">{{UEN?'Color 4':'配色四'}}</button>
+                    <button bindtap="Scr4" class="DisINF1" style="text-align:center;color:{{Crs==0?'#0e0':'#fff'}};">{{UEN?'Customization':'自定义'}}</button>
+                    <button bindtap="Scr1" class="DisINF1" style="text-align:center;color:{{Crs==1?'#0e0':'#fff'}};">{{UEN?'Color 1':'配色一'}}</button>
+                    <button bindtap="Scr2" class="DisINF1" style="text-align:center;color:{{Crs==2?'#0e0':'#fff'}};">{{UEN?'Color 2':'配色二'}}</button>
+                    <button bindtap="Scr3" class="DisINF1" style="text-align:center;color:{{Crs==3?'#0e0':'#fff'}};">{{UEN?'Color 3':'配色三'}}</button>
                 </view>
                 <view style="position:relative;height:260px;width:100%;">
                     <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;">
@@ -1392,18 +1452,16 @@
                     </view>
                 </view>
                 <view style="height:100px">
-                    <slider activeColor="transparent" backgroundColor="#f00" bindchanging="CRC" class="ribbon" max="255" onChanging="CRC" style="position:relative;width:80%;left:5%;top:5px" value="{{CR}}"></slider>
-                    <slider activeColor="transparent" backgroundColor="#0f0" bindchanging="CGC" class="ribbon" max="255" onChanging="CGC" style="position:relative;width:80%;left:5%;top:20px" value="{{CG}}"></slider>
-                    <slider activeColor="transparent" backgroundColor="#00f" bindchanging="CBC" class="ribbon" max="255" onChanging="CBC" style="position:relative;width:80%;left:5%;top:35px" value="{{CB}}"></slider>
+                    <slider activeColor="transparent" backgroundColor="#f00" bindchange="CSC" bindchanging="CRC" class="ribbon" max="255" onChanging="CRC" style="position:relative;width:80%;left:5%;top:5px" value="{{CR}}"></slider>
+                    <slider activeColor="transparent" backgroundColor="#0f0" bindchange="CSC" bindchanging="CGC" class="ribbon" max="255" onChanging="CGC" style="position:relative;width:80%;left:5%;top:20px" value="{{CG}}"></slider>
+                    <slider activeColor="transparent" backgroundColor="#00f" bindchange="CSC" bindchanging="CBC" class="ribbon" max="255" onChanging="CBC" style="position:relative;width:80%;left:5%;top:35px" value="{{CB}}"></slider>
                 </view>
                 <view style="height:15px;"></view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Click on the corresponding display position and adjust the RGB color value below.</view>
-                    <view class="tip2">{{nbsp}}After the adjustment is completed, click the green send button in the upper right corner to take effect.</view>
+                    <view class="tip2">{{nbsp}}Only the color adjustments in the customization will be saved to the phone, and the rest of the color changes will be restored to default every time they are selected.<view></view>{{nbsp}}Please click on the corresponding display position and adjust the RGB color values below. After the adjustment is complete, click the green send button in the upper right corner to make it effective.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}点击对应显示位置后在下面调整RGB颜色值。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}调整完成后点击右上角绿色发送按钮即可生效。</view>
+                    <view class="tip2">{{nbsp}}{{nbsp}}只有自定义中的配色调整后将会保存至手机,其余配色修改后每次选中都会恢复默认。<view></view>{{nbsp}}{{nbsp}}请点击对应显示位置后在下面调整RGB颜色值,调整完成后点击右上角绿色发送按钮即可生效。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>

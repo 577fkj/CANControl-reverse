@@ -15,6 +15,20 @@
 <view style="height:5px;"></view>
 <view class="SetBox">
     <view class="SendLayout">
+        <view bindtap="HELP13" style="width:20px;background-color:#88888850;">
+            <view class="open" hidden="{{PG!=13}}"></view>
+            <view class="close" hidden="{{PG==13}}"></view>
+        </view>
+        <button bindtap="HELP13" class="DisTIP" style="width:100%;">{{'取电器取电失败'}}</button>
+    </view>
+    <view style="display:{{PG==13?'block':'none'}}">
+        <view class="tip2" style="color:#0f0;">　　由于充电桩协议目版本不同,使用协议不同,生产厂家不同,甚至厂家生产批次不同,都有可能会产生兼容性问题.本产品不能保证所有充电桩都能使用,遇到取电失败的只能换一个充电桩<text style="color:red;">(单个桩故障)</text>或者换一个品牌充电站<text style="color:red;">(整个站不兼容)</text>再做测试,而且同品牌旗下也会存在购买不同品牌厂家的充电桩产品,如果找不到其它品牌充电站也可以换一个同品牌不同厂家批次的充电站<text style="color:red;">(充电桩厂家生产批次不兼容)</text>.<view></view>　　当前中国市面上存在三个版本的协议:<view></view>　　　1.GB/T 27930-2011 (简称国标2011)<view></view>　　　2.GB/T 27930-2015 (简称国标2011)<view></view>　　　3.GB/T 27930-2023 (简称国标2023)<view></view>　　本产品协议按照最新国标2023做的,所以越是新的充电桩越兼容,几乎百分百.<view></view>　　而早期国标2015甚至国标2011协议的充电桩兼容性就会差一些,就有可能会取电失败,市面主流的小桔特来电等都没问题,这种大品牌的充电桩会自己更新新版协议,所以几乎也是百分百兼容,而我这边也会经常测试更新兼容性,大城市几乎都没问题,各大一二线城市的可以放心购买使用,本人所在重庆市九龙坡区我住所附近测试了很多品牌充电桩,目前为止没有遇到一个不能用的,而三四线城市或者县一级甚至镇一级的地方由于基础建设更新速度慢,充电桩本身也比较少,而正好建设比较早的话就存在老协议的充电桩会比较多,可能会存在部分不能使用的情况,请尽量找新一点的充电桩使用.</view>
+        <view style="height:15px;"></view>
+    </view>
+</view>
+<view style="height:5px;"></view>
+<view class="SetBox">
+    <view class="SendLayout">
         <view bindtap="HELP10" style="width:20px;background-color:#88888850;">
             <view class="open" hidden="{{PG!=10}}"></view>
             <view class="close" hidden="{{PG==10}}"></view>

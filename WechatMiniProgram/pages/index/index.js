@@ -1,11 +1,11 @@
 var t, e = require("../../@babel/runtime/helpers/createForOfIteratorHelper"),
   a = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   i = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  n = (t = require("../../C599EBE09E166AAFA3FF83E799E18510.js")) && t.__esModule ? t : {
+  n = (t = require("../../89FCDC259E166AAFEF9AB422C656D4C0.js")) && t.__esModule ? t : {
     default: t
   },
-  r = require("../../B90FE0219E166AAFDF69882689C18510.js");
-var s, o = require("../../AF3078509E166AAFC956105707D18510.js"),
+  r = require("../../4E08A4649E166AAF286ECC635736D4C0.js");
+var s, o = require("../../1C192C069E166AAF7A7F4401A546D4C0.js"),
   c = 0,
   u = 0,
   h = 0,
@@ -118,13 +118,13 @@ Page({
     }), 1800), h && wx.getClipboardData({
       success: function (t) {
         var e = t.data.toLowerCase().replace(/×/g, "x").replace(/[Oo]/g, "0");
-        if (e = e.replace("can_", "0x").replace("can-", "0x"), (0, r.print)("Str=" + e), e = e.match(/0x[0-9a-f]{10,12}/), (0, r.print)("math=" + e), e) {
+        if (e = (e = e.replace("can_", "0x").replace("can-", "0x")).match(/0x[0-9a-f]{10,12}/)) {
           n.default.hex_md5("Check" + e + "@t*s$e#T.'1)`").match(/(....)$/);
-          for (var a = (Number(e) + 19880914).toString(16).substring(4, 8), i = RegExp.$1, s = Number(e), o = 0, c = s.toString(), u = 0; u < c.length; u++) o += c.charCodeAt(u);
-          var h = (Math.trunc(s / 655) * o).toString(16),
-            d = h.substr(h.length - 6, 6);
+          for (var a = (Number(e) + 19880914).toString(16).substring(4, 8), i = RegExp.$1, r = Number(e), s = 0, o = r.toString(), c = 0; c < o.length; c++) s += o.charCodeAt(c);
+          var u = (Math.trunc(r / 655) * s).toString(16),
+            h = u.substr(u.length - 6, 6);
           wx.setClipboardData({
-            data: "设备ID:" + e + "\n固件5.0之前老版本密码:" + i + "\n固件5.0及之后蓝牙密码:" + a + "\n固件5.24及之后后台密码:" + d
+            data: "设备ID:" + e + "\n固件5.0之前老版本密码:" + i + "\n固件5.0及之后蓝牙密码:" + a + "\n固件5.24及之后后台密码:" + h
           })
         }
       }

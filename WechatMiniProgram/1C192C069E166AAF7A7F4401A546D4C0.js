@@ -1,6 +1,6 @@
 var e = require("@babel/runtime/helpers/regeneratorRuntime.js"),
   r = require("@babel/runtime/helpers/asyncToGenerator.js"),
-  n = require("B90FE0219E166AAFDF69882689C18510.js"),
+  n = require("4E08A4649E166AAF286ECC635736D4C0.js"),
   t = [],
   o = "",
   s = "",
@@ -468,7 +468,7 @@ module.exports = {
   onBLECharacteristicValueChange1: function (e) {
     wx.onBLECharacteristicValueChange((function (r) {
       for (var n = new Uint8Array(r.value), t = "", o = 0; o < n.length; o++) t += n[o].toString(16).padStart(2, "0"), String.fromCharCode(n[o]);
-      e(0, t.toUpperCase())
+      e(r.value, t.toUpperCase())
     }))
   },
   easySendData: l,
