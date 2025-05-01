@@ -13,6 +13,7 @@
     ],
     "default": "exparser"
   },
+  "subPackages": [],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -26,5 +27,6 @@
     "pages/NewUI/NewUI",
     "pages/NewUI1/NewUI",
     "pages/Help/Help"
-  ]
+  ],
+  "sitemapLocation": "sitemap.json"
 }

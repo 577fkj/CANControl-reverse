@@ -5,11 +5,11 @@
   color: #121312;
   font-size: 28rpx;
   height: 22px;
-  width: 18%
+  width: 18%;
 }
 
 .btnLayout {
-  text-align: center
+  text-align: center;
 }
 
 .SendLayout,
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 0
+  margin: 0;
 }
 
 .bt1,
@@ -27,36 +27,36 @@
   display: -webkit-flex;
   display: flex;
   height: 100rpx;
-  width: 100rpx
+  width: 100rpx;
 }
 
 .SendBox {
-  border: 1px solid #dcdcdc
+  border: 1px solid #dcdcdc;
 }
 
 .page {
   margin: 0 auto;
   padding-bottom: 60px;
-  width: 960px
+  width: 960px;
 }
 
 .footer {
   background: #6cf;
   clear: both;
-  height: 60px
+  height: 60px;
 }
 
 .container,
 .footer {
   bottom: 0;
   position: absolute;
-  width: 100%
+  width: 100%;
 }
 
 .container {
   box-sizing: border-box;
   height: 100%;
-  padding-bottom: 0
+  padding-bottom: 0;
 }
 
 footer {
@@ -64,13 +64,13 @@ footer {
   height: 30px;
   left: 0;
   position: absolute;
-  width: 100%
+  width: 100%;
 }
 
 .Control {
   float: right;
   margin-left: 2em;
-  visibility: hidden
+  visibility: hidden;
 }
 
 .conic-progress {
@@ -78,7 +78,7 @@ footer {
   height: 300rpx;
   margin: 30rpx auto;
   position: relative;
-  width: 300rpx
+  width: 300rpx;
 }
 
 .conic-progress::before {
@@ -86,7 +86,7 @@ footer {
   border-radius: 50%;
   content: "";
   height: 80%;
-  width: 80%
+  width: 80%;
 }
 
 .conic-progress::before,
@@ -94,11 +94,11 @@ footer {
   left: 50%;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .progress-value {
   color: green;
   font-size: 60rpx;
-  font-weight: bolder
+  font-weight: bolder;
 }

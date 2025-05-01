@@ -1,207 +1,248 @@
 <image class="background" mode="aspectFill" src="{{BGP}}"></image>
 <view hidden="{{BGI==0}}" style="position:fixed;width:100%;height:100%;background-color:{{BGC}};"></view>
-<view id="page" style="display:{{Panel==1?'block':'none'}}">
-    <view style="height:10px"></view>
-    <view class="btnLayout" style="height:88px;font-size:15px;color:white;">
-        <view bindtap="nvbt" style="z-index:1;width:50%;">
-            <image mode="aspectFill" src="/img/vt.png" style="height:88px;width:100%;"></image>
-            <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OV}}V</view>
-            <view style="position:relative;top:-70px;text-align:right;width:85%;">{{SV}}V</view>
-        </view>
-        <view bindtap="nabt" style="z-index:1;width:50%;">
-            <image mode="aspectFill" src="/img/cu.png" style="height:88px;width:100%;"></image>
-            <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OA}}A</view>
-            <view style="position:relative;top:-70px;text-align:left;left:15%;width:85%;">{{SA}}A</view>
-        </view>
-    </view>
-    <view class="btnLayout" style="height:188px;">
-        <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:56%;height:110px;">
-            <view style="position:relative;top:-30px;color:#fff8;width:100%;height:0px;">APP-{{APP}}</view>
-            <view style="height:151px;" wx:if="{{CEV==1}}">
-                <view style="background-color:#0005;position:relative;left:0px;top:0px;height:110px;width:100%"></view>
-                <image mode="aspectFit" src="/img/ev.png" style="left:0%;top:0px;width:100%;height:100%;position:absolute;"></image>
-                <view bindtap="BTVIN" style="position:relative;left:-2px;top:-15px;color:rgb(0, 255, 255);width:100%;height:0px;font-size:12px;z-index:1;">{{VIN}}</view>
+<view id="page" wx:if="{{Panel==1&&!UPS}}">
+    <view wx:if="{{ODM==0||GM==2}}">
+        <view style="height:10px"></view>
+        <view class="btnLayout" style="height:88px;font-size:15px;color:white;">
+            <view bindtap="nvbt" style="z-index:1;width:50%;">
+                <image mode="aspectFill" src="/img/vt.png" style="height:88px;width:100%;"></image>
+                <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OV}}V</view>
+                <view style="position:relative;top:-70px;text-align:right;width:85%;">{{SV}}V</view>
             </view>
-            <view style="height:151px;" wx:else>
-                <view style="background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};position:relative;left:0px;top:0px;height:110px;width:{{SOC}}%"></view>
-                <view style="border-style:solid;border-width:8px;border-radius:5px;border-color:#aaa;position:relative;left:100%;top:-75px;width:0%;height:25px;"></view>
-                <view style="position:relative;top:-100px;color:#fff;width:100%;height:0px;font-size:40px;">{{SOC}}%</view>
-            </view>
-            <view style="position:relative;top:-145px;color:#fff;width:100%;white-space:nowrap;height:0px;font-size:{{FSize}}px;">{{STR}}</view>
-            <view style="position:relative;top:{{CEV?'-25px':'-30px'}};color:#fff8;width:100%;">{{SCAN+'-'+CVer}}</view>
-        </view>
-        <view bindtap="DST1" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:195px;position:absolute;color:{{DST==0?'#0f0':'#AAAA'}};">①</view>
-        <view bindtap="DST2" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:160px;position:absolute;color:{{DST==1?'#0f0':'#AAAA'}};">②</view>
-        <view bindtap="DST3" hidden="{{!(DOL>2)}}" style="font-size:28px;left:90%;top:125px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">③</view>
-        <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top:90px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">④</view>
-        <view bindtap="uset" style="left:90%;top:240px;width:28px;height:28px;position:absolute;">
-            <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate}}"></view>
-            <image mode="aspectFit" src="/img/set.png" style="width:25px;height:25px;"></image>
-        </view>
-        <image bindtap="SetSM" mode="aspectFit" src="/img/vw.png" style="left:5%;top:240px;width:25px;height:25px;position:absolute;"></image>
-    </view>
-    <view class="btnLayout" style="height:0px;">
-        <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:-166px;width:56%;height:110px;"></view>
-    </view>
-    <view class="btnLayout" hidden="{{ShowM==0}}" style="height:240px;">
-        <view style="display:flex;width:90%;font-size:14px;text-align:right;color:#aaa;z-index:1;line-height:1.95;white-space:nowrap;">
-            <view style="width:20%;text-align:left;">{{UEN?'IN Voltage':'输入电压'}}<view></view>{{UEN?'IN Current':'输入电流'}}<view></view>{{UEN?'IN Power':'输入功率'}}<view></view>{{UEN?'IN Temp':'输入温度'}}<view></view>{{UEN?'Efficiency':'充电效率'}}<view></view>{{UEN?'Ampere-hour':'充入容量'}}<view></view>{{UEN?'Watt-hour':'充入电量'}}<view></view>{{UEN?'Work Time':'充电时间'}}<view></view>
-            </view>
-            <view style="width:20%;color:#fff;">{{IV}}<view></view>{{IA}}<view></view>{{IW}}<view></view>{{IT}}<view></view>{{EEI}}<view></view>{{Ah}}<view></view>{{Wh}}<view></view>{{Ti}}</view>
-            <view style="width:8%;">V<view></view>A<view></view>W<view></view>℃<view></view>%<view></view>Ah<view></view>Wh</view>
-            <view style="width:3%;"></view>
-            <view style="width:2px;background-color:#aaa;height:220px;"></view>
-            <view style="width:3%;"></view>
-            <view style="width:20%;text-align:left;">{{UEN?'OUT Voltage':'输出电压'}}<view></view>{{UEN?'OUT Current':'输出电流'}}<view></view>{{UEN?'OUT Power':'输出功率'}}<view></view>{{UEN?'OUT Temp':'输出温度'}}<view></view>{{UEN?'Charge loss':'充电损耗'}}<view></view>{{UEN?'All Ah':'累计容量'}}<view></view>{{UEN?'All Wh':'累计电量'}}<view></view>{{UEN?'All Time':'累计时间'}}<view></view>
-            </view>
-            <view style="width:20%;color:#fff;">{{OV}}<view></view>{{OA}}<view style="color:{{SWT||SMT?'red':'white'}}">{{OW}}</view>
-                <view style="color:{{SMT?'red':'wgite'}}">{{OT}}</view>{{EES}}<view></view>{{AH}}<view></view>{{WH}}<view></view>{{TI}}</view>
-            <view style="width:8%;">V<view></view>A<view></view>W<view></view>℃<view></view>W<view></view>Ah<view></view>Wh</view>
-        </view>
-    </view>
-    <view class="btnLayout" hidden="{{ShowM!=0}}" style="height:240px;color:white;font-size:17px;">
-        <image bindtap="pwrbt" mode="aspectFit" src="/img/{{PON==1?'iv':'iv1'}}.png" style="left:5%;top:280px;width:30%;height:120px;position:absolute;"></image>
-        <view style="position:absolute;left:5%;top:356px;width:30%;">{{IV}}</view>
-        <image bindtap="otbt" mode="aspectFit" src="/img/ot.png" style="left:35%;top:280px;width:30%;height:120px;position:absolute;"></image>
-        <view style="position:absolute;left:35%;top:356px;width:30%;color:{{SMT?'red':'white'}};">{{OT>IT?OT:IT}}℃</view>
-        <image bindtap="{{CEV?'':'owbt'}}" mode="aspectFit" src="/img/ow.png" style="left:65%;top:280px;width:30%;height:120px;position:absolute;"></image>
-        <view style="position:absolute;left:65%;top:356px;width:30%;color:{{(SWT||SMT)&&!CEV?'red':'white'}};">{{OW}}</view>
-        <view hidden="{{CEV}}" style="position:absolute;left:65%;top:346px;width:30%;font-size:12px;color:#aaa;">{{UMW}}</view>
-        <image bindtap="ahbt" mode="aspectFit" src="/img/ah.png" style="left:5%;top:400px;width:30%;height:120px;position:absolute;"></image>
-        <view style="position:absolute;left:5%;top:476px;width:30%;">{{Ah}}</view>
-        <image bindtap="whbt" mode="aspectFit" src="/img/wh.png" style="left:35%;top:400px;width:30%;height:120px;position:absolute;"></image>
-        <view style="position:absolute;left:35%;top:476px;width:30%;">{{Wh}}</view>
-        <image bindtap="{{CEV?'':'tibt'}}" mode="aspectFit" src="/img/ti.png" style="left:65%;top:400px;width:30%;height:120px;position:absolute;"></image>
-        <view style="position:absolute;left:65%;top:476px;width:30%;">{{Ti}}</view>
-    </view>
-    <view class="btnLayout" hidden="{{ShowM!=0&&(SCAN=='Increase'||SCAN=='Huawei'&&CVer>=5.36||SCAN=='INFY'||CEV==1)&&!UEN}}" style="height:120px;">
-        <view>
-            <image mode="scaleToFill" src="/img/sb.png" style="left:5%;top:520px;width:30%;height:120px;position:absolute;"></image>
-            <view bindtap="hqbt1" style="position:absolute;left:5%;top:550px;width:30%;font-size:17px;color:white;" wx:if="{{!CEV}}">{{UHQ+(UEN?'S':'秒')}}</view>
-            <view wx:else>
-                <view bindtap="BTOST" style="position:absolute;left:5%;top:540px;width:30%;font-size:17px;color:white;">{{OST+'℃'}}</view>
-                <view bindtap="hqbt1" style="position:absolute;left:5%;top:563px;width:30%;font-size:17px;color:white;">{{UHQ+(UEN?'S':'秒')}}</view>
-            </view>
-            <view bindtap="hqbt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:9%;top:590px;width:22%;height:20px;">
-                <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{UHQ==0?'#999':'#0f0'}};"></view>
-                <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?CEV?'Protection':'Soft start':CEV?'超温关机':'电流缓启'}}</view>
+            <view bindtap="nabt" style="z-index:1;width:50%;">
+                <image mode="aspectFill" src="/img/cu.png" style="height:88px;width:100%;"></image>
+                <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OA}}A</view>
+                <view style="position:relative;top:-70px;text-align:left;left:15%;width:85%;">{{SA}}A</view>
             </view>
         </view>
-        <view>
-            <image mode="scaleToFill" src="/img/sb.png" style="left:35%;top:520px;width:30%;height:120px;position:absolute;"></image>
-            <view wx:if="{{CEV&&(CVer<5.39||SV>126)}}">
-                <view bindtap="sa2bt3" style="position:absolute;left:35%;top:550px;width:30%;font-size:17px;color:white;">{{YS}}</view>
-                <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
-                    <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{YS=='00:00:00'?'#999':'#0f0'}};"></view>
-                    <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?'Timed':'定时关机'}}</view>
+        <view class="btnLayout" style="height:188px;">
+            <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:56%;height:110px;">
+                <view style="position:relative;top:-30px;color:#fff8;width:100%;height:0px;">APP-{{APP}}</view>
+                <view style="height:151px;" wx:if="{{CEV==1}}">
+                    <view style="background-color:#0005;position:relative;left:0px;top:0px;height:110px;width:100%"></view>
+                    <image mode="aspectFit" src="/img/ev.png" style="left:0%;top:0px;width:100%;height:100%;position:absolute;"></image>
+                    <view bindtap="BTVIN" style="position:relative;left:-2px;top:-15px;color:rgb(0, 255, 255);width:100%;height:0px;font-size:12px;z-index:1;">{{VIN}}</view>
+                </view>
+                <view style="height:151px;" wx:else>
+                    <view style="background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};position:relative;left:0px;top:0px;height:110px;width:{{SOC}}%"></view>
+                    <view style="border-style:solid;border-width:8px;border-radius:5px;border-color:#aaa;position:relative;left:100%;top:-75px;width:0%;height:25px;"></view>
+                    <view style="position:relative;top:-100px;color:#fff;width:100%;height:0px;font-size:40px;">{{SOC}}%</view>
+                </view>
+                <view style="position:relative;top:-145px;color:#fff;width:100%;white-space:nowrap;height:0px;font-size:{{FSize}}px;">{{STR}}</view>
+                <view style="position:relative;top:{{CEV?'-25px':'-30px'}};color:#fff8;width:100%;">{{SCAN+'-'+CVer}}</view>
+            </view>
+            <view bindtap="DST1" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:195px;position:absolute;color:{{DST==0?'#0f0':'#AAAA'}};">①</view>
+            <view bindtap="DST2" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:160px;position:absolute;color:{{DST==1?'#0f0':'#AAAA'}};">②</view>
+            <view bindtap="DST3" hidden="{{!(DOL>2)}}" style="font-size:28px;left:90%;top:125px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">③</view>
+            <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top:90px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">④</view>
+            <view bindtap="uset" style="left:90%;top:240px;width:28px;height:28px;position:absolute;">
+                <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate}}"></view>
+                <image mode="aspectFit" src="/img/set.png" style="width:25px;height:25px;"></image>
+            </view>
+            <image bindtap="SetSM" mode="aspectFit" src="/img/vw.png" style="left:5%;top:240px;width:25px;height:25px;position:absolute;"></image>
+        </view>
+        <view class="btnLayout" style="height:0px;">
+            <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:-166px;width:56%;height:110px;"></view>
+        </view>
+        <view class="btnLayout" hidden="{{ShowM==0}}" style="height:240px;">
+            <view style="display:flex;width:90%;font-size:14px;text-align:right;color:#aaa;z-index:1;line-height:1.95;white-space:nowrap;">
+                <view style="width:20%;text-align:left;">{{UEN?'IN Voltage':'输入电压'}}<view></view>{{UEN?'IN Current':'输入电流'}}<view></view>{{UEN?'IN Power':'输入功率'}}<view></view>{{UEN?'IN Temp':'输入温度'}}<view></view>{{UEN?'Efficiency':'充电效率'}}<view></view>{{UEN?'Ampere-hour':'充入容量'}}<view></view>{{UEN?'Watt-hour':'充入电量'}}<view></view>{{UEN?'Work Time':'充电时间'}}<view></view>
+                </view>
+                <view style="width:20%;color:#fff;">{{IV}}<view></view>{{IA}}<view style="color:{{SWT&&UIW&&IW?'red':'white'}}">{{IW}}</view>
+                    <view></view>{{IT}}<view></view>{{EEI}}<view></view>{{Ah}}<view></view>{{Wh}}<view></view>{{Ti}}</view>
+                <view style="width:8%;">V<view></view>A<view></view>W<view></view>℃<view></view>%<view></view>Ah<view></view>Wh</view>
+                <view style="width:3%;"></view>
+                <view style="width:2px;background-color:#aaa;height:220px;"></view>
+                <view style="width:3%;"></view>
+                <view style="width:20%;text-align:left;">{{UEN?'OUT Voltage':'输出电压'}}<view></view>{{UEN?'OUT Current':'输出电流'}}<view></view>{{UEN?'OUT Power':'输出功率'}}<view></view>{{UEN?'OUT Temp':'输出温度'}}<view></view>{{UEN?'Charge loss':'充电损耗'}}<view></view>{{UEN?'All Ah':'累计容量'}}<view></view>{{UEN?'All Wh':'累计电量'}}<view></view>{{UEN?'All Time':'累计时间'}}<view></view>
+                </view>
+                <view style="width:20%;color:#fff;">{{OV}}<view></view>{{OA}}<view style="color:{{SWT&&!(UIW&&IW)||SMT?'red':'white'}}">{{OW}}</view>
+                    <view style="color:{{SMT?'red':'wgite'}}">{{OT}}</view>{{EES}}<view></view>{{AH}}<view></view>{{WH}}<view></view>{{TI}}</view>
+                <view style="width:8%;">V<view></view>A<view></view>W<view></view>℃<view></view>W<view></view>Ah<view></view>Wh</view>
+            </view>
+        </view>
+        <view class="btnLayout" hidden="{{ShowM!=0}}" style="height:240px;color:white;font-size:17px;">
+            <image bindtap="pwrbt" mode="aspectFit" src="/img/{{PON==1?'iv':'iv1'}}.png" style="left:5%;top:280px;width:30%;height:120px;position:absolute;"></image>
+            <view style="position:absolute;left:5%;top:356px;width:30%;">{{IV}}</view>
+            <image bindtap="otbt" mode="aspectFit" src="/img/ot.png" style="left:35%;top:280px;width:30%;height:120px;position:absolute;"></image>
+            <view style="position:absolute;left:35%;top:356px;width:30%;color:{{SMT?'red':'white'}};">{{OT>IT?OT:IT}}℃</view>
+            <image bindtap="{{CEV?'':'owbt'}}" mode="aspectFit" src="/img/ow.png" style="left:65%;top:280px;width:30%;height:120px;position:absolute;"></image>
+            <view style="position:absolute;left:65%;top:356px;width:30%;color:{{(SWT||SMT)&&!CEV?'red':'white'}};">{{UIW&&IW?IW:OW}}</view>
+            <view hidden="{{CEV}}" style="position:absolute;left:65%;top:346px;width:30%;font-size:12px;color:#aaa;">{{UMW}}</view>
+            <image bindtap="ahbt" mode="aspectFit" src="/img/ah.png" style="left:5%;top:400px;width:30%;height:120px;position:absolute;"></image>
+            <view style="position:absolute;left:5%;top:476px;width:30%;">{{Ah}}</view>
+            <image bindtap="whbt" mode="aspectFit" src="/img/wh.png" style="left:35%;top:400px;width:30%;height:120px;position:absolute;"></image>
+            <view style="position:absolute;left:35%;top:476px;width:30%;">{{Wh}}</view>
+            <image bindtap="{{CEV?'':'tibt'}}" mode="aspectFit" src="/img/ti.png" style="left:65%;top:400px;width:30%;height:120px;position:absolute;"></image>
+            <view style="position:absolute;left:65%;top:476px;width:30%;">{{Ti}}</view>
+        </view>
+        <view class="btnLayout" hidden="{{ShowM!=0&&(SCAN=='Increase'||SCAN=='Huawei'&&CVer>=5.36||SCAN=='INFY'||CEV==1)&&!UEN}}" style="height:120px;">
+            <view>
+                <image mode="scaleToFill" src="/img/sb.png" style="left:5%;top:520px;width:30%;height:120px;position:absolute;"></image>
+                <view bindtap="hqbt1" style="position:absolute;left:5%;top:550px;width:30%;font-size:17px;color:white;" wx:if="{{!CEV}}">{{UHQ+(UEN?'S':'秒')}}</view>
+                <view wx:else>
+                    <view bindtap="BTOST" style="position:absolute;left:5%;top:540px;width:30%;font-size:17px;color:white;">{{OST+'℃'}}</view>
+                    <view bindtap="hqbt1" style="position:absolute;left:5%;top:563px;width:30%;font-size:17px;color:white;">{{UHQ+(UEN?'S':'秒')}}</view>
+                </view>
+                <view bindtap="hqbt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:9%;top:590px;width:22%;height:20px;">
+                    <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{UHQ==0?'#999':'#0f0'}};"></view>
+                    <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?CEV?'Protection':'Soft start':CEV?'超温关机':'电流缓启'}}</view>
                 </view>
             </view>
-            <view wx:else>
-                <view bindtap="sa2bt1" style="position:absolute;left:35%;top:540px;width:30%;font-size:17px;color:white;">{{SV2}}V</view>
-                <view bindtap="sa2bt2" style="position:absolute;left:35%;top:563px;width:30%;font-size:17px;color:white;">{{SA2}}A</view>
-                <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
-                    <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{SA2==0?'#999':'#0f0'}};"></view>
-                    <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?'Two stage':'二段功能'}}</view>
+            <view>
+                <image mode="scaleToFill" src="/img/sb.png" style="left:35%;top:520px;width:30%;height:120px;position:absolute;"></image>
+                <view wx:if="{{CEV&&(CVer<5.39||SV>126)}}">
+                    <view bindtap="sa2bt3" style="position:absolute;left:35%;top:550px;width:30%;font-size:17px;color:white;">{{YS}}</view>
+                    <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
+                        <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{YS=='00:00:00'?'#999':'#0f0'}};"></view>
+                        <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?'Timed':'定时关机'}}</view>
+                    </view>
+                </view>
+                <view wx:else>
+                    <view bindtap="sa2bt1" style="position:absolute;left:35%;top:540px;width:30%;font-size:17px;color:white;">{{SV2}}V</view>
+                    <view bindtap="sa2bt2" style="position:absolute;left:35%;top:563px;width:30%;font-size:17px;color:white;">{{SA2}}A</view>
+                    <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
+                        <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{SA2==0?'#999':'#0f0'}};"></view>
+                        <view style="position:relative;left:20%;top:1px;width:80%;color:white;text-align:center;font-size:12px;">{{UEN?'Two stage':'二段功能'}}</view>
+                    </view>
                 </view>
             </view>
+            <image mode="scaleToFill" src="/img/sb.png" style="left:65%;top:520px;width:30%;height:120px;position:absolute;"></image>
+            <view bindtap="sdbt0">
+                <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:20px;height:20px;background-color:{{USD==0?'#999':'#0f0'}};z-index:1;"></view>
+                <view style="position:absolute;left:75%;top:593px;width:15%;height:20px;color:white;text-align:center;font-size:12px;">{{UEN?'Shutdown':'充满关机'}}</view>
+                <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:22%;height:20px;color:white;"></view>
+            </view>
+            <view wx:if="{{CVer>=5.27}}">
+                <view bindtap="sdbt1" style="position:absolute;left:65%;top:540px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
+                <view bindtap="sdbt2" style="position:absolute;left:65%;top:563px;width:30%;font-size:17px;color:white;">{{SDU}}A</view>
+            </view>
+            <view wx:else>
+                <view bindtap="sdbt1" style="position:absolute;left:65%;top:550px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
+            </view>
         </view>
-        <image mode="scaleToFill" src="/img/sb.png" style="left:65%;top:520px;width:30%;height:120px;position:absolute;"></image>
-        <view bindtap="sdbt0">
-            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:20px;height:20px;background-color:{{USD==0?'#999':'#0f0'}};z-index:1;"></view>
-            <view style="position:absolute;left:75%;top:593px;width:15%;height:20px;color:white;text-align:center;font-size:12px;">{{UEN?'Shutdown':'充满关机'}}</view>
-            <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:69%;top:590px;width:22%;height:20px;color:white;"></view>
+        <view class="Err" hidden="{{ShowM==0||SCAN!='Increase'||UEN}}" style="position:relative;top:-10px;height:120px;">
+            <view class="btnLayout" style="height:50px;">
+                <view style="width:2%;"></view>
+                <view style="width:15%;color:{{ST0&16?'#f90':'#888'}};">输入<view></view>过压</view>
+                <view style="width:15%;color:{{ST0&64?'#f90':'#888'}};">输出<view></view>过压</view>
+                <view style="width:15%;color:{{ST0==0?'#f90':'#888'}};">恒压<view></view>状态</view>
+                <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">过热<view></view>保护</view>
+                <view style="width:15%;color:{{ST0&8?'#f90':'#888'}};">风机<view></view>故障</view>
+                <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">模块<view></view>关机</view>
+                <view style="width:2%;"></view>
+            </view>
+            <view style="height:15px;"></view>
+            <view class="btnLayout" style="height:50px;">
+                <view style="width:2%;"></view>
+                <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">输入<view></view>欠压</view>
+                <view style="width:15%;color:{{ST0&128?'#f90':'#888'}};">输出<view></view>欠压</view>
+                <view style="width:15%;color:{{ST0&4?'#f90':'#888'}};">恒流<view></view>状态</view>
+                <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">过流<view></view>保护</view>
+                <view style="width:15%;color:{{ST0&2?'#f90':'#888'}};">模块<view></view>故障</view>
+                <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">设置<view></view>关机</view>
+                <view style="width:2%;"></view>
+            </view>
         </view>
-        <view wx:if="{{CVer>=5.27}}">
-            <view bindtap="sdbt1" style="position:absolute;left:65%;top:540px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
-            <view bindtap="sdbt2" style="position:absolute;left:65%;top:563px;width:30%;font-size:17px;color:white;">{{SDU}}A</view>
+        <view class="Err" hidden="{{ShowM==0||SCAN!='INFY'||UEN}}" style="position:relative;top:-10px;height:120px;">
+            <view class="btnLayout" style="height:50px;">
+                <view style="width:2%;"></view>
+                <view style="width:15%;color:{{ST2&64?'#f90':'#888'}};">输入<view></view>过压</view>
+                <view style="width:15%;color:{{ST1&32?'#f90':'#888'}};">输出<view></view>过压</view>
+                <view style="width:15%;color:{{ST2&8?'#f90':'#888'}};">三相<view></view>缺相</view>
+                <view style="width:15%;color:{{ST1&16?'#f90':'#888'}};">过热<view></view>警告</view>
+                <view style="width:15%;color:{{ST1&8?'#f90':'#888'}};">风机<view></view>故障</view>
+                <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">模块<view></view>关机</view>
+                <view style="width:2%;"></view>
+            </view>
+            <view style="height:15px;"></view>
+            <view class="btnLayout" style="height:50px;">
+                <view style="width:2%;"></view>
+                <view style="width:15%;color:{{ST2&32?'#f90':'#888'}};">输入<view></view>欠压</view>
+                <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">输出<view></view>短路</view>
+                <view style="width:15%;color:{{ST2&1?'#f90':'#888'}};">功率<view></view>限制</view>
+                <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">模块<view></view>保护</view>
+                <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">模块<view></view>故障</view>
+                <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">放电<view></view>异常</view>
+                <view style="width:2%;"></view>
+            </view>
         </view>
-        <view wx:else>
-            <view bindtap="sdbt1" style="position:absolute;left:65%;top:550px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
+        <view class="Err" style="position:relative;top:-10px;height:120px;" wx:if="{{ShowM==1&&UEN==0&&(SCAN=='Huawei'&&CVer>=5.36||CEV==1)}}">
+            <view class="btnLayout" style="height:50px;color:#f00;">
+                <view style="width:2%;"></view>
+                <view style="width:15%;color:{{E1S==0?'#888':E1S==1?'#f00':'#f90'}};">{{E1A}}<view></view>{{E1B}}</view>
+                <view style="width:15%;color:{{E2S==0?'#888':E2S==1?'#f00':'#f90'}};">{{E2A}}<view></view>{{E2B}}</view>
+                <view style="width:15%;color:{{E3S==0?'#888':E3S==1?'#f00':'#f90'}};">{{E3A}}<view></view>{{E3B}}</view>
+                <view style="width:15%;color:{{E4S==0?'#888':E4S==1?'#f00':'#f90'}};">{{E4A}}<view></view>{{E4B}}</view>
+                <view style="width:15%;color:{{E5S==0?'#888':E5S==1?'#f00':'#f90'}};">{{E5A}}<view></view>{{E5B}}</view>
+                <view style="width:15%;color:{{E6S==0?'#888':E6S==1?'#f00':'#f90'}};">{{E6A}}<view></view>{{E6B}}</view>
+                <view style="width:2%;"></view>
+            </view>
+            <view style="height:15px;"></view>
+            <view class="btnLayout" style="height:50px;">
+                <view style="width:2%;"></view>
+                <view style="width:15%;color:{{E7S==0?'#888':E7S==1?'#f00':'#f90'}};">{{E7A}}<view></view>{{E7B}}</view>
+                <view style="width:15%;color:{{E8S==0?'#888':E8S==1?'#f00':'#f90'}};">{{E8A}}<view></view>{{E8B}}</view>
+                <view style="width:15%;color:{{E9S==0?'#888':E9S==1?'#f00':'#f90'}};">{{E9A}}<view></view>{{E9B}}</view>
+                <view style="width:15%;color:{{EAS==0?'#888':EAS==1?'#f00':'#f90'}};">{{EAA}}<view></view>{{EAB}}</view>
+                <view style="width:15%;color:{{EBS==0?'#888':EBS==1?'#f00':'#f90'}};">{{EBA}}<view></view>{{EBB}}</view>
+                <view style="width:15%;color:{{ECS==0?'#888':ECS==1?'#f00':'#f90'}};">{{ECA}}<view></view>{{ECB}}</view>
+                <view style="width:2%;"></view>
+            </view>
+        </view>
+        <view class="btnLayout" style="position:relative;left:2.5%;width:95%;height:0px">
+            <image bindtap="ks1bt" mode="aspectFit" src="/img/{{KSi==1?'ks2':'ks1'}}.png" style="height:80px;"></image>
+            <image bindtap="ks2bt" mode="aspectFit" src="/img/{{KSi==2?'ks2':'ks1'}}.png" style="height:80px;"></image>
+            <image bindtap="ks3bt" mode="aspectFit" src="/img/{{KSi==3?'ks2':'ks1'}}.png" style="height:80px;"></image>
+            <image bindtap="ks4bt" mode="aspectFit" src="/img/{{KSi==4?'ks2':'ks1'}}.png" style="height:80px;"></image>
+        </view>
+        <view class="btnLayout" style="position:relative;left:2.5%;width:95%;height:0px;font-size:16px;">
+            <view bindtap="ks1bt" style="color:{{KSi==1?'#fff':'#999'}};">{{CX.toFixed(KS1[0],2)}}V<view></view>{{CX.toFixed(KS1[1],2)}}A</view>
+            <view bindtap="ks2bt" style="color:{{KSi==2?'#fff':'#999'}};">{{CX.toFixed(KS2[0],2)}}V<view></view>{{CX.toFixed(KS2[1],2)}}A</view>
+            <view bindtap="ks3bt" style="color:{{KSi==3?'#fff':'#999'}};">{{CX.toFixed(KS3[0],2)}}V<view></view>{{CX.toFixed(KS3[1],2)}}A</view>
+            <view bindtap="ks4bt" style="color:{{KSi==4?'#fff':'#999'}};">{{CX.toFixed(KS4[0],2)}}V<view></view>{{CX.toFixed(KS4[1],2)}}A</view>
         </view>
     </view>
-    <view class="Err" hidden="{{ShowM==0||SCAN!='Increase'||UEN}}" style="position:relative;top:-10px;height:120px;">
-        <view class="btnLayout" style="height:50px;">
-            <view style="width:2%;"></view>
-            <view style="width:15%;color:{{ST0&16?'#f90':'#888'}};">输入<view></view>过压</view>
-            <view style="width:15%;color:{{ST0&64?'#f90':'#888'}};">输出<view></view>过压</view>
-            <view style="width:15%;color:{{ST0==0?'#f90':'#888'}};">恒压<view></view>状态</view>
-            <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">过热<view></view>保护</view>
-            <view style="width:15%;color:{{ST0&8?'#f90':'#888'}};">风机<view></view>故障</view>
-            <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">模块<view></view>关机</view>
-            <view style="width:2%;"></view>
+    <view wx:elif="{{ODM==1}}">
+        <view>
+            <view class="SetBox">
+                <view class="SendLayout">
+                    <view bindtap="BTUP" style="width:20px;background-color:#88888850;">
+                        <view class="{{ShowBar==4?'open':'close1'}}"></view>
+                    </view>
+                    <button bindtap="BTUP" class="DisTIP" style="width:65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
+                    <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate>CVer?'Start Upgrade':'No Available'}}</button>
+                    <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate>CVer?'开始升级':'已最新版'}}</button>
+                    <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate}}"></view>
+                </view>
+                <view hidden="{{ShowBar!=4}}">
+                    <view class="btnLayout">
+                        <button class="DisTIP1">{{UEN?'WIFI hotspot name':'WIFI热点名'}}</button>
+                        <button bindtap="BTUP6" class="DisINF1">{{WID}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">{{UEN?'WIFI hotspot password':'WIFI热点密码'}}</button>
+                        <button bindtap="BTUP7" class="DisINF1">{{WPD}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">{{UEN?'Device ID':'设备ID'}}</button>
+                        <button bindtap="BTUP2" class="DisINF1">{{ID}}</button>
+                    </view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">{{UEN?'Firmware version':'固件版本'}}</button>
+                        <button bindtap="BTUP3" class="DisINF1" style="color:gray;">{{CVer}}</button>
+                    </view>
+                    <view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    </view>
+                    <view style="height:15px;"></view>
+                </view>
+            </view>
+            <view style="height:5px;"></view>
         </view>
-        <view style="height:15px;"></view>
-        <view class="btnLayout" style="height:50px;">
-            <view style="width:2%;"></view>
-            <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-            <view style="width:15%;color:{{ST0&128?'#f90':'#888'}};">输出<view></view>欠压</view>
-            <view style="width:15%;color:{{ST0&4?'#f90':'#888'}};">恒流<view></view>状态</view>
-            <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">过流<view></view>保护</view>
-            <view style="width:15%;color:{{ST0&2?'#f90':'#888'}};">模块<view></view>故障</view>
-            <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">设置<view></view>关机</view>
-            <view style="width:2%;"></view>
-        </view>
-    </view>
-    <view class="Err" hidden="{{ShowM==0||SCAN!='INFY'||UEN}}" style="position:relative;top:-10px;height:120px;">
-        <view class="btnLayout" style="height:50px;">
-            <view style="width:2%;"></view>
-            <view style="width:15%;color:{{ST2&64?'#f90':'#888'}};">输入<view></view>过压</view>
-            <view style="width:15%;color:{{ST1&32?'#f90':'#888'}};">输出<view></view>过压</view>
-            <view style="width:15%;color:{{ST2&8?'#f90':'#888'}};">三相<view></view>缺相</view>
-            <view style="width:15%;color:{{ST1&16?'#f90':'#888'}};">过热<view></view>警告</view>
-            <view style="width:15%;color:{{ST1&8?'#f90':'#888'}};">风机<view></view>故障</view>
-            <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">模块<view></view>关机</view>
-            <view style="width:2%;"></view>
-        </view>
-        <view style="height:15px;"></view>
-        <view class="btnLayout" style="height:50px;">
-            <view style="width:2%;"></view>
-            <view style="width:15%;color:{{ST2&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-            <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">输出<view></view>短路</view>
-            <view style="width:15%;color:{{ST2&1?'#f90':'#888'}};">功率<view></view>限制</view>
-            <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">模块<view></view>保护</view>
-            <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">模块<view></view>故障</view>
-            <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">放电<view></view>异常</view>
-            <view style="width:2%;"></view>
-        </view>
-    </view>
-    <view class="Err" style="position:relative;top:-10px;height:120px;" wx:if="{{ShowM==1&&UEN==0&&(SCAN=='Huawei'&&CVer>=5.36||CEV==1)}}">
-        <view class="btnLayout" style="height:50px;color:#f00;">
-            <view style="width:2%;"></view>
-            <view style="width:15%;color:{{E1S==0?'#888':E1S==1?'#f00':'#f90'}};">{{E1A}}<view></view>{{E1B}}</view>
-            <view style="width:15%;color:{{E2S==0?'#888':E2S==1?'#f00':'#f90'}};">{{E2A}}<view></view>{{E2B}}</view>
-            <view style="width:15%;color:{{E3S==0?'#888':E3S==1?'#f00':'#f90'}};">{{E3A}}<view></view>{{E3B}}</view>
-            <view style="width:15%;color:{{E4S==0?'#888':E4S==1?'#f00':'#f90'}};">{{E4A}}<view></view>{{E4B}}</view>
-            <view style="width:15%;color:{{E5S==0?'#888':E5S==1?'#f00':'#f90'}};">{{E5A}}<view></view>{{E5B}}</view>
-            <view style="width:15%;color:{{E6S==0?'#888':E6S==1?'#f00':'#f90'}};">{{E6A}}<view></view>{{E6B}}</view>
-            <view style="width:2%;"></view>
-        </view>
-        <view style="height:15px;"></view>
-        <view class="btnLayout" style="height:50px;">
-            <view style="width:2%;"></view>
-            <view style="width:15%;color:{{E7S==0?'#888':E7S==1?'#f00':'#f90'}};">{{E7A}}<view></view>{{E7B}}</view>
-            <view style="width:15%;color:{{E8S==0?'#888':E8S==1?'#f00':'#f90'}};">{{E8A}}<view></view>{{E8B}}</view>
-            <view style="width:15%;color:{{E9S==0?'#888':E9S==1?'#f00':'#f90'}};">{{E9A}}<view></view>{{E9B}}</view>
-            <view style="width:15%;color:{{EAS==0?'#888':EAS==1?'#f00':'#f90'}};">{{EAA}}<view></view>{{EAB}}</view>
-            <view style="width:15%;color:{{EBS==0?'#888':EBS==1?'#f00':'#f90'}};">{{EBA}}<view></view>{{EBB}}</view>
-            <view style="width:15%;color:{{ECS==0?'#888':ECS==1?'#f00':'#f90'}};">{{ECA}}<view></view>{{ECB}}</view>
-            <view style="width:2%;"></view>
-        </view>
-    </view>
-    <view class="btnLayout" style="position:relative;left:2.5%;width:95%;height:0px">
-        <image bindtap="ks1bt" mode="aspectFit" src="/img/{{KSi==1?'ks2':'ks1'}}.png" style="height:80px;"></image>
-        <image bindtap="ks2bt" mode="aspectFit" src="/img/{{KSi==2?'ks2':'ks1'}}.png" style="height:80px;"></image>
-        <image bindtap="ks3bt" mode="aspectFit" src="/img/{{KSi==3?'ks2':'ks1'}}.png" style="height:80px;"></image>
-        <image bindtap="ks4bt" mode="aspectFit" src="/img/{{KSi==4?'ks2':'ks1'}}.png" style="height:80px;"></image>
-    </view>
-    <view class="btnLayout" style="position:relative;left:2.5%;width:95%;height:0px;font-size:16px;">
-        <view bindtap="ks1bt" style="color:{{KSi==1?'#fff':'#999'}};">{{CX.toFixed(KS1[0],2)}}V<view></view>{{CX.toFixed(KS1[1],2)}}A</view>
-        <view bindtap="ks2bt" style="color:{{KSi==2?'#fff':'#999'}};">{{CX.toFixed(KS2[0],2)}}V<view></view>{{CX.toFixed(KS2[1],2)}}A</view>
-        <view bindtap="ks3bt" style="color:{{KSi==3?'#fff':'#999'}};">{{CX.toFixed(KS3[0],2)}}V<view></view>{{CX.toFixed(KS3[1],2)}}A</view>
-        <view bindtap="ks4bt" style="color:{{KSi==4?'#fff':'#999'}};">{{CX.toFixed(KS4[0],2)}}V<view></view>{{CX.toFixed(KS4[1],2)}}A</view>
-    </view>
-</view>
-<view style="display:{{Panel==2?'block':'none'}}">
+    </view>></view>
+<view wx:if="{{Panel==2&&!UPS}}">
     <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
             <button bindtap="BTGPWD" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'SYS Password':'后台密码'}}</button>
@@ -210,129 +251,6 @@
         </view>
     </view>
     <view style="height:45px;"></view>
-    <view hidden="{{UEN}}">
-        <view style="height:5px;"></view>
-        <view class="SetBox">
-            <view class="SendLayout">
-                <view bindtap="BTHELP" style="width:20px;background-color:#88888850;">
-                    <view class="{{ShowBar==22?'open':'close'}}"></view>
-                </view>
-                <button bindtap="BTHELP" class="DisTIP" style="width:65%;">{{'版本更新说明'}}</button>
-                <button bindtap="BTHELP" class="DisINF" style="width:35%;">2025-03-21</button>
-            </view>
-            <view hidden="{{ShowBar!=22}}">
-                <view class="btnLayout">
-                    <button class="DisTIP1">{{UEN?'APP Android':'APP及图片转换软件等'}}</button>
-                    <button bindtap="BTUP10" class="DisINF1">{{UEN?'Copy Connection':'复制连接'}}</button>
-                </view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">固件:5.41 APP:1.26 2025-03-21</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}为避免误触,小程序快捷切换电压电流添加了一个确认框,添加颜色设置中一个自定义配色,此配色修改后会保存至手机,下次打开选中后就可以调出上次设置,添加华为输入电压校正(用于修改过PFC电阻的机器,正常情况无需设置).</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">固件:5.40 APP:1.25 2025-03-06</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}此版本细分了取电器失败提示 取电失败后不再只显示'CAN通讯异常' 会细分显示为'CAN通讯异常' '绝缘测试未通过' '握手信息未通过' '车辆信息未通过' '电压检测未通过' '模拟电池升压异常' 以便分析故障,加入一个电桩限压策略设置,加入手动开关继电器功能,修复5.39部分华为风扇不受控问题,修复5.39华为外置传感器温度跳动问题.</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">固件:5.39 APP:1.24 2025-01-04</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要是针对5.37故障修复 修复部分取电器在低压桩时提前显示就绪问题 修复取电器升压电压跳动过大问题 修复5.37充电器在部分情况下最大电流变100问题 修复中兴和华为充在温度零下时不能正确识别问题 修复充电器小程序二段开关问题 增加了取电器兼容性 增加了保护关机倒计时设置 增加了取电器二段充电功能(仅限于低压直冲 所以设置电压126V以内才会显示) 增加了一个新的"数据异常修复"功能 (升级后会重置掉部分用户个性化设置,比如屏幕颜色等)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">固件:5.37 APP:1.23 2024-12-01</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}本次更新主要加入新产品取电器支持 底层代码有大量改动 充电器升级后如有问题可降级至5.35稳定版</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">固件:5.36 APP:1.22 2024-11-11</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入华为模块故障显示功能 小程序加入背景图片设置</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.35 2024-10-01</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 加入了超温关机保护功能 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.34 2024-06-30</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.33 2024-06-02</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.32 2024-05-25</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.31 2024-05-16</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.30 2024-04-21</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复长按加减按键会重启问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 修复部分屏幕会显示错乱问题</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.29 2024-04-14</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力 优化电流范围设置(比如设置最大50A 以前必须输入1-50 现在可以直接输入50) 优化校正微调设置(直接按加减微调 不用再每次输入) 加入输出电压电流缓冲设置(以前默认都有开启且不能修改设置 有反映说这样在微调时看不到真实数据 所以现在改为可设置)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.28 2024-04-07</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复中兴4875改高压后功率显示错误 加入中兴4875二次电压校正功能(修复上个版本电压校正后偏差较大问题) 修改中兴4875最低电流为2(以前未测试最低电流 实测2A起调) 修复二段电流缓降功能在部分情况下电流异常问题 修复快速设置重启后记忆错误和设置错误的问题</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.27 2024-03-29</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入中兴"ZXEPS R4875F1"电源支持(专用版本 普通版本无法切换) 风机初始风速设置最大值由120改为150(中兴4875初始风速默认为120,低了会停转) 加入了关机电流设置(以前是默认0.5A开始启动倒计时 不能设置) 重新打开5.24及之前版本升级5.25之后通道(用户设置中不能升级 仅限小程序系统设置中升级 且会重置所有设置)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">1.10 2024-03-22(小程序更新)</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}由于最近5.25版本底层数据改动较大,导致部分用户升级后出现屏幕黑屏,电压范围异常,风速异常等情况,为避免大量异常导致机器返工问题所以决定关闭老版本升级5.25及之后的升级通道,由于APP端升级管理较为复杂,从此版本开始关闭安卓APP升级,只能小程序升级.更改更新日志为倒序.</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.26 2024-03-18</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复固件升级后不能自动重启问题(下次更新才生效) 修复5.25校正电压后不能立刻设置电压问题 修复5.25升级后部分机器电压范围错误问题 修改重置设置不再删除文字LOGO 修复了启动时按键跳过后偶尔会重启问题 加入允许用户设置LOGO选项 加入输出电压缓冲器(用于优化部分机器波纹偏大导致输出电压跳动频繁问题) 加入版本更新说明(涉及部分改机专业问题 所以仅在中文状态下系统设置中展示 切换至英文时不予显示)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.25 2024-03-07</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}本次版本大量代码优化重写 重写小程序与控制板通讯协议 重写小程序UI绘制方法(以前UI部分会抖动) 加入详细数据显示功能 微信小程序加入英文支持 正式推出APP(从支持蓝牙开始历史所有版本均支持) 修复了ZXD3000一个Bug导致的电压设置和显示出现误差 重置设置后会清除所有设置图片了 优化苹果手机设置LOGO卡顿问题 优化传输图片中途退出导致死机问题 重新加入二段电流缓降功能 由于两个小程序更新比较麻烦 且改过蓝牙通讯后专业版需要重写才能使用 加上专业版代码过于老旧 所以正式放弃专业版 所有功能已搬迁至炫酷版 炫酷板加入导入图片代码方法(由于微信因安全及隐私等限制小程序访问手机图片 所以只能以代码形式发送 代码由PC端程序转换图片得到 复制好需要设置的图片代码 在点击设置电压后留空别粘贴 然后点确定即可识别 识别时会提示"CAN蓝牙读取了你的剪切板" 正确识别到图片代码后会弹出确认发送框 如无弹出请检查图片代码是否复制完整)</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.24 2024-01-19</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}优化部分代码 重写了升级界面 加入系统密码查询(一机一码永久有效) 加入英文显示支持(小程序暂不支持英文) 修复数据清零问题</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.23 2023-12-31</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入上下键同时按下开关机 修复4875低温异常问题 修复设置低于10A时会错误显示A</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.22 2023-11-16</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.21风速异常 修复部分手机不能连接专业版小程序</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.21 2023-11-12</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}提高显示刷新率 加入自动息屏默认60秒亮度50 支持GIF图片上传和JPG欢迎页面上传</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.20 2023-10-18</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}去除OVF和OAF,改为设置系数OVD和OAD,显示系数OVT和OAT设置</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.19 2023-10-12</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}部分显示信息修复 屏幕方向蓝牙名称和蓝牙密码移至用户设置</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.18 2023-10-05</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修改开机提示倒计根据CAN通讯变色 加入充电动画 修复1个BUG导致缓启开启后部分英可瑞不能进入充电状态 加入按键交换功能</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.17 2023-09-29</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入OTA功能 部分UI调整 加入开机提示 移除驱动选择 受文件大小限制移除SSD1306和SH1106两个驱动 不再支持黑白屏</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.16</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}重写电流电压修正功能 现在按系数修正 优化电流采样显示 加入设置电压系数 OAF电流系数</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.15</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}由于部分电源异常 默认关闭电压电流修正功能</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.14</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复二段进入异常问题 二段电流缓降功能部分电源异常暂时移除二段电流缓降</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.13</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}重写电压电流自动修正功能 优化缓启显示 修复不能延时关机问题</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.12</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入重置所有设置 修改初始蓝牙密码为0000</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.11</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入英可瑞自动修正输出电压高于设置电压</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.10</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复屏幕统计数据问题 修改充电识别模式</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.09</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入liteffs文件系统 以及ST7789V240*240高分屏 正式推出彩屏版本</view>
-                <view style="height:10px;"></view>
-                <view class="tip2" style="color:#fa0;">5.08</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入彩屏驱动GC9A01支持 128*128LCD屏幕</view>
-                <view class="tip2" style="color:#fa0;">5.07</view>
-                <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.06不能正确进入温度限制</view>
-                <view style="height:15px;"></view>
-            </view>
-        </view>
-    </view>
     <view hidden="{{CEV==1}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
@@ -396,16 +314,16 @@
                     <button bindtap="BTOVS" class="DisINF1">{{LSV+'-'+HSV}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2" wx:if="{{CVer>=5.29}}">{{nbsp}}"Voltage jump buffer" is an optimized display for some power supply output voltages that may jump to two decimal places. For example, if the voltage is set to 84V, it will jump between 84.02 and 83.99 during display. At this time, setting this value to 0.02 is sufficient (voltage jump is actually a normal phenomenon, and the size of the jump is generally determined by the performance of the transformer and output capacitor, not a control board issue).</view>
-                    <view class="tip2">{{nbsp}}Click on the green "Start" button in the upper right corner, then use a multimeter to measure the actual output voltage. In the pop-up input box, enter the actual output voltage you just measured and send it.</view>
-                    <view class="tip2" style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">{{nbsp}}"Output voltage correction point two" is a second correction point designed for ZTE 4875F1, which has a large error after single point correction. The actual measurement shows that the accuracy can reach within 0.1 after two point correction is completed.</view>
-                    <view class="tip2">{{nbsp}}If there are still slight deviations after calibration, you can manually adjust the "display compensation" and "setting compensation"</view>
+                    <view class="tip2" wx:if="{{CVer>=5.29}}">　"Voltage jump buffer" is an optimized display for some power supply output voltages that may jump to two decimal places. For example, if the voltage is set to 84V, it will jump between 84.02 and 83.99 during display. At this time, setting this value to 0.02 is sufficient (voltage jump is actually a normal phenomenon, and the size of the jump is generally determined by the performance of the transformer and output capacitor, not a control board issue).</view>
+                    <view class="tip2">　Click on the green "Start" button in the upper right corner, then use a multimeter to measure the actual output voltage. In the pop-up input box, enter the actual output voltage you just measured and send it.</view>
+                    <view class="tip2" style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">　"Output voltage correction point two" is a second correction point designed for ZTE 4875F1, which has a large error after single point correction. The actual measurement shows that the accuracy can reach within 0.1 after two point correction is completed.</view>
+                    <view class="tip2">　If there are still slight deviations after calibration, you can manually adjust the "display compensation" and "setting compensation"</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2" wx:if="{{CVer>=5.29}}">{{nbsp}}{{nbsp}}"电压跳动缓冲"是针对部分电源输出电压会在小数点后两位跳动而进行优化显示,比如设置电压84V,显示时会在84.02到83.99之间跳动,此时设置此值为0.02即可(电压跳动其实是属于正常现象,一般大部分是由变压器的性能和输出电容性能决定了跳动的大小,非控制板问题)。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色"开始校正",然后用万用表测量实际输出电压,等待读数稳定后,在弹出的输入框中输入刚才所测得的实际输出电压后发送即可。</view>
-                    <view class="tip2" style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">{{nbsp}}{{nbsp}}"输出电压校正二"是针对中兴4875F1单点校正后误差较大所设计的第二校正点,实测在两点校正完成后精度可达0.1以内。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
+                    <view class="tip2" wx:if="{{CVer>=5.29}}">　　"电压跳动缓冲"是针对部分电源输出电压会在小数点后两位跳动而进行优化显示,比如设置电压84V,显示时会在84.02到83.99之间跳动,此时设置此值为0.02即可(电压跳动其实是属于正常现象,一般大部分是由变压器的性能和输出电容性能决定了跳动的大小,非控制板问题)。</view>
+                    <view class="tip2">　　点击右上角绿色"开始校正",然后用万用表测量实际输出电压,等待读数稳定后,在弹出的输入框中输入刚才所测得的实际输出电压后发送即可。</view>
+                    <view class="tip2" style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">　　"输出电压校正二"是针对中兴4875F1单点校正后误差较大所设计的第二校正点,实测在两点校正完成后精度可达0.1以内。</view>
+                    <view class="tip2">　　如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -457,18 +375,18 @@
                     </view>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2" wx:if="{{CVer>=5.29}}">{{nbsp}}"Current Jump Buffer" is an optimized display for some power supply output currents that will jump to two decimal places. For example, if the current is set to 15A, it will jump between 15.02 and 14.99 during display. At this time, setting this value to 0.02 is sufficient (current jumping is actually a normal phenomenon, and the size of the jump is generally determined by the performance of the transformer and output capacitor, not a control board problem).</view>
-                    <view class="tip2" wx:if="{{CVer>=5.29}}">{{nbsp}} "Minimum current filtering" is aimed at some power supplies that generate output current when unloaded. For example, most Increase power supplies display a current between 0.2 and 0.4 when unloaded. At this point, setting this value greater than 0.4 is sufficient (the current displayed during no-load is due to poor current sampling accuracy or electromagnetic interference caused by the power supply itself, not a control board issue).</view>
-                    <view class="tip2">{{nbsp}}Click on the green "Start" button in the upper right corner, then use an ammeter to measure the actual output current. In the pop-up input box, enter the actual output current measured earlier and send it.</view>
-                    <view class="tip2">{{nbsp}}The correction current must be in a constant current state of the power supply. To distinguish between constant current and constant voltage states, one only needs to check whether the output voltage value has reached the set value. If it has reached the set value, it belongs to constant voltage, and if it has not reached it, it belongs to constant current.</view>
-                    <view class="tip2">{{nbsp}}If there are still slight deviations after calibration, you can manually adjust the "display compensation" and "setting compensation".</view>
+                    <view class="tip2" wx:if="{{CVer>=5.29}}">　"Current Jump Buffer" is an optimized display for some power supply output currents that will jump to two decimal places. For example, if the current is set to 15A, it will jump between 15.02 and 14.99 during display. At this time, setting this value to 0.02 is sufficient (current jumping is actually a normal phenomenon, and the size of the jump is generally determined by the performance of the transformer and output capacitor, not a control board problem).</view>
+                    <view class="tip2" wx:if="{{CVer>=5.29}}">　 "Minimum current filtering" is aimed at some power supplies that generate output current when unloaded. For example, most Increase power supplies display a current between 0.2 and 0.4 when unloaded. At this point, setting this value greater than 0.4 is sufficient (the current displayed during no-load is due to poor current sampling accuracy or electromagnetic interference caused by the power supply itself, not a control board issue).</view>
+                    <view class="tip2">　Click on the green "Start" button in the upper right corner, then use an ammeter to measure the actual output current. In the pop-up input box, enter the actual output current measured earlier and send it.</view>
+                    <view class="tip2">　The correction current must be in a constant current state of the power supply. To distinguish between constant current and constant voltage states, one only needs to check whether the output voltage value has reached the set value. If it has reached the set value, it belongs to constant voltage, and if it has not reached it, it belongs to constant current.</view>
+                    <view class="tip2">　If there are still slight deviations after calibration, you can manually adjust the "display compensation" and "setting compensation".</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2" wx:if="{{CVer>=5.29}}">{{nbsp}}{{nbsp}}"电流跳动缓冲"是针对部分电源输出电流会在小数点后两位跳动而进行优化显示,比如设置电流15A,显示时会在15.02到14.99之间跳动,此时设置此值为0.02即可(电流跳动其实是属于正常现象,一般大部分是由变压器的性能和输出电容性能决定了跳动的大小,非控制板问题)。</view>
-                    <view class="tip2" wx:if="{{CVer>=5.29}}">{{nbsp}}{{nbsp}}"最小电流过滤"是针对部分电源在空载时会产生输出电流,比如大部分英可瑞电源都有在空载是显示0.2-0.4之间的电流,此时设置此值大于0.4即可(空载有电流显示属于电源本身的电流采样精度不好或者电磁干扰导致,非控制板问题)。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色按钮开始校正,然后用电流表测量出实际输出电流,在弹出的输入框中输入刚才所测得的实际输出电流后发送即可。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}校正电流必须要电源处于恒流状态,区分恒流和恒压状态只需要看输出电压值是否到达设置值,如到达则属于恒压,未到达则属于恒流"。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
+                    <view class="tip2" wx:if="{{CVer>=5.29}}">　　"电流跳动缓冲"是针对部分电源输出电流会在小数点后两位跳动而进行优化显示,比如设置电流15A,显示时会在15.02到14.99之间跳动,此时设置此值为0.02即可(电流跳动其实是属于正常现象,一般大部分是由变压器的性能和输出电容性能决定了跳动的大小,非控制板问题)。</view>
+                    <view class="tip2" wx:if="{{CVer>=5.29}}">　　"最小电流过滤"是针对部分电源在空载时会产生输出电流,比如大部分英可瑞电源都有在空载是显示0.2-0.4之间的电流,此时设置此值大于0.4即可(空载有电流显示属于电源本身的电流采样精度不好或者电磁干扰导致,非控制板问题)。</view>
+                    <view class="tip2">　　点击右上角绿色按钮开始校正,然后用电流表测量出实际输出电流,在弹出的输入框中输入刚才所测得的实际输出电流后发送即可。</view>
+                    <view class="tip2">　　校正电流必须要电源处于恒流状态,区分恒流和恒压状态只需要看输出电压值是否到达设置值,如到达则属于恒压,未到达则属于恒流"。</view>
+                    <view class="tip2">　　如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -490,12 +408,12 @@
                     <button bindtap="BTOAS" class="DisINF1">{{LSA+'-'+HSA}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Set the maximum output power limit of the power system, and once it is set, the user cannot exceed this value.</view>
-                    <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to switch.</view>
+                    <view class="tip2">　Set the maximum output power limit of the power system, and once it is set, the user cannot exceed this value.</view>
+                    <view class="tip2">　Click on the green text in the upper right corner to switch.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}设置电源系统输出功率上限,设置好后用户设置功率就不能超过此值。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字设置。</view>
+                    <view class="tip2">　　设置电源系统输出功率上限,设置好后用户设置功率就不能超过此值。</view>
+                    <view class="tip2">　　点击右上角绿色文字设置。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -528,8 +446,8 @@
                     <button class="DisTIP1">{{UEN?'Over Temp Exit Value':'超温关机保护值'}}</button>
                     <button bindtap="BTOST" class="DisINF1">{{OST}}</button>
                 </view>
-                <view class="tip2" wx:if="{{UEN}}">{{nbsp}}Overtemperature limit refers to the automatic limitation of output power to the specified power value after the temperature reaches the "overtemperature entry value", with a default of 75 degrees and 3KW. When the temperature is less than the "overtemperature exit value", it will return to the original set current.</view>
-                <view class="tip2" wx:if="{{!UEN}}">{{nbsp}}{{nbsp}}超温限制是指温度到达"超温进入值"后自动将输出功率限制在指定功率值,默认75度3KW,当温度小于"超温退出值"后将会恢到复原来设置电流。<view></view>{{nbsp}}{{nbsp}}如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
+                <view class="tip2" wx:if="{{UEN}}">　Overtemperature limit refers to the automatic limitation of output power to the specified power value after the temperature reaches the "overtemperature entry value", with a default of 75 degrees and 3KW. When the temperature is less than the "overtemperature exit value", it will return to the original set current.</view>
+                <view class="tip2" wx:if="{{!UEN}}">　　超温限制是指温度到达"超温进入值"后自动将输出功率限制在指定功率值,默认75度3KW,当温度小于"超温退出值"后将会恢到复原来设置电流。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -566,26 +484,26 @@
                     <button bindtap="BTUFS" class="DisINF1">{{OT}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}If a fan control panel is added, the wind speed can be set and controlled accordingly, and there are three values for setting the wind speed. (Maximum wind speed 255)</view>
-                    <view class="tip2">{{nbsp}}1. The initial wind speed value determines the initial minimum wind speed. (Default 50)</view>
-                    <view class="tip2">{{nbsp}}2. Current acceleration value, which means that the actual output current of each A increases by the specified wind speed. For example, if the output is 15A, the default value is 15 * 1.0=15 point wind speed. (Default 1.0)</view>
-                    <view class="tip2">{{nbsp}}3. Temperature acceleration value, which means increasing the specified wind speed for every 1 degree increase, starting from 30 degrees. If the current temperature is 35 degrees, then the acceleration value is (35-30) * 8=40 points. (Default 8)</view>
-                    <view class="tip2">{{nbsp}} Attachment: Full speed temperature gauge (dynamically calculated after modifying settings)</view>
+                    <view class="tip2">　If a fan control panel is added, the wind speed can be set and controlled accordingly, and there are three values for setting the wind speed. (Maximum wind speed 255)</view>
+                    <view class="tip2">　1. The initial wind speed value determines the initial minimum wind speed. (Default 50)</view>
+                    <view class="tip2">　2. Current acceleration value, which means that the actual output current of each A increases by the specified wind speed. For example, if the output is 15A, the default value is 15 * 1.0=15 point wind speed. (Default 1.0)</view>
+                    <view class="tip2">　3. Temperature acceleration value, which means increasing the specified wind speed for every 1 degree increase, starting from 30 degrees. If the current temperature is 35 degrees, then the acceleration value is (35-30) * 8=40 points. (Default 8)</view>
+                    <view class="tip2">　 Attachment: Full speed temperature gauge (dynamically calculated after modifying settings)</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2" wx:if="{{CVer>=5.31}}">{{nbsp}}{{nbsp}}风速最大值为255,中兴电源部分超过230会因为供电不足导致屏幕重启,如发现重启请改小此值。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}如添加了风机控制小板后风速可由此设置控制,风速设置有三个值。(风速最大值255)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}1.初始风速值,此值决定了初始最低风速。(默认50)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}2.电流加速值,意思是每A的实际输出电流增加指定风速,如输出15A按默认值就是15*1.0=15点风速。(默认1.0)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}3.温度加速值,意思是每升温1度时增加指定风速,30度起算,如当前温度35度那么该加速值是(35-30)*8=40点。(默认8)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}附.满速温度表(修改设置后会动态计算)</view>
+                    <view class="tip2" wx:if="{{CVer>=5.31}}">　　风速最大值为255,中兴电源部分超过230会因为供电不足导致屏幕重启,如发现重启请改小此值。</view>
+                    <view class="tip2">　　如添加了风机控制小板后风速可由此设置控制,风速设置有三个值。(风速最大值255)</view>
+                    <view class="tip2">　　1.初始风速值,此值决定了初始最低风速。(默认50)</view>
+                    <view class="tip2">　　2.电流加速值,意思是每A的实际输出电流增加指定风速,如输出15A按默认值就是15*1.0=15点风速。(默认1.0)</view>
+                    <view class="tip2">　　3.温度加速值,意思是每升温1度时增加指定风速,30度起算,如当前温度35度那么该加速值是(35-30)*8=40点。(默认8)</view>
+                    <view class="tip2">　　附.满速温度表(修改设置后会动态计算)</view>
                 </view>
-                <view class="tip2" style="color:#0f0">{{nbsp}}{{nbsp}}10A:(255-10*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-10*AFS-LFS)/UFS+30,2 )}}℃</view>
-                <view class="tip2" style="color:#0f0">{{nbsp}}{{nbsp}}20A:(255-20*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-20*AFS-LFS)/UFS+30,2 )}}℃</view>
-                <view class="tip2" style="color:#0f0">{{nbsp}}{{nbsp}}30A:(255-30*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-30*AFS-LFS)/UFS+30,2 )}}℃</view>
-                <view class="tip2" style="color:#0f0">{{nbsp}}{{nbsp}}40A:(255-40*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-40*AFS-LFS)/UFS+30,2 )}}℃</view>
-                <view class="tip2" style="color:#0f0">{{nbsp}}{{nbsp}}50A:(255-50*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-50*AFS-LFS)/UFS+30,2 )}}℃</view>
-                <view class="tip2" style="color:#0f0">{{nbsp}}{{nbsp}}60A:(255-60*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-60*AFS-LFS)/UFS+30,2 )}}℃</view>
+                <view class="tip2" style="color:#0f0">　　10A:(255-10*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-10*AFS-LFS)/UFS+30,2 )}}℃</view>
+                <view class="tip2" style="color:#0f0">　　20A:(255-20*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-20*AFS-LFS)/UFS+30,2 )}}℃</view>
+                <view class="tip2" style="color:#0f0">　　30A:(255-30*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-30*AFS-LFS)/UFS+30,2 )}}℃</view>
+                <view class="tip2" style="color:#0f0">　　40A:(255-40*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-40*AFS-LFS)/UFS+30,2 )}}℃</view>
+                <view class="tip2" style="color:#0f0">　　50A:(255-50*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-50*AFS-LFS)/UFS+30,2 )}}℃</view>
+                <view class="tip2" style="color:#0f0">　　60A:(255-60*{{AFS}}-{{LFS}})/{{UFS}}+30={{CX.toFixed( (255-60*AFS-LFS)/UFS+30,2 )}}℃</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -616,24 +534,24 @@
                     <button bindtap="BTCAN16" style="text-align:center;width:50%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">EPS6020</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Huawei supports R4815, R4830, R4850, R4875, and R48100.</view>
-                    <view class="tip2">{{nbsp}}Increase supply supports TR72-3500 TR48-3000 TR240-6000 EVR500-10000 EVR700-15000C, which is currently supported by all known models.</view>
-                    <view class="tip2">{{nbsp}}ZTE supports ZXD3000 V5.5 V5.6 V5.7 V5.8. (ZXD4000 can control voltage, some cannot control current)</view>
-                    <view class="tip2" wx:if="{{UCN&32}}">{{nbsp}}ZTE 4875 supports "ZXEPS 4875F1" (theoretically supporting "ZXEPS 4850F1" and "ZXD3000 V6.6")</view>
-                    <view class="tip2">{{nbsp}}Infy has only tested REG50010S. (Theoretically, other models can support it)</view>
-                    <view class="tip2">{{nbsp}}EPS6020 supports EPS4820, EPS6020, and EPS7220.</view>
-                    <view class="tip2">{{nbsp}}Click on the corresponding power brand to switch.</view>
-                    <view class="tip2" style="color:#f00">{{nbsp}}After setting up, it will automatically reset the settings and restart</view>
+                    <view class="tip2">　Huawei supports R4815, R4830, R4850, R4875, and R48100.</view>
+                    <view class="tip2">　Increase supply supports TR72-3500 TR48-3000 TR240-6000 EVR500-10000 EVR700-15000C, which is currently supported by all known models.</view>
+                    <view class="tip2">　ZTE supports ZXD3000 V5.5 V5.6 V5.7 V5.8. (ZXD4000 can control voltage, some cannot control current)</view>
+                    <view class="tip2" wx:if="{{UCN&32}}">　ZTE 4875 supports "ZXEPS 4875F1" (theoretically supporting "ZXEPS 4850F1" and "ZXD3000 V6.6")</view>
+                    <view class="tip2">　Infy has only tested REG50010S. (Theoretically, other models can support it)</view>
+                    <view class="tip2">　EPS6020 supports EPS4820, EPS6020, and EPS7220.</view>
+                    <view class="tip2">　Click on the corresponding power brand to switch.</view>
+                    <view class="tip2" style="color:#f00">　After setting up, it will automatically reset the settings and restart</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}华为电源支持R4815 R4830 R4850 R4875以及R48100。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}英可瑞电源支持TR72-3500 TR48-3000 TR240-6000 EVR500-10000 EVR700-15000C 目前已知的型号均可支持。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}中兴3000支持ZXD3000 V5.5 V5.6 V5.7 V5.8。(ZXD4000可控制电压,部分不能控制电流)</view>
-                    <view class="tip2" wx:if="{{UCN&32}}">{{nbsp}}{{nbsp}}中兴4875支持"ZXEPS 4875F1" (理论上支持"ZXEPS 4850F1"和"ZXD3000 V6.6")</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}英飞源目前只测试了REG50010S。(理论上其他的型号均可支持)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}EPS6020这个支持EPS4820 EPS6020 EPS7220。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击对应电源品牌即可切换。</view>
-                    <view class="tip2" style="color:#f00">{{nbsp}}{{nbsp}}设置后会自动重置设置并重启</view>
+                    <view class="tip2">　　华为电源支持R4815 R4830 R4850 R4875以及R48100。</view>
+                    <view class="tip2">　　英可瑞电源支持TR72-3500 TR48-3000 TR240-6000 EVR500-10000 EVR700-15000C 目前已知的型号均可支持。</view>
+                    <view class="tip2">　　中兴3000支持ZXD3000 V5.5 V5.6 V5.7 V5.8。(ZXD4000可控制电压,部分不能控制电流)</view>
+                    <view class="tip2" wx:if="{{UCN&32}}">　　中兴4875支持"ZXEPS 4875F1" (理论上支持"ZXEPS 4850F1"和"ZXD3000 V6.6")</view>
+                    <view class="tip2">　　英飞源目前只测试了REG50010S。(理论上其他的型号均可支持)</view>
+                    <view class="tip2">　　EPS6020这个支持EPS4820 EPS6020 EPS7220。</view>
+                    <view class="tip2">　　点击对应电源品牌即可切换。</view>
+                    <view class="tip2" style="color:#f00">　　设置后会自动重置设置并重启</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -652,16 +570,16 @@
             </view>
             <view hidden="{{ShowBar!=17}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Set the output temperature collection point. The original Huawei power supply comes with an output temperature, while other power supplies do not.</view>
-                    <view class="tip2">{{nbsp}}Power: The system temperature read using CAN communication.</view>
-                    <view class="tip2">{{nbsp}}Control: temperature obtained by using an external 10K NTC sensor connected to the control board.</view>
-                    <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to switch.</view>
+                    <view class="tip2">　Set the output temperature collection point. The original Huawei power supply comes with an output temperature, while other power supplies do not.</view>
+                    <view class="tip2">　Power: The system temperature read using CAN communication.</view>
+                    <view class="tip2">　Control: temperature obtained by using an external 10K NTC sensor connected to the control board.</view>
+                    <view class="tip2">　Click on the green text in the upper right corner to switch.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}设置输出温度采集点,华为电源原机附带有输出温度，其它电源无。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}电源：使用CAN通信读取到的系统温度。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}控制：使用控制板外接10K_NTC传感器取到的温度。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字即可切换。</view>
+                    <view class="tip2">　　设置输出温度采集点,华为电源原机附带有输出温度，其它电源无。</view>
+                    <view class="tip2">　　电源：使用CAN通信读取到的系统温度。</view>
+                    <view class="tip2">　　控制：使用控制板外接10K_NTC传感器取到的温度。</view>
+                    <view class="tip2">　　点击右上角绿色文字即可切换。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -680,10 +598,10 @@
             </view>
             <view hidden="{{ShowBar!=27}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}This value determines the requested output voltage when the charging station does not match the set voltage. For example, if the current set voltage is 84V and the current charging station displays a range of 200-750, the 'lowest voltage', which is 200V, will be used as the requested output voltage to be sent to the charging station by default. If most charging stations send the current set voltage value of 84V, it will cause the charging station to disconnect due to the charging station not supporting this voltage. However, there are a few charging stations that can support the normal use of 84V even though the lower limit is 200V. At this time, changing the voltage limiting strategy to 'set voltage' will send a request for the current set voltage of 84V (only for special situations, use 'lowest voltage' can be used in normal situations, but when modified to 'set voltage'). Setting the minimum voltage range is no longer limited, and it is not recommended to modify this value.</view>
+                    <view class="tip2">　This value determines the requested output voltage when the charging station does not match the set voltage. For example, if the current set voltage is 84V and the current charging station displays a range of 200-750, the 'lowest voltage', which is 200V, will be used as the requested output voltage to be sent to the charging station by default. If most charging stations send the current set voltage value of 84V, it will cause the charging station to disconnect due to the charging station not supporting this voltage. However, there are a few charging stations that can support the normal use of 84V even though the lower limit is 200V. At this time, changing the voltage limiting strategy to 'set voltage' will send a request for the current set voltage of 84V (only for special situations, use 'lowest voltage' can be used in normal situations, but when modified to 'set voltage'). Setting the minimum voltage range is no longer limited, and it is not recommended to modify this value.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}此值决定了电桩不匹配设置电压时的请求输出电压,例如当前设置电压为84V,而当前充电桩显示范围为200-750,此时默认使用'最低电压'也就是200V作为请求输出电压发送给充电桩,大部分电桩如果将当前设置电压值84V发送过去的话会由于充电桩不支持此电压而导致充电桩断开,但是有极个别少数充电桩虽然下限是200V,却可以支持设置84V正常使用,此时将限压策略改为'设置电压'则会发送请求当前设置84V电压(仅限特殊情况使用,正常情况使用'最低电压'即可,当修改为'设置电压'时设置最低电压范围不再受限制,不推荐修改此值)。</view>
+                    <view class="tip2">　　此值决定了电桩不匹配设置电压时的请求输出电压,例如当前设置电压为84V,而当前充电桩显示范围为200-750,此时默认使用'最低电压'也就是200V作为请求输出电压发送给充电桩,大部分电桩如果将当前设置电压值84V发送过去的话会由于充电桩不支持此电压而导致充电桩断开,但是有极个别少数充电桩虽然下限是200V,却可以支持设置84V正常使用,此时将限压策略改为'设置电压'则会发送请求当前设置84V电压(仅限特殊情况使用,正常情况使用'最低电压'即可,当修改为'设置电压'时设置最低电压范围不再受限制,不推荐修改此值)。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -701,10 +619,10 @@
             </view>
             <view hidden="{{ShowBar!=0}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Set the maximum allowable voltage limit to avoid exceeding the required voltage of the device due to incorrect adjustment.</view>
+                    <view class="tip2">　Set the maximum allowable voltage limit to avoid exceeding the required voltage of the device due to incorrect adjustment.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}设置最高允许设置电压限制,避免调错导致超过设备需求电压。</view>
+                    <view class="tip2">　　设置最高允许设置电压限制,避免调错导致超过设备需求电压。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -722,10 +640,10 @@
             </view>
             <view hidden="{{ShowBar!=1}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Set the maximum allowable current to avoid overcurrent damage to the equipment.</view>
+                    <view class="tip2">　Set the maximum allowable current to avoid overcurrent damage to the equipment.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}设置最高允许电流,避免过流损坏设备。</view>
+                    <view class="tip2">　　设置最高允许电流,避免过流损坏设备。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -743,10 +661,10 @@
             </view>
             <view hidden="{{ShowBar!=16}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}When the output voltage of the charging station reaches the set voltage, it is ready. However, there may be errors in the output voltage of different charging stations. It is ready when the default and set voltages are ± 5V. If the error of the charging station exceeds the default range and it is still not ready, you can modify this range yourself.</view>
+                    <view class="tip2">　When the output voltage of the charging station reaches the set voltage, it is ready. However, there may be errors in the output voltage of different charging stations. It is ready when the default and set voltages are ± 5V. If the error of the charging station exceeds the default range and it is still not ready, you can modify this range yourself.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}当充电桩输出电压后到达设置电压时就准备就绪了,但是不同电桩输出电压有误差,默认和设置电压±5V时就绪,如电桩误差超过默认范围时一直不就绪可自己修改此范围。</view>
+                    <view class="tip2">　　当充电桩输出电压后到达设置电压时就准备就绪了,但是不同电桩输出电压有误差,默认和设置电压±5V时就绪,如电桩误差超过默认范围时一直不就绪可自己修改此范围。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -770,10 +688,10 @@
                     <button bindtap="BTOVTU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The charging station needs to detect the battery voltage. Here, the simulated voltage of the battery is boosted and reported to the charging station. A multimeter is needed to test the voltage at around 251. Due to the accuracy errors of the sampling resistor and ADC, each may have errors. Currently, manual correction is required. If the deviation is large, please adjust the "boost compensation value" to 251V (within plus or minus 1V).</view>
+                    <view class="tip2">　The charging station needs to detect the battery voltage. Here, the simulated voltage of the battery is boosted and reported to the charging station. A multimeter is needed to test the voltage at around 251. Due to the accuracy errors of the sampling resistor and ADC, each may have errors. Currently, manual correction is required. If the deviation is large, please adjust the "boost compensation value" to 251V (within plus or minus 1V).</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}充电桩需要检测电池电压,此处模拟电池电压升压后上报给充电桩的电压,需要万用表测试电压在251左右,由于取样电阻和ADC有精度误差,所以每个可能都有误差,目前需要手动校正,如偏差较大请调整"升压补偿值"修正到251V(正负1V内)。</view>
+                    <view class="tip2">　　充电桩需要检测电池电压,此处模拟电池电压升压后上报给充电桩的电压,需要万用表测试电压在251左右,由于取样电阻和ADC有精度误差,所以每个可能都有误差,目前需要手动校正,如偏差较大请调整"升压补偿值"修正到251V(正负1V内)。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -781,7 +699,7 @@
     </view>
     <view style="height:5px;"></view>
 </view>
-<view wx:if="{{Panel==3}}">
+<view wx:if="{{Panel==3&&!UPS}}">
     <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
             <button bindtap="BTBLE2" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'BLE Password':'蓝牙密码'}}</button>
@@ -791,7 +709,7 @@
     </view>
     <view style="height:48px;"></view>
 </view>
-<view wx:if="{{UEG&&Panel==3||Panel==2}}">
+<view wx:if="{{(UEG&&Panel==3||Panel==2)&&!UPS}}">
     <view class="SetBox">
         <view class="SendLayout">
             <view bindtap="BTLOGO" style="width:20px;background-color:#88888850;">
@@ -818,11 +736,11 @@
                 <button bindtap="BTLOGO4" class="DisINF1">{{UEN?'Set up':'设置'}}</button>
             </view>
             <view wx:if="{{UEN}}">
-                <view class="tip2">{{nbsp}}If there are only four Chinese characters, you only need to enter Chinese characters in the pop-up input box. Otherwise, you need to adjust the font and position yourself.</view>
-                <view class="tip2">{{nbsp}}Set parameter descriptions (separated by commas):</view>
+                <view class="tip2">　If there are only four Chinese characters, you only need to enter Chinese characters in the pop-up input box. Otherwise, you need to adjust the font and position yourself.</view>
+                <view class="tip2">　Set parameter descriptions (separated by commas):</view>
                 <view class="btnLayout">
                     <view style="width:70%;text-align:left">
-                        <view class="tip2">{{nbsp}}1:Left margin of text (0-60).<view></view>{{nbsp}}2:Top margin of text (0-60).<view></view>{{nbsp}}3:Text font size (10-30).<view></view>{{nbsp}}4:The text to be displayed.</view>
+                        <view class="tip2">　1:Left margin of text (0-60).<view></view>　2:Top margin of text (0-60).<view></view>　3:Text font size (10-30).<view></view>　4:The text to be displayed.</view>
                     </view>
                     <view style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
                         <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
@@ -830,10 +748,10 @@
                 </view>
             </view>
             <view wx:if="{{!UEN}}">
-                <view class="tip2">{{nbsp}}{{nbsp}}如果刚好就四个中文那么就只需要在弹出输入框中输入中文即可,否则需要自行调整字体及位置。<view></view>{{nbsp}}{{nbsp}}设置参数说明(中间以逗号隔开):</view>
+                <view class="tip2">　　如果刚好就四个中文那么就只需要在弹出输入框中输入中文即可,否则需要自行调整字体及位置。<view></view>　　设置参数说明(中间以逗号隔开):</view>
                 <view class="btnLayout">
                     <view style="width:70%;text-align:left">
-                        <view class="tip2">{{nbsp}} 1:文字离左边框距离(0-60)。<view></view>{{nbsp}} 2:文字离顶边框距离(0-60)。<view></view>{{nbsp}} 3:文字字体大小(10-30)。<view></view>{{nbsp}} 4:要显示的文本文字。</view>
+                        <view class="tip2">　 1:文字离左边框距离(0-60)。<view></view>　 2:文字离顶边框距离(0-60)。<view></view>　 3:文字字体大小(10-30)。<view></view>　 4:要显示的文本文字。</view>
                     </view>
                     <view style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
                         <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
@@ -845,7 +763,7 @@
     </view>
     <view style="height:5px;"></view>
 </view>
-<view hidden="{{Panel<2}}">
+<view wx:if="{{(Panel==3||Panel==2)&&!UPS}}">
     <view>
         <view class="SetBox">
             <view class="SendLayout">
@@ -879,10 +797,10 @@
                     </button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Due to the restriction of accessing local photo albums by the mini program, only network images can be used, and GIF animations are supported. Click on the link to set the image connection address, and click on the green text in the upper right corner to switch images.<view></view>{{nbsp}}The demonstration image connection comes from the internet and may fail at any time. If there is any infringement, contact must be deleted.</view>
+                    <view class="tip2">　Due to the restriction of accessing local photo albums by the mini program, only network images can be used, and GIF animations are supported. Click on the link to set the image connection address, and click on the green text in the upper right corner to switch images.<view></view>　The demonstration image connection comes from the internet and may fail at any time. If there is any infringement, contact must be deleted.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}由于小程序限制访问本地相册,所以只能使用网络图片,支持GIF动图,点击连接即可设置图片连接地址,点击右上角绿色文字即可切换图片。<view></view>{{nbsp}}{{nbsp}}示范图片连接来自于网络,随时可能连接失效,如有侵权,联系必删。</view>
+                    <view class="tip2">　　由于小程序限制访问本地相册,所以只能使用网络图片,支持GIF动图,点击连接即可设置图片连接地址,点击右上角绿色文字即可切换图片。<view></view>　　示范图片连接来自于网络,随时可能连接失效,如有侵权,联系必删。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -900,12 +818,12 @@
             </view>
             <view hidden="{{ShowBar!=26}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}There is a very small probability that there will be some screen display numerical abnormalities during use, such as setting voltage and current to 0 or battery level exceeding 100%, or accidentally setting certain parameters incorrectly but not clearly. If the abnormality is caused by the Bluetooth control board, click "Repair" in the upper right corner.</view>
-                    <view class="tip2">{{nbsp}}Abnormal repair will detect the setting data and reset some personalized settings (such as screen color, etc.). After the repair is completed, the device will automatically restart (if unable to restart automatically, please power off and manually restart)</view>
+                    <view class="tip2">　There is a very small probability that there will be some screen display numerical abnormalities during use, such as setting voltage and current to 0 or battery level exceeding 100%, or accidentally setting certain parameters incorrectly but not clearly. If the abnormality is caused by the Bluetooth control board, click "Repair" in the upper right corner.</view>
+                    <view class="tip2">　Abnormal repair will detect the setting data and reset some personalized settings (such as screen color, etc.). After the repair is completed, the device will automatically restart (if unable to restart automatically, please power off and manually restart)</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}在使用过程中有极小概率会出现一些屏幕显示数字异常 比如设置电压和设置电流均显示为0 或者电池电量显示超过100%等 又或者在无意间设置错了某些参数但是又不清楚怎么设置了 只要是蓝牙控制板导致的异常 此时点击右上角"修复"即可。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}异常修复会检测设置数据并重置掉部分个性化设置(比如屏幕颜色等) 修复完成后会自动重启设备(如未能自动重启请断电手动重启)。</view>
+                    <view class="tip2">　　在使用过程中有极小概率会出现一些屏幕显示数字异常 比如设置电压和设置电流均显示为0 或者电池电量显示超过100%等 又或者在无意间设置错了某些参数但是又不清楚怎么设置了 只要是蓝牙控制板导致的异常 此时点击右上角"修复"即可。</view>
+                    <view class="tip2">　　异常修复会检测设置数据并重置掉部分个性化设置(比如屏幕颜色等) 修复完成后会自动重启设备(如未能自动重启请断电手动重启)。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -923,10 +841,35 @@
             </view>
             <view hidden="{{ShowBar!=28}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Normally, after displaying 'Ready', the relay will automatically turn on to start outputting voltage. However, due to some user requirements, manual opening or closing of the relay is set here Be careful not to manually turn on the relay before it is ready, otherwise there may be high voltage output directly causing damage to the downstream electrical equipment or battery, and even fire and explosion (Normally does not require manual opening or closing)<view></view>{{nbsp}}Click on the green text in the upper right corner to manually turn on or off the relay.</view>
+                    <view class="tip2">　Normally, after displaying 'Ready', the relay will automatically turn on to start outputting voltage. However, due to some user requirements, manual opening or closing of the relay is set here Be careful not to manually turn on the relay before it is ready, otherwise there may be high voltage output directly causing damage to the downstream electrical equipment or battery, and even fire and explosion (Normally does not require manual opening or closing)<view></view>　Click on the green text in the upper right corner to manually turn on or off the relay.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}正常在显示'已准备就绪'后会自动打开继电器开始输出电压,因部分用户要求所以在此处设置手动打开或关闭继电器.注意请勿在准备就绪前手动打开继电器,否则可能会有高压直接输出导致损坏用后级用电设备或电池甚至起火爆炸.(正常不需要手动打开或关闭)<view></view>{{nbsp}}{{nbsp}}点击右上角绿色文字可手动打开或关闭继电器。</view>
+                    <view class="tip2">　　正常在显示'已准备就绪'后会自动打开继电器开始输出电压,因部分用户要求所以在此处设置手动打开或关闭继电器.注意请勿在准备就绪前手动打开继电器,否则可能会有高压直接输出导致损坏用后级用电设备或电池甚至起火爆炸.(正常不需要手动打开或关闭)<view></view>　　点击右上角绿色文字可手动打开或关闭继电器。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{CVer<5.41||CEV==1}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTUIW" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==29?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTUIW" class="DisTIP" style="width:65%;">{{UEN?'Charging Power Limit':'充电功率限制'}}</button>
+                <button bindtap="owbt" class="DisINF" style="width:35%;">{{UMW}}</button>
+            </view>
+            <view hidden="{{ShowBar!=29}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Power Limitation Strategy':'功率限制策略'}}</button>
+                    <button bindtap="BTUIW1" class="DisINF1">{{UIW?UEN?'Limited input':'限输入':UEN?'Limited output':'限输出'}}</button>
+                </view>
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">　Some electric bicycle charging stations in certain residential areas may limit the charging power, and power outages may occur after exceeding the power limit. Corresponding power limits can be set here to avoid power outages caused by exceeding the power limit (note: most charging stations have large power limit errors, such as 1KW, but in reality, 900W will show that you have already reached 1KW, with an error of 100W. Huawei and ZTE's input power are very accurate, with a basic error of generally within 10W)<view></view>　Default output power limit, can choose to limit input power or output power by yourself</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">　　部分小区电动自行车充电桩会限制充电功率,超功率后会断电,在此可设置对应功率限制可避免超功率断电<view></view>　　因部分充电器无法读取输入功率,所以默认限制输出功率,有输入功率的机器(华为和中兴)可自行选择限制输入功率<view></view>　　注意:部分充电桩功率限制误差较大,比如实际上900W就会在充电桩小程序中显示你已经1000W了,误差了100W,华为和中兴的输入功率都很准,一般基本误差10W内,所以设置时需要参考充电桩误差值</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -950,12 +893,12 @@
                     <button bindtap="BTKEY2" class="DisINF1" wx:if="{{!UEN}}">{{KRC?'是':'否'}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The panel buttons can be swapped or turned on or off according to your own needs.</view>
-                    <view class="tip2">{{nbsp}}Tip: Long press the up and down keys at the same time to switch on and off. Long press the middle key to enter quick switching (which is the 4 sets of voltage and current settings displayed at the bottom of the mini program). Long press the middle key to enter and then press the up and down keys to switch</view>
+                    <view class="tip2">　The panel buttons can be swapped or turned on or off according to your own needs.</view>
+                    <view class="tip2">　Tip: Long press the up and down keys at the same time to switch on and off. Long press the middle key to enter quick switching (which is the 4 sets of voltage and current settings displayed at the bottom of the mini program). Long press the middle key to enter and then press the up and down keys to switch</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}面板按键可以按自己需求打开或者关闭。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}小提示:同时长按上下键可开关机 长按中键可进入快捷切换(就是小程序底部显示的4组设置电压电流) 按上下键切换</view>
+                    <view class="tip2">　　面板按键可以按自己需求打开或者关闭。</view>
+                    <view class="tip2">　　小提示:同时长按上下键可开关机 长按中键可进入快捷切换(就是小程序底部显示的4组设置电压电流) 按上下键切换</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -977,12 +920,12 @@
                     <button bindtap="BTTCH2" class="DisINF1">{{LKS+(UEN?' Second':'秒')}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The touch screen password is limited to numbers and can be between 4 and 6 digits.</view>
-                    <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to set it.</view>
+                    <view class="tip2">　The touch screen password is limited to numbers and can be between 4 and 6 digits.</view>
+                    <view class="tip2">　Click on the green number in the upper right corner to set it.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}触屏密码仅限数字,4-6位均可,锁屏后会在屏幕上显示红色锁图标,上滑或者长按屏幕开始解锁,解锁后图标变为绿色,触屏无操作{{LKS}}秒后会再次锁定。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}击右上角绿色数字进行设置。</view>
+                    <view class="tip2">　　触屏密码仅限数字,4-6位均可,锁屏后会在屏幕上显示红色锁图标,上滑或者长按屏幕开始解锁,解锁后图标变为绿色,触屏无操作{{LKS}}秒后会再次锁定。</view>
+                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1001,14 +944,14 @@
             </view>
             <view hidden="{{ShowBar!=21}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The internal resistance of some batteries and connecting wires is extremely low, which can cause the charging voltage to be almost full and the current to not decrease. After enabling this function, the current will slowly decrease after entering the second stage of charging, better protecting the battery.</view>
-                    <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to switch.</view>
+                    <view class="tip2">　The internal resistance of some batteries and connecting wires is extremely low, which can cause the charging voltage to be almost full and the current to not decrease. After enabling this function, the current will slowly decrease after entering the second stage of charging, better protecting the battery.</view>
+                    <view class="tip2">　Click on the green text in the upper right corner to switch.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}部分电池内阻和连接线内阻超低,这会导致充电电压都已经要满了电流还不下降,开启此功能后在充电进入二段后会缓慢降低电流,更好的保护电池。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}市面上锂电池充电方案一般分为两个阶段,第一阶段为大电流快充,电量0%-80%,第二阶段为低电流慢充,电量80%-100%。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}锂电池非必须充至100%,充低一点寿命更长也更安全.比如17串三元电池理论上是17*4.2=71.4V充满,但是也有部分厂家会设置17*4.1=69.7V(我手上的速珂TS就是此电压,我个人设置是4.15*17=70.55V),个人可根据自己需求调节。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字进行切换。</view>
+                    <view class="tip2">　　部分电池内阻和连接线内阻超低,这会导致充电电压都已经要满了电流还不下降,开启此功能后在充电进入二段后会缓慢降低电流,更好的保护电池。</view>
+                    <view class="tip2">　　市面上锂电池充电方案一般分为两个阶段,第一阶段为大电流快充,电量0%-80%,第二阶段为低电流慢充,电量80%-100%。</view>
+                    <view class="tip2">　　锂电池非必须充至100%,充低一点寿命更长也更安全.比如17串三元电池理论上是17*4.2=71.4V充满,但是也有部分厂家会设置17*4.1=69.7V(我手上的速珂TS就是此电压,我个人设置是4.15*17=70.55V),个人可根据自己需求调节。</view>
+                    <view class="tip2">　　点击右上角绿色文字进行切换。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1030,11 +973,11 @@
                     <button bindtap="BTYC2" class="DisINF1">{{YCA}}A</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}This function is designed to meet the special requirements of some battery manufacturers for the first stage of high current charging. For example, if a single battery has a voltage of 3.7V and requires it to reach 3.2V or above before starting 2C charging, this function can be activated. At this time, the voltage will be charged to 3.2V using the set current first and then switched to the first stage of charging (note: the charger can only read the output voltage, which is the same as the battery voltage when there is no current, but in the case of current or high current, the voltage at the charger end will be inconsistent with the actual voltage of the battery due to the internal resistance of the charging connection line. The longer the line, the higher the current, and the higher the battery voltage read by the charger end).</view>
+                    <view class="tip2">　This function is designed to meet the special requirements of some battery manufacturers for the first stage of high current charging. For example, if a single battery has a voltage of 3.7V and requires it to reach 3.2V or above before starting 2C charging, this function can be activated. At this time, the voltage will be charged to 3.2V using the set current first and then switched to the first stage of charging (note: the charger can only read the output voltage, which is the same as the battery voltage when there is no current, but in the case of current or high current, the voltage at the charger end will be inconsistent with the actual voltage of the battery due to the internal resistance of the charging connection line. The longer the line, the higher the current, and the higher the battery voltage read by the charger end).</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}此功能是针对部分电池厂家对大电流充电有起充点的特殊要求设置的,比如单个电池3.7V,要求必须达到3.2V以上才能启动2C充电,那么就可以开启此功能,此时就会先用设置好的电流先把电压充到3.2V再切换到第一段充电(注意:充电器只能读取输出端电压,在无电流的时候和电池电压是相同的,但是在有电流或者大电流的情况下充电器端电压会因为充电连接线的内阻而导致和电池的实际电压不一致,线越长电流越大充电器端读取到的电池电压也就越高)。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字开始设置,设置为0即可关闭预充功能。</view>
+                    <view class="tip2">　　此功能是针对部分电池厂家对大电流充电有起充点的特殊要求设置的,比如单个电池3.7V,要求必须达到3.2V以上才能启动2C充电,那么就可以开启此功能,此时就会先用设置好的电流先把电压充到3.2V再切换到第一段充电(注意:充电器只能读取输出端电压,在无电流的时候和电池电压是相同的,但是在有电流或者大电流的情况下充电器端电压会因为充电连接线的内阻而导致和电池的实际电压不一致,线越长电流越大充电器端读取到的电池电压也就越高)。</view>
+                    <view class="tip2">　　点击右上角绿色文字开始设置,设置为0即可关闭预充功能。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1052,13 +995,13 @@
             </view>
             <view hidden="{{ShowBar!=19}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Set display language, support bilingual selection in Chinese and English, synchronize power screen and mini program switching, and take effect immediately after switching.</view>
-                    <view class="tip2">{{nbsp}}All current English translations come from machine translation. If you have any better suggestions, please send an email to cxjdwx@live.com Contact the author.</view>
+                    <view class="tip2">　Set display language, support bilingual selection in Chinese and English, synchronize power screen and mini program switching, and take effect immediately after switching.</view>
+                    <view class="tip2">　All current English translations come from machine translation. If you have any better suggestions, please send an email to cxjdwx@live.com Contact the author.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}设置显示语言,支持中英双语选择,电源屏幕和小程序同步切换,切换后即刻生效.</view>
+                    <view class="tip2">　设置显示语言,支持中英双语选择,电源屏幕和小程序同步切换,切换后即刻生效.</view>
                 </view>
-                <view class="tip2">{{nbsp}}点击右上角绿色文字进行切换/Click on the green text in the upper right corner to switch.</view>
+                <view class="tip2">　点击右上角绿色文字进行切换/Click on the green text in the upper right corner to switch.</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -1079,12 +1022,12 @@
                     <button bindtap="BTBLE2" class="DisINF1">{{UPWD}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Set the Bluetooth name and password to a maximum of 18 characters. If it is a Chinese character, each Chinese character occupies three characters, which is a maximum of 6 Chinese characters. (Restart takes effect)</view>
-                    <view class="tip2">{{nbsp}}Click on the green text in the upper right corner to make the settings.</view>
+                    <view class="tip2">　Set the Bluetooth name and password to a maximum of 18 characters. If it is a Chinese character, each Chinese character occupies three characters, which is a maximum of 6 Chinese characters. (Restart takes effect)</view>
+                    <view class="tip2">　Click on the green text in the upper right corner to make the settings.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}设置蓝牙名称,支持表情符号,最长18个字符,如果是汉字则每个汉字占三个字符,也就是最长6个汉字。(重启生效,设备需要要断电重启,小程序需要关闭后台进程后再打开,不懂杀后台的直接重启手机即可)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色文字进行设置。</view>
+                    <view class="tip2">　　设置蓝牙名称,支持表情符号,最长18个字符,如果是汉字则每个汉字占三个字符,也就是最长6个汉字。(重启生效,设备需要要断电重启,小程序需要关闭后台进程后再打开,不懂杀后台的直接重启手机即可)</view>
+                    <view class="tip2">　　点击右上角绿色文字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1098,11 +1041,19 @@
                     <view class="{{ShowBar==4?'open':'close1'}}"></view>
                 </view>
                 <button bindtap="BTUP" class="DisTIP" style="width:65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
-                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate>CVer?'Start Upgrade':'No Available'}}</button>
-                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate>CVer?'开始升级':'已最新版'}}</button>
+                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate!=CVer?'Start Upgrade':'No Available'}}</button>
+                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate!=CVer?'升级 '+UPDate:'已最新版'}}</button>
                 <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate}}"></view>
             </view>
             <view hidden="{{ShowBar!=4}}">
+                <view class="btnLayout" wx:if="{{!ADD&&!UEN}}">
+                    <button class="DisTIP1">测试版固件</button>
+                    <button bindtap="BTUP9" class="DisINF1">{{TestV}}</button>
+                </view>
+                <view class="btnLayout" wx:if="{{!ADD&&CVer>(CEV?RoCEV:RollV)}}">
+                    <button class="DisTIP1">{{UEN?'Firmware rollback':'固件降级'}}</button>
+                    <button bindtap="BTUP0" class="DisINF1">{{CEV?RoCEV:RollV}}</button>
+                </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'WIFI hotspot name':'WIFI热点名'}}</button>
                     <button bindtap="BTUP6" class="DisINF1">{{WID}}</button>
@@ -1119,14 +1070,6 @@
                     <button class="DisTIP1">{{UEN?'Firmware version':'固件版本'}}</button>
                     <button bindtap="BTUP3" class="DisINF1" style="color:gray;">{{CVer}}</button>
                 </view>
-                <view class="btnLayout" wx:if="{{GM}}">
-                    <button class="DisTIP1">{{UEN?'Test Firmware':'测试版固件'}}</button>
-                    <button bindtap="BTUP9" class="DisINF1">{{TestV}}</button>
-                </view>
-                <view class="btnLayout" wx:if="{{!ADD&&CVer>(CEV?RoCEV:RollV)}}">
-                    <button class="DisTIP1">{{UEN?'Firmware rollback':'固件降级'}}</button>
-                    <button bindtap="BTUP0" class="DisINF1">{{CEV?RoCEV:RollV}}</button>
-                </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'APP version':'APP版本'}}</button>
                     <button bindtap="BTUP4" class="DisINF1" style="color:gray;">{{APP}}</button>
@@ -1141,70 +1084,161 @@
                 </view>
                 <view wx:if="{{UEN}}">
                     <view style="display:{{ADD?'block':'none'}}">
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}Check for version updates, please move to the WeChat mini program end.</view>
+                        <view class="tip2" style="color:#0f0;">　　Check for version updates, please move to the WeChat mini program end.</view>
                     </view>
-                    <view class="tip2">{{nbsp}}Firmware upgrade requires connecting the router or mobile hotspot via WIFI and ensuring that the connected router or mobile hotspot is connected to the network</view>
-                    <view class="tip2">{{nbsp}}1.Hotspot name:{{WID}}<view></view>{{nbsp}}2.Password:{{WPD}}<view></view>{{nbsp}}3.Frequency band:2.4G<view></view>{{nbsp}}After following the above settings, click the "Start Upgrade" button in the upper right corner to start the upgrade program.<view></view>{{nbsp}}If there is an unexpected power outage or network outage during remote upgrades, it will not affect the current version and can be used with confidence.</view>
+                    <view class="tip2">　Firmware upgrade requires connecting the router or mobile hotspot via WIFI and ensuring that the connected router or mobile hotspot is connected to the network</view>
+                    <view class="tip2">　1.Hotspot name:{{WID}}<view></view>　2.Password:{{WPD}}<view></view>　3.Frequency band:2.4G<view></view>　After following the above settings, click the "Start Upgrade" button in the upper right corner to start the upgrade program.<view></view>　If there is an unexpected power outage or network outage during remote upgrades, it will not affect the current version and can be used with confidence.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view style="display:{{ADD?'block':'none'}}">
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}检查版本更新请移步微信小程序端。</view>
+                    <view class="btnLayout">
+                        <button class="DisTIP1">{{UEN?'APP Android':'历史更新日志'}}</button>
+                        <button bindtap="BTLST" class="DisINF1">{{LST?'显示':'隐藏'}}</button>
                     </view>
-                    <view wx:if="{{CVer<5.4}}">
+                    <view style="display:{{ADD?'block':'none'}}">
+                        <view class="tip2" style="color:#0f0;">　　检查版本更新请移步微信小程序端。</view>
+                    </view>
+                    <view style="height:10px;"></view>
+                    <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.42||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.42 APP:1.27 2025-04-12</view>
+                        <view class="tip2" style="color:#0f0;">　　此次加入了一个批量工厂客户定制版本及部分细节调整和修复,对所有用户开放了测试版,加入了APP端固件升级进度显示,以前只能在屏幕上显示,主要是方便没有装屏幕的用户升级固件时使用(下次升级生效).</view>
+                    </view>
+                    <view wx:if="{{CVer<5.41||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.41 APP:1.26 2025-03-21</view>
+                        <view class="tip2" style="color:#0f0;">　　为避免误触,1.26版本小程序快捷切换电压电流添加了一个确认框,添加颜色设置中一个自定义配色,此配色修改后会保存至手机,下次打开选中后就可以调出上次设置,添加华为输入电压校正(用于修改过PFC电阻的机器,正常情况无需设置),重写了充电器电流缓启修复了部分华为机器的缓启问题,重写了功率限制修复满功率时部分机器出现异常限流或乱跳问题,加入了功率限制输入和输出选择,以前只能限制输出功率,不过只有华为和中兴能读取到输入功率,所以限制输入功率目前也只有华为和中兴能用.</view>
+                    </view>
+                    <view wx:if="{{CVer<5.4||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">固件:5.40 APP:1.25 2025-03-06</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}此版本细分了取电器失败提示 取电失败后不再只显示'CAN通讯异常' 会细分显示为'CAN通讯异常' '绝缘测试未通过' '握手信息未通过' '车辆信息未通过' '电压检测未通过' '模拟电池升压异常' 以便分析故障,加入一个电桩限压策略设置,加入手动开关继电器功能,修复5.39部分华为风扇不受控问题,修复5.39华为外置传感器温度跳动问题.</view>
+                        <view class="tip2" style="color:#0f0;">　　此版本细分了取电器失败提示 取电失败后不再只显示'CAN通讯异常' 会细分显示为'CAN通讯异常' '绝缘测试未通过' '握手信息未通过' '车辆信息未通过' '电压检测未通过' '模拟电池升压异常' 以便分析故障,加入一个电桩限压策略设置,加入手动开关继电器功能,修复5.39部分华为风扇不受控问题,修复5.39华为外置传感器温度跳动问题.</view>
                     </view>
-                    <view wx:if="{{CVer<5.39}}">
+                    <view wx:if="{{CVer<5.39||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">固件:5.39 APP:1.24 2025-01-04</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要是针对5.37故障修复 修复部分取电器在低压桩时提前显示就绪问题 修复取电器升压电压跳动过大问题 修复5.37充电器在部分情况下最大电流变100问题 修复中兴和华为充在温度零下时不能正确识别问题 修复充电器小程序二段开关问题 增加了取电器兼容性 增加了保护关机倒计时设置 增加了取电器二段充电功能(仅限于低压直冲 所以设置电压126V以内才会显示) 增加了一个新的"数据异常修复"功能 (升级后会重置掉部分用户个性化设置,比如屏幕颜色等)</view>
+                        <view class="tip2" style="color:#0f0;">　　主要是针对5.37故障修复 修复部分取电器在低压桩时提前显示就绪问题 修复取电器升压电压跳动过大问题 修复5.37充电器在部分情况下最大电流变100问题 修复中兴和华为充在温度零下时不能正确识别问题 修复充电器小程序二段开关问题 增加了取电器兼容性 增加了保护关机倒计时设置 增加了取电器二段充电功能(仅限于低压直冲 所以设置电压126V以内才会显示) 增加了一个新的"数据异常修复"功能 (升级后会重置掉部分用户个性化设置,比如屏幕颜色等)</view>
                     </view>
-                    <view wx:if="{{CVer<5.37}}">
+                    <view wx:if="{{CVer<5.37||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">固件:5.37 APP:1.23 2024-12-01</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}本次更新主要加入新产品取电器支持 底层代码有大量改动 充电器升级后如有问题可降级至5.35稳定版</view>
+                        <view class="tip2" style="color:#0f0;">　　本次更新主要加入新产品取电器支持 底层代码有大量改动 充电器升级后如有问题可降级至5.35稳定版</view>
                     </view>
-                    <view wx:if="{{CVer<5.36}}">
+                    <view wx:if="{{CVer<5.36||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">固件:5.36 APP:1.22 2024-11-11</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入华为模块故障显示功能</view>
+                        <view class="tip2" style="color:#0f0;">　　加入华为模块故障显示功能</view>
                     </view>
-                    <view wx:if="{{CVer<5.35}}">
+                    <view wx:if="{{CVer<5.35||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">5.35(稳定版) 2024-10-01</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
+                        <view class="tip2" style="color:#0f0;">　　加入一个新的简约风格屏幕布局 添加了几种屏幕配色 均在屏幕颜色设置选项卡中设置 小程序加入英可瑞故障显示 修改蓝牙密码设置在用户设置中顶部即可设置(很多人找不到蓝牙密码,所以改到明显的地方.) 修改默认启用二段电流缓降 加入校正电压时如果检测到有电流时提示是否屏蔽选项 以及部分细节修改</view>
                     </view>
-                    <view wx:if="{{CVer<5.34}}">
+                    <view wx:if="{{CVer<5.34||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">5.34 2024-06-30</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
+                        <view class="tip2" style="color:#0f0;">　　主要为新品触摸屏版本更新 另外屏幕上加入蓝牙连接图标(蓝牙连接后蓝色,断开灰色) 加入触摸屏幕锁定图标(触屏解锁后绿色,锁定后红色)</view>
                     </view>
-                    <view wx:if="{{CVer<5.33}}">
+                    <view wx:if="{{CVer<5.33||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">5.33 2024-06-02</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
+                        <view class="tip2" style="color:#0f0;">　　加入中兴4875F1和华为4875一拖多功能(最多四台,并联CAN线后通电会自动识别) 设置项加入打开折叠箭头指示(很多人第一次用不知道可以打开)</view>
                     </view>
-                    <view wx:if="{{CVer<5.32}}">
+                    <view wx:if="{{CVer<5.32||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">5.32 2024-05-25</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.31功率限制异常问题 部分细节修复</view>
+                        <view class="tip2" style="color:#0f0;">　　修复5.31功率限制异常问题 部分细节修复</view>
                     </view>
-                    <view wx:if="{{CVer<5.31}}">
+                    <view wx:if="{{CVer<5.31||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">5.31 2024-05-16</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}加入预充功能 部分细节修复</view>
+                        <view class="tip2" style="color:#0f0;">　　加入预充功能 部分细节修复</view>
                     </view>
-                    <view wx:if="{{CVer<5.3}}">
+                    <view wx:if="{{CVer<5.3||LST}}">
                         <view style="height:10px;"></view>
                         <view class="tip2" style="color:#fa0;">5.30 2024-04-21</view>
-                        <view class="tip2" style="color:#0f0;">{{nbsp}}{{nbsp}}修复5.29版本长按加减按键会重启问题 修复5.29版本部分屏幕会显示错乱问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力</view>
+                        <view class="tip2" style="color:#0f0;">　　修复5.29版本长按加减按键会重启问题 修复5.29版本部分屏幕会显示错乱问题 修复部分中兴4875不能读取到参数问题 修复中兴3000输出功率会大于输入功率问题 修复中兴3000不能正确开机导致风机不受控问题 优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力</view>
                     </view>
-                    <view style="height:10px;"></view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>{{nbsp}}{{nbsp}}1.热点名:{{WID}}<view></view>{{nbsp}}{{nbsp}}2.密码:{{WPD}}<view></view>{{nbsp}}{{nbsp}}3.频段:2.4G<view></view>{{nbsp}}{{nbsp}}按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>{{nbsp}}{{nbsp}}远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.29 2024-04-14</view>
+                        <view class="tip2" style="color:#0f0;">　　优化显示刷新率 优化蓝牙通讯提升蓝牙抗干扰能力 优化电流范围设置(比如设置最大50A 以前必须输入1-50 现在可以直接输入50) 优化校正微调设置(直接按加减微调 不用再每次输入) 加入输出电压电流缓冲设置(以前默认都有开启且不能修改设置 有反映说这样在微调时看不到真实数据 所以现在改为可设置)</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.28 2024-04-07</view>
+                        <view class="tip2" style="color:#0f0;">　　修复中兴4875改高压后功率显示错误 加入中兴4875二次电压校正功能(修复上个版本电压校正后偏差较大问题) 修改中兴4875最低电流为2(以前未测试最低电流 实测2A起调) 修复二段电流缓降功能在部分情况下电流异常问题 修复快速设置重启后记忆错误和设置错误的问题</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.27 2024-03-29</view>
+                        <view class="tip2" style="color:#0f0;">　　加入中兴"ZXEPS R4875F1"电源支持(专用版本 普通版本无法切换) 风机初始风速设置最大值由120改为150(中兴4875初始风速默认为120,低了会停转) 加入了关机电流设置(以前是默认0.5A开始启动倒计时 不能设置) 重新打开5.24及之前版本升级5.25之后通道(用户设置中不能升级 仅限小程序系统设置中升级 且会重置所有设置)</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">1.10 2024-03-22(小程序更新)</view>
+                        <view class="tip2" style="color:#0f0;">　　由于最近5.25版本底层数据改动较大,导致部分用户升级后出现屏幕黑屏,电压范围异常,风速异常等情况,为避免大量异常导致机器返工问题所以决定关闭老版本升级5.25及之后的升级通道,由于APP端升级管理较为复杂,从此版本开始关闭安卓APP升级,只能小程序升级.更改更新日志为倒序.</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.26 2024-03-18</view>
+                        <view class="tip2" style="color:#0f0;">　　修复固件升级后不能自动重启问题(下次更新才生效) 修复5.25校正电压后不能立刻设置电压问题 修复5.25升级后部分机器电压范围错误问题 修改重置设置不再删除文字LOGO 修复了启动时按键跳过后偶尔会重启问题 加入允许用户设置LOGO选项 加入输出电压缓冲器(用于优化部分机器波纹偏大导致输出电压跳动频繁问题) 加入版本更新说明(涉及部分改机专业问题 所以仅在中文状态下系统设置中展示 切换至英文时不予显示)</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.25 2024-03-07</view>
+                        <view class="tip2" style="color:#0f0;">　　本次版本大量代码优化重写 重写小程序与控制板通讯协议 重写小程序UI绘制方法(以前UI部分会抖动) 加入详细数据显示功能 微信小程序加入英文支持 正式推出APP(从支持蓝牙开始历史所有版本均支持) 修复了ZXD3000一个Bug导致的电压设置和显示出现误差 重置设置后会清除所有设置图片了 优化苹果手机设置LOGO卡顿问题 优化传输图片中途退出导致死机问题 重新加入二段电流缓降功能 由于两个小程序更新比较麻烦 且改过蓝牙通讯后专业版需要重写才能使用 加上专业版代码过于老旧 所以正式放弃专业版 所有功能已搬迁至炫酷版 炫酷板加入导入图片代码方法(由于微信因安全及隐私等限制小程序访问手机图片 所以只能以代码形式发送 代码由PC端程序转换图片得到 复制好需要设置的图片代码 在点击设置电压后留空别粘贴 然后点确定即可识别 识别时会提示"CAN蓝牙读取了你的剪切板" 正确识别到图片代码后会弹出确认发送框 如无弹出请检查图片代码是否复制完整)</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.24 2024-01-19</view>
+                        <view class="tip2" style="color:#0f0;">　　优化部分代码 重写了升级界面 加入系统密码查询(一机一码永久有效) 加入英文显示支持(小程序暂不支持英文) 修复数据清零问题</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.23 2023-12-31</view>
+                        <view class="tip2" style="color:#0f0;">　　加入上下键同时按下开关机 修复4875低温异常问题 修复设置低于10A时会错误显示A</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.22 2023-11-16</view>
+                        <view class="tip2" style="color:#0f0;">　　修复5.21风速异常 修复部分手机不能连接专业版小程序</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.21 2023-11-12</view>
+                        <view class="tip2" style="color:#0f0;">　　提高显示刷新率 加入自动息屏默认60秒亮度50 支持GIF图片上传和JPG欢迎页面上传</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.20 2023-10-18</view>
+                        <view class="tip2" style="color:#0f0;">　　去除OVF和OAF,改为设置系数OVD和OAD,显示系数OVT和OAT设置</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.19 2023-10-12</view>
+                        <view class="tip2" style="color:#0f0;">　　部分显示信息修复 屏幕方向蓝牙名称和蓝牙密码移至用户设置</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.18 2023-10-05</view>
+                        <view class="tip2" style="color:#0f0;">　　修改开机提示倒计根据CAN通讯变色 加入充电动画 修复1个BUG导致缓启开启后部分英可瑞不能进入充电状态 加入按键交换功能</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.17 2023-09-29</view>
+                        <view class="tip2" style="color:#0f0;">　　加入OTA功能 部分UI调整 加入开机提示 移除驱动选择 受文件大小限制移除SSD1306和SH1106两个驱动 不再支持黑白屏</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.16</view>
+                        <view class="tip2" style="color:#0f0;">　　重写电流电压修正功能 现在按系数修正 优化电流采样显示 加入设置电压系数 OAF电流系数</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.15</view>
+                        <view class="tip2" style="color:#0f0;">　　由于部分电源异常 默认关闭电压电流修正功能</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.14</view>
+                        <view class="tip2" style="color:#0f0;">　　修复二段进入异常问题 二段电流缓降功能部分电源异常暂时移除二段电流缓降</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.13</view>
+                        <view class="tip2" style="color:#0f0;">　　重写电压电流自动修正功能 优化缓启显示 修复不能延时关机问题</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.12</view>
+                        <view class="tip2" style="color:#0f0;">　　加入重置所有设置 修改初始蓝牙密码为0000</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.11</view>
+                        <view class="tip2" style="color:#0f0;">　　加入英可瑞自动修正输出电压高于设置电压</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.10</view>
+                        <view class="tip2" style="color:#0f0;">　　修复屏幕统计数据问题 修改充电识别模式</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.09</view>
+                        <view class="tip2" style="color:#0f0;">　　加入liteffs文件系统 以及ST7789V240*240高分屏 正式推出彩屏版本</view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">5.08</view>
+                        <view class="tip2" style="color:#0f0;">　　加入彩屏驱动GC9A01支持 128*128LCD屏幕</view>
+                        <view class="tip2" style="color:#fa0;">5.07</view>
+                        <view class="tip2" style="color:#0f0;">　　修复5.06不能正确进入温度限制</view>
+                    </view>
                 </view>
+                <view style="height:15px;"></view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -1221,12 +1255,12 @@
             </view>
             <view hidden="{{ShowBar!=7}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The screen display orientation can be adjusted in four directions.</view>
-                    <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to switch.</view>
+                    <view class="tip2">　The screen display orientation can be adjusted in four directions.</view>
+                    <view class="tip2">　Click on the green number in the upper right corner to switch.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}屏幕显示朝向可以四个方向可调。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}点击右上角绿色数字进行切换。</view>
+                    <view class="tip2">　　屏幕显示朝向可以四个方向可调。</view>
+                    <view class="tip2">　　点击右上角绿色数字进行切换。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1248,12 +1282,12 @@
                     <button bindtap="BTLEDK2" class="DisINF1">{{LEDK0}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The screen brightness value range is 0-255, and you can set the screen brightness according to your own needs.</view>
-                    <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to switch.</view>
+                    <view class="tip2">　The screen brightness value range is 0-255, and you can set the screen brightness according to your own needs.</view>
+                    <view class="tip2">　Click on the green number in the upper right corner to switch.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}击右上角绿色数字进行设置。</view>
+                    <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
+                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1276,14 +1310,14 @@
                     <button bindtap="BTLEDKS2" class="DisINF1">{{LEDK2}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Pressing any button or connecting to Bluetooth after screen rest can light up the screen. When the mini program is connected, it will not enter screen rest. If screen rest is not required, set the screen rest time to 0.</view>
-                    <view class="tip2">{{nbsp}}The screen brightness value range is 0-255, and you can set the screen brightness according to your own needs.</view>
-                    <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to set it.</view>
+                    <view class="tip2">　Pressing any button or connecting to Bluetooth after screen rest can light up the screen. When the mini program is connected, it will not enter screen rest. If screen rest is not required, set the screen rest time to 0.</view>
+                    <view class="tip2">　The screen brightness value range is 0-255, and you can set the screen brightness according to your own needs.</view>
+                    <view class="tip2">　Click on the green number in the upper right corner to set it.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}息屏后按任意按键或者连接上蓝牙均可点亮屏幕,小程序连接时不会进入息屏,如不需要息屏则把息屏时间设置为0即可。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}击右上角绿色数字进行设置。</view>
+                    <view class="tip2">　　息屏后按任意按键或者连接上蓝牙均可点亮屏幕,小程序连接时不会进入息屏,如不需要息屏则把息屏时间设置为0即可。</view>
+                    <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
+                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1306,12 +1340,12 @@
                     <button bindtap="BTStart2" class="DisINF1" wx:if="{{!UEN}}">{{ETi?'是':'否'}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}The initial page time range is 3-15 seconds, which can be set according to your own needs. (Press any button to skip)</view>
-                    <view class="tip2">{{nbsp}}Click on the green number in the upper right corner to set it.</view>
+                    <view class="tip2">　The initial page time range is 3-15 seconds, which can be set according to your own needs. (Press any button to skip)</view>
+                    <view class="tip2">　Click on the green number in the upper right corner to set it.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}初始页面时间范围是3-15秒可根据自己需要设置。(按下任意按键可跳过)</view>
-                    <view class="tip2">{{nbsp}}{{nbsp}}击右上角绿色数字进行设置。</view>
+                    <view class="tip2">　　初始页面时间范围是3-15秒可根据自己需要设置。(按下任意按键可跳过)</view>
+                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1336,8 +1370,8 @@
                     <image bindtap="BT_GIF4" mode="aspectFit" src="{{GIF4}}" style="height:73px;"></image>
                     <image bindtap="BT_GIF5" mode="aspectFit" src="{{GIF5}}" style="height:73px;"></image>
                 </view>
-                <view class="tip2" wx:if="{{UEN}}">{{nbsp}}Set the position of the screen logo box to play a dynamic image during the charging process. (After modifying the animation, it may restart)</view>
-                <view class="tip2" wx:if="{{!UEN}}">{{nbsp}}{{nbsp}}点击上面动图即可设置在充电过程中屏幕LOGO框位置播放动图。</view>
+                <view class="tip2" wx:if="{{UEN}}">　Set the position of the screen logo box to play a dynamic image during the charging process. (After modifying the animation, it may restart)</view>
+                <view class="tip2" wx:if="{{!UEN}}">　　点击上面动图即可设置在充电过程中屏幕LOGO框位置播放动图。</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -1364,7 +1398,7 @@
                     <button bindtap="Scr3" class="DisINF1" style="text-align:center;color:{{Crs==3?'#0e0':'#fff'}};">{{UEN?'Color 3':'配色三'}}</button>
                 </view>
                 <view style="position:relative;height:260px;width:100%;">
-                    <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;">
+                    <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;;">
                         <view hidden="{{UI==1}}">
                             <view bindtap="CK0" class="UIBox1" style="z-index:1;border-color:{{Cr0}};left:2%;top:2px;width:95%;height:20px;color:{{Cr0}};">{{STR}}</view>
                             <view class="UIBox1" style="left:2.5%;width:62%;border-style:none;">
@@ -1458,14 +1492,58 @@
                 </view>
                 <view style="height:15px;"></view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">{{nbsp}}Only the color adjustments in the customization will be saved to the phone, and the rest of the color changes will be restored to default every time they are selected.<view></view>{{nbsp}}Please click on the corresponding display position and adjust the RGB color values below. After the adjustment is complete, click the green send button in the upper right corner to make it effective.</view>
+                    <view class="tip2">　Only the color adjustments in the customization will be saved to the phone, and the rest of the color changes will be restored to default every time they are selected.<view></view>　Please click on the corresponding display position and adjust the RGB color values below. After the adjustment is complete, click the green send button in the upper right corner to make it effective.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">{{nbsp}}{{nbsp}}只有自定义中的配色调整后将会保存至手机,其余配色修改后每次选中都会恢复默认。<view></view>{{nbsp}}{{nbsp}}请点击对应显示位置后在下面调整RGB颜色值,调整完成后点击右上角绿色发送按钮即可生效。</view>
+                    <view class="tip2">　　只有自定义中的配色调整后将会保存至手机,其余配色修改后每次选中都会恢复默认。<view></view>　　请点击对应显示位置后在下面调整RGB颜色值,调整完成后点击右上角绿色发送按钮即可生效。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
         </view>
+    </view>
+</view>
+<view style="position:relative;z-index:1;color:#fff;width:90%;left:5%;" wx:if="{{UPS}}">
+    <view style="height:40px"></view>
+    <view style="font-size:25px;color:#f00;text-align:center;">{{UEN?'Firmware Upgrade':'固件升级'}}</view>
+    <view style="height:20px"></view>
+    <view style="line-height:1.8;color:#8ef;" wx:if="{{UPS==2}}">
+        <view style="font-size:20px;color:#f80;text-align:center;">{{UEN?'Waiting for network connection':'正在等待网络连接'}}</view>
+        <view style="height:10px"></view>
+        <view wx:if="{{UEN}}">　　Any internet enabled phone can open a hotspot and set up the network according to the following instructions. Some phones may not be able to connect if they do not have a frequency band setting (unable to use the 2.4G frequency band). You can switch to another phone setting, such as an iPhone. If it is inconvenient to change the hotspot name, you can also click on the hotspot name and password below to make changes.<view style="height:10px"></view>
+            <view bindtap="BTUP6">　　1.Hotspot name:<text style="color:#0f0;">{{WID}}</text>
+            </view>
+            <view bindtap="BTUP7">　　2.Password:<text style="color:#0f0;">{{WPD}}</text>
+            </view>
+            <view>　　3.Frequency band: 2.4G</view>
+        </view>
+        <view wx:if="{{!UEN}}">　　任意一部可联网手机打开热点并打开网络后按以下说明设置,部分手机如无频段设置(无法使用2.4G频段)可能无法连接,可换一部手机设置,如IPhone手机等不方便修改热点名的也可点击下面热点名和密码可做修改。<view style="height:10px"></view>
+            <view bindtap="BTUP6">　　 1.设置热点名称为:<text style="color:#0f0;">{{WID}}</text>
+            </view>
+            <view bindtap="BTUP7">　　 2.设置热点密码为:<text style="color:#0f0;">{{WPD}}</text>
+            </view>
+            <view>　　 3.设置热点频段为: 2.4G</view>
+        </view>
+    </view>
+    <view style="line-height:1.8;color:#8ef;" wx:if="{{UPS==1}}">
+        <view style="font-size:20px;color:#f80;text-align:center;">{{UEN?'Network connection successful':'网络连接成功'}}</view>
+        <view style="height:10px"></view>
+        <view wx:if="{{UEN}}">　　Downloading and writing firmware, please do not power off and maintain network connection. If you encounter a stuck or unexpected network disconnection during the upgrade process, simply restart. After the upgrade is completed, the device will automatically restart.</view>
+        <view wx:if="{{!UEN}}">　　正在下载并写入固件,请勿断电并保持网络连接,如升级过程中遇到卡死或者意外断网只需重启即可,升级进度完成后设备会自动重启。(部分情况需手动拔电重启)</view>
+        <view style="position:fixed;top:82%;width:100%;left:0px;">
+            <view class="btnLayout" style="height:188px;">
+                <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:90%;height:35px;">
+                    <view style="height:101px;">
+                        <view style="background-color:#0f0;position:relative;left:0px;top:0px;height:35px;width:{{UPV}}%"></view>
+                        <view style="position:relative;top:-45px;color:#fff;width:100%;height:0px;font-size:30px;">{{UPV}}%</view>
+                    </view>
+                </view>
+            </view>
+            <view class="btnLayout">
+                <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:-166px;width:90%;height:35px;"></view>
+            </view>
+        </view>
+        <view style="position:fixed;top:95%;left:5%;color:#fff8;width:100%;height:0px;">APP-{{APP}}</view>
+        <view style="position:fixed;top:95%;left:5%;color:#fff8;width:90%;height:0px;text-align:right;">{{SCAN+'-'+CVer}}</view>
     </view>
 </view>
 <view style="height:12%;"></view>

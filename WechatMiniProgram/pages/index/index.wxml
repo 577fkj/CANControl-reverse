@@ -2,6 +2,7 @@
     <view bindtap="listViewTap" class="list-item" data-name="{{item.name}}" wx:for="{{deviceListDataShow}}" wx:key="name">
         <image class="list-item-img" src="/img/icon.png" wx:if="{{tools.StrFirst(item.name,4)=='CAN-'||tools.StrFirst(item.name,4)=='CAN_'||tools.StrFirst(item.name)=='@'}}"></image>
         <image class="list-item-img" src="/img/cev.png" wx:elif="{{tools.StrFirst(item.name,4)=='CEV_'}}"></image>
+        <image class="list-item-img" src="/img/cev.png" wx:elif="{{tools.StrFirst(item.name,4)=='ODM_'}}"></image>
         <view style="position:absolute;left:22px;top:12px;width:32px;height:32px;border-radius:50%;background-color:#444;" wx:else>
             <view style="position:absolute;left:2px;top:2px;width:28px;height:28px;border-radius:50%;background-color:#ccc;"></view>
             <view style="position:absolute;left:15px;top:7px;transform:rotate( 45deg);background-color:#444;width:3px;height:17px;"></view>

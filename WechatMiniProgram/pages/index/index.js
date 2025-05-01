@@ -1,11 +1,11 @@
 var t, e = require("../../@babel/runtime/helpers/createForOfIteratorHelper"),
   a = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   i = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  n = (t = require("../../89FCDC259E166AAFEF9AB422C656D4C0.js")) && t.__esModule ? t : {
+  n = (t = require("../../2617D5879E166AAF4071BD80CB856D63.js")) && t.__esModule ? t : {
     default: t
   },
-  r = require("../../4E08A4649E166AAF286ECC635736D4C0.js");
-var s, o = require("../../1C192C069E166AAF7A7F4401A546D4C0.js"),
+  r = require("../../D6700B049E166AAFB0166303AB656D63.js");
+var s, o = require("../../9236B3819E166AAFF450DB86EB756D63.js"),
   c = 0,
   u = 0,
   h = 0,
@@ -41,7 +41,7 @@ function v() {
         case 12:
           return t.next = 14, o.easyConnect(e, (function () {}));
         case 14:
-          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", false), wx.navigateTo({
+          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", !1), wx.navigateTo({
             url: "../device/device?Ver=3.47&GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : e.startsWith("CAN-") ? i.data.NewUI ? (wx.navigateTo({
             url: "../device2/device?Ver=3.47&GM=" + (h ? 1 : 0)
@@ -49,6 +49,8 @@ function v() {
             url: "../NewUI/NewUI?GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : e.startsWith("CAN_") ? (wx.navigateTo({
             url: "../NewUI1/NewUI?GM=" + h
+          }), wx.hideLoading()) : e.startsWith("ODM_") ? (wx.navigateTo({
+            url: "../NewUI1/NewUI?CEV=1&ODM=1&GM=" + h
           }), wx.hideLoading()) : e.startsWith("CEV_") && (wx.navigateTo({
             url: "../NewUI1/NewUI?CEV=1&GM=" + h
           }), wx.hideLoading()) : u < 5 ? (u += 1, l(e, i), console.log("失败！正在重新连接" + u)) : (wx.hideLoading(), f("连接失败"), i.startDiscovery());
@@ -68,11 +70,11 @@ function f(t) {
   })
 }
 
-function x(t) {
+function D(t) {
   return wx.getStorageSync(t)
 }
 
-function D(t, e) {
+function x(t, e) {
   wx.setStorageSync(t, e)
 }
 Page({
@@ -86,10 +88,10 @@ Page({
   },
   onShareAppMessage: function () {},
   onLoad: function (t) {
-    h = Number(t.GM), w = x("DEBUG");
+    h = Number(t.GM) || 0, w = D("DEBUG");
     var e = wx.getAccountInfoSync();
     "trial" == e.miniProgram.envVersion && (h = 1), "develop" == e.miniProgram.envVersion && (h = 2);
-    var a = x("UI");
+    var a = D("UI");
     this.setData({
       NewUI: 0 == a ? 0 : a
     }), this.setData({
@@ -148,15 +150,15 @@ Page({
       return a().wrap((function (a) {
         for (;;) switch (a.prev = a.next) {
           case 0:
-            t.currentTarget.dataset.name.match(/^(C(AN|EV)[\-\_]|@)/) ? (n = e, u = 0, o.stopBluetoothDevicesDiscovery(), c = t.currentTarget.dataset.name, wx.showToast({
+            t.currentTarget.dataset.name.match(/^((CAN|CEV|ODM)[\-\_]|@)/) ? (n = e, u = 0, o.stopBluetoothDevicesDiscovery(), c = t.currentTarget.dataset.name, wx.showToast({
               title: "设备连接中",
               icon: "loading",
               duration: 46e5,
-              mask: true
+              mask: !0
             }), l(c, n)) : (i = "未知设备", r = "不支持此蓝牙设备", wx.showModal({
               title: i,
               content: r,
-              showCancel: false
+              showCancel: !1
             }));
           case 1:
           case "end":
@@ -169,12 +171,12 @@ Page({
   SetUI1: function () {
     this.setData({
       NewUI: 1
-    }), D("UI", 1)
+    }), x("UI", 1)
   },
   SetUI0: function () {
     this.setData({
       NewUI: 0
-    }), D("UI", 0)
+    }), x("UI", 0)
   },
   HELP: function () {
     wx.navigateTo({
@@ -201,7 +203,20 @@ Page({
               title: "正在搜索中",
               icon: "loading",
               duration: 5e3
-            }), (0, r.print)("IDX:", "Start BLE Search"), o.startBluetoothDevicesDiscovery((function (t, a) {
+            }), (0, r.print)("IDX:", "Start BLE Search"), setInterval((function () {
+              var t, a = Math.floor(Date.now() / 1e3),
+                i = 0,
+                n = e(s.data.deviceListData);
+              try {
+                for (n.s(); !(t = n.n()).done;) {
+                  a - t.value.time > 5 && s.data.deviceListData.splice(i, 1), i++
+                }
+              } catch (t) {
+                n.e(t)
+              } finally {
+                n.f()
+              }
+            }), 1e3), o.startBluetoothDevicesDiscovery((function (t, a) {
               d = 1;
               var i, n = e(s.data.deviceListData);
               try {
@@ -209,20 +224,26 @@ Page({
                   var r = i.value;
                   if (r.name.startsWith("CAN-") && s.setData({
                       ShowUI: 1
-                    }), r.name === t) return void(r.rssi = a)
+                    }), r.name === t) return r.rssi = a, void(r.time = Math.floor(Date.now() / 1e3))
                 }
               } catch (t) {
                 n.e(t)
               } finally {
                 n.f()
               }
-              s.data.deviceListDataShow.length >= 5 ? (t.startsWith("CAN_") || t.startsWith("CEV_") || t.startsWith("@") || t.startsWith("CAN-")) && s.data.deviceListData.push({
+              if (s.data.deviceListDataShow.length >= 5)(t.startsWith("CAN_") || t.startsWith("ODM_") || t.startsWith("CEV_") || t.startsWith("@") || t.startsWith("CAN-")) && s.data.deviceListData.push({
                 name: t,
                 rssi: a
-              }) : s.data.deviceListData.push({
-                name: t,
-                rssi: a
-              }), setTimeout((function () {
+              });
+              else {
+                var o = Math.floor(Date.now() / 1e3);
+                s.data.deviceListData.push({
+                  name: t,
+                  rssi: a,
+                  time: o
+                })
+              }
+              setTimeout((function () {
                 wx.hideToast()
               }), 1e3)
             }))) : ((0, r.print)("IDX:", i.errMsg), d = 1, wx.showModal({
