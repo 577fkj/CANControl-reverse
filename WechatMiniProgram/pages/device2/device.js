@@ -101,8 +101,8 @@ function yt(t, e) {
   wx.createSelectorQuery()
     .select("#myCanvas")
     .fields({
-      node: !0,
-      size: !0
+      node: true,
+      size: true
     })
     .exec(function (e) {
       var a = e[0].node,
@@ -138,7 +138,7 @@ var Et = [],
   Kt = 0;
 
 function Bt(t) {
-  s.easySendData(Et[Kt], !1),
+  s.easySendData(Et[Kt], false),
     Ut("发送进度:" + ((Kt / Et.length) * 100).toFixed(2) + "%"),
     console.log("ID=" + Kt + "  Str=" + Et[Kt]),
     Kt++;
@@ -150,8 +150,8 @@ function kt(t) {
         wx.createSelectorQuery()
           .select(t[e][0])
           .fields({
-            node: !0,
-            size: !0
+            node: true,
+            size: true
           })
           .exec(function (a) {
             var i = a[0].node,
@@ -268,7 +268,7 @@ Page({
           if (e.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/))
             wx.showModal({
               title: "是否发送剪切板中的设置代码",
-              editable: !1,
+              editable: false,
               placeholderText: "",
               success: function (t) {
                 t.confirm &&
@@ -287,7 +287,7 @@ Page({
           else
             for (var a = e.split("\n"), i = 0; i < a.length; i++)
               if (a[i].startsWith("SetMSG="))
-                s.easySendData(a[i] + "\n", !0), Ut("信息已发送");
+                s.easySendData(a[i] + "\n", true), Ut("信息已发送");
               else if (a[i].startsWith("SetLOGO=")) {
             if ((a[i].match(/SetLOGO=(.+)$/), "" != (Lt = RegExp.$1))) {
               $t("SetLOGO=S");
@@ -303,7 +303,7 @@ Page({
       i = RegExp.$2;
     if (3 == this.data.ShowPan)
       "SetMSG" == e ?
-      (s.easySendData(t + "\n", !0), Yt("设置已发送,重启生效!")) :
+      (s.easySendData(t + "\n", true), Yt("设置已发送,重启生效!")) :
       ((pt = this.data.CMD.toLowerCase()),
         jt(E, pt),
         $t("CheckUPWD=" + pt));
@@ -407,7 +407,7 @@ Page({
             void yt(this.data.CMD)
           );
         (t = t.replace("0104", "")),
-        s.easySendData(t + "\n", !0),
+        s.easySendData(t + "\n", true),
           (t = "Restart"),
           Yt("设置已发送,设备正在重启!"),
           wx.navigateBack({
@@ -433,10 +433,10 @@ Page({
         else {
           if ("设置蓝牙名称" == e)
             return (
-              s.easySendData("SetCFG=SSID," + Xt(i) + "\n", !0),
+              s.easySendData("SetCFG=SSID," + Xt(i) + "\n", true),
               (t = ""),
               Ut("名称已修改 重启生效"),
-              s.easySendData("SetCFG=SSID," + Xt(i) + "\n", !0),
+              s.easySendData("SetCFG=SSID," + Xt(i) + "\n", true),
               void $t("GetINF")
             );
           if ("设置蓝牙密码" == e)
@@ -708,8 +708,8 @@ Page({
       .createSelectorQuery()
       .select("#canvas")
       .fields({
-        node: !0,
-        size: !0
+        node: true,
+        size: true
       })
       .exec(function (t) {
         var e = t[0].node;
@@ -1072,7 +1072,7 @@ function Ht() {
         for (;;)
           switch ((t.prev = t.next)) {
             case 0:
-              return (t.next = 2), s.easySendData(a + "\n", !1);
+              return (t.next = 2), s.easySendData(a + "\n", false);
             case 2:
             case "end":
               return t.stop();
@@ -1090,7 +1090,7 @@ function Yt(t) {
   wx.showModal({
     title: "MSG",
     content: t,
-    showCancel: !1
+    showCancel: false
   });
 }
 

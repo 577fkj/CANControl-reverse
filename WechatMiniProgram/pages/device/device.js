@@ -108,8 +108,8 @@ function js(s) {
         wx.createSelectorQuery()
           .select(s[f][0])
           .fields({
-            node: !0,
-            size: !0
+            node: true,
+            size: true
           })
           .exec(function (a) {
             var e = a[0].node,
@@ -299,8 +299,8 @@ Page({
               .createSelectorQuery()
               .select("#myCanvas")
               .fields({
-                node: !0,
-                size: !0
+                node: true,
+                size: true
               })
               .exec(function (f) {
                 var a = f[0].node,
@@ -795,8 +795,8 @@ Page({
       .createSelectorQuery()
       .select("#canvas")
       .fields({
-        node: !0,
-        size: !0
+        node: true,
+        size: true
       })
       .exec(function (s) {
         var f = s[0].node;
@@ -1158,7 +1158,7 @@ var Os = [],
   Js = 0;
 
 function Xs(s) {
-  u.easySendData(Os[$s][Ks] + "\n", !1),
+  u.easySendData(Os[$s][Ks] + "\n", false),
     (Ks += 1),
     (Ls += 1),
     s.setData({
@@ -1210,7 +1210,7 @@ function Us() {
         for (;;)
           switch ((s.prev = s.next)) {
             case 0:
-              return (s.next = 2), u.easySendData(a + "\n", !1);
+              return (s.next = 2), u.easySendData(a + "\n", false);
             case 2:
             case "end":
               return s.stop();
@@ -1228,7 +1228,7 @@ function ff(s) {
   wx.showModal({
     title: "MSG",
     content: s,
-    showCancel: !1
+    showCancel: false
   });
 }
 

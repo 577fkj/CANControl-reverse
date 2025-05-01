@@ -39,7 +39,7 @@ function Oe(t, e) {
   var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : function () {};
   Ge.showModal({
     title: t,
-    editable: !0,
+    editable: true,
     placeholderText: e,
     confirmText: k ? "YES" : "确定",
     cancelText: k ? "NO" : "取消",
@@ -53,7 +53,7 @@ function Ue(t, e, a, n) {
   var i = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : function () {};
   Ge.showModal({
     title: k ? e : t,
-    editable: !0,
+    editable: true,
     placeholderText: (k ? "Range:" : "范围:") + a + "-" + n,
     confirmText: k ? "YES" : "确定",
     cancelText: k ? "NO" : "取消",
@@ -71,7 +71,7 @@ function xe(t, e, a, n) {
   var i = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : function () {};
   Ge.showModal({
     title: k ? e : t,
-    editable: !0,
+    editable: true,
     placeholderText: k ? n : a,
     confirmText: k ? "YES" : "确定",
     cancelText: k ? "NO" : "取消",
@@ -126,7 +126,7 @@ function Pe() {
           }
           return (0, qt.Toast)(k ? "There Are Unfinished Sending Tasks" : "有发送任务未完成"), t.abrupt("return");
         case 4:
-          return e = e.substring(0, 40), t.next = 7, Qt.easySendData1(e, !0);
+          return e = e.substring(0, 40), t.next = 7, Qt.easySendData1(e, true);
         case 7:
         case "end":
           return t.stop()
@@ -142,7 +142,7 @@ function Ke(t) {
     a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 0;
   0 == Le ? Ge.showModal({
     title: k ? "Confirm Whether To Send" : "确认是否发送",
-    editable: !1,
+    editable: false,
     confirmText: k ? "YES" : "确定",
     cancelText: k ? "NO" : "取消",
     success: function (n) {
@@ -157,7 +157,7 @@ function Ke(t) {
 
 function ye(t) {
   var e = Re[Le];
-  Qt.easySendData1(e, !0), (0, qt.Toast)((k ? "Sending:" : "发送进度:") + (Le / Re.length * 100).toFixed(2) + "%"), Le++
+  Qt.easySendData1(e, true), (0, qt.Toast)((k ? "Sending:" : "发送进度:") + (Le / Re.length * 100).toFixed(2) + "%"), Le++
 }
 
 function ke(t) {
@@ -205,7 +205,7 @@ function ze(t) {
 function _e(t, e) {
   var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 2,
     n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 0,
-    i = t.getFloat32(e, !0).toFixed(a);
+    i = t.getFloat32(e, true).toFixed(a);
   return n ? parseFloat(i) : i
 }
 
@@ -562,7 +562,7 @@ Page({
       type: "loading",
       icon: "loading",
       duration: 46e5,
-      mask: !0
+      mask: true
     }), a.SetLOGO(le + "|" + de, a);
     else if ("发送" == a.data.LOGO || "Send" == a.data.LOGO) {
       return Ke(o, 1), void Ve("FAD2" + $e(unescape(encodeURIComponent(Ce))))
@@ -612,8 +612,8 @@ Page({
   },
   SetLOGO: function (t, e) {
     Ge.createSelectorQuery().select("#LOGO").fields({
-      node: !0,
-      size: !0
+      node: true,
+      size: true
     }).exec((function (a) {
       var n = a[0].node,
         i = n.getContext("2d");
@@ -1060,7 +1060,7 @@ Page({
         }))
       } else Ge.showModal({
         title: k ? "Start Upgrade" : "开始升级",
-        editable: !1,
+        editable: false,
         confirmText: k ? "YES" : "确定",
         cancelText: k ? "NO" : "取消",
         success: function (t) {
@@ -1091,7 +1091,7 @@ Page({
   BTUP0: function (t) {
     Ge.showModal({
       title: k ? "Firmware rollback" : "固件回退",
-      editable: !1,
+      editable: false,
       confirmText: k ? "YES" : "确定",
       cancelText: k ? "NO" : "取消",
       success: function (t) {
@@ -1103,7 +1103,7 @@ Page({
     Ge.showModal({
       title: k ? "Write Test Firmware" : "升级测试固件",
       content: "测试版本固件可能会有未知的BUG,如遇到BUG可以升级到正式版或者退回稳定版",
-      editable: !1,
+      editable: false,
       confirmText: "确定",
       cancelText: "取消",
       success: function (t) {
@@ -1378,7 +1378,7 @@ Page({
           }));
           else if ("强制升级" == t || "测试版" == t) Ge.showModal({
             title: k ? "Start Upgrade" : "开始升级",
-            editable: !1,
+            editable: false,
             confirmText: k ? "YES" : "确定",
             cancelText: k ? "NO" : "取消",
             success: function (e) {
@@ -1387,7 +1387,7 @@ Page({
           });
           else if ("测试二" == t) Ge.showModal({
             title: k ? "Start Upgrade" : "开始升级",
-            editable: !1,
+            editable: false,
             confirmText: k ? "YES" : "确定",
             cancelText: k ? "NO" : "取消",
             success: function (t) {
@@ -1473,7 +1473,7 @@ Page({
       ne = 1, (0, qt.Toast)(k ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3), setTimeout((function () {
         Ge.showModal({
           title: k ? "Enter Bluetooth password" : "输入蓝牙密码",
-          editable: !0,
+          editable: true,
           placeholderText: "ID:" + D,
           confirmText: k ? "YES" : "确定",
           cancelText: k ? "Observer" : "我只看看",
@@ -1495,7 +1495,7 @@ Page({
       } else(0, qt.Toast)(k ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3), setTimeout((function () {
         Ge.showModal({
           title: k ? "Enter Bluetooth password" : "输入蓝牙密码",
-          editable: !0,
+          editable: true,
           placeholderText: "ID:" + D,
           confirmText: k ? "YES" : "确定",
           cancelText: k ? "Observer" : "我只看看",
@@ -1659,7 +1659,7 @@ Page({
           title: k ? "Abnormal device authorization" : "设备授权异常",
           content: "",
           confirmText: k ? "Yes I Kown" : "我知道了",
-          showCancel: !1,
+          showCancel: false,
           success: function (t) {
             Ge.navigateBack({
               delta: 0
@@ -2133,7 +2133,7 @@ Page({
         title: k ? "Bluetooth Disconnected" : "蓝牙信号丢失",
         content: k ? "Blue abnormal interruption is usually caused by shutdown, weak signal, or significant signal interference" : "通常是关机或信号弱或干扰大导致",
         confirmText: k ? "Yes I Kown" : "我知道了",
-        showCancel: !1,
+        showCancel: false,
         success: function (t) {
           Ge.navigateBack({
             delta: 0
