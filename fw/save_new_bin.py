@@ -10,12 +10,23 @@ devid = 'https://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZD
 
 def get_version(data):
     # find version string '00 35 2E ? ? 00'
-    version = b'Unk'
+    versions = []
     for i in range(len(data) - 5):
-        if data[i] == 0x00 and data[i + 1] == 0x35 and data[i + 2] == 0x2E and data[i + 5] == 0x00:
-            version = data[i + 1:i + 5]
-            break
-    return version.decode('utf-8')
+        if (data[i] == 0x00 and 
+            data[i + 1] == 0x35 and 
+            data[i + 2] == 0x2E and 
+            data[i + 5] == 0x00 and
+            0x30 <= data[i + 3] <= 0x39 and
+            0x30 <= data[i + 4] <= 0x39):
+            versions.append(float(data[i + 1:i + 5].decode('utf-8')))
+    
+    if not versions:
+        return 'Unk'
+    
+    versions.sort(reverse=True)
+    version = versions[0]
+    print(f'Version: {version:.2f}')
+    return f"{version:.2f}"
 
 def download(url, file_name, save_dir, bin_id, next_bin = None, find_version = True):
     r = requests.get(url.format(bin_id))
