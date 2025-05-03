@@ -13,42 +13,8 @@ class ProtocolType(IntFlag):
     PROTOCOL_EPS6020    = 0x10
     PROTOCOL_ZTE4875    = 0x20
     PROTOCOL_SINEXCEL   = 0x40
-
-    @staticmethod
-    def get_all_support():
-        return (ProtocolType.PROTOCOL_HUAWEI | 
-                ProtocolType.PROTOCOL_INCREASE | 
-                ProtocolType.PROTOCOL_ZTE3000 | 
-                ProtocolType.PROTOCOL_INFY | 
-                ProtocolType.PROTOCOL_EV_STATION | 
-                ProtocolType.PROTOCOL_EV_CHARGER | 
-                ProtocolType.PROTOCOL_EPS6020 | 
-                ProtocolType.PROTOCOL_ZTE4875 | 
-                ProtocolType.PROTOCOL_SINEXCEL)
-
-    @staticmethod
-    def decode_protocol(protocol):
-        if protocol == ProtocolType.PROTOCOL_HUAWEI:
-            return "HUAWEI"
-        elif protocol == ProtocolType.PROTOCOL_INCREASE:
-            return "INCREASE"
-        elif protocol == ProtocolType.PROTOCOL_ZTE3000:
-            return "ZTE3000"
-        elif protocol == ProtocolType.PROTOCOL_INFY:
-            return "INFY"
-        elif protocol == ProtocolType.PROTOCOL_EV_STATION:
-            return "EV_STATION"
-        elif protocol == ProtocolType.PROTOCOL_EV_CHARGER:
-            return "EV_CHARGER"
-        elif protocol == ProtocolType.PROTOCOL_EPS6020:
-            return "EPS6020"
-        elif protocol == ProtocolType.PROTOCOL_ZTE4875:
-            return "ZTE4875"
-        elif protocol == ProtocolType.PROTOCOL_SINEXCEL:
-            return "SINEXCEL"
-        else:
-            return "UNKNOWN"
     
+    @staticmethod
     def str():
         keys = [
             key for key, val in ProtocolType.__dict__.items()
