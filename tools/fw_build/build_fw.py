@@ -1,9 +1,45 @@
-import os
 import struct
 import collections
-import zlib
 import binascii
+from nvs import nvs_open, write_entry, check_size, Page, VERSION1_PRINT, VERSION2_PRINT
+import nvs_decode
+from enum import IntFlag
+import os
+import shutil
 
+if os.path.exists("build"):
+    shutil.rmtree("build")
+
+os.makedirs("build")
+
+def generate_nvs_data(output_file, partition_size, keys_values):
+    """
+    生成NVS分区数据
+    
+    :param output_file: 输出的二进制文件路径
+    :param partition_size: 分区大小(字节)，必须是4096的倍数
+    :param keys_values: 包含键值对的列表，每项为(key, type, encoding, value)
+    """
+
+    version = Page.VERSION2
+    input_size, read_only = check_size(str(partition_size))
+    
+    with open(output_file, 'wb') as f_out,\
+        nvs_open(f_out, input_size, version=version, read_only=read_only) as nvs_instance:
+
+        if nvs_instance.version == Page.VERSION1:
+            version_set = VERSION1_PRINT
+        else:
+            version_set = VERSION2_PRINT
+        print('Creating NVS binary with version:', version_set)
+
+        for key, datatype, encoding, value in keys_values:
+            max_key_len = 15
+            if len(key) > max_key_len:
+                raise RuntimeError('Length of key `%s` should be <= 15 characters.' % key)
+            write_entry(nvs_instance, key, datatype, encoding, value)
+
+    print(f"NVS generated successfully at {output_file}")
 
 def create_otadata(spi_flash_sec_size=0x2000):
     otadata = bytearray(spi_flash_sec_size)
@@ -36,7 +72,18 @@ def get_otadata_info(otadata, spi_flash_sec_size=0x2000):
 
     return info
 
-def build_fw(bootloader_path, partition_table_path, nvs_path, app_path, spiffs_path):
+def dump_nvs(nvs_path):
+    with open(nvs_path, 'rb') as f:
+        nvs_data = f.read()
+    
+    nvs_decode.blob_limit = 0
+    nvs_decode.special_handling = True
+    nvs_decode.verify_nvs_size(nvs_data)
+    
+    nvs_decode.parse_nvs_binary(nvs_data)
+    nvs_decode.dump_nvs_data()
+
+def build_fw(bootloader_path, partition_table_path, app_path, spiffs_path, nvs_path=None, output_path="flash_image.bin"):
     # Read bootloader, partition table, NVS, app, and spiffs files
     with open(bootloader_path, 'rb') as f:
         bootloader = f.read()
@@ -112,14 +159,84 @@ def build_fw(bootloader_path, partition_table_path, nvs_path, app_path, spiffs_p
         flash[0x390000 + i] = spiffs[i]
 
     # Save the flash image to a file
-    with open("flash_image.bin", 'wb') as f:
+    with open(output_path, 'wb') as f:
         f.write(flash)
     print("Flash image created successfully!")
 
+class ProtocolType(IntFlag):
+    PROTOCOL_HUAWEI     = 0x1
+    PROTOCOL_INCREASE   = 0x2
+    PROTOCOL_ZTE3000    = 0x4
+    PROTOCOL_INFY       = 0x8
+    PROTOCOL_EV_STATION = 0xc
+    PROTOCOL_EV_CHARGER = 0xe
+    PROTOCOL_EPS6020    = 0x10
+    PROTOCOL_ZTE4875    = 0x20
+    PROTOCOL_SINEXCEL   = 0x40
+
+    @staticmethod
+    def get_all_support():
+        return (ProtocolType.PROTOCOL_HUAWEI | 
+                ProtocolType.PROTOCOL_INCREASE | 
+                ProtocolType.PROTOCOL_ZTE3000 | 
+                ProtocolType.PROTOCOL_INFY | 
+                ProtocolType.PROTOCOL_EV_STATION | 
+                ProtocolType.PROTOCOL_EV_CHARGER | 
+                ProtocolType.PROTOCOL_EPS6020 | 
+                ProtocolType.PROTOCOL_ZTE4875 | 
+                ProtocolType.PROTOCOL_SINEXCEL)
+
+    @staticmethod
+    def decode_protocol(protocol):
+        if protocol == ProtocolType.PROTOCOL_HUAWEI:
+            return "HUAWEI"
+        elif protocol == ProtocolType.PROTOCOL_INCREASE:
+            return "INCREASE"
+        elif protocol == ProtocolType.PROTOCOL_ZTE3000:
+            return "ZTE3000"
+        elif protocol == ProtocolType.PROTOCOL_INFY:
+            return "INFY"
+        elif protocol == ProtocolType.PROTOCOL_EV_STATION:
+            return "EV_STATION"
+        elif protocol == ProtocolType.PROTOCOL_EV_CHARGER:
+            return "EV_CHARGER"
+        elif protocol == ProtocolType.PROTOCOL_EPS6020:
+            return "EPS6020"
+        elif protocol == ProtocolType.PROTOCOL_ZTE4875:
+            return "ZTE4875"
+        elif protocol == ProtocolType.PROTOCOL_SINEXCEL:
+            return "SINEXCEL"
+        else:
+            return "UNKNOWN"
+    
+    @staticmethod
+    def decode_protocols(protocols):
+        decoded_protocols = []
+        for protocol in ProtocolType:
+            if protocol & protocols:
+                decoded_protocols.append(ProtocolType.decode_protocol(protocol))
+        return decoded_protocols
+
+nvs_data = [
+    # key,type,encoding,value
+    ("SYS", "namespace", "u8", 0),
+    ("7a", "data", "string", "45c176"), # Activation code
+    ("48", "data", "string", "2024-10-01"), # Activation date
+
+    # Not work why???
+    ("53", "data", "u8", ProtocolType.PROTOCOL_INCREASE), # Current Protocol
+    ("f1", "data", "u8", ProtocolType.get_all_support()), # Support Protocols
+]
+
+generate_nvs_data("build/nvs.bin", 0x4000, nvs_data)
+
+dump_nvs("build/nvs.bin")
+
 build_fw(
-    bootloader_path="bootloader.bin",
-    partition_table_path="partition_table.bin",
-    nvs_path=None,
-    app_path="app0.bin",
-    spiffs_path="spiffs.bin"
+    bootloader_path="files/bootloader.bin",
+    partition_table_path="files/partition_table.bin",
+    nvs_path="build/nvs.bin",
+    app_path="../../fw/bin_test/231_NewTest_5.42.bin",
+    spiffs_path="files/spiffs.bin",
+    output_path="build/flash_image.bin"
 )
