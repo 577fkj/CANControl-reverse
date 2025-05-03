@@ -222,10 +222,8 @@ nvs_data = [
     ("SYS", "namespace", "u8", 0),
     ("7a", "data", "string", "45c176"), # Activation code
     ("48", "data", "string", "2024-10-01"), # Activation date
-
-    # Not work why???
-    ("53", "data", "u8", ProtocolType.PROTOCOL_INCREASE), # Current Protocol
-    ("f1", "data", "u8", ProtocolType.get_all_support()), # Support Protocols
+    ("53", "data", "i8", ProtocolType.PROTOCOL_ZTE4875), # Current Protocol
+    ("f1", "data", "i8", ProtocolType.get_all_support()), # Support Protocols
 ]
 
 generate_nvs_data("build/nvs.bin", 0x4000, nvs_data)
