@@ -35,99 +35,102 @@ User Settings
 
 | key | type | default_value | description |
 |-----|------|---------------|-------------|
-| 20 | u64 | ? | ? |
-| 21 | u64 | ? | ? |
-| 22 | u64 | ? | ? |
-| 23 | u64 | ? | ? |
-| 24 | u64 | ? | ? |
-| 25 | u64 | ? | ? |
-| 26 | u64 | ? | ? |
-| 27 | u64 | ? | ? |
-| 30 | u64 | ? | ? |
-| 31 | u64 | ? | ? |
-| 32 | u64 | ? | ? |
-| 33 | u64 | ? | ? |
-| 34 | u64 | ? | ? |
-| 35 | u64 | ? | ? |
-| 36 | u64 | ? | ? |
-| 37 | u64 | ? | ? |
-| 38 | u64 | ? | ? |
-| 39 | u64 | ? | ? |
+| 20 | u64 | ? | Custom color (Cr10) |
+| 21 | u64 | ? | Custom color (Cr11) |
+| 22 | u64 | ? | Custom color (Cr12) |
+| 23 | u64 | ? | Custom color (Cr13) |
+| 24 | u64 | ? | Custom color (Cr14) |
+| 25 | u64 | ? | Custom color (Cr15) |
+| 26 | u64 | ? | Custom color (Cr16) |
+| 27 | u64 | ? | Custom color (Cr17) |
+| 30 | u64 | ? | Custom color (Cr0) |
+| 31 | u64 | ? | Custom color (Cr1) |
+| 32 | u64 | ? | Custom color (Cr2) |
+| 33 | u64 | ? | Custom color (Cr3) |
+| 34 | u64 | ? | Custom color (Cr4) |
+| 35 | u64 | ? | Custom color (Cr5) |
+| 36 | u64 | ? | Custom color (Cr6) |
+| 37 | u64 | ? | Custom color (Cr7) |
+| 38 | u64 | ? | Custom color (Cr8) |
+| 39 | u64 | ? | Custom color (Not use) |
 | 41 | base64(float) | 0.0 | All work time |
 | 42 | base64(float) | 0.0 | All ampere hour |
 | 43 | base64(float) | 0.0 | All watt hout |
-| 44 | base64(float) | 0.0 | Set current offset |
-| 45 | base64(float) | 0.0 | Current display offset |
-| 46 | base64(float) | 0.0 | Set voltage offset |
-| 47 | base64(float) | 0.0 | Voltage display offset |
-| 4a | base64(float) | 0.0 | Temp limit join |
-| 4b | base64(float) | 0.0 | Temp limit exit |
-| 4c | base64(float) | 0.0 | Temp limit power |
-| 4e | base64(float) | 0.0 | Max power |
-| 4d | base64(float) | 0.0 | Power limit |
-| 4f | u64 | ? | ? |
-| 50 | u64 | ? | ? |
-| 51 | u64 | ? | ? |
-| 52 | u64 | ? | ? |
-| 57 | base64(float) | 0.0 | ? |
-| 58 | base64(float) | 0.0 | ? |
-| 59 | base64(float) | 0.0 | ? |
-| 61 |  i8 | 0 | ? |
-| 62 |  i8 | 0 | Use NTC |
-| 63 |  i8 | 8 | ? |
-| 64 |  i8 | 10 | ? |
-| 65 |  i8 | 50 | ? |
-| 66 |  i8 | 0 | ? |
-| 67 |  i8 | 0 | ? |
-| 68 |  i8 | 100 | Shutdown backlight |
-| 69 |  i8 | 0 | Startup backlight |
-| 6a |  i8 | 50 | ? |
-| 6b |  i8 | 10 | ? |
-| 6c |  i8 | 1 | ? |
-| 6d |  i8 | 60 | ? |
-| 6e |  i8 | 3 or 1 | ? |
-| 6f |  i8 | 1 | ? |
-| 70 |  i8 | 0 | ? |
-| 71 |  i8 | 1 | ? |
-| 72 |  i8 | 1 | ? |
-| 73 |  i8 | 0 | Huawei current point |
+| 44 | base64(float) | 1.0 | Set current offset |
+| 45 | base64(float) | 1.0 | Display current offset |
+| 46 | base64(float) | 1.0 | Set voltage offset |
+| 47 | base64(float) | 1.0 | Display voltage offset |
+| 48 | base64(float) | 0.45 | Minimum current filtering |
+| 4a | base64(float) | 75.0 | Temp limit join |
+| 4b | base64(float) | 70.0 | Temp limit exit |
+| 4c | base64(float) | 3000.0 | Temp limit power |
+| 4d | base64(float) | 3500.0 | Charge limit power |
+| 4e | base64(float) | 3500.0 | System limit power |
+| 4f | u64 | 0x1554000005dc(voltage:54.6, current:15.0) | volage and current slot 1 (LSB current, MSB voltage) |
+| 50 | u64 | 0x16f8000005dc(voltage:58.8, current:15.0) | volage and current slot 2 (LSB current, MSB voltage) |
+| 51 | u64 | 0x1be4000005dc(voltage:71.4, current:15.0) | volage and current slot 3 (LSB current, MSB voltage) |
+| 52 | u64 | 0x20d0000005dc(voltage:84.0, current:15.0) | volage and current slot 4 (LSB current, MSB voltage) |
+| 57 | base64(float) | 0.0 | Second stage voltage |
+| 58 | base64(float) | 0.0 | Second stage current |
+| 59 | base64(float) | 0.0 | Auto shutdown (s) |
+| 61 | i8 | 0 | Soft start (s) |
+| 62 | i8 | 0 | Use NTC |
+| 63 | i8 | 8 | Fan speed, temperature, acceleration value |
+| 64 | i8 | 10 | Fan speed, Current acceleration value (value * 10) = 0.1 |
+| 65 | i8 | 50 | Init fan speed |
+| 66 | i8 | 0 | Swap button |
+| 67 | i8 | 0 | Button enabled |
+| 68 | i8 | 100 | Shutdown backlight |
+| 69 | i8 | 0 | Startup backlight |
+| 6a | i8 | 50 | Screen sleep backlight |
+| 6b | i8 | 10 | Init page show time (s) |
+| 6c | i8 | 1 | Show init page time |
+| 6d | i8 | 60 | Screen sleep time (s) |
+| 6e | i8 | 3 or 1 | Screen orientation |
+| 6f | i8 | 1 | Enable GIF |
+| 70 | i8 | 0 | Use English |
+| 71 | i8 | 1 | Voltage and current select solt |
+| 72 | i8 | 1 | Second stage current gradual decrease |
 | 73 | string | 0 | Ble name |
 | 74 | string | 0000 | Ble password |
 | 75 | string | 8888 | Advanced setting password |
-| 76 | base64(float) | 0.0 | Voltage min |
-| 77 | base64(float) | 0.0 | Voltage max |
-| 78 | base64(float) | 0.0 | Current min |
-| 79 | base64(float) | 0.0 | Current max |
-| c0 |  i8 | 0 | ? |
-| c1 |  i8 | 3 | ? |
-| c2 |  i8 | 51 | ? |
-| c3 |  i8 | 15 | ? |
-| c4 |  i8 | 68 | ? |
-| c5 |  i8 | 0xffffffff | ? |
-| c6 |  i8 | 0 | Power device id |
-| c7 |  i8 | 15 | ? |
-| c8 |  i8 | 0 | ? |
-| c9 |  i8 | 0 | Debug1 |
-| ca |  i8 | 0 | Debug2 |
-| cb |  i8 | 0 | Debug3 |
-| cc |  i8 | 1 | ? |
-| cd |  i8 | 5 | Ready voltage range |
-| ce |  i8 | 1 | ? |
-| cf |  i8 | 0 | ? |
-| d1 | string | 0000 | ? |
+| 76 | base64(float) | 41.0 | Voltage min |
+| 77 | base64(float) | 58.5 | Voltage max |
+| 78 | base64(float) | 1.0 | Current min |
+| 79 | base64(float) | 40.0 | Current max |
+| c0 | i8 | 0 | Allow user set LOGO |
+| c1 | i8 | 3 | ? |
+| c2 | i8 | 51 | ? |
+| c3 | i8 | 15 | ? |
+| c4 | i8 | 68 | ? |
+| c5 | i8 | 255 | Max fan speed |
+| c6 | i8 | 0 | Power device id |
+| c7 | i8 | 15 | Touch screen lock time (s) |
+| c8 | i8 | 0 | Screen display style |
+| c9 | i8 | 0 | Debug1 |
+| ca | i8 | 0 | Debug2 |
+| cb | i8 | 0 | Debug3 |
+| cc | i8 | 1 | ? |
+| cd | i8 | 5 | Ready voltage range |
+| ce | i8 | 1 | ? |
+| cf | i8 | 0 | Voltage limitation strategy |
+| d1 | string | 0000 | Touch password |
 | d2 | string | 欢迎使用 | ? |
 | d3 | string | LGXC76C43M0044948 | VIN |
-| f0 | base64(float) | 0.5 | ? |
-| f1 | base64(float) | 1.0 | ? |
-| f2 | base64(float) | 1.0 | ? |
-| f3 | base64(float) | 0.05 | ? |
-| f4 | base64(float) | 0.05 | ? |
-| f5 | base64(float) | 10.0 | ? |
-| f6 | base64(float) | 0.0 | ? |
-| f7 | base64(float) | 85.0 | ? |
+| e0 | i8 | 0 | ? |
+| e1 | i8 | 0 | Power limit point (0: Input, 1: Output) |
+| f0 | base64(float) | 0.5 | Auto shutdown current |
+| f1 | base64(float) | 1.0 | Voltage set offset 2 |
+| f2 | base64(float) | 1.0 | Voltage display offset 2  |
+| f3 | base64(float) | 0.05 | Voltage jump buffer |
+| f4 | base64(float) | 0.05 | Current jump buffer |
+| f5 | base64(float) | 10.0 | Pre charge current |
+| f6 | base64(float) | 0.0 | Pre charge voltage |
+| f7 | base64(float) | 85.0 | Temp limit poweroff |
 | f8 | base64(float) | 1.0 | ? |
-| f9 | base64(float) | 100.0 | Current max (Only EV) |
-| fa | base64(float) | 420.0 | Voltage max (Only EV) |
+| f9 | base64(float) | 0.0 | Current max limit |
+| fa | base64(float) | 0.0 | Voltage max limit |
+| fb | base64(float) | 1.0 | Input voltage correction |
 
 ## Raw
 

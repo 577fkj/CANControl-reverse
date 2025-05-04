@@ -217,6 +217,7 @@ class ProtocolType(IntFlag):
                 decoded_protocols.append(ProtocolType.decode_protocol(protocol))
         return decoded_protocols
 
+# Active time < 2025-08-31 14:28:25
 nvs_data = [
     # key,type,encoding,value
     ("SYS", "namespace", "u8", 0),
