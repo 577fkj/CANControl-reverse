@@ -822,6 +822,11 @@ def write_entry(nvs_instance, key, datatype, encoding, value, namespace_idx=None
 
         with open(abs_file_path, 'rb') as f:
             value = f.read()
+    
+    if encoding == 'float':
+        encoding = 'hex2bin'
+        value = struct.pack('<f', float(value))
+        value = binascii.hexlify(value).decode('utf-8')
 
     if datatype == 'namespace':
         nvs_instance.write_namespace(key)

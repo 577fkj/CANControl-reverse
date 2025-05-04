@@ -1,6 +1,7 @@
 
 import argparse
 import os
+import struct
 import sys
 from enum import Enum
 
@@ -127,6 +128,18 @@ nvs_table = {}
 # It differs in that the BLOB value itself is represented by a BlobReassemblyClass, which is
 # used to collect the BLOB pieces before generating the final byte array that goes into nvs_table.
 blob_reassembly_table = {}
+
+def try_parse_float_blob(blob_data):
+    if len(blob_data) != 4:
+        return None
+    try:
+        value = struct.unpack('<f', blob_data)[0]
+        if -1e10 < value < 1e10:
+            return value
+        else:
+            return None
+    except struct.error:
+        return None
 
 def verify_nvs_size(input):
     if (len(input) % PAGE_SIZE) != 0:
@@ -328,6 +341,14 @@ def dump_nvs_data():
             entry_data = entry_info[1]
             
             data_str = entry_data_to_string(entry_key, entry_type, entry_data)
+            
+            if EntryType(entry_type) == EntryType.BLOB:
+                blob_data = blob_reassembly_table[ns_name][entry_key].get_reassembled_blob()
+                if len(blob_data) == 4:
+                    float_value = try_parse_float_blob(blob_data)
+                    if float_value is not None:
+                        print("  %-16s: %-4s  %s (float:%f)" % (entry_key, EntryType(entry_type).name, data_str, float_value))
+                        continue
             
             print("  %-16s: %-4s  %s" % (entry_key, EntryType(entry_type).name, data_str))
 

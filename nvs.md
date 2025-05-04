@@ -131,68 +131,66 @@ User Settings
 
 ## Raw
 
-```csv
-# NVS csv file
-key,type,encoding,value
-SYS,namespace,,
-50,data,string,5.42
-53,data,i8,32
-f1,data,i8,63
-54,data,i8,0
-f2,data,i8,0
-7a,data,string,45c176
-48,data,string,2025-5-4
-User,namespace,,
-6e,data,i8,0
-4f,data,u64,21474836481500
-4f,data,u64,21474836481000
-61,data,i8,10
-61,data,i8,15
-58,data,base64,AABMQg==
-57,data,base64,AAAwQQ==
-59,data,base64,AABQQQ==
-f0,data,base64,zczMPQ==
-71,data,i8,2
-50,data,u64,24481313588700
-75,data,string,7777
-47,data,base64,YxCAPw==
-47,data,base64,4C2APw==
-f2,data,base64,xCCAPw==
-76,data,base64,AAAgQg==
-77,data,base64,AADGQg==
-f4,data,base64,MzMzPw==
-48,data,base64,zcxMPg==
-4e,data,base64,AAB6RQ==
-4d,file,binary,blob_data\4d.bin
-79,data,base64,AADIQg==
-4a,data,base64,AAA0Qg==
-4c,data,base64,AAAWRA==
-4b,data,base64,AAC0Qg==
-f7,data,base64,AADwQg==
-c5,data,i8,-2
-65,data,i8,112
-64,data,i8,9
-63,data,i8,6
-62,data,i8,1
-e1,data,i8,1
-66,data,i8,1
-67,data,i8,0
-72,data,i8,0
-70,data,i8,1
-70,data,i8,0
-70,data,i8,1
-6e,data,i8,1
-69,data,i8,-3
-68,data,i8,104
-6a,data,i8,55
-6b,data,i8,3
-6c,data,i8,0
-phy,namespace,,
-cal_data,file,binary,blob_data\cal_data.bin
-cal_mac,data,base64,5GW4dRpc
-cal_version,data,u32,4670
-nimble_bond,namespace,,
-WIFI,namespace,,
+```
+Namespace SYS
+  7a              : STR   45c176
+  48              : STR   2024-10-01
+  53              : I8    32
+  f1              : I8    127
+  50              : STR   5.42
+Namespace User
+  fb              : BLOB  CD CC CC 3D  (float:0.100000)
+  f3              : BLOB  CD CC 4C 3E  (float:0.200000)
+  47              : BLOB  9A 99 99 3E  (float:0.300000)
+  46              : BLOB  CD CC CC 3E  (float:0.400000)
+  f2              : BLOB  00 00 00 3F  (float:0.500000)
+  f1              : BLOB  9A 99 19 3F  (float:0.600000)
+  76              : BLOB  00 00 80 3F  (float:1.000000)
+  77              : BLOB  00 00 C8 42  (float:100.000000)
+  f4              : BLOB  33 33 33 3F  (float:0.700000)
+  48              : BLOB  CD CC 4C 3F  (float:0.800000)
+  45              : BLOB  66 66 66 3F  (float:0.900000)
+  78              : BLOB  00 00 00 40  (float:2.000000)
+  79              : BLOB  00 00 C6 42  (float:99.000000)
+  4e              : BLOB  00 00 7A 45  (float:4000.000000)
+  4d              : BLOB  00 00 7A 45  (float:4000.000000)
+  4a              : BLOB  00 00 22 42  (float:40.500000)
+  4c              : BLOB  00 00 FA 43  (float:500.000000)
+  4b              : BLOB  00 00 2A 42  (float:42.500000)
+  f7              : BLOB  CD CC 5C 42  (float:55.200001)
+  c5              : I8    -2
+  65              : I8    -57
+  64              : I8    23
+  63              : I8    19
+  62              : I8    1
+  c0              : I8    1
+  e1              : I8    0
+  67              : I8    1
+  66              : I8    1
+  72              : I8    1
+  f5              : BLOB  0A D7 1F 41  (float:9.990000)
+  70              : I8    0
+  74              : STR   9999
+  75              : STR   7777
+  6e              : I8    1
+  69              : I8    -3
+  68              : I8    101
+  6d              : I8    55
+  6a              : I8    92
+  6b              : I8    6
+  6c              : I8    1
+  4f              : U64   2233382994480
+  61              : I8    14
+  58              : BLOB  9A 99 A9 40  (float:5.300000)
+  57              : BLOB  66 66 B6 40  (float:5.700000)
+  59              : BLOB  00 00 3C 42  (float:47.000000)
+  f0              : BLOB  CD CC 0C 3F  (float:0.550000)
+  50              : U64   2705829397120
+  51              : U64   3135326126820
+  71              : I8    4
+  52              : U64   3564822856519
+Namespace nimble_bond
+Namespace WIFI
 ```
 
 ### base64 float decode
