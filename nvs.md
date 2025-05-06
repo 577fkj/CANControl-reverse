@@ -66,17 +66,17 @@ User Settings
 | 4c | base64(float) | 3000.0 | Temp limit power |
 | 4d | base64(float) | 3500.0 | Charge limit power |
 | 4e | base64(float) | 3500.0 | System limit power |
-| 4f | u64 | 0x1554000005dc(voltage:54.6, current:15.0) | volage and current slot 1 (LSB current, MSB voltage) |
-| 50 | u64 | 0x16f8000005dc(voltage:58.8, current:15.0) | volage and current slot 2 (LSB current, MSB voltage) |
-| 51 | u64 | 0x1be4000005dc(voltage:71.4, current:15.0) | volage and current slot 3 (LSB current, MSB voltage) |
-| 52 | u64 | 0x20d0000005dc(voltage:84.0, current:15.0) | volage and current slot 4 (LSB current, MSB voltage) |
+| 4f | u64 | 0x1554000005dc(voltage:54.6, current:15.0) | volage and current slot 1 (LSB current (*0.01), MSB voltage (*0.01)) |
+| 50 | u64 | 0x16f8000005dc(voltage:58.8, current:15.0) | volage and current slot 2 (LSB current (*0.01), MSB voltage (*0.01)) |
+| 51 | u64 | 0x1be4000005dc(voltage:71.4, current:15.0) | volage and current slot 3 (LSB current (*0.01), MSB voltage (*0.01)) |
+| 52 | u64 | 0x20d0000005dc(voltage:84.0, current:15.0) | volage and current slot 4 (LSB current (*0.01), MSB voltage (*0.01)) |
 | 57 | base64(float) | 0.0 | Second stage voltage |
 | 58 | base64(float) | 0.0 | Second stage current |
 | 59 | base64(float) | 0.0 | Auto shutdown (s) |
 | 61 | i8 | 0 | Soft start (s) |
 | 62 | i8 | 0 | Use NTC |
 | 63 | i8 | 8 | Fan speed, temperature, acceleration value |
-| 64 | i8 | 10 | Fan speed, Current acceleration value (value * 10) = 0.1 |
+| 64 | i8 | 10 | Fan speed, Current acceleration value (value / 10) = 0.1 |
 | 65 | i8 | 50 | Init fan speed |
 | 66 | i8 | 0 | Swap button |
 | 67 | i8 | 0 | Button enabled |
@@ -107,17 +107,17 @@ User Settings
 | c6 | i8 | 0 | Power device id |
 | c7 | i8 | 15 | Touch screen lock time (s) |
 | c8 | i8 | 0 | Screen display style |
-| c9 | i8 | 0 | Debug1 |
-| ca | i8 | 0 | Debug2 |
-| cb | i8 | 0 | Debug3 |
-| cc | i8 | 1 | ? |
+| c9 | i8 | 0 | Debug enable |
+| ca | i8 | 0 | Debug: CAN send data to ble |
+| cb | i8 | 0 | Debug: CAN recv send to ble |
+| cc | i8 | 1 | Debug: Enable can send |
 | cd | i8 | 5 | Ready voltage range |
 | ce | i8 | 1 | ? |
 | cf | i8 | 0 | Voltage limitation strategy |
 | d1 | string | 0000 | Touch password |
 | d2 | string | 欢迎使用 | ? |
 | d3 | string | LGXC76C43M0044948 | VIN |
-| e0 | i8 | 0 | ? |
+| e0 | i8 | 0 | Debug: CAN send data to ble delay |
 | e1 | i8 | 0 | Power limit point (0: Input, 1: Output) |
 | f0 | base64(float) | 0.5 | Auto shutdown current |
 | f1 | base64(float) | 1.0 | Voltage set offset 2 |
