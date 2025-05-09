@@ -3,18 +3,24 @@ from typing import Union
 
 
 class Channel(Enum):
-    U = "U"
-    S = "S"
-    S1 = "S1"
-    G = "G"
+    U = "U" # 用户认证超级密码
+    G = "G" # 高级设置超级密码
+
+    P = "P" # Ble 设置协议密码
+
+    S = "S"   # 旧激活码
+    S1 = "S1" # 激活码
+    S2 = "S2" # ?
 
 
 CODE_CHARS = "0123456789abcdef"
 KEYS = {
     Channel.U: (0x12f5bd2,),
     Channel.S: (0x12a403ac3,),
-    Channel.S1: (0x2ac, 0x0),
+    Channel.P: (0x263, 0x0),
     Channel.G: (0x28f, 0x0),
+    Channel.S1: (0x2ac, 0x0),
+    Channel.S2: (681.1638, 0x0),
 }
 
 
@@ -54,9 +60,14 @@ def get_activation_code(mac: int, key: int) -> str:
     return convert_to_base(mac + key, 16)
 
 
-def get_activation_code2(mac: int, key0: int, key1: int) -> str:
+def get_activation_code2(mac: int, key0: Union[int, float], key1: int) -> str:
     seed = mac + key1
     part1 = convert_to_base(seed, 10)
+
+    if isinstance(key0, float):
+        part1 += f'{key0:.4f}'
+        key0 = int(key0)
+
     mul = sum(ord(c) for c in part1)
     seed = (seed // key0) * mul
     code = convert_to_base(seed, 16)
@@ -72,18 +83,17 @@ def generate_activation_code(mac_input: Union[str, int], channel: Union[str, Cha
     if isinstance(channel, str):
         channel = Channel[channel.upper()]
 
+    key0, key1 = KEYS[channel]
+
     if channel == Channel.U:
-        key, = KEYS[channel]
-        code = get_activation_code(mac, key)
+        code = get_activation_code(mac, key0)
         return code[4:8]
 
     elif channel == Channel.S:
-        key, = KEYS[channel]
-        code = get_activation_code(mac, key)
+        code = get_activation_code(mac, key0)
         return code[2:8]
 
-    elif channel in (Channel.S1, Channel.G):
-        key0, key1 = KEYS[channel]
+    elif channel in (Channel.S1, Channel.S2, Channel.P, Channel.G):
         return get_activation_code2(mac, key0, key1)
 
     raise ValueError(f"Unsupported channel: {channel}")
