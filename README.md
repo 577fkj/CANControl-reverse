@@ -133,7 +133,7 @@ Low level trigger
 
 ## Tips
 
-If you want to replicate this project, please use the firmware '[dump_no_nvs.bin](dump/lcd/5.31/dump_no_nvs.bin)' and activate it using '[active.py](tools/active.py)'.
+If you want to replicate this project, please use the firmware '[dump_no_nvs.bin](dump/lcd/5.31/dump_no_nvs.bin)' and activate it using '[active.py](tools/activation/python/activation.py)'.
 
 ## Mini program
 
