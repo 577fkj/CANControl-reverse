@@ -2369,21 +2369,25 @@
         {
             "count": 0,
             "md5": "Unk",
+            "device_id_count": 0,
             "size": 0
         },
         {
             "count": 1,
             "md5": "af7329f7a50d8e359b5d7655e15af269",
+            "device_id_count": 4496,
             "size": 58233
         },
         {
             "count": 2,
             "md5": "e235c11670fd06d23a7c296e7605bcbb",
+            "device_id_count": 4497,
             "size": 58246
         },
         {
             "count": 3,
             "md5": "870bc773aec5ef759e79dbc51fd8423e",
+            "device_id_count": 9756,
             "size": 126333
         }
     ]

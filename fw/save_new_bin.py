@@ -99,6 +99,7 @@ def download_device_id(count: str, file: str, save_path: str, file_name_count: i
         return {
             'count': count,
             'md5': 'Unk',
+            'device_id_count': 0,
             'size': 0
         }
     if count == -1:
@@ -108,6 +109,7 @@ def download_device_id(count: str, file: str, save_path: str, file_name_count: i
     return {
         'count': count,
         'md5': m5,
+        'device_id_count': len([device_id for device_id in data.decode().split(' ') if device_id != '']),
         'size': len(data),
 
         'data': data,
@@ -136,9 +138,9 @@ def download_file(result: list, file: str, save_path: str, start: int, max_count
                 if result[-1]['md5'] == last['md5']:
                     print('Last file is the same as the last one, skipping')
                 else:
-                    save_file(info['path'], info['data'])
-                    del info['data']
-                    del info['path']
+                    save_file(last['path'], last['data'])
+                    del last['data']
+                    del last['path']
                     result.append(last)
                 break
         else:
