@@ -1,14 +1,38 @@
 import requests
 import os
+import json
+import hashlib
 
-url = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin'
-new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=NewUI.bin'
-test_new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=NewTest.bin'
-test2_new_ui = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=Test2.bin'
+CANControl_save_path = 'CANControl'
+NewUI_save_path = 'NewUI'
+NewTest_save_path = 'NewTest'
+Test2_save_path = 'Test2'
+DEVID_save_path = 'devid'
 
-devid = 'https://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=DEVID.bin'
+if not os.path.exists(CANControl_save_path):
+    os.makedirs(CANControl_save_path)
+if not os.path.exists(NewUI_save_path):
+    os.makedirs(NewUI_save_path)
+if not os.path.exists(NewTest_save_path):
+    os.makedirs(NewTest_save_path)
+if not os.path.exists(Test2_save_path):
+    os.makedirs(Test2_save_path)
+if not os.path.exists(DEVID_save_path):
+    os.makedirs(DEVID_save_path)
 
-def get_version(data):
+# CANControl.bin
+# NewUI.bin
+# NewTest.bin
+# Test2.bin
+# DEVID.bin
+base_url = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc={}'
+
+def md5(data: bytes) -> str:
+    m = hashlib.md5()
+    m.update(data)
+    return m.hexdigest()
+
+def get_version(data: bytes) -> str:
     # find version string '00 35 2E ? ? 00'
     versions = []
     for i in range(len(data) - 5):
@@ -25,99 +49,156 @@ def get_version(data):
     
     versions.sort(reverse=True)
     version = versions[0]
-    print(f'Version: {version:.2f}')
     return f"{version:.2f}"
 
-def download(url, file_name, save_dir, bin_id, next_bin = None, find_version = True):
-    r = requests.get(url.format(bin_id))
+def download(count: int, file: str) -> bytes:
+    if not file.endswith('.bin'):
+        file += '.bin'  
+    if count == -1:
+        count = ''
+    url = base_url.format(count, file)
+    r = requests.get(url)
     if r.status_code != 200:
-        print(f'Error({bin_id}): {r.status_code}')
-        return False
+        print(f'Error({count}): {r.status_code}')
+        return None
     data = r.content
-    file_id = bin_id if not next_bin else next_bin
-    name = f'{file_name}_{file_id}.bin'
-    if find_version:
-        version = '_' + get_version(data)
-    else:
-        version = ''
-    if os.path.exists(f'{save_dir}/{name}'):
-        os.remove(f'{save_dir}/{name}')
-    name = f'{file_id}_{file_name}{version}.bin'
-    print(url.format(bin_id))
-    print(f'Saving {name}')
-    with open(f'{save_dir}/{name}', 'wb') as f:
+    return data
+
+def save_file(name: str, data: bytes):
+    with open(name, 'wb') as f:
         f.write(data)
-    return True
+    print(f'Saved {name}')
 
-def download_new_ui(bin_id, next_bin = None):
-    return download(new_ui, 'NewUI', 'bin_new', bin_id, next_bin)
+def download_fw(count: int, file: str, save_path: str, file_name_count: int = -1) -> dict:
+    data = download(count, file)
+    if data is None:
+        return {
+            'count': count,
+            'version': 'Unk',
+            'md5': 'Unk',
+            'size': 0
+        }
+    if count == -1:
+        count = file_name_count
+    m5 = md5(data)
+    version = get_version(data)
+    file_name = f"{count}_{file}_{version}_{m5}.bin"
+    return {
+        'count': count,
+        'version': version,
+        'md5': m5,
+        'size': len(data),
+        
+        'data': data,
+        'path': os.path.join(save_path, file_name)
+    }
 
-def download_bin(bin_id, next_bin = None):
-    return download(url, 'CANControl', 'bin', bin_id, next_bin)
+def download_device_id(count: str, file: str, save_path: str, file_name_count: int = -1) -> dict:
+    data = download(count, file)
+    if data is None:
+        return {
+            'count': count,
+            'md5': 'Unk',
+            'size': 0
+        }
+    if count == -1:
+        count = file_name_count
+    m5 = md5(data)
+    file_name = f"{count}_{file}_{m5}.bin"
+    return {
+        'count': count,
+        'md5': m5,
+        'size': len(data),
 
-def download_test_new_ui(bin_id, next_bin = None):
-    return download(test_new_ui, 'NewTest', 'bin_test', bin_id, next_bin)
+        'data': data,
+        'path': os.path.join(save_path, file_name)
+    }
 
-def download_test2_new_ui(bin_id, next_bin = None):
-    return download(test2_new_ui, 'Test2', 'bin_test2', bin_id, next_bin)
+def download_file(result: list, file: str, save_path: str, start: int, max_count: int = 999):
+    print(f'Downloading {file} from {start} to {max_count}')
 
-def download_devid(bin_id, next_bin = None):
-    return download(devid, 'DEVID', 'devid', bin_id, next_bin, False)
+    download = download_fw
+    if file == 'DEVID':
+        download = download_device_id
 
-new_files = os.listdir('bin_new')
-test_files = os.listdir('bin_test')
-test2_files = os.listdir('bin_test2')
-files = os.listdir('bin')
-devid_files = os.listdir('devid')
+    error_count = 0
+    error_info = []
+    for i in range(start, max_count):
+        info = download(i, file, save_path)
+        if info['size'] == 0:
+            error_info.append(info)
+            error_count += 1
+            if error_count > 5:
+                print('Too many errors, stopping download')
+                count = (i - error_count) + 1
+                last = download(-1, file, save_path, count)
+                last['count'] = count
+                if result[-1]['md5'] == last['md5']:
+                    print('Last file is the same as the last one, skipping')
+                else:
+                    save_file(info['path'], info['data'])
+                    del info['data']
+                    del info['path']
+                    result.append(last)
+                break
+        else:
+            for j in range(len(error_info)):
+                result.append(error_info[j])
+            error_info = []
+            error_count = 0
+            save_file(info['path'], info['data'])
+            del info['data']
+            del info['path']
 
-new_files = [int(f.split('_')[0]) for f in new_files]
-test_files = [int(f.split('_')[0]) for f in test_files]
-test2_files = [int(f.split('_')[0]) for f in test2_files]
-files = [int(f.split('_')[0]) for f in files]
-devid_files = [int(f.split('_')[0]) for f in devid_files]
+            result.append(info)
 
-new_files.sort()
-test_files.sort()
-test2_files.sort()
-files.sort()
-devid_files.sort()
+def download_all(max_count: int = 999):
+    bin_info = load_bin_info()
+    CANControl = bin_info['CANControl']
+    NewUI = bin_info['NewUI']
+    NewTest = bin_info['NewTest']
+    Test2 = bin_info['Test2']
+    DEVID = bin_info['DEVID']
 
-new_start = new_files[-1] if new_files else 1
-test_start = test_files[-1] if test_files else 1
-test2_start = test2_files[-1] if test2_files else 1
-start = files[-1] if files else 1
-devid_start = devid_files[-1] if devid_files else 1
+    CANControl_start = CANControl[-1]['count'] if CANControl else 0
+    NewUI_start = NewUI[-1]['count'] if NewUI else 0
+    NewTest_start = NewTest[-1]['count'] if NewTest else 0
+    Test2_start = Test2[-1]['count'] if Test2 else 0
+    DEVID_start = DEVID[-1]['count'] if DEVID else 0
 
-print(f'New start: {new_start}')
-print(f'Test start: {test_start}')
-print(f'Test2 start: {test2_start}')
-print(f'Bin start: {start}')
-print(f'Devid start: {devid_start}')
+    try:
+        download_file(CANControl, 'CANControl', CANControl_save_path, CANControl_start, max_count)
+        download_file(NewUI, 'NewUI', NewUI_save_path, NewUI_start, max_count)
+        download_file(NewTest, 'NewTest', NewTest_save_path, NewTest_start, max_count)
+        download_file(Test2, 'Test2', Test2_save_path, Test2_start, max_count)
+        download_file(DEVID, 'DEVID', DEVID_save_path, DEVID_start, max_count)
+    finally:
+        bin_info['CANControl'] = CANControl
+        bin_info['NewUI'] = NewUI
+        bin_info['NewTest'] = NewTest
+        bin_info['Test2'] = Test2
+        bin_info['DEVID'] = DEVID
+        save_bin_info(bin_info)
 
-for i in range(start, 999):
-    if not download_bin(i):
-        download_bin('', i)
-        break
+def load_bin_info() -> dict:
+    if os.path.exists('bin_info.json'):
+        with open('bin_info.json', 'r') as f:
+            bin_info = json.load(f)
+            print('Loaded bin_info.json')
+            return bin_info
+    else:
+        return {
+            'CANControl': [],
+            'NewUI': [],
+            'NewTest': [],
+            'Test2': [],
+            'DEVID': []
+        }
 
-for i in range(new_start, 999):
-    if not download_new_ui(i):
-        download_new_ui('', i)
-        break
-
-for i in range(test_start, 999):
-    if not download_test_new_ui(i):
-        download_test_new_ui('', i)
-        break
-
-for i in range(test2_start, 999):
-    if not download_test2_new_ui(i):
-        download_test2_new_ui('', i)
-        break
-
-for i in range(devid_start, 999):
-    if not download_devid(i):
-        download_devid('', i)
-        break
+def save_bin_info(bin_info: dict):
+    with open('bin_info.json', 'w') as f:
+        json.dump(bin_info, f, indent=4)
+    print('Saved bin_info.json')
 
 if __name__ == '__main__':
-    print('Done')
+    download_all()
