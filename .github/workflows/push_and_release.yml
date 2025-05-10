@@ -51,10 +51,10 @@ jobs:
       if: steps.check_changes.outputs.changes_detected == 'true'
       id: get_changed_files
       run: |
-        echo "files=$(git diff --name-only --cached | tr '\n' ' ')" >> $GITHUB_OUTPUT
+        echo "files=$(git diff --name-only --cached | grep -v 'bin_info.json' | tr '\n' ' ')" >> $GITHUB_OUTPUT
         {
           echo 'filesn<<EOF'
-          git diff --name-only --cached
+          git diff --name-only --cached | grep -v 'bin_info.json'
           echo EOF
         } >> $GITHUB_OUTPUT
 
