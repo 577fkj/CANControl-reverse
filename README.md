@@ -146,7 +146,7 @@ Set voltage input 'FFF8 key float_value' save to user settings
 | Command   | Example                   | Description                                         |
 | --------- | ------------------------- | --------------------------------------------------- |
 | Restart   | Restart=1                 | Restart                                             |
-| Active    | Active=\<code\>           | Active                                              |
+| Active    | Active=\<code\>           | Activation chip                                     |
 | GetID     | GetID=1                   | Get chip id, Not work!                              |
 | SetMSG    | SetMSG=1,2,3,4,5          | Set nvs data: 1 = ?, 2 = 53, 3 = 54, 4 = 6e, 5 = f2 |
 | SetLOGO=S | SetLOGO=S                 | Clear memory logo data                              |
