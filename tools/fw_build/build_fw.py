@@ -91,8 +91,14 @@ def build_fw(bootloader_path, partition_table_path, app_path, spiffs_path, nvs_p
         partition_table = f.read()
     with open(app_path, 'rb') as f:
         app = f.read()
-    with open(spiffs_path, 'rb') as f:
-        spiffs = f.read()
+    
+    if spiffs_path:
+        with open(spiffs_path, 'rb') as f:
+            spiffs = f.read()
+    else:
+        spiffs = bytearray(0x70000)
+        for i in range(len(spiffs)):
+            spiffs[i] = 0xff
 
     if nvs_path:
         with open(nvs_path, 'rb') as f:
@@ -154,6 +160,7 @@ def build_fw(bootloader_path, partition_table_path, app_path, spiffs_path, nvs_p
     # Write app0 to flash
     for i in range(len(app)):
         flash[0x010000 + i] = app[i]
+
     # Write spiffs to flash
     for i in range(len(spiffs)):
         flash[0x390000 + i] = spiffs[i]
@@ -225,6 +232,7 @@ nvs_data = [
     ("48", "data", "string", "2024-10-01"), # Activation date
     ("53", "data", "i8", ProtocolType.PROTOCOL_ZTE4875), # Current Protocol
     ("f1", "data", "i8", ProtocolType.get_all_support()), # Support Protocols
+    ("56", "data", "i8", 1), # Enable uart
 ]
 
 generate_nvs_data("build/nvs.bin", 0x4000, nvs_data)
@@ -235,7 +243,7 @@ build_fw(
     bootloader_path="files/bootloader.bin",
     partition_table_path="files/partition_table.bin",
     nvs_path="build/nvs.bin",
-    app_path="../../fw/bin_test/231_NewTest_5.42.bin",
+    app_path="../../fw/NewTest/231_NewTest_5.42_e9c21faf293165e9abf56a0b36d6761c.bin",
     spiffs_path="files/spiffs.bin",
     output_path="build/flash_image.bin"
 )
