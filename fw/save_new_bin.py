@@ -132,7 +132,7 @@ def download_file(result: list, file: str, save_path: str, start: int, max_count
             error_count += 1
             if error_count > 5:
                 print('Too many errors, stopping download')
-                count = (i - error_count) + 1
+                count = result[-1]['count'] + 1
                 last = download(-1, file, save_path, count)
                 last['count'] = count
                 if result[-1]['md5'] == last['md5']:
