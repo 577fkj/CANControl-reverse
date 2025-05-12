@@ -35,24 +35,24 @@ User Settings
 
 | key | type          | default_value                              | description                                                          |
 | --- | ------------- | ------------------------------------------ | -------------------------------------------------------------------- |
-| 20  | u64           | ?                                          | Custom color (Cr10)                                                  |
-| 21  | u64           | ?                                          | Custom color (Cr11)                                                  |
-| 22  | u64           | ?                                          | Custom color (Cr12)                                                  |
-| 23  | u64           | ?                                          | Custom color (Cr13)                                                  |
-| 24  | u64           | ?                                          | Custom color (Cr14)                                                  |
-| 25  | u64           | ?                                          | Custom color (Cr15)                                                  |
-| 26  | u64           | ?                                          | Custom color (Cr16)                                                  |
-| 27  | u64           | ?                                          | Custom color (Cr17)                                                  |
-| 30  | u64           | ?                                          | Custom color (Cr0)                                                   |
-| 31  | u64           | ?                                          | Custom color (Cr1)                                                   |
-| 32  | u64           | ?                                          | Custom color (Cr2)                                                   |
-| 33  | u64           | ?                                          | Custom color (Cr3)                                                   |
-| 34  | u64           | ?                                          | Custom color (Cr4)                                                   |
-| 35  | u64           | ?                                          | Custom color (Cr5)                                                   |
-| 36  | u64           | ?                                          | Custom color (Cr6)                                                   |
-| 37  | u64           | ?                                          | Custom color (Cr7)                                                   |
-| 38  | u64           | ?                                          | Custom color (Cr8)                                                   |
-| 39  | u64           | ?                                          | Custom color (Not use)                                               |
+| 20  | u64           | 0xffff0000781c                             | Style 1, Custom color (Cr10) (Status)                                |
+| 21  | u64           | 0x07e0001cf02e                             | Style 1, Custom color (Cr11) (Output voltage)                        |
+| 22  | u64           | 0x065f004af02e                             | Style 1, Custom color (Cr12) (Output current)                        |
+| 23  | u64           | 0xfc060078f02e                             | Style 1, Custom color (Cr13) (Output power)                          |
+| 24  | u64           | 0x67f900a6f02e                             | Style 1, Custom color (Cr14) (Input voltage)                         |
+| 25  | u64           | 0xffff7800781c                             | Style 1, Custom color (Cr15) (Text logo)                             |
+| 26  | u64           | 0xf0ff00d4781b                             | Style 1, Custom color (Cr16) (Output temp)                           |
+| 27  | u64           | 0xffff78d4781b                             | Style 1, Custom color (Cr17) (Run time)                              |
+| 30  | u64           | 0xffff0000f01c                             | Style 0, Custom color (Cr0) (Status)                                 |
+| 31  | u64           | 0x07e000209f26                             | Style 0, Custom color (Cr1) (Output voltage)                         |
+| 32  | u64           | 0x065f00479f26                             | Style 0, Custom color (Cr2) (Output current)                         |
+| 33  | u64           | 0xffff006e9f27                             | Style 0, Custom color (Cr3) (Set voltage and current)                |
+| 34  | u64           | 0x67f900969f3f                             | Style 0, Custom color (Cr4) (Output info)                            |
+| 35  | u64           | 0xffffa3204d4d                             | Style 0, Custom color (Cr5) (LOGO)                                   |
+| 36  | u64           | 0xfc0650d64f1a                             | Style 0, Custom color (Cr6) (Output power)                           |
+| 37  | u64           | 0xf0ff00d64f1a                             | Style 0, Custom color (Cr7) (Output temp)                            |
+| 38  | u64           | 0xffffa3774d68                             | Style 0, Custom color (Cr8) (Battery)                                |
+| 39  | u64           | 0xdddda3e44d0c                             | Style 0, Custom color (Version)                                      |
 | 41  | base64(float) | 0.0                                        | All work time                                                        |
 | 42  | base64(float) | 0.0                                        | All ampere hour                                                      |
 | 43  | base64(float) | 0.0                                        | All watt hout                                                        |
@@ -86,7 +86,7 @@ User Settings
 | 6b  | i8            | 10                                         | Init page show time (s)                                              |
 | 6c  | i8            | 1                                          | Show init page time                                                  |
 | 6d  | i8            | 60                                         | Screen sleep time (s)                                                |
-| 6e  | i8            | 3 or 1                                     | Screen orientation                                                   |
+| 6e  | i8            | 3                                          | Screen orientation                                                   |
 | 6f  | i8            | 1                                          | Enable GIF                                                           |
 | 70  | i8            | 0                                          | Use English                                                          |
 | 71  | i8            | 1                                          | Voltage and current select solt                                      |
@@ -115,7 +115,7 @@ User Settings
 | ce  | i8            | 1                                          | ?                                                                    |
 | cf  | i8            | 0                                          | Voltage limitation strategy                                          |
 | d1  | string        | 0000                                       | Touch password                                                       |
-| d2  | string        | 欢迎使用                                    | ?                                                                    |
+| d2  | string        | 欢迎使用                                    | Style 1, Text logo                                                   |
 | d3  | string        | LGXC76C43M0044948                          | VIN                                                                  |
 | e0  | i8            | 0                                          | Debug: CAN send data to ble delay                                    |
 | e1  | i8            | 0                                          | Power limit point (0: Input, 1: Output)                              |
@@ -207,4 +207,34 @@ byte_data = base64.b64decode(b64_str)
 float_value = struct.unpack('<f', byte_data)[0]
 
 print(float_value)
+```
+
+### Custom color
+
+#### Encode
+
+```python
+low = 0
+low |= x << 0x18 # x
+low |= y << 0x10 # y
+low |= width << 0x8 # width
+low |= high # high
+
+color = color # RGB565
+
+combined = (color << 32) | low
+```
+
+#### Decode
+
+```python
+combined = 0xffff0000f01c
+
+low = combined & 0xffffffff
+color = (combined >> 32) & 0xffffffff # RGB565
+
+x = low >> 0x18 & 0xff # x
+y = low >> 0x10 & 0xff # y
+width = low >> 0x8 & 0xff # width
+high = low & 0xff # high
 ```
