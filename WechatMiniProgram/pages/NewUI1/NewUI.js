@@ -202,10 +202,11 @@ function ze(t) {
   return Math.floor(t).toString(16).padStart(2, "0")
 }
 
-function _e(view, offset, decimals = 2, asNumber = false) {
-  const rawValue = view.getFloat32(offset, true);
-  const formatted = rawValue.toFixed(decimals);
-  return asNumber ? parseFloat(formatted) : formatted;
+function _e(t, e) {
+  var a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 2,
+    n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 0,
+    i = t.getFloat32(e, true).toFixed(a);
+  return n ? parseFloat(i) : i
 }
 
 function Ze(t, e) {
@@ -835,26 +836,7 @@ Page({
     })
   },
   BTCr1: function (t) {
-    if (a.data.UI === 0) {
-      Ve("F53000" + We(this.data.Cr0) + "0000f01c");
-      Ve("F53100" + We(this.data.Cr1) + "00209F26");
-      Ve("F53200" + We(this.data.Cr2) + "00479F26");
-      Ve("F53300" + We(this.data.Cr3) + "006e9F27");
-      Ve("F53400" + We(this.data.Cr4) + "00969F3f");
-      Ve("F53500" + We(this.data.Cr5) + "A3204d4d");
-      Ve("F53600" + We(this.data.Cr6) + "50d64f1A");
-      Ve("F53700" + We(this.data.Cr7) + "00d64f1A");
-      Ve("F53801" + We(this.data.Cr8) + "A3774d68");
-    } else if (a.data.UI === 1) {
-      Ve("F52000" + We(this.data.Cr10) + "0000781c");
-      Ve("F52100" + We(this.data.Cr11) + "001cf02e");
-      Ve("F52200" + We(this.data.Cr12) + "004af02e");
-      Ve("F52300" + We(this.data.Cr13) + "0078f02e");
-      Ve("F52400" + We(this.data.Cr14) + "00a6f02e");
-      Ve("F52500" + We(this.data.Cr15) + "7800781c");
-      Ve("F52600" + We(this.data.Cr16) + "00d4781b");
-      Ve("F52701" + We(this.data.Cr17) + "78d4781b");
-    }  
+    0 == a.data.UI ? (Ve("F53000" + We(this.data.Cr0) + "0000f01c"), Ve("F53100" + We(this.data.Cr1) + "00209F26"), Ve("F53200" + We(this.data.Cr2) + "00479F26"), Ve("F53300" + We(this.data.Cr3) + "006e9F27"), Ve("F53400" + We(this.data.Cr4) + "00969F3f"), Ve("F53500" + We(this.data.Cr5) + "A3204d4d"), Ve("F53600" + We(this.data.Cr6) + "50d64f1A"), Ve("F53700" + We(this.data.Cr7) + "00d64f1A"), Ve("F53801" + We(this.data.Cr8) + "A3774d68")) : 1 == a.data.UI && (Ve("F52000" + We(this.data.Cr10) + "0000781c"), Ve("F52100" + We(this.data.Cr11) + "001cf02e"), Ve("F52200" + We(this.data.Cr12) + "004af02e"), Ve("F52300" + We(this.data.Cr13) + "0078f02e"), Ve("F52400" + We(this.data.Cr14) + "00a6f02e"), Ve("F52500" + We(this.data.Cr15) + "7800781c"), Ve("F52600" + We(this.data.Cr16) + "00d4781b"), Ve("F52701" + We(this.data.Cr17) + "78d4781b"))
   },
   CK0: function (t) {
     Be = 0, this.CRSet(this.data.Cr0)
@@ -1381,35 +1363,11 @@ Page({
         if (t.startsWith("FFF8")) Ve(t.substr(2, 4) + He(t.substr(6))), Ve("FF");
         else {
           if (t.startsWith("FFF9")) return Ve(t.substr(2)), void Ve("FF");
-          if (t === "DEBUG=0") {
-            qt.SetCFG("DEBUG", 0);
-            ee = 0;
-            Ve("F9C900");
-            Ve("F9CA01");
-            Ve("F9CB01");
-            Ve("F9CC01");
-          } else if (t === "DEBUG=1") {
-            qt.SetCFG("DEBUG", 1);
-            ee = 1;
-            Ve("F9C900");
-            Ve("F9CA01");
-            Ve("F9CB01");
-            Ve("F9CC01");
-          } else if (t === "DEBUG=2") {
-            qt.SetCFG("DEBUG", 2);
-            ee = 2;
-            Ve("F9C9FF");
-            Ve("F9CA01");
-            Ve("F9CB01");
-            Ve("F9CC01");
-          } else if (t === "DEBUG=3") {
-            qt.SetCFG("DEBUG", 2);
-            ee = 2;
-            Ve("F9C9FF");
-            Ve("F9CA01");
-            Ve("F9CB01");
-            Ve("F9CC00");
-          } else if (t.startsWith("FFC8")) Ve(t.substr(2, 4) + t.substr(6)), Ve("FF");
+          if ("DEBUG=0" == t)(0, qt.SetCFG)("DEBUG", 0), ee = 0, Ve("F9C900"), Ve("F9CA01"), Ve("F9CB01"), Ve("F9CC01");
+          else if ("DEBUG=1" == t)(0, qt.SetCFG)("DEBUG", 1), ee = 1, Ve("F9C900"), Ve("F9CA01"), Ve("F9CB01"), Ve("F9CC01");
+          else if ("DEBUG=2" == t)(0, qt.SetCFG)("DEBUG", 2), ee = 2, Ve("F9C9FF"), Ve("F9CA01"), Ve("F9CB01"), Ve("F9CC01");
+          else if ("DEBUG=3" == t)(0, qt.SetCFG)("DEBUG", 2), ee = 2, Ve("F9C9FF"), Ve("F9CA01"), Ve("F9CB01"), Ve("F9CC00");
+          else if (t.startsWith("FFC8")) Ve(t.substr(2, 4) + t.substr(6)), Ve("FF");
           else if (t.startsWith("FFC9")) {
             var e = "C9" + t.substr(4, 4) + $e(t.substr(8));
             console.log(e), Ve(e)
@@ -1534,94 +1492,21 @@ Page({
           var Zt = new Date;
           Ve("FD48" + $e(Zt.getFullYear() + "-" + (Zt.getMonth() + 1) + "-" + Zt.getDate()))
         }
-      } else {
-        (0, qt.Toast)(k ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3)
-        setTimeout((function () {
-          Ge.showModal({
-            title: k ? "Enter Bluetooth password" : "输入蓝牙密码",
-            editable: true,
-            placeholderText: "ID:" + D,
-            confirmText: k ? "YES" : "确定",
-            cancelText: k ? "Observer" : "我只看看",
-            success: function (t) {
-              t.confirm && ((0, qt.SetCFG)(D, t.content), Ve("FF" + $e(t.content)), ne = 0)
-            }
-          })
-        }), 1e3);
-      }
-      M = _t.getUint8(2);
-      V = _t.getUint8(3);
-      y = _t.getUint8(4);
-      k = _t.getUint8(5);
-      $ = _t.getUint8(6);
-      q = _t.getUint8(7);
-      J = _t.getUint8(8);
-      it = _t.getUint8(9);
-      rt = _t.getUint8(10);
-      ot = _t.getUint8(11);
-      Ft = _t.getUint8(12);
-      St = _t.getUint8(13);
-      ht = _t.getUint8(14) / 10;
-      gt = _t.getUint8(15);
-      Tt = _t.getUint8(16);
-      Et = _t.getUint8(17);
-      Gt = _t.getUint8(18);
-      wt = _t.getUint8(19);
-      bt = _t.getUint8(20) * .01;
-      xt = _t.getUint8(21);
-      Nt = _t.getUint8(22);
-      Wt = _t.getUint8(23);
-      Lt = _t.getUint8(24);
-      Kt = _t.getUint8(25);
-      yt = _t.getUint8(26);
-      Yt = _t.getUint8(27);
-      Ht = _t.getUint8(28);
-      jt = _t.getUint8(29);
-      Q = _t.getUint8(30);
-      W = _t.getUint8(31);
-      zt = _t.getUint8(32);
-      Rt = _t.getUint8(33);
-      ue = _t.getUint8(34);
-      Fe = _t.getUint8(35);
-      Se = _t.getUint8(36);
+      } else(0, qt.Toast)(k ? "Password error, please re-enter" : "密码错误,请重新输入!!!", 2e3), setTimeout((function () {
+        Ge.showModal({
+          title: k ? "Enter Bluetooth password" : "输入蓝牙密码",
+          editable: true,
+          placeholderText: "ID:" + D,
+          confirmText: k ? "YES" : "确定",
+          cancelText: k ? "Observer" : "我只看看",
+          success: function (t) {
+            t.confirm && ((0, qt.SetCFG)(D, t.content), Ve("FF" + $e(t.content)), ne = 0)
+          }
+        })
+      }), 1e3);
+      M = _t.getUint8(2), V = _t.getUint8(3), y = _t.getUint8(4), k = _t.getUint8(5), $ = _t.getUint8(6), q = _t.getUint8(7), J = _t.getUint8(8), it = _t.getUint8(9), rt = _t.getUint8(10), ot = _t.getUint8(11), Ft = _t.getUint8(12), St = _t.getUint8(13), ht = _t.getUint8(14) / 10, gt = _t.getUint8(15), Tt = _t.getUint8(16), Et = _t.getUint8(17), Gt = _t.getUint8(18), wt = _t.getUint8(19), bt = .01 * _t.getUint8(20), xt = _t.getUint8(21), Nt = _t.getUint8(22), Wt = _t.getUint8(23), Lt = _t.getUint8(24), Kt = _t.getUint8(25), yt = _t.getUint8(26), Yt = _t.getUint8(27), Ht = _t.getUint8(28), jt = _t.getUint8(29), Q = _t.getUint8(30), W = _t.getUint8(31), zt = _t.getUint8(32), Rt = _t.getUint8(33), ue = _t.getUint8(34), Fe = _t.getUint8(35), Se = _t.getUint8(36);
       var Qt = 51;
-      x = [_e(_t, Qt, 2, 1), _e(_t, Qt + 4, 2, 1)]
-      N = [_e(_t, Qt += 8, 2, 1), _e(_t, Qt + 4, 2, 1)]
-      L = [_e(_t, Qt += 8, 2, 1), _e(_t, Qt + 4, 2, 1)]
-      K = [_e(_t, Qt += 8, 2, 1), _e(_t, Qt + 4, 2, 1)]
-      j = _e(_t, Qt += 8)
-      z = _e(_t, Qt += 4)
-      _ = _e(_t, Qt += 4)
-      Z = _e(_t, Qt += 4)
-      et = _e(_t, Qt += 4)
-      at = _e(_t, Qt += 4)
-      nt = _e(_t, Qt += 4)
-      P = _e(_t, Qt += 4)
-      st = _e(_t, Qt += 4)
-      ct = _e(_t, Qt += 4)
-      ft = _e(_t, Qt += 4)
-      ut = _e(_t, Qt += 4)
-      Ct = _e(_t, Qt += 4, 4)
-      lt = _e(_t, Qt += 4, 4)
-      dt = _e(_t, Qt += 4, 4)
-      Bt = _e(_t, Qt += 4, 4)
-      Dt = _e(_t, Qt += 4)
-      pt = _e(_t, Qt += 4)
-      mt = _e(_t, Qt += 4)
-      At = _e(_t, Qt += 4)
-      vt = _e(_t, Qt += 4, 4)
-      It = _e(_t, Qt += 4, 4)
-      Ot = _e(_t, Qt += 4)
-      Ut = _e(_t, Qt += 4)
-      Mt = _e(_t, Qt += 4)
-      Vt = _e(_t, Qt += 4)
-      Pt = _e(_t, Qt += 4)
-      kt = _e(_t, Qt += 4)
-      $t = _e(_t, Qt += 4)
-      R = _e(_t, Qt += 4, 4)
-      Qt += 4
-      1 == W ? (tt = x[1], X = x[0]) : 2 == W ? (tt = N[1], X = N[0]) : 3 == W ? (tt = L[1], X = L[0]) : 4 == W && (tt = K[1], X = K[0])
-      a.setData({
+      x = [_e(_t, Qt, 2, 1), _e(_t, Qt + 4, 2, 1)], N = [_e(_t, Qt += 8, 2, 1), _e(_t, Qt + 4, 2, 1)], L = [_e(_t, Qt += 8, 2, 1), _e(_t, Qt + 4, 2, 1)], K = [_e(_t, Qt += 8, 2, 1), _e(_t, Qt + 4, 2, 1)], j = _e(_t, Qt += 8), z = _e(_t, Qt += 4), _ = _e(_t, Qt += 4), Z = _e(_t, Qt += 4), et = _e(_t, Qt += 4), at = _e(_t, Qt += 4), nt = _e(_t, Qt += 4), P = _e(_t, Qt += 4), st = _e(_t, Qt += 4), ct = _e(_t, Qt += 4), ft = _e(_t, Qt += 4), ut = _e(_t, Qt += 4), Ct = _e(_t, Qt += 4, 4), lt = _e(_t, Qt += 4, 4), dt = _e(_t, Qt += 4, 4), Bt = _e(_t, Qt += 4, 4), Dt = _e(_t, Qt += 4), pt = _e(_t, Qt += 4), mt = _e(_t, Qt += 4), At = _e(_t, Qt += 4), vt = _e(_t, Qt += 4, 4), It = _e(_t, Qt += 4, 4), Ot = _e(_t, Qt += 4), Ut = _e(_t, Qt += 4), Mt = _e(_t, Qt += 4), Vt = _e(_t, Qt += 4), Pt = _e(_t, Qt += 4), kt = _e(_t, Qt += 4), $t = _e(_t, Qt += 4), R = _e(_t, Qt += 4, 4), Qt += 4, 1 == W ? (tt = x[1], X = x[0]) : 2 == W ? (tt = N[1], X = N[0]) : 3 == W ? (tt = L[1], X = L[0]) : 4 == W && (tt = K[1], X = K[0]), a.setData({
         PON: M,
         KON: V,
         CAN: y,
@@ -1696,66 +1581,81 @@ Page({
       })
     } else if (e.startsWith("FE") || e.startsWith("EE")) {
       if (0 == y) {
-        n = Ye(e.substring(20, 40))
-        Jt = .01 * parseInt(e.substring(16, 20), 16)
-        y = qe(e, 14)
-        Xt = 0
-        D = e.substring(2, 14)
-        if (y === 1) {
-          r = "Huawei";
-        } else if (y === 2) {
-          r = "Increase";
-        } else if (y === 4) {
-          r = "ZTE3000";
-        } else if (y === 8) {
-          r = "INFY";
-        } else if (y === 12) {
-          r = "EV_Station";
-          Xt = 2;
-        } else if (y === 14) {
-          r = "EV_Charger";
-          Xt = 1;
-        } else if (y === 16) {
-          r = "EPS6020";
-        } else if (y === 32) {
-          r = "ZTE4875";
-        } else if (y === 64) {
-          r = "Sinexcel";
-        }
-
-        if (r === "EV_Charger") {
-          a.setData({
-            E1S: 0,   E1A: "正常",   E1B: "中止",
-            E2S: 0,   E2A: "电桩",   E2B: "温度",
-            E3S: 0,   E3A: "枪头",   E3B: "异常",
-            E4S: 0,   E4A: "内部",   E4B: "过温",
-            E5S: 0,   E5A: "充电",   E5B: "异常",
-            E6S: 0,   E6A: "电桩",   E6B: "急停",
-            E7S: 0,   E7A: "其他",   E7B: "异常",
-            E8S: 0,   E8A: "自检",   E8B: "异常",
-            E9S: 0,   E9A: "预充",   E9B: "异常",
-            EAS: 0,   EAA: "电流",   EAB: "异常",
-            EBS: 0,   EBA: "电压",   EBB: "异常",
-            ECS: 0,   ECA: "参数",   ECB: "异常"
-          });
-        } else if (r === "Huawei") {
-          a.setData({
-            E1S: 0,   E1A: "模块",   E1B: "保护",
-            E2S: 0,   E2A: "风扇",   E2B: "异常",
-            E3S: 0,   E3A: "输入",   E3B: "欠压",
-            E4S: 0,   E4A: "输入",   E4B: "过压",
-            E5S: 0,   E5A: "输入",   E5B: "停电",
-            E6S: 0,   E6A: "温度",   E6B: "异常",
-            E7S: 0,   E7A: "模块",   E7B: "故障",
-            E8S: 0,   E8A: "输出",   E8B: "过流",
-            E9S: 0,   E9A: "输出",   E9B: "欠压",
-            EAS: 0,   EAA: "输出",   EAB: "过压",
-            EBS: 0,   EBA: "输出",   EBB: "过流",
-            ECS: 0,   ECA: "模块",   ECB: "关机"
-          });
-        }
-        n.startsWith("Cxjdwx") && (n = "未激活")
-        (new Date).getTime() > 1756621705e3 && (Date.parse(n) < 1756621705e3 || (0, qt.CheckID)(D) || (i = 1, Ge.showModal({
+        n = Ye(e.substring(20, 40)), Jt = .01 * parseInt(e.substring(16, 20), 16), y = qe(e, 14), Xt = 0, D = e.substring(2, 14), 1 == y ? r = "Huawei" : 2 == y ? r = "Increase" : 4 == y ? r = "ZTE3000" : 8 == y ? r = "INFY" : 12 == y ? (r = "EV_Station", Xt = 2) : 14 == y ? (r = "EV_Charger", Xt = 1) : 16 == y ? r = "EPS6020" : 32 == y ? r = "ZTE4875" : 64 == y && (r = "Sinexcel"), "EV_Charger" == r ? a.setData({
+          E1S: 0,
+          E1A: "正常",
+          E1B: "中止",
+          E2S: 0,
+          E2A: "电桩",
+          E2B: "温度",
+          E3S: 0,
+          E3A: "枪头",
+          E3B: "异常",
+          E4S: 0,
+          E4A: "内部",
+          E4B: "过温",
+          E5S: 0,
+          E5A: "充电",
+          E5B: "异常",
+          E6S: 0,
+          E6A: "电桩",
+          E6B: "急停",
+          E7S: 0,
+          E7A: "其他",
+          E7B: "异常",
+          E8S: 0,
+          E8A: "自检",
+          E8B: "异常",
+          E9S: 0,
+          E9A: "预充",
+          E9B: "异常",
+          EAS: 0,
+          EAA: "电流",
+          EAB: "异常",
+          EBS: 0,
+          EBA: "电压",
+          EBB: "异常",
+          ECS: 0,
+          ECA: "参数",
+          ECB: "异常"
+        }) : "Huawei" == r && a.setData({
+          E1S: 0,
+          E1A: "模块",
+          E1B: "保护",
+          E2S: 0,
+          E2A: "风扇",
+          E2B: "异常",
+          E3S: 0,
+          E3A: "输入",
+          E3B: "欠压",
+          E4S: 0,
+          E4A: "输入",
+          E4B: "过压",
+          E5S: 0,
+          E5A: "输入",
+          E5B: "停电",
+          E6S: 0,
+          E6A: "温度",
+          E6B: "异常",
+          E7S: 0,
+          E7A: "模块",
+          E7B: "故障",
+          E8S: 0,
+          E8A: "输出",
+          E8B: "过流",
+          E9S: 0,
+          E9A: "输出",
+          E9B: "欠压",
+          EAS: 0,
+          EAA: "输出",
+          EAB: "过压",
+          EBS: 0,
+          EBA: "输出",
+          EBB: "过流",
+          ECS: 0,
+          ECA: "模块",
+          ECB: "关机"
+        }), n.startsWith("Cxjdwx") && (n = "未激活"), (new Date).getTime() > 1756621705e3 && (Date.parse(n) < 1756621705e3 || (0, qt.CheckID)(D) || (i = 1, Ge.showModal({
           title: k ? "Abnormal device authorization" : "设备授权异常",
           content: "",
           confirmText: k ? "Yes I Kown" : "我知道了",
@@ -1765,9 +1665,7 @@ Page({
               delta: 0
             })
           }
-        })))
-        D = "0x" + D
-        a.setData({
+        }))), D = "0x" + D, a.setData({
           CVer: Jt.toFixed(2),
           CEV: Xt,
           SCAN: r,
@@ -1780,35 +1678,20 @@ Page({
         }), 1500))
       }
       if (e.startsWith("FE")) {
-        var re = Ye(e.substring(260, 300));
-        var he = Ye(e.substring(300, 340));
-        
-        if (re === "config" || re === "") {
-          re = (0, qt.GetCFG)("WID", "config");
-        }
-        
-        if (he === "88888888" || he === "") {
-          he = (0, qt.GetCFG)("WPD", "88888888");
-        }
-        
-        a.setData({
-          VIN : Ye(e.substring(100, 140)),   // Vehicle Identification Number
-          SSID: Ye(e.substring(140, 180)),   // BLE SSID
-          UPWD: Ye(e.substring(180, 220)),   // BLE Password
-          LKV : Ye(e.substring(220, 260)),   // Touch Password
-          WID : re,                          // Wireless ID (possibly from config)
-          WPD : he                           // Wireless Password (possibly from config)
-        });
+        var re = Ye(e.substring(260, 300)),
+          he = Ye(e.substring(300, 340));
+        "config" != re && "" != re || (re = (0, qt.GetCFG)("WID", "config")), "88888888" != he && "" != he || (he = (0, qt.GetCFG)("WPD", "88888888")), a.setData({
+          VIN: Ye(e.substring(100, 140)),
+          SSID: Ye(e.substring(140, 180)),
+          UPWD: Ye(e.substring(180, 220)),
+          LKV: Ye(e.substring(220, 260)),
+          WID: re,
+          WPD: he
+        })
       }
     } else if (e.startsWith("FA")) {
       var Ce = new DataView(t);
-      s = _e(Ce, 1)
-      c = _e(Ce, 5)
-      f = _e(Ce, 9)
-      C = _e(Ce, 13)
-      l = _e(Ce, 17)
-      d = _e(Ce, 21)
-      a.setData({
+      s = _e(Ce, 1), c = _e(Ce, 5), f = _e(Ce, 9), C = _e(Ce, 13), l = _e(Ce, 17), d = _e(Ce, 21), a.setData({
         IV: C,
         IA: l,
         IW: d,
@@ -1817,104 +1700,15 @@ Page({
         OW: f
       })
     } else if (e.startsWith("FB")) {
-      // Step 1: Read header fields using DataView
       var le = new DataView(t);
-      F  = le.getUint8(1);
-      S  = le.getUint8(2);
-      h  = le.getUint8(3);
-      g  = le.getUint8(4);
-      T  = le.getUint8(5);
-      E  = le.getUint8(6);
-      w  = le.getUint8(7);
-      b  = le.getUint8(8);
-      Y  = le.getUint8(9);
-      oe = le.getUint8(10) + (le.getUint8(11) << 8); // Combined 2 bytes
-      se = le.getUint8(12);
-      H  = le.getUint8(13);
-
-      // Step 2: Read 4-byte float values starting from offset 31
+      F = le.getUint8(1), S = le.getUint8(2), h = le.getUint8(3), g = le.getUint8(4), T = le.getUint8(5), E = le.getUint8(6), w = le.getUint8(7), b = le.getUint8(8), Y = le.getUint8(9), oe = le.getUint8(10), oe += le.getUint8(11) << 8, se = le.getUint8(12), H = le.getUint8(13);
       var de = 31;
-      s  = _e(le, de);      de += 4;
-      c  = _e(le, de);      de += 4;
-      f  = _e(le, de);      de += 4;
-      u  = _e(le, de);      de += 4;
-      C  = _e(le, de);      de += 4;
-      l  = _e(le, de);      de += 4;
-      d  = _e(le, de);      de += 4;
-      B  = _e(le, de);      de += 4;
-      p  = _e(le, de);      de += 4;
-      m  = _e(le, de);      de += 4;
-      A  = _e(le, de);      de += 4;
-      G  = _e(le, de);      de += 4;
-      v  = _e(le, de);      de += 4;
-      I  = _e(le, de);      de += 4;
-      O  = _e(le, de);      de += 4;
-      U  = _e(le, de);      de += 4;
-      de += 4;
-
-      // Step 3: Optional version-dependent parsing
-      if (Jt >= 5.42) {
-        ce = le.getUint8(14);
-        fe = _e(le, de);
-        de += 4;
-      }
-
-      // Step 4: Calculate derived values
-      var Be = d ? Number(f / d * 100).toFixed(2) : "0.00";  // Efficiency
-      var ge = d ? Number(d - f).toFixed(2) : "0.00";        // Energy difference
-
-      // Step 5: Determine STR message (status text) based on flags
-      if ((Fe === 0 || Se === 0) && Jt >= 5.42) {
-        ie = k ? "Device unauthorized" : "设备未授权";
-      } else if (F === 60) {
-        ie = k ? "Simulate high voltage anomaly" : "模拟电池升压异常";
-      } else if (h == "0") {
-        if (Y === 0) {
-          ie = k ? "Communication Abnormality" : "CAN通讯异常";
-        } else if (Y === 39) {
-          ie = k ? "Abnormal Insulation Test" : "绝缘测试未通过";
-        } else if (Y < 6) {
-          ie = k ? "Handshake message failed" : "握手信息未通过";
-        } else if (Y < 9) {
-          ie = k ? "Vehicle information not pass" : "车辆信息未通过";
-        } else if (Y === 16) {
-          ie = k ? "Charging station not ready" : "电压检测未通过";
-        } else {
-          ie = k ? "Other abnormal interruptions" : "其它异常中止";
-        }
-      } else {
-        // Various charging states
-        switch (F) {
-          case 50: ie = k ? "Stop Charging" : "中 止 充 电"; break;
-          case 51: ie = k ? "Charging Error" : "充 电 错 误"; break;
-          case 52: ie = k ? "Seting Handshake Information" : "配置握手信息"; break;
-          case 53: ie = k ? "Seting Charging Information" : "配置充电信息"; break;
-          case 54: ie = k ? "Waiting Output Set Voltage" : "等待输出设定电压"; break;
-          case 55: ie = k ? "Ready For Use" : "已准备就绪"; break;
-          case 56: ie = k ? "Charging" : "正在充电中"; break;
-          case 57: ie = k ? "Charging Completed" : "充电完成"; break;
-          case 58: ie = k ? "Overtemperature shutdown" : `超温关机(${se})`; break;
-          case 59: ie = k ? "Insulation testing" : "绝缘测试"; break;
-          case 4:  ie = k ? "Charger Shutdown" : "充电器已关机"; break;
-          case 0:  ie = k ? "Waiting For Battery Connection" : "等待接入电池"; break;
-          case 1:  ie = k ? "Charging" : "正在充电中"; break;
-          case 2:  ie = k ? "In The Second Stage Of Charging" : "第二段充电中"; break;
-          case 5:  ie = k ? "Precharging" : "正在预充"; break;
-          case 40: ie = k ? "Appointment Waiting" : "预约等待中"; break;
-          case 3:  ie = k ? "Charging Completed" : "充电完成"; break;
-          case 43: ie = k ? "Charging Completed(Turned Off)" : "充电完成(已关机)"; break;
-          case 44: ie = k ? "Over Temperature Shutdown" : "超温保护关机"; break;
-          default:
-            ie = s === 0 ? (k ? "Charger Output Abnormality" : "充电器输出异常") : "";
-            break;
-        }
-      }
-
-      // Step 6: Calculate font size based on text length
-      var Te = 0.65 * wx.getWindowInfo().windowWidth;
-      var Ee = Math.max(15, Math.min(30, Te / (k ? ie.length : 1.8 * ie.length) * 1.5));
-
-      // Step 7: Set all the final data values
+      s = _e(le, de), c = _e(le, de += 4), f = _e(le, de += 4), u = _e(le, de += 4), C = _e(le, de += 4), l = _e(le, de += 4), d = _e(le, de += 4), B = _e(le, de += 4), p = _e(le, de += 4), m = _e(le, de += 4), A = _e(le, de += 4), G = _e(le, de += 4), v = _e(le, de += 4), I = _e(le, de += 4), O = _e(le, de += 4), U = _e(le, de += 4), de += 4, Jt >= 5.42 && (ce = le.getUint8(14), fe = _e(le, de), de += 4);
+      var Be = Number(f / d * 100).toFixed(2),
+        ge = Number(d - f).toFixed(2);
+      (0 == Fe || 0 == Se) && Jt >= 5.42 ? ie = k ? "Device unauthorized" : "设备未授权" : 60 == F ? ie = k ? "Simulate high voltage anomaly" : "模拟电池升压异常" : "0" == h ? ie = 0 == Y ? k ? "Communication Abnormality" : "CAN通讯异常" : 39 == Y ? k ? "Abnormal Insulation Test" : "绝缘测试未通过" : Y < 6 ? k ? "Handshake message failed" : "握手信息未通过" : Y < 9 ? k ? "Vehicle information not pass" : "车辆信息未通过" : 16 == Y ? k ? "Charging station not ready" : "电压检测未通过" : k ? "Other abnormal interruptions" : "其它异常中止" : 50 == F ? ie = k ? "Stop Charging" : "中 止 充 电" : 51 == F ? ie = k ? "Charging Error" : "充 电 错 误" : 52 == F ? ie = k ? "Seting Handshake Information" : "配置握手信息" : 53 == F ? ie = k ? "Seting Charging Information" : "配置充电信息" : 54 == F ? ie = k ? "Waiting Output Set Voltage" : "等待输出设定电压" : 55 == F ? ie = k ? "Ready For Use" : "已准备就绪" : 56 == F ? ie = k ? "Charging" : "正在充电中" : 57 == F ? ie = k ? "Charging Completed" : "充电完成" : 58 == F ? ie = k ? "Overtemperature shutdown" : "超温关机(" + se + ")" : 59 == F ? ie = k ? "Insulation testing" : "绝缘测试" : 0 == s ? ie = k ? "Charger Output Abnormality" : "充电器输出异常" : 4 == F ? ie = k ? "Charger Shutdown" : "充电器已关机" : 0 == F ? ie = k ? "Waiting For Battery Connection" : "等待接入电池" : 1 == F ? ie = k ? "Charging" : "正在充电中" : 2 == F ? ie = k ? "In The Second Stage Of Charging" : "第二段充电中" : 5 == F ? ie = k ? "Precharging" : "正在预充" : 40 == F ? ie = k ? "Appointment Waiting" : "预约等待中" : 3 == F ? ie = k ? "Charging Completed" : "充电完成" : 43 == F ? ie = k ? "Charging Completed(Turned Off)" : "充电完成(已关机)" : 44 == F && (ie = k ? "Over Temperature Shutdown" : "超温保护关机");
+      var Te = .65 * wx.getWindowInfo().windowWidth,
+        Ee = Math.max(15, Math.min(30, Te / (k ? ie.length : 1.8 * ie.length) * 1.5));
       a.setData({
         Ah: p,
         Wh: m,
@@ -1929,8 +1723,8 @@ Page({
         ST0: g,
         ST1: T,
         ST2: E,
-        EEI: Be,
-        EES: ge,
+        EEI: d ? Be : "0.00",
+        EES: d ? ge : "0.00",
         YS: Me(oe),
         STR: ie,
         NFS: S,
@@ -1947,8 +1741,7 @@ Page({
         UPS: ce,
         SOC: Number(U).toFixed(0),
         UPV: Number(fe).toFixed(0)
-      });
-
+      })
     } else if (e.startsWith("01")) {
       s = Ze(e, 2), c = Ze(e, 10), f = Ze(e, 18), u = Ze(e, 26), F = qe(e, 34), S = qe(e, 36), h = qe(e, 38), 60 == F ? ie = k ? "Simulate high voltage anomaly" : "模拟电池升压异常" : "0" == h ? ie = k ? "Communication Abnormality" : "CAN通讯异常" : 50 == F ? ie = k ? "Stop Charging" : "中 止 充 电" : 51 == F ? ie = k ? "Charging Error" : "充 电 错 误" : 52 == F ? ie = k ? "Seting Handshake Information" : "配置握手信息" : 53 == F ? ie = k ? "Seting Charging Information" : "配置充电信息" : 54 == F ? ie = k ? "Waiting Output Set Voltage" : "等待输出设定电压" : 55 == F ? ie = k ? "Ready For Use" : "已准备就绪" : 56 == F ? ie = k ? "Charging" : "正在充电中" : 57 == F ? ie = k ? "Charging Completed" : "充电完成" : 58 == F ? ie = k ? "Overtemperature shutdown" : "超温关机(" + se + ")" : 59 == F ? ie = k ? "Insulation testing" : "绝缘测试" : 0 == s ? ie = k ? "Charger Output Abnormality" : "充电器输出异常" : 4 == F ? ie = k ? "Charger Shutdown" : "充电器已关机" : 0 == F ? ie = k ? "Waiting For Battery Connection" : "等待接入电池" : 1 == F ? ie = k ? "Charging" : "正在充电中" : 2 == F ? ie = k ? "In The Second Stage Of Charging" : "第二段充电中" : 5 == F ? ie = k ? "Precharging" : "正在预充" : 40 == F ? ie = k ? "Appointment Waiting" : "预约等待中" : 3 == F ? ie = k ? "Charging Completed" : "充电完成" : 43 == F ? ie = k ? "Charging Completed(Turned Off)" : "充电完成(已关机)" : 44 == F && (ie = k ? "Over Temperature Shutdown" : "超温保护关机");
       var De = .65 * wx.getWindowInfo().windowWidth;
