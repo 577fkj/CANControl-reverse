@@ -148,6 +148,11 @@ def download_file(result: list, file: str, save_path: str, start: int, max_count
                 result.append(error_info[j])
             error_info = []
             error_count = 0
+
+            if len(result) > 0 and result[-1]['md5'] == info['md5']:
+                print('File is the same as the last one, skipping')
+                continue
+
             save_file(info['path'], info['data'])
             del info['data']
             del info['path']
