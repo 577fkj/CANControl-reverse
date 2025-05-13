@@ -16,7 +16,7 @@
             </view>
         </view>
         <view class="btnLayout" style="height:188px;">
-            <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:56%;height:110px;">
+            <view bindtap="btbt1" style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:56%;height:110px;">
                 <view style="position:relative;top:-30px;color:#fff8;width:100%;height:0px;">APP-{{APP}}</view>
                 <view style="height:151px;" wx:if="{{CEV==1}}">
                     <view style="background-color:#0005;position:relative;left:0px;top:0px;height:110px;width:100%"></view>
@@ -204,6 +204,13 @@
         </view>
     </view>
     <view wx:elif="{{ODM==1}}">
+        <view style="height:25px;"></view>
+        <view>
+            <view class="SetBox">
+                <button class="DisTIP" style="width:100%;text-align:center;">{{STR}}</button>
+            </view>
+            <view style="height:5px;"></view>
+        </view>
         <view>
             <view class="SetBox">
                 <view class="SendLayout">
@@ -230,7 +237,7 @@
                     </view>
                     <view class="btnLayout">
                         <button class="DisTIP1">{{UEN?'Firmware version':'固件版本'}}</button>
-                        <button bindtap="BTUP3" class="DisINF1" style="color:gray;">{{CVer}}</button>
+                        <button bindtap="nvbt" class="DisINF1" style="color:gray;">{{CVer}}</button>
                     </view>
                     <view>
                         <view style="height:10px;"></view>
@@ -241,7 +248,8 @@
             </view>
             <view style="height:5px;"></view>
         </view>
-    </view>></view>
+    </view>
+</view>
 <view wx:if="{{Panel==2&&!UPS}}">
     <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
@@ -347,6 +355,11 @@
                     <button style="position:absolute;width:50%;left:50%;height:55px;font-size:30px;top:45px;background-color:transparent;color:white;">{{OA}}A</button>
                     <view style="position:absolute;left:57%;top:105px;font-size:15px;color:white;">{{SA}}A</view>
                     <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%;width:50%;height:88px;position:absolute;"></image>
+                </view>
+                <view class="btnLayout" wx:if="{{CVer>=5.43&&SCAN=='MC1503N5R'}}">
+                    <button class="DisTIP1">{{UEN?'Input voltage correction':'输入电流校正'}}</button>
+                    <button bindtap="BTIAD1" class="DisINF1">{{IAD}}</button>
+                    <button bindtap="BTIAD2" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
                 </view>
                 <view class="btnLayout" wx:if="{{CVer>=5.29}}">
                     <button class="DisTIP1">{{UEN?'Current jump buffer':'电流跳动缓冲'}}</button>
@@ -532,6 +545,11 @@
                 <view class="btnLayout" wx:else>
                     <button bindtap="BTCAN8" style="text-align:center;width:50%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'INFY':'英飞源'}}</button>
                     <button bindtap="BTCAN16" style="text-align:center;width:50%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">EPS6020</button>
+                </view>
+                <view class="btnLayout" wx:if="{{(UCN&128||GM==2)&&CVer>=5.43}}">
+                    <button bindtap="BTCAN64" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">SER10010K</button>
+                    <button bindtap="BTCAN65" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">BH10M100</button>
+                    <button bindtap="BTCAN66" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">MC1503N5R</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">　Huawei supports R4815, R4830, R4850, R4875, and R48100.</view>
@@ -1099,6 +1117,12 @@
                     </view>
                     <view style="height:10px;"></view>
                     <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.43||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.43 APP:1.28 2025-05-12</view>
+                        <view class="tip2" style="color:#0f0;">　　加入了三个新的电源模块协议支持(SER10010K BH10M100 MC1503N5R),提高了取电器升压电流解决了部分充电桩报升压异常问题,修复充电器功率限制时部分情况下修改电流不生效问题.</view>
+                    </view>
                     <view wx:if="{{CVer<5.42||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
