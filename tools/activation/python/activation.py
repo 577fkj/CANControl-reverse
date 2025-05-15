@@ -27,7 +27,9 @@ class ProtocolType(IntFlag):
     PROTOCOL_EV_CHARGER = 0xE
     PROTOCOL_EPS6020    = 0x10
     PROTOCOL_ZTE4875    = 0x20
-    PROTOCOL_SINEXCEL   = 0x40
+    PROTOCOL_SER10010K  = 0x40
+    PROTOCOL_BH10M100   = 0x41
+    PROTOCOL_MC1503N5R  = 0x42
 
     @classmethod
     def list_names(cls):

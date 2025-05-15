@@ -175,11 +175,13 @@ class ProtocolType(IntFlag):
     PROTOCOL_INCREASE   = 0x2
     PROTOCOL_ZTE3000    = 0x4
     PROTOCOL_INFY       = 0x8
-    PROTOCOL_EV_STATION = 0xc
-    PROTOCOL_EV_CHARGER = 0xe
+    PROTOCOL_EV_STATION = 0xC
+    PROTOCOL_EV_CHARGER = 0xE
     PROTOCOL_EPS6020    = 0x10
     PROTOCOL_ZTE4875    = 0x20
-    PROTOCOL_SINEXCEL   = 0x40
+    PROTOCOL_SER10010K  = 0x40
+    PROTOCOL_BH10M100   = 0x41
+    PROTOCOL_MC1503N5R  = 0x42
 
     @staticmethod
     def get_all_support():
@@ -191,7 +193,9 @@ class ProtocolType(IntFlag):
                 ProtocolType.PROTOCOL_EV_CHARGER | 
                 ProtocolType.PROTOCOL_EPS6020 | 
                 ProtocolType.PROTOCOL_ZTE4875 | 
-                ProtocolType.PROTOCOL_SINEXCEL)
+                ProtocolType.PROTOCOL_SER10010K |
+                ProtocolType.PROTOCOL_BH10M100 |
+                ProtocolType.PROTOCOL_MC1503N5R)
 
     @staticmethod
     def decode_protocol(protocol):
@@ -211,8 +215,12 @@ class ProtocolType(IntFlag):
             return "EPS6020"
         elif protocol == ProtocolType.PROTOCOL_ZTE4875:
             return "ZTE4875"
-        elif protocol == ProtocolType.PROTOCOL_SINEXCEL:
-            return "SINEXCEL"
+        elif protocol == ProtocolType.PROTOCOL_SER10010K:
+            return "SER10010K"
+        elif protocol == ProtocolType.PROTOCOL_BH10M100:
+            return "BH10M100"
+        elif protocol == ProtocolType.PROTOCOL_MC1503N5R:
+            return "MC1503N5R"
         else:
             return "UNKNOWN"
     
@@ -243,7 +251,7 @@ build_fw(
     bootloader_path="files/bootloader.bin",
     partition_table_path="files/partition_table.bin",
     nvs_path="build/nvs.bin",
-    app_path="../../fw/NewTest/231_NewTest_5.42_e9c21faf293165e9abf56a0b36d6761c.bin",
+    app_path="../../fw/Test2/72_Test2_5.44_68052ad7f2321c65c4a69654b6104296.bin",
     spiffs_path="files/spiffs.bin",
     output_path="build/flash_image.bin"
 )
