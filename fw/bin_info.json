@@ -2423,6 +2423,12 @@
             "version": "5.44",
             "md5": "3f473f284d2d4de4c02d7f3b20716e9c",
             "size": 1591488
+        },
+        {
+            "count": 76,
+            "version": "5.45",
+            "md5": "2f9f2ea7f14de047ac242648afa19ecb",
+            "size": 1591856
         }
     ],
     "DEVID": [
