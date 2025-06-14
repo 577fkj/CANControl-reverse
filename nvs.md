@@ -4,21 +4,22 @@
 
 System settings
 
-| key  | type   | default_value                                                                        | description             |
-| ---- | ------ | ------------------------------------------------------------------------------------ | ----------------------- |
-| 7a   | string | Cxjdwx                                                                               | Active key              |
-| 7A   | string | Cxjdwx                                                                               | Active key 2            |
-| SPWD | string | Cxjdwx                                                                               | Active key 3            |
-| 48   | string | Cxjdwx                                                                               | Active time             |
-| 49   | string | http://bin.bemfa.com/b/3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin | Update URL              |
-| 50   | string | 0                                                                                    | Last version?           |
-| 53   | i8     | 0                                                                                    | CAN Protocol            |
-| 54   | i8     | 2                                                                                    | Screen protocol         |
-| 55   | i8     | 0                                                                                    | Enable wifi             |
-| 56   | i8     | 0                                                                                    | Enable UART input       |
-| f1   | i8     | 31                                                                                   | Support CAN protocol    |
-| f2   | i8     | 0                                                                                    | EV Protocol type        |
-| CAN  | string | 1                                                                                    | Old version of the key? |
+| key  | type   | default_value                                                                        | description                          |
+| ---- | ------ | ------------------------------------------------------------------------------------ | ------------------------------------ |
+| 7a   | string | Cxjdwx                                                                               | Active key                           |
+| 7A   | string | Cxjdwx                                                                               | Active key 2                         |
+| SPWD | string | Cxjdwx                                                                               | Active key 3                         |
+| 48   | string | Cxjdwx                                                                               | Active time                          |
+| 49   | string | http://bin.bemfa.com/b/3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc=CANControl.bin | Update URL                           |
+| 50   | string | 0                                                                                    | Last version?                        |
+| 53   | i8     | 0                                                                                    | CAN Protocol                         |
+| 54   | i8     | 2                                                                                    | Screen protocol                      |
+| 55   | i8     | 0                                                                                    | Enable wifi                          |
+| 56   | i8     | 0                                                                                    | Enable UART input                    |
+| f1   | i8     | 31                                                                                   | Support CAN protocol                 |
+| f2   | i8     | 0                                                                                    | EV Protocol type                     |
+| f3   | i8     | 1                                                                                    | 0: Cloud locked, 1: Not cloud locked |
+| CAN  | string | 1                                                                                    | Old version of the key?              |
 
 ## WIFI
 
