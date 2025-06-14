@@ -30,7 +30,7 @@ if not os.path.exists(Test0_save_path):
 # DEVID.bin
 base_url = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc={}'
 
-test0_url = 'http://6ud6631us995.vicp.fun/firmware.bin'
+test0_url = 'https://6ud6631us995.vicp.fun/firmware.bin'
 
 def md5(data: bytes) -> str:
     m = hashlib.md5()
@@ -167,7 +167,7 @@ def download_file(result: list, file: str, save_path: str, start: int, max_count
 def download_test0(Test0, save_path: str):
     print('Downloading Test0 from test0_url')
     try:
-        r = requests.get(test0_url)
+        r = requests.get(test0_url, timeout=30)
         if r.status_code != 200:
             print(f'Error downloading Test0: {r.status_code}')
             return
@@ -191,9 +191,7 @@ def download_test0(Test0, save_path: str):
     Test0.append({
         'version': version,
         'md5': m5,
-        'size': len(data),
-        'data': data,
-        'path': path
+        'size': len(data)
     })
     
 
