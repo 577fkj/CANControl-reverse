@@ -8,6 +8,7 @@ NewUI_save_path = 'NewUI'
 NewTest_save_path = 'NewTest'
 Test2_save_path = 'Test2'
 DEVID_save_path = 'devid'
+Test0_save_path = 'Test0'
 
 if not os.path.exists(CANControl_save_path):
     os.makedirs(CANControl_save_path)
@@ -19,6 +20,8 @@ if not os.path.exists(Test2_save_path):
     os.makedirs(Test2_save_path)
 if not os.path.exists(DEVID_save_path):
     os.makedirs(DEVID_save_path)
+if not os.path.exists(Test0_save_path):
+    os.makedirs(Test0_save_path)
 
 # CANControl.bin
 # NewUI.bin
@@ -26,6 +29,8 @@ if not os.path.exists(DEVID_save_path):
 # Test2.bin
 # DEVID.bin
 base_url = 'http://bin.bemfa.com/b/{}3BcOGM0ZDJiN2ZkMGU3NDk0ZWEwMzkwNGU2ZDBmYWNhZDc={}'
+
+test0_url = 'http://6ud6631us995.vicp.fun/firmware.bin'
 
 def md5(data: bytes) -> str:
     m = hashlib.md5()
@@ -159,6 +164,39 @@ def download_file(result: list, file: str, save_path: str, start: int, max_count
 
             result.append(info)
 
+def download_test0(Test0, save_path: str):
+    print('Downloading Test0 from test0_url')
+    try:
+        r = requests.get(test0_url)
+        if r.status_code != 200:
+            print(f'Error downloading Test0: {r.status_code}')
+            return
+    except requests.RequestException as e:
+        print(f'Error downloading Test0: {e}')
+        return
+
+    data = r.content
+    m5 = md5(data)
+    version = get_version(data)
+    file_name = f"Test0_{version}_{m5}.bin"
+    path = os.path.join(save_path, file_name)
+
+    for item in Test0:
+        if item['md5'] == m5:
+            print('Test0 file is the same as the last one, skipping')
+            return
+
+    save_file(path, data)
+
+    Test0.append({
+        'version': version,
+        'md5': m5,
+        'size': len(data),
+        'data': data,
+        'path': path
+    })
+    
+
 def download_all(max_count: int = 999):
     bin_info = load_bin_info()
     CANControl = bin_info['CANControl']
@@ -166,6 +204,7 @@ def download_all(max_count: int = 999):
     NewTest = bin_info['NewTest']
     Test2 = bin_info['Test2']
     DEVID = bin_info['DEVID']
+    Test0 = bin_info['Test0']
 
     CANControl_start = CANControl[-1]['count'] if CANControl else 0
     NewUI_start = NewUI[-1]['count'] if NewUI else 0
@@ -179,12 +218,14 @@ def download_all(max_count: int = 999):
         download_file(NewTest, 'NewTest', NewTest_save_path, NewTest_start, max_count)
         download_file(Test2, 'Test2', Test2_save_path, Test2_start, max_count)
         download_file(DEVID, 'DEVID', DEVID_save_path, DEVID_start, max_count)
+        download_test0(Test0, Test0_save_path)
     finally:
         bin_info['CANControl'] = CANControl
         bin_info['NewUI'] = NewUI
         bin_info['NewTest'] = NewTest
         bin_info['Test2'] = Test2
         bin_info['DEVID'] = DEVID
+        bin_info['Test0'] = Test0
         save_bin_info(bin_info)
 
 def load_bin_info() -> dict:
@@ -199,7 +240,8 @@ def load_bin_info() -> dict:
             'NewUI': [],
             'NewTest': [],
             'Test2': [],
-            'DEVID': []
+            'DEVID': [],
+            'Test0': []
         }
 
 def save_bin_info(bin_info: dict):
