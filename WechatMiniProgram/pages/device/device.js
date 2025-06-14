@@ -1,15 +1,15 @@
 var s = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   f = require("../../@babel/runtime/helpers/asyncToGenerator");
 require("../../@babel/runtime/helpers/Arrayincludes");
-var a = t(require("../../8E6659B59E166AAFE80031B2CF74AA85.js")),
-  e = t(require("../../B312FEA69E166AAFD57496A1D194AA85.js"));
+var a = t(require("../../4E32DEC39E166AAF2854B6C471091D62.js")),
+  e = t(require("../../578207C49E166AAF31E46FC305191D62.js"));
 
 function t(s) {
   return s && s.__esModule ? s : {
     default: s
   }
 }
-var u = require("../../C2110F759E166AAFA47767728C64AA85.js"),
+var u = require("../../E0B6CAE39E166AAF86D0A2E4CEE81D62.js"),
   d = "3.48",
   i = null,
   r = ["#bt1", "设置电压", "NV", "V", "", ""],
@@ -105,8 +105,8 @@ var u = require("../../C2110F759E166AAFA47767728C64AA85.js"),
 function js(s) {
   for (var f = function (f) {
       wx.createSelectorQuery().select(s[f][0]).fields({
-        node: true,
-        size: true
+        node: !0,
+        size: !0
       }).exec((function (a) {
         var e = a[0].node,
           t = e.getContext("2d"),
@@ -203,8 +203,8 @@ Page({
         } else {
           if ("LOGO" == f) {
             if (t = u.match(/=(0\d\d\d[\u4e00-\u9fa5\w]{4,6})$/), console.log(t), null != t) t = RegExp.$1, wx.createSelectorQuery().select("#myCanvas").fields({
-              node: true,
-              size: true
+              node: !0,
+              size: !0
             }).exec((function (f) {
               var a = f[0].node,
                 e = a.getContext("2d");
@@ -470,8 +470,8 @@ Page({
   },
   onLoad: function (s) {
     Es = 1 == s.GM ? 1 : ef("GM"), wx.createSelectorQuery().select("#canvas").fields({
-      node: true,
-      size: true
+      node: !0,
+      size: !0
     }).exec((function (s) {
       var f = s[0].node;
       i = f.getContext("2d");
@@ -596,7 +596,7 @@ var Os = [],
   Js = 0;
 
 function Xs(s) {
-  u.easySendData(Os[$s][Ks] + "\n", false), Ks += 1, Ls += 1, s.setData({
+  u.easySendData(Os[$s][Ks] + "\n", !1), Ks += 1, Ls += 1, s.setData({
     SOC: (Ls / Js * 100).toFixed(2)
   })
 }
@@ -628,7 +628,7 @@ function Us() {
     return s().wrap((function (s) {
       for (;;) switch (s.prev = s.next) {
         case 0:
-          return s.next = 2, u.easySendData(a + "\n", false);
+          return s.next = 2, u.easySendData(a + "\n", !1);
         case 2:
         case "end":
           return s.stop()
@@ -645,7 +645,7 @@ function ff(s) {
   wx.showModal({
     title: "MSG",
     content: s,
-    showCancel: false
+    showCancel: !1
   })
 }
 

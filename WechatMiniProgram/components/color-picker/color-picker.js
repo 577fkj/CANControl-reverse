@@ -6,15 +6,15 @@ Component({
     },
     maskClosable: {
       type: Boolean,
-      value: true
+      value: !0
     },
     mask: {
       type: Boolean,
-      value: true
+      value: !0
     },
     show: {
       type: Boolean,
-      value: false
+      value: !1
     },
     title: {
       type: String,
@@ -104,7 +104,7 @@ Component({
     },
     close: function (t) {
       this.data.maskClosable && (this.setData({
-        show: false
+        show: !1
       }), this.triggerEvent("close"))
     },
     preventdefault: function () {},

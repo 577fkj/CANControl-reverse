@@ -3,7 +3,7 @@ var t = require("./typeof");
 function r() {
   module.exports = r = function () {
     return e
-  }, module.exports.__esModule = true, module.exports.default = module.exports;
+  }, module.exports.__esModule = !0, module.exports.default = module.exports;
   var e = {},
     n = Object.prototype,
     o = n.hasOwnProperty,
@@ -18,9 +18,9 @@ function r() {
   function h(t, r, e) {
     return Object.defineProperty(t, r, {
       value: e,
-      enumerable: true,
-      configurable: true,
-      writable: true
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
     }), t[r]
   }
   try {
@@ -170,7 +170,7 @@ function r() {
   function k(t) {
     this.tryEntries = [{
       tryLoc: "root"
-    }], t.forEach(O, this), this.reset(true)
+    }], t.forEach(O, this), this.reset(!0)
   }
 
   function G(t) {
@@ -182,8 +182,8 @@ function r() {
         var e = -1,
           n = function r() {
             for (; ++e < t.length;)
-              if (o.call(t, e)) return r.value = t[e], r.done = false, r;
-            return r.value = void 0, r.done = true, r
+              if (o.call(t, e)) return r.value = t[e], r.done = !1, r;
+            return r.value = void 0, r.done = !0, r
           };
         return n.next = n
       }
@@ -196,15 +196,15 @@ function r() {
   function N() {
     return {
       value: void 0,
-      done: true
+      done: !0
     }
   }
   return v.prototype = y, i(x, "constructor", {
     value: y,
-    configurable: true
+    configurable: !0
   }), i(y, "constructor", {
     value: v,
-    configurable: true
+    configurable: !0
   }), v.displayName = h(y, l, "GeneratorFunction"), e.isGeneratorFunction = function (t) {
     var r = "function" == typeof t && t.constructor;
     return !!r && (r === v || "GeneratorFunction" === (r.displayName || r.name))
@@ -234,18 +234,18 @@ function r() {
       function t() {
         for (; e.length;) {
           var n = e.pop();
-          if (n in r) return t.value = n, t.done = false, t
+          if (n in r) return t.value = n, t.done = !1, t
         }
-        return t.done = true, t
+        return t.done = !0, t
       }
   }, e.values = G, k.prototype = {
     constructor: k,
     reset: function (t) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = void 0, this.done = false, this.delegate = null, this.method = "next", this.arg = void 0, this.tryEntries.forEach(j), !t)
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = void 0, this.done = !1, this.delegate = null, this.method = "next", this.arg = void 0, this.tryEntries.forEach(j), !t)
         for (var r in this) "t" === r.charAt(0) && o.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = void 0)
     },
     stop: function () {
-      this.done = true;
+      this.done = !0;
       var t = this.tryEntries[0].completion;
       if ("throw" === t.type) throw t.arg;
       return this.rval
@@ -265,10 +265,10 @@ function r() {
           var c = o.call(i, "catchLoc"),
             u = o.call(i, "finallyLoc");
           if (c && u) {
-            if (this.prev < i.catchLoc) return e(i.catchLoc, true);
+            if (this.prev < i.catchLoc) return e(i.catchLoc, !0);
             if (this.prev < i.finallyLoc) return e(i.finallyLoc)
           } else if (c) {
-            if (this.prev < i.catchLoc) return e(i.catchLoc, true)
+            if (this.prev < i.catchLoc) return e(i.catchLoc, !0)
           } else {
             if (!u) throw new Error("try statement without catch or finally");
             if (this.prev < i.finallyLoc) return e(i.finallyLoc)
@@ -321,4 +321,4 @@ function r() {
     }
   }, e
 }
-module.exports = r, module.exports.__esModule = true, module.exports.default = module.exports;
+module.exports = r, module.exports.__esModule = !0, module.exports.default = module.exports;

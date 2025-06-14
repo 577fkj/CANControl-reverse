@@ -7,12 +7,6 @@
     "useAuthorizePage": true
   },
   "style": "v2",
-  "componentFramework": {
-    "allUsed": [
-      "exparser"
-    ],
-    "default": "exparser"
-  },
   "subPackages": [],
   "window": {
     "backgroundTextStyle": "light",

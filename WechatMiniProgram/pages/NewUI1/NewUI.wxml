@@ -76,7 +76,7 @@
             <image bindtap="{{CEV?'':'tibt'}}" mode="aspectFit" src="/img/ti.png" style="left:65%;top:400px;width:30%;height:120px;position:absolute;"></image>
             <view style="position:absolute;left:65%;top:476px;width:30%;">{{Ti}}</view>
         </view>
-        <view class="btnLayout" hidden="{{ShowM!=0&&(SCAN=='Increase'||SCAN=='Huawei'&&CVer>=5.36||SCAN=='INFY'||CEV==1)&&!UEN}}" style="height:120px;">
+        <view class="btnLayout" hidden="{{ShowM!=0&&(SCAN=='Increase'||Err==1||SCAN=='INFY'||CEV==1)&&!UEN}}" style="height:120px;">
             <view>
                 <image mode="scaleToFill" src="/img/sb.png" style="left:5%;top:520px;width:30%;height:120px;position:absolute;"></image>
                 <view bindtap="hqbt1" style="position:absolute;left:5%;top:550px;width:30%;font-size:17px;color:white;" wx:if="{{!CEV}}">{{UHQ+(UEN?'S':'秒')}}</view>
@@ -121,53 +121,7 @@
                 <view bindtap="sdbt1" style="position:absolute;left:65%;top:550px;width:30%;font-size:17px;color:white;">{{NSD}}</view>
             </view>
         </view>
-        <view class="Err" hidden="{{ShowM==0||SCAN!='Increase'||UEN}}" style="position:relative;top:-10px;height:120px;">
-            <view class="btnLayout" style="height:50px;">
-                <view style="width:2%;"></view>
-                <view style="width:15%;color:{{ST0&16?'#f90':'#888'}};">输入<view></view>过压</view>
-                <view style="width:15%;color:{{ST0&64?'#f90':'#888'}};">输出<view></view>过压</view>
-                <view style="width:15%;color:{{ST0==0?'#f90':'#888'}};">恒压<view></view>状态</view>
-                <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">过热<view></view>保护</view>
-                <view style="width:15%;color:{{ST0&8?'#f90':'#888'}};">风机<view></view>故障</view>
-                <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">模块<view></view>关机</view>
-                <view style="width:2%;"></view>
-            </view>
-            <view style="height:15px;"></view>
-            <view class="btnLayout" style="height:50px;">
-                <view style="width:2%;"></view>
-                <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-                <view style="width:15%;color:{{ST0&128?'#f90':'#888'}};">输出<view></view>欠压</view>
-                <view style="width:15%;color:{{ST0&4?'#f90':'#888'}};">恒流<view></view>状态</view>
-                <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">过流<view></view>保护</view>
-                <view style="width:15%;color:{{ST0&2?'#f90':'#888'}};">模块<view></view>故障</view>
-                <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">设置<view></view>关机</view>
-                <view style="width:2%;"></view>
-            </view>
-        </view>
-        <view class="Err" hidden="{{ShowM==0||SCAN!='INFY'||UEN}}" style="position:relative;top:-10px;height:120px;">
-            <view class="btnLayout" style="height:50px;">
-                <view style="width:2%;"></view>
-                <view style="width:15%;color:{{ST2&64?'#f90':'#888'}};">输入<view></view>过压</view>
-                <view style="width:15%;color:{{ST1&32?'#f90':'#888'}};">输出<view></view>过压</view>
-                <view style="width:15%;color:{{ST2&8?'#f90':'#888'}};">三相<view></view>缺相</view>
-                <view style="width:15%;color:{{ST1&16?'#f90':'#888'}};">过热<view></view>警告</view>
-                <view style="width:15%;color:{{ST1&8?'#f90':'#888'}};">风机<view></view>故障</view>
-                <view style="width:15%;color:{{ST1&1?'#f90':'#888'}};">模块<view></view>关机</view>
-                <view style="width:2%;"></view>
-            </view>
-            <view style="height:15px;"></view>
-            <view class="btnLayout" style="height:50px;">
-                <view style="width:2%;"></view>
-                <view style="width:15%;color:{{ST2&32?'#f90':'#888'}};">输入<view></view>欠压</view>
-                <view style="width:15%;color:{{ST0&1?'#f90':'#888'}};">输出<view></view>短路</view>
-                <view style="width:15%;color:{{ST2&1?'#f90':'#888'}};">功率<view></view>限制</view>
-                <view style="width:15%;color:{{ST1&4?'#f90':'#888'}};">模块<view></view>保护</view>
-                <view style="width:15%;color:{{ST1&2?'#f90':'#888'}};">模块<view></view>故障</view>
-                <view style="width:15%;color:{{ST0&32?'#f90':'#888'}};">放电<view></view>异常</view>
-                <view style="width:2%;"></view>
-            </view>
-        </view>
-        <view class="Err" style="position:relative;top:-10px;height:120px;" wx:if="{{ShowM==1&&UEN==0&&(SCAN=='Huawei'&&CVer>=5.36||CEV==1)}}">
+        <view class="Err" style="position:relative;top:-10px;height:120px;" wx:if="{{ShowM==1&&UEN==0&&Err==1}}">
             <view class="btnLayout" style="height:50px;color:#f00;">
                 <view style="width:2%;"></view>
                 <view style="width:15%;color:{{E1S==0?'#888':E1S==1?'#f00':'#f90'}};">{{E1A}}<view></view>{{E1B}}</view>
@@ -205,11 +159,32 @@
     </view>
     <view wx:elif="{{ODM==1}}">
         <view style="height:25px;"></view>
-        <view>
-            <view class="SetBox">
-                <button class="DisTIP" style="width:100%;text-align:center;">{{STR}}</button>
+        <view class="btnLayout" style="height:88px;font-size:15px;color:white;">
+            <view style="z-index:1;width:50%;">
+                <image mode="aspectFill" src="/img/vt.png" style="height:88px;width:100%;"></image>
+                <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OV}}V</view>
+                <view style="position:relative;top:-70px;text-align:right;width:85%;">{{SV}}V</view>
             </view>
-            <view style="height:5px;"></view>
+            <view style="z-index:1;width:50%;">
+                <image mode="aspectFill" src="/img/cu.png" style="height:88px;width:100%;"></image>
+                <view style="position:relative;top:-75px;font-size:30px;font-weight:900;">{{OA}}A</view>
+                <view style="position:relative;top:-70px;text-align:left;left:15%;width:85%;">{{SA}}A</view>
+            </view>
+        </view>
+        <view class="btnLayout" style="height:188px;">
+            <view bindtap="btbt1" style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:22px;width:56%;height:110px;">
+                <view style="position:relative;top:-30px;color:#fff8;width:100%;height:0px;">APP-{{APP}}</view>
+                <view style="height:151px;" wx:if="{{CEV==1}}">
+                    <view style="background-color:#0005;position:relative;left:0px;top:0px;height:110px;width:100%"></view>
+                    <image mode="aspectFit" src="/img/ev.png" style="left:0%;top:0px;width:100%;height:100%;position:absolute;"></image>
+                    <view bindtap="BTVIN" style="position:relative;left:-2px;top:-15px;color:rgb(0, 255, 255);width:100%;height:0px;font-size:12px;z-index:1;">{{VIN}}</view>
+                </view>
+                <view style="position:relative;top:-145px;color:#fff;width:100%;white-space:nowrap;height:0px;font-size:{{FSize}}px;">{{STR}}</view>
+                <view style="position:relative;top:{{CEV?'-25px':'-30px'}};color:#fff8;width:100%;">{{SCAN+'-'+CVer}}</view>
+            </view>
+        </view>
+        <view class="btnLayout" style="height:0px;">
+            <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:-166px;width:56%;height:110px;"></view>
         </view>
         <view>
             <view class="SetBox">
@@ -223,6 +198,10 @@
                     <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate}}"></view>
                 </view>
                 <view hidden="{{ShowBar!=4}}">
+                    <view class="btnLayout" wx:if="{{!ADD&&!UEN}}">
+                        <button class="DisTIP1">测试版固件</button>
+                        <button bindtap="BTUP9" class="DisINF1">{{TestV}}</button>
+                    </view>
                     <view class="btnLayout">
                         <button class="DisTIP1">{{UEN?'WIFI hotspot name':'WIFI热点名'}}</button>
                         <button bindtap="BTUP6" class="DisINF1">{{WID}}</button>
@@ -253,7 +232,7 @@
 <view wx:if="{{Panel==2&&!UPS}}">
     <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
-            <button bindtap="BTGPWD" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'SYS Password':'后台密码'}}</button>
+            <button bindtap="BTGPWD" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'SYS Password':GM==2?'重启蓝牙':'后台密码'}}</button>
             <button bindtap="BTRST" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Reset':'重置设置'}}</button>
             <button bindtap="BTBC" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Go Back':'返回上级'}}</button>
         </view>
@@ -278,7 +257,7 @@
                     <view style="position:absolute;left:57%;top:105px;font-size:15px;color:white;">{{SA}}A</view>
                     <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%;width:50%;height:88px;position:absolute;"></image>
                 </view>
-                <view class="btnLayout" wx:if="{{CVer>=5.41}}">
+                <view class="btnLayout" wx:if="{{CVer>=5.41&&SCAN=='Huawei'}}">
                     <button class="DisTIP1">{{UEN?'Input voltage correction':'输入电压校正'}}</button>
                     <button bindtap="BTIVD1" class="DisINF1">{{IVD}}</button>
                     <button bindtap="BTIVD2" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
@@ -299,7 +278,7 @@
                     <button bindtap="BTOVD1" class="DisINF1" style="width:25%;text-align:center;">{{OVD}}</button>
                     <button bindtap="BTOVDU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
-                <view style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">
+                <view style="display:{{SCAN=='ZTE4875'||SCAN=='ZTE3000'&&CVer>=5.45?'block':'none'}}">
                     <view class="btnLayout">
                         <button class="DisTIP" style="width:65%;">{{UEN?'Output voltage correction two':'输出电压校正二'}}</button>
                         <button bindtap="BTOVT3" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
@@ -492,6 +471,10 @@
                     <button class="DisTIP1">{{UEN?'Temp acceleration value':'温度加速值'}}</button>
                     <button bindtap="BTUFS" class="DisINF1">{{UFS}}</button>
                 </view>
+                <view class="btnLayout" wx:if="{{CVer>=5.45&&UEN==0}}">
+                    <button class="DisTIP1">{{UEN?'Wind speed control method':'风速控制方式'}}</button>
+                    <button bindtap="BTUFN" class="DisINF1">{{UFN?'反控':'正控'}}</button>
+                </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Output temperature':'输出温度'}}</button>
                     <button bindtap="BTUFS" class="DisINF1">{{OT}}</button>
@@ -504,6 +487,7 @@
                     <view class="tip2">　 Attachment: Full speed temperature gauge (dynamically calculated after modifying settings)</view>
                 </view>
                 <view wx:if="{{!UEN}}">
+                    <view class="tip2" style="color:#0f0" wx:if="{{CVer>=5.45}}">　　"风速控制方式"是指控制板通过PWM控制风速的方式,本产品标配风机小板默认是采样反控,此控制优点是就算遇到极限情况死机后会保持风机最高转速,避免热失控炸机,其它品牌风机小板设计采用是正控,此控制模式如遇到控制板死机情况下会关闭风机,有可能因此导致炸机,此设置需要风机小板硬件设计配合使用,如采样原配风机小板况请勿修改。</view>
                     <view class="tip2" wx:if="{{CVer>=5.31}}">　　风速最大值为255,中兴电源部分超过230会因为供电不足导致屏幕重启,如发现重启请改小此值。</view>
                     <view class="tip2">　　如添加了风机控制小板后风速可由此设置控制,风速设置有三个值。(风速最大值255)</view>
                     <view class="tip2">　　1.初始风速值,此值决定了初始最低风速。(默认50)</view>
@@ -1060,7 +1044,7 @@
                 </view>
                 <button bindtap="BTUP" class="DisTIP" style="width:65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
                 <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate!=CVer?'Start Upgrade':'No Available'}}</button>
-                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate!=CVer?'升级 '+UPDate:'已最新版'}}</button>
+                <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate!=CVer?UPDate+'(正式版)':'已最新版'}}</button>
                 <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate}}"></view>
             </view>
             <view hidden="{{ShowBar!=4}}">
@@ -1117,6 +1101,12 @@
                     </view>
                     <view style="height:10px;"></view>
                     <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.44||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.44 APP:1.29 2025-06-01</view>
+                        <view class="tip2" style="color:#0f0;">　　加入中兴4875有锁模块支持(之前版本遇到有锁模块会在开机6分钟左右停止输出),加入中兴4875故障显示功能,修复部分华为模块误报风机异常问题,修复部分华为模块电压上升缓慢问题.</view>
+                    </view>
                     <view wx:if="{{CVer<5.43||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
@@ -1540,12 +1530,13 @@
             </view>
             <view>　　3.Frequency band: 2.4G</view>
         </view>
-        <view wx:if="{{!UEN}}">　　任意一部可联网手机打开热点并打开网络后按以下说明设置,部分手机如无频段设置(无法使用2.4G频段)可能无法连接,可换一部手机设置,如IPhone手机等不方便修改热点名的也可点击下面热点名和密码可做修改。<view style="height:10px"></view>
+        <view wx:if="{{!UEN}}">　　任意一部可联网手机打开热点并打开网络后按以下说明设置,部分手机如无频段设置(无法使用2.4G频段)可能无法连接,可换一部手机设置,如IPhone手机等不方便修改热点名的也可点击下面热点名和密码可做修改。<view></view>　　iPhone手机用户需要打开<view style="height:10px"></view>
             <view bindtap="BTUP6">　　 1.设置热点名称为:<text style="color:#0f0;">{{WID}}</text>
             </view>
             <view bindtap="BTUP7">　　 2.设置热点密码为:<text style="color:#0f0;">{{WPD}}</text>
             </view>
-            <view>　　 3.设置热点频段为: 2.4G</view>
+            <view>　　 3.设置热点频段为: 2.4G频段<text style="color:#f00;">(iPhone用户打开最大兼容性)</text>
+            </view>
         </view>
     </view>
     <view style="line-height:1.8;color:#8ef;" wx:if="{{UPS==1}}">

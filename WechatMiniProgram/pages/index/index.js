@@ -1,11 +1,11 @@
 var t, e = require("../../@babel/runtime/helpers/createForOfIteratorHelper"),
   a = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   i = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  n = (t = require("../../8E6659B59E166AAFE80031B2CF74AA85.js")) && t.__esModule ? t : {
+  n = (t = require("../../4E32DEC39E166AAF2854B6C471091D62.js")) && t.__esModule ? t : {
     default: t
   },
-  r = require("../../02BB97E59E166AAF64DDFFE25164AA85.js");
-var s, o = require("../../C2110F759E166AAFA47767728C64AA85.js"),
+  r = require("../../1D3746269E166AAF7B512E21F3E81D62.js");
+var s, o = require("../../E0B6CAE39E166AAF86D0A2E4CEE81D62.js"),
   c = 0,
   u = 0,
   h = 0,
@@ -27,7 +27,7 @@ function v() {
           }
           wx.navigateTo({
             url: "../NewUI1/NewUI?Test=1&GM=" + h
-          }), wx.hideLoading(), t.next = 16;
+          }), wx.hideLoading(), t.next = 21;
           break;
         case 7:
           if ("CEV_虚拟测试设备" != e) {
@@ -36,12 +36,21 @@ function v() {
           }
           wx.navigateTo({
             url: "../NewUI1/NewUI?CEV=1&Test=1&GM=" + h
-          }), wx.hideLoading(), t.next = 16;
+          }), wx.hideLoading(), t.next = 21;
           break;
         case 12:
-          return t.next = 14, o.easyConnect(e, (function () {}));
-        case 14:
-          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", false), wx.navigateTo({
+          if ("ODM_虚拟测试设备" != e) {
+            t.next = 17;
+            break
+          }
+          wx.navigateTo({
+            url: "../NewUI1/NewUI?CEV=1&Test=1&ODM=1"
+          }), wx.hideLoading(), t.next = 21;
+          break;
+        case 17:
+          return t.next = 19, o.easyConnect(e, (function () {}));
+        case 19:
+          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", !1), wx.navigateTo({
             url: "../device/device?Ver=3.47&GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : e.startsWith("CAN-") ? i.data.NewUI ? (wx.navigateTo({
             url: "../device2/device?Ver=3.47&GM=" + (h ? 1 : 0)
@@ -53,8 +62,8 @@ function v() {
             url: "../NewUI1/NewUI?CEV=1&ODM=1&GM=" + h
           }), wx.hideLoading()) : e.startsWith("CEV_") && (wx.navigateTo({
             url: "../NewUI1/NewUI?CEV=1&GM=" + h
-          }), wx.hideLoading()) : u < 5 ? (u += 1, l(e, i), console.log("失败！正在重新连接" + u)) : (wx.hideLoading(), f("连接失败"), i.startDiscovery());
-        case 16:
+          }), wx.hideLoading()) : u < 5 ? (u += 1, l(e, i), console.log("失败！正在重新连接" + u)) : (wx.hideLoading(), D("连接失败"), i.startDiscovery());
+        case 21:
         case "end":
           return t.stop()
       }
@@ -62,7 +71,7 @@ function v() {
   })))).apply(this, arguments)
 }
 
-function f(t) {
+function D(t) {
   wx.showToast({
     title: t,
     icon: "none",
@@ -70,7 +79,7 @@ function f(t) {
   })
 }
 
-function D(t) {
+function f(t) {
   return wx.getStorageSync(t)
 }
 
@@ -88,10 +97,10 @@ Page({
   },
   onShareAppMessage: function () {},
   onLoad: function (t) {
-    h = Number(t.GM) || 0, w = D("DEBUG");
+    w = f("DEBUG");
     var e = wx.getAccountInfoSync();
-    "trial" == e.miniProgram.envVersion && (h = 1), "develop" == e.miniProgram.envVersion && (h = 2);
-    var a = D("UI");
+    h = "trial" == e.miniProgram.envVersion ? 1 : "develop" == e.miniProgram.envVersion ? 2 : 0;
+    var a = f("UI");
     this.setData({
       NewUI: 0 == a ? 0 : a
     }), this.setData({
@@ -154,11 +163,11 @@ Page({
               title: "设备连接中",
               icon: "loading",
               duration: 46e5,
-              mask: true
+              mask: !0
             }), l(c, n)) : (i = "未知设备", r = "不支持此蓝牙设备", wx.showModal({
               title: i,
               content: r,
-              showCancel: false
+              showCancel: !1
             }));
           case 1:
           case "end":
@@ -197,6 +206,9 @@ Page({
               name: n,
               rssi: c
             }), n = "CEV_虚拟测试设备", c = "-60", s.data.deviceListData.push({
+              name: n,
+              rssi: c
+            }), n = "ODM_虚拟测试设备", c = "-60", s.data.deviceListData.push({
               name: n,
               rssi: c
             })), i.ok ? (wx.showToast({
