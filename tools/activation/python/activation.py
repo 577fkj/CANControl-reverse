@@ -4,7 +4,7 @@ import sys
 import logging
 import argparse
 import serial
-from enum import IntFlag
+from enum import IntEnum
 
 from activation_code import generate_activation_code, Channel
 
@@ -18,24 +18,44 @@ def setup_logger():
     )
 
 
-class ProtocolType(IntFlag):
+class ProtocolType(IntEnum):
     PROTOCOL_HUAWEI     = 0x1
     PROTOCOL_INCREASE   = 0x2
     PROTOCOL_ZTE3000    = 0x4
     PROTOCOL_INFY       = 0x8
     PROTOCOL_EV_STATION = 0xC
+    PROTOCOL_ZEEHO      = 0xD
     PROTOCOL_EV_CHARGER = 0xE
     PROTOCOL_EPS6020    = 0x10
     PROTOCOL_ZTE4875    = 0x20
     PROTOCOL_SER10010K  = 0x40
     PROTOCOL_BH10M100   = 0x41
     PROTOCOL_MC1503N5R  = 0x42
+    PROTOCOL_R24_2200   = 0x43
 
-    @classmethod
-    def list_names(cls):
-        """Return all protocol names"""
-        return [name[len('PROTOCOL_'):] for name, val in cls.__dict__.items()
-                if not name.startswith('_') and name != 'list_names']
+    @staticmethod
+    def list_protocols():
+        return [p.name.split('_', 1)[1].upper() for p in ProtocolType]
+
+    @staticmethod
+    def get_all_support():
+        flags = 0
+        for protocol in ProtocolType:
+            flags |= protocol
+        return flags
+
+    @staticmethod
+    def decode_protocol(protocol):
+        protocol_map = { p.value: p.name.split('_', 1)[1].lower() for p in ProtocolType }
+        return protocol_map.get(protocol.value, "unknown")
+    
+    @staticmethod
+    def decode_protocols(protocols):
+        decoded_protocols = []
+        for protocol in ProtocolType:
+            if protocol & protocols:
+                decoded_protocols.append(ProtocolType.decode_protocol(protocol))
+        return decoded_protocols
 
 
 def parse_args():
@@ -50,8 +70,8 @@ def parse_args():
     )
     parser.add_argument(
         '-p', '--protocol',
-        choices=ProtocolType.list_names(),
-        default=ProtocolType.PROTOCOL_HUAWEI.name,
+        choices=ProtocolType.list_protocols(),
+        default=ProtocolType.decode_protocol(ProtocolType.PROTOCOL_HUAWEI),
         type=str.upper,
         help="Protocol type, one of: %(choices)s"
     )

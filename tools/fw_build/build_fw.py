@@ -3,7 +3,7 @@ import collections
 import binascii
 from nvs import nvs_open, write_entry, check_size, Page, VERSION1_PRINT, VERSION2_PRINT
 import nvs_decode
-from enum import IntFlag
+from enum import IntEnum
 import os
 import shutil
 
@@ -170,59 +170,32 @@ def build_fw(bootloader_path, partition_table_path, app_path, spiffs_path, nvs_p
         f.write(flash)
     print("Flash image created successfully!")
 
-class ProtocolType(IntFlag):
+class ProtocolType(IntEnum):
     PROTOCOL_HUAWEI     = 0x1
     PROTOCOL_INCREASE   = 0x2
     PROTOCOL_ZTE3000    = 0x4
     PROTOCOL_INFY       = 0x8
     PROTOCOL_EV_STATION = 0xC
+    PROTOCOL_ZEEHO      = 0xD
     PROTOCOL_EV_CHARGER = 0xE
     PROTOCOL_EPS6020    = 0x10
     PROTOCOL_ZTE4875    = 0x20
     PROTOCOL_SER10010K  = 0x40
     PROTOCOL_BH10M100   = 0x41
     PROTOCOL_MC1503N5R  = 0x42
+    PROTOCOL_R24_2200   = 0x43
 
     @staticmethod
     def get_all_support():
-        return (ProtocolType.PROTOCOL_HUAWEI | 
-                ProtocolType.PROTOCOL_INCREASE | 
-                ProtocolType.PROTOCOL_ZTE3000 | 
-                ProtocolType.PROTOCOL_INFY | 
-                ProtocolType.PROTOCOL_EV_STATION | 
-                ProtocolType.PROTOCOL_EV_CHARGER | 
-                ProtocolType.PROTOCOL_EPS6020 | 
-                ProtocolType.PROTOCOL_ZTE4875 | 
-                ProtocolType.PROTOCOL_SER10010K |
-                ProtocolType.PROTOCOL_BH10M100 |
-                ProtocolType.PROTOCOL_MC1503N5R)
+        flags = 0
+        for protocol in ProtocolType:
+            flags |= protocol
+        return flags
 
     @staticmethod
     def decode_protocol(protocol):
-        if protocol == ProtocolType.PROTOCOL_HUAWEI:
-            return "HUAWEI"
-        elif protocol == ProtocolType.PROTOCOL_INCREASE:
-            return "INCREASE"
-        elif protocol == ProtocolType.PROTOCOL_ZTE3000:
-            return "ZTE3000"
-        elif protocol == ProtocolType.PROTOCOL_INFY:
-            return "INFY"
-        elif protocol == ProtocolType.PROTOCOL_EV_STATION:
-            return "EV_STATION"
-        elif protocol == ProtocolType.PROTOCOL_EV_CHARGER:
-            return "EV_CHARGER"
-        elif protocol == ProtocolType.PROTOCOL_EPS6020:
-            return "EPS6020"
-        elif protocol == ProtocolType.PROTOCOL_ZTE4875:
-            return "ZTE4875"
-        elif protocol == ProtocolType.PROTOCOL_SER10010K:
-            return "SER10010K"
-        elif protocol == ProtocolType.PROTOCOL_BH10M100:
-            return "BH10M100"
-        elif protocol == ProtocolType.PROTOCOL_MC1503N5R:
-            return "MC1503N5R"
-        else:
-            return "UNKNOWN"
+        protocol_map = { p.value: p.name.split('_', 1)[1].lower() for p in ProtocolType }
+        return protocol_map.get(protocol.value, "unknown")
     
     @staticmethod
     def decode_protocols(protocols):
