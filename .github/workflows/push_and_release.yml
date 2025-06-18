@@ -2,8 +2,8 @@ name: Update Firmware
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天 00:00 UTC 触发，可以根据需要调整 cron 表达式
-  workflow_dispatch:  # 手动触发
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -83,7 +83,7 @@ jobs:
     - name: Get timestamp
       id: timestamp
       if: steps.check_changes.outputs.changes_detected == 'true'
-      run: echo "timestamp=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      run: echo "timestamp=$(date +'%Y-%m-%d')-$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
   
     - name: Create GitHub release
       if: steps.check_changes.outputs.changes_detected == 'true'
@@ -91,6 +91,6 @@ jobs:
       with:
           tag_name: CANControl-${{ steps.timestamp.outputs.timestamp }}
           files: ${{ steps.get_changed_files.outputs.filesn }}
-          body_path: release_notes.md  # 使用包含 MD5 校验和的文件作为 release 说明
+          body_path: release_notes.md
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -56,13 +56,21 @@ def get_version(data: bytes) -> str:
     version = versions[0]
     return f"{version:.2f}"
 
-def download(count: int, file: str) -> bytes:
+def download(count: int, file: str, retry: int = 3) -> bytes:
     if not file.endswith('.bin'):
         file += '.bin'  
     if count == -1:
         count = ''
     url = base_url.format(count, file)
-    r = requests.get(url)
+    try:
+        r = requests.get(url)
+    except Exception as e:
+        print(f'Error downloading {file} (count={count}): {e}')
+        if retry > 0:
+            print(f'Retrying... ({retry} retries left)')
+            return download(count, file, retry - 1)
+        else:
+            raise e
     if r.status_code != 200:
         print(f'Error({count}): {r.status_code}')
         return None
