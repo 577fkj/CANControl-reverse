@@ -4,10 +4,13 @@
 #@toolbar
 
 from ghidra.program.model.address import Address
+from ghidra.program.model.symbol import SourceType, Namespace
 
 assert_func = "__assert_func"
 set_command = ["l32r", "mov", "movi"]
 function_name_register = 'a12'
+
+process_function_name = ["FUN_"]
 
 def find_assert_func():
     """
@@ -40,11 +43,17 @@ def parse_assert_parameters(call_addr):
         print("Cannot find function containing address: " + str(call_addr))
         return
     
-    if not func.getName().startswith("FUN_"):
+    process = False
+    for name in process_function_name:
+        if func.getName().startswith(name):
+            process = True
+            break
+    
+    if len(process_function_name) == 0:
+        process = True
+    
+    if not process:
         return
-
-    # if "::" not in func.getName():
-    #     return
 
     # Look for the instruction before the call (which stores parameters in registers)
     prev_inst = getInstructionBefore(call_addr)
@@ -54,7 +63,6 @@ def parse_assert_parameters(call_addr):
         return
 
     # Check the register values of a10, a11, a12 to get the parameters
-    # registers = ['a10', 'a11', 'a12']
     reg_value = get_register_value_from_instruction_chain(prev_inst, function_name_register)
     if reg_value:
         # Extract the address where the function name is stored
@@ -96,7 +104,7 @@ def read_c_string(address):
 
 def get_register_value_from_instruction_chain(inst, register):
     """
-    This function retrieves the address stored in a specified register (a10, a11, a12) by backtracking the instructions.
+    This function retrieves the address stored in a specified register by backtracking the instructions.
     """
     # Initialize the register_value to None
     register_value = None
@@ -115,61 +123,90 @@ def get_register_value_from_instruction_chain(inst, register):
         return register_value[0]  # Return the Address object
     return None
 
+def get_or_create_namespace(full_namespace):
+    """
+    Get or create a namespace hierarchy from a "::" separated string
+    """
+    symbol_table = currentProgram.getSymbolTable()
+    global_namespace = currentProgram.getGlobalNamespace()
+    
+    # Start from global namespace
+    current_namespace = global_namespace
+    
+    # Split the namespace path
+    parts = full_namespace.split("::")
+    
+    for part in parts:
+        # Skip empty parts (e.g., leading/trailing separators)
+        if not part:
+            continue
+            
+        # Check if namespace already exists
+        namespace = None
+        for sym in symbol_table.getSymbols(part, current_namespace):
+            if sym.getSymbolType().isNamespace():
+                namespace = sym.getObject()
+                break
+        
+        # Create namespace if it doesn't exist
+        if namespace is None:
+            namespace = symbol_table.createNameSpace(current_namespace, part, SourceType.USER_DEFINED)
+        
+        current_namespace = namespace
+    
+    return current_namespace
 
 def rename_function(func, new_name):
     """
-    Rename the function with the new name extracted from the parameters.
+    Rename the function and set its namespace based on the class name.
     """
-
     is_cpp_method = "(" in new_name
     if is_cpp_method:
-        # void NimBLEAttValue::deepCopy(const NimBLEAttValue&)
-        # int __cxa_guard_acquire(__cxxabiv1::__guard*)
         is_static = False
-        start, params = new_name.split("(")
+        start, params = new_name.split("(", 1)
         
         sp = start.split(" ")
         if sp[0] == "static":
             is_static = True
             sp = sp[1:]
         
-        if len(sp) == 2:
+        # Handle return type and function name
+        if len(sp) > 1:
             return_type = sp[0]
-            func_name = sp[1]
+            func_name = " ".join(sp[1:])
         else:
-            return_type = sp[0]
-            func_name = sp[0]
+            return_type = ""
+            func_name = sp[0] if sp else "unknown"
 
         if "::" in func_name:
-            class_name, func_name = func_name.split("::")
+            namespace_path = func_name[:func_name.rindex("::")]
+            short_name = func_name[func_name.rindex("::") + 2:]
         else:
-            class_name = ""
+            namespace_path = None
+            short_name = func_name
 
-        params = params.replace(")", "")
-
-        if (class_name):
-            new_name = class_name + "::" + func_name
-        else:
-            new_name = func_name
-
-        full_name = return_type + " " + new_name + "(" + params + ")"
-        if is_static:
-            full_name = "static " + full_name
-
-        comment = "\n"
-        comment += "Class: " + class_name + "\n"
-        comment += "Function: " + func_name + "\n"
-        comment += "Static: " + str(is_static) + "\n"
-        comment += "Parameters: " + params + "\n"
-        comment += "Return type: " + return_type + "\n"
-        comment += "Full name: " + full_name + "\n"
-        print(comment)
+        comment = "Class: {}\n".format(namespace_path if namespace_path else "Global")
+        comment += "Function: {}\n".format(short_name)
+        comment += "Static: {}\n".format(str(is_static))
+        comment += "Parameters: {}\n".format(params.rstrip(")"))
+        comment += "Return type: {}\n".format(return_type)
+        comment += "Full name: {}\n".format(new_name)
         func.setComment(comment)
-    try:
-        func.setName(new_name, ghidra.program.model.symbol.SourceType.USER_DEFINED)
-        print("Function at " + str(func.getEntryPoint()) + " renamed to " + new_name)
-    except Exception as e:
-        print("Renaming failed: " + str(e))
+
+        try:
+            func.setName(short_name, SourceType.USER_DEFINED)
+            
+            if namespace_path:
+                namespace = get_or_create_namespace(namespace_path)
+                func.setParentNamespace(namespace)
+            
+            print("Function at {} renamed to {} in namespace {}".format(
+                func.getEntryPoint(), short_name, namespace_path if namespace_path else "Global"))
+                
+        except Exception as e:
+            print("Renaming failed: " + str(e))
+            import traceback
+            traceback.print_exc()
 
 def main():
     assert_func = find_assert_func()

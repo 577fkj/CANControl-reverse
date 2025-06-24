@@ -209,7 +209,7 @@ class ProtocolType(IntEnum):
 nvs_data = [
     # key,type,encoding,value
     ("SYS", "namespace", "u8", 0),
-    ("7a", "data", "string", "45c176"), # Activation code
+    ("SPWD", "data", "string", "1b9ff8"), # Activation code
     ("48", "data", "string", "2024-10-01"), # Activation date
     ("53", "data", "i8", ProtocolType.PROTOCOL_ZTE4875), # Current Protocol
     ("f1", "data", "i8", ProtocolType.get_all_support()), # Support Protocols
@@ -224,7 +224,7 @@ build_fw(
     bootloader_path="files/bootloader.bin",
     partition_table_path="files/partition_table.bin",
     nvs_path="build/nvs.bin",
-    app_path="../../fw/Test2/72_Test2_5.44_68052ad7f2321c65c4a69654b6104296.bin",
+    app_path="../../fw/Test0/Test0_5.24_ef6fc2ac5fcf51ec3e1717d0d8804d0c.bin",
     spiffs_path="files/spiffs.bin",
     output_path="build/flash_image.bin"
 )

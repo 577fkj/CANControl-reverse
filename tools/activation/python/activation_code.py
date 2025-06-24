@@ -15,8 +15,8 @@ class Channel(Enum):
 
 CODE_CHARS = "0123456789abcdef"
 KEYS = {
-    Channel.U: (0x12f5bd2,),
-    Channel.S: (0x12a403ac3,),
+    Channel.U: (0x12f5bd2,0x0),
+    Channel.S: (0x12a403ac3,0x0),
     Channel.P: (0x263, 0x0),
     Channel.G: (0x28f, 0x0),
     Channel.S1: (0x2ac, 0x0),
