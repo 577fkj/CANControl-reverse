@@ -83,7 +83,7 @@ jobs:
     - name: Get timestamp
       id: timestamp
       if: steps.check_changes.outputs.changes_detected == 'true'
-      run: echo "timestamp=$(date +'%Y-%m-%d')-$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
+      run: echo "timestamp=$(date +'%Y-%m-%d')-$(date +'%H_%M_%S')" >> $GITHUB_OUTPUT
   
     - name: Create GitHub release
       if: steps.check_changes.outputs.changes_detected == 'true'
