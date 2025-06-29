@@ -2602,6 +2602,11 @@
             "version": "5.45",
             "md5": "de79c6f2b7eb49c50c5e0acb4d82e6d8",
             "size": 1592688
+        },
+        {
+            "version": "5.45",
+            "md5": "b0b459a3c2efa497c9e032f71f558802",
+            "size": 1592864
         }
     ]
 }
