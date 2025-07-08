@@ -565,6 +565,12 @@
             "version": "5.44",
             "md5": "3f473f284d2d4de4c02d7f3b20716e9c",
             "size": 1591488
+        },
+        {
+            "count": 63,
+            "version": "5.45",
+            "md5": "ffafef6b413b1fd699594b33f49264fc",
+            "size": 1594112
         }
     ],
     "NewTest": [
