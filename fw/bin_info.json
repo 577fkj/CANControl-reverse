@@ -2713,6 +2713,11 @@
             "version": "5.46",
             "md5": "e85d3ed7cc05f7d718bdc15ebf5cc654",
             "size": 1594672
+        },
+        {
+            "version": "5.47",
+            "md5": "fbc2eb0f6907e152ece60d9cdd754e59",
+            "size": 1594880
         }
     ]
 }
