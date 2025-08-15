@@ -3064,6 +3064,11 @@
             "version": "5.48",
             "md5": "f9dc538d0ca50957f07257cce193ee1a",
             "size": 1600528
+        },
+        {
+            "version": "5.48",
+            "md5": "73d7ac68ec3debe4df35aed6c72812ce",
+            "size": 1600960
         }
     ]
 }
