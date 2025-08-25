@@ -1,15 +1,15 @@
 var t = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   e = require("../../@babel/runtime/helpers/asyncToGenerator");
 require("../../@babel/runtime/helpers/Arrayincludes");
-i(require("../../4E32DEC39E166AAF2854B6C471091D62.js"));
-var a = i(require("../../578207C49E166AAF31E46FC305191D62.js"));
+i(require("../../4C9E6F719E166AAF2AF807768F6456D5.js"));
+var a = i(require("../../D309EC519E166AAFB56F84566E7456D5.js"));
 
 function i(t) {
   return t && t.__esModule ? t : {
     default: t
   }
 }
-var s = require("../../E0B6CAE39E166AAF86D0A2E4CEE81D62.js"),
+var s = require("../../6AF67F959E166AAF0C901792E56456D5.js"),
   n = "5.13",
   r = 1,
   l = null,
@@ -99,8 +99,8 @@ var s = require("../../E0B6CAE39E166AAF86D0A2E4CEE81D62.js"),
 
 function yt(t, e) {
   wx.createSelectorQuery().select("#myCanvas").fields({
-    node: !0,
-    size: !0
+    node: true,
+    size: true
   }).exec((function (e) {
     var a = e[0].node,
       i = a.getContext("2d");
@@ -128,14 +128,14 @@ var Et = [],
   Kt = 0;
 
 function Bt(t) {
-  s.easySendData(Et[Kt], !1), Ut("发送进度:" + (Kt / Et.length * 100).toFixed(2) + "%"), console.log("ID=" + Kt + "  Str=" + Et[Kt]), Kt++
+  s.easySendData(Et[Kt], false), Ut("发送进度:" + (Kt / Et.length * 100).toFixed(2) + "%"), console.log("ID=" + Kt + "  Str=" + Et[Kt]), Kt++
 }
 
 function kt(t) {
   for (var e = function (e) {
       wx.createSelectorQuery().select(t[e][0]).fields({
-        node: !0,
-        size: !0
+        node: true,
+        size: true
       }).exec((function (a) {
         var i = a[0].node,
           s = i.getContext("2d"),
@@ -208,7 +208,7 @@ Page({
         var e = t.data;
         if (e.match(/(DataStart=[^\{]+)\{(.+)\}(DataEnd)$/)) wx.showModal({
           title: "是否发送剪切板中的设置代码",
-          editable: !1,
+          editable: false,
           placeholderText: "",
           success: function (t) {
             t.confirm && function (t) {
@@ -224,7 +224,7 @@ Page({
         });
         else
           for (var a = e.split("\n"), i = 0; i < a.length; i++)
-            if (a[i].startsWith("SetMSG=")) s.easySendData(a[i] + "\n", !0), Ut("信息已发送");
+            if (a[i].startsWith("SetMSG=")) s.easySendData(a[i] + "\n", true), Ut("信息已发送");
             else if (a[i].startsWith("SetLOGO=")) {
           if (a[i].match(/SetLOGO=(.+)$/), "" != (Lt = RegExp.$1)) {
             $t("SetLOGO=S");
@@ -236,7 +236,7 @@ Page({
     }), this.data.CMD.match(/^([^=]+)=(.+)/);
     var e = RegExp.$1,
       i = RegExp.$2;
-    if (3 == this.data.ShowPan) "SetMSG" == e ? (s.easySendData(t + "\n", !0), Yt("设置已发送,重启生效!")) : (pt = this.data.CMD.toLowerCase(), jt(E, pt), $t("CheckUPWD=" + pt));
+    if (3 == this.data.ShowPan) "SetMSG" == e ? (s.easySendData(t + "\n", true), Yt("设置已发送,重启生效!")) : (pt = this.data.CMD.toLowerCase(), jt(E, pt), $t("CheckUPWD=" + pt));
     else if (4 == this.data.ShowPan) {
       if ("预览" == this.data.STX) yt(this.data.CMD), this.setData({
         STX: "发送"
@@ -282,7 +282,7 @@ Page({
           ShowPan: 4,
           CMD: "1,27,30," + i.substring(0, 2) + "|1,57,30," + i.substring(2)
         }), void yt(this.data.CMD);
-        t = t.replace("0104", ""), s.easySendData(t + "\n", !0), t = "Restart", Yt("设置已发送,设备正在重启!"), wx.navigateBack({
+        t = t.replace("0104", ""), s.easySendData(t + "\n", true), t = "Restart", Yt("设置已发送,设备正在重启!"), wx.navigateBack({
           delta: 0
         })
       } else {
@@ -296,7 +296,7 @@ Page({
           for (var e = 0, a = "CAN-", i = 0; i < t.length; i++)
             if (a += t[i], t[i].match(/[\u4e00-\u9fa5]/g) ? e += 3 : e++, e >= 24) return a;
           return a
-        }(i) + "\n", !0), $t("GetINF"), Ut("名称已修改 重启生效");
+        }(i) + "\n", true), $t("GetINF"), Ut("名称已修改 重启生效");
         else if ("设置蓝牙密码" == e) t = "SetUPWD=" + i.toLowerCase(), jt(E, ""), Ut("密码已修改 重启生效");
         else if ("充满延时关机" == e) i >= 0 && i < 1200 && (t = "SetUSD=" + i);
         else if ("设置功率限制" == e) i > At || i < 100 ? Ut("超出设置范围") : t = "SetUMW=" + i;
@@ -503,8 +503,8 @@ Page({
   },
   onLoad: function (t) {
     Pt = 1 == t.GM ? 1 : _t("GM"), Vt = 0, wx.createSelectorQuery().select("#canvas").fields({
-      node: !0,
-      size: !0
+      node: true,
+      size: true
     }).exec((function (t) {
       var e = t[0].node;
       l = e.getContext("2d");
@@ -666,7 +666,7 @@ function Ht() {
     return t().wrap((function (t) {
       for (;;) switch (t.prev = t.next) {
         case 0:
-          return t.next = 2, s.easySendData(a + "\n", !1);
+          return t.next = 2, s.easySendData(a + "\n", false);
         case 2:
         case "end":
           return t.stop()
@@ -683,7 +683,7 @@ function Yt(t) {
   wx.showModal({
     title: "MSG",
     content: t,
-    showCancel: !1
+    showCancel: false
   })
 }
 

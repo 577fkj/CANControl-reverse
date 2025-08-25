@@ -1,5 +1,5 @@
 <image class="background" mode="aspectFill" src="{{BGP}}"></image>
-<view hidden="{{BGI==0}}" style="position:fixed;width:100%;height:100%;background-color:{{BGC}};"></view>
+<view hidden="{{BGP=='/img/bc1.gif'}}" style="position:fixed;width:100%;height:100%;background-color:{{BGC}};"></view>
 <view id="page" wx:if="{{Panel==1&&!UPS}}">
     <view wx:if="{{ODM==0||GM==2}}">
         <view style="height:10px"></view>
@@ -40,6 +40,11 @@
                 <image mode="aspectFit" src="/img/set.png" style="width:25px;height:25px;"></image>
             </view>
             <image bindtap="SetSM" mode="aspectFit" src="/img/vw.png" style="left:5%;top:240px;width:25px;height:25px;position:absolute;"></image>
+            <view hidden="{{!MUS}}" style="left:4.5%;top:120px;width:28px;height:88px;position:absolute;border-style:solid;border-width:2px;border-radius:15px;border-color:{{MUE?'#fa0':'#5ab'}};">
+                <image bindtap="BTUJY5" class="{{NFS?'rotate-img':''}}" mode="aspectFit" src="/img/1.png" style="width:28px;height:28px;"></image>
+                <view style="top:-2px;position:relative;height:20px;font-size:13px;color:#fff;">{{NFS}}</view>
+                <view bind:tap="BTUJY1" style="top:0px;height:36px ;color:#fff;font-size:{{UEN?8:12}}px;background-color:{{MUE?'#fa0':'#5ab'}};border-width:2px;border-radius:0px 0px 12px 12px;border-color:{{MUE?'#fa0':'#5ab'}};position:relative;margin-top:0px;">{{MUE?UEN?'Quiet  Mode':'静音模式':UEN?'Normal  Mode':'标准模式'}}</view>
+            </view>
         </view>
         <view class="btnLayout" style="height:0px;">
             <view style="border-style:solid;border-width:6px;border-radius:15px;border-color:#aaa;position:relative;top:-166px;width:56%;height:110px;"></view>
@@ -419,7 +424,7 @@
                     <view class="{{ShowBar==5?'open':'close'}}"></view>
                 </view>
                 <button bindtap="BTUMT" class="DisTIP" style="width:65%;">{{UEN?'Set Over Temp Limit':'设置超温限制'}}</button>
-                <button bindtap="BTUMT" class="DisINF" style="width:35%;">{{UMT+'℃'+TMW+'W'}}</button>
+                <button bindtap="BTUMT" class="DisINF" style="width:35%;">{{UMT+'℃'+(CVer<5.46?TMW+'W':'')}}</button>
             </view>
             <view hidden="{{ShowBar!=5}}">
                 <view class="btnLayout">
@@ -427,19 +432,21 @@
                     <button bindtap="BTTMC" class="DisINF1">{{UMT}}</button>
                 </view>
                 <view class="btnLayout">
-                    <button class="DisTIP1">{{UEN?'Power Limit Value':'功率限制值'}}</button>
+                    <button class="DisTIP1">{{CVer<5.46?UEN?'Power Limit Value':'功率限制值':UEN?'Minimum current value':'电流最低值'}}</button>
                     <button bindtap="BTTMW" class="DisINF1">{{TMW}}</button>
                 </view>
                 <view class="btnLayout">
-                    <button class="DisTIP1">{{UEN?'Over Temp Exit Value':'超温退出值'}}</button>
+                    <button class="DisTIP1">{{CVer<5.46?UEN?'Over Temp Exit Value':'超温退出值':UEN?'Amplitude of current variation':'电流加减幅度'}}</button>
                     <button bindtap="BTTMC1" class="DisINF1">{{OMT}}</button>
                 </view>
                 <view class="btnLayout" hidden="{{CVer<5.35}}">
                     <button class="DisTIP1">{{UEN?'Over Temp Exit Value':'超温关机保护值'}}</button>
                     <button bindtap="BTOST" class="DisINF1">{{OST}}</button>
                 </view>
-                <view class="tip2" wx:if="{{UEN}}">　Overtemperature limit refers to the automatic limitation of output power to the specified power value after the temperature reaches the "overtemperature entry value", with a default of 75 degrees and 3KW. When the temperature is less than the "overtemperature exit value", it will return to the original set current.</view>
-                <view class="tip2" wx:if="{{!UEN}}">　　超温限制是指温度到达"超温进入值"后自动将输出功率限制在指定功率值,默认75度3KW,当温度小于"超温退出值"后将会恢到复原来设置电流。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
+                <view class="tip2" wx:if="{{UEN&&CVer<5.46}}">　Overtemperature limit refers to the automatic limitation of output power to the specified power value after the temperature reaches the "overtemperature entry value", with a default of 75 degrees and 3KW. When the temperature is less than the "overtemperature exit value", it will return to the original set current.</view>
+                <view class="tip2" wx:if="{{UEN&&CVer>=5.46}}">　Overtemperature limit refers to gradually reducing the current after the temperature reaches the "overtemperature entry value" until the temperature is below the "overtemperature entry value" or reaches the "minimum limit current value". When the temperature is below the limit temperature by 1 degree, the current will gradually increase. When it is just above the "overtemperature entry value", the current will remain unchanged. When the temperature is below the overtemperature entry value by 2 degrees, the overtemperature limit will be exited. For example, if the over temperature is set to 75 degrees, the current will start to decrease when it exceeds 75 degrees, remain constant between 74-75 degrees, start to increase when it falls below 74 degrees, and release the over temperature limit when it falls below 73 degrees. If the temperature continues to rise to the "over temperature shutdown protection value", the charger will enter a shutdown state, but the fan will not be turned off. At this time, it will wait for the temperature to drop to the over temperature exit value before continuing to automatically power on for charging.</view>
+                <view class="tip2" wx:if="{{!UEN&&CVer>=5.46}}">　　超温限制是指温度高于"超温进入值"后开始逐步降低电流,直到温度低于"超温进入值"或者降至"电流最低值"为止,当温度低于限制温度2度后会逐步增加电流,当刚好处于"超温进入值"时就保持电流不变,当温度低于超温进入值5度后退出超温限制。<view></view>　　例如超温设置75度,超过75度时电流开始下降,73-75度时保持电流不变,低于73度时电流开始上升,低于70度后解除超温限制。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
+                <view class="tip2" wx:if="{{!UENC&&CVer<5.46}}">　　超温限制是指温度高于"超温进入值"后自动将输出功率限制在指定功率值,默认75度3KW,当温度小于"超温退出值"后将会恢到复原来设置电流。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -505,7 +512,7 @@
             </view>
         </view>
     </view>
-    <view hidden="{{CEV==1}}">
+    <view hidden="{{CEV==1&&GM!=2}}">
         <view style="height:5px;"></view>
         <view class="SetBox">
             <view class="SendLayout">
@@ -534,6 +541,11 @@
                     <button bindtap="BTCAN64" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">SER10010K</button>
                     <button bindtap="BTCAN65" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">BH10M100</button>
                     <button bindtap="BTCAN66" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">MC1503N5R</button>
+                </view>
+                <view class="btnLayout" wx:if="{{(UCN&128||GM==2)&&CVer>=5.45}}">
+                    <button bindtap="BTCAN67" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">R24-2200</button>
+                    <button bindtap="BTCAN13" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">ZEEHO</button>
+                    <button bindtap="BTCAN14" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">EV_Charger</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">　Huawei supports R4815, R4830, R4850, R4875, and R48100.</view>
@@ -680,9 +692,13 @@
                     <view class="{{ShowBar==17?'open':'close'}}"></view>
                 </view>
                 <button bindtap="BTNTC" class="DisTIP" style="width:65%;">{{UEN?'High Voltage Boost Test':'高压升压测试'}}</button>
-                <button bindtap="SetSGK" class="DisINF" style="width:35%;">{{(CVer>=5.39?SGK:SA2)>0?'251.5V':UEN?'OFF':'关闭'}}</button>
+                <button bindtap="SetSGK" class="DisINF" style="width:35%;">{{(CVer>=5.39?SGK:SA2)>0?CVer>=5.47?UEN?'ON':'打开':'251.5V':UEN?'OFF':'关闭'}}</button>
             </view>
             <view hidden="{{ShowBar!=17}}">
+                <view class="btnLayout" hidden="{{CVer<5.47}}">
+                    <button class="DisTIP1">{{UEN?'High voltage boost voltage':'高压升压电压'}}</button>
+                    <button bindtap="SetSGV" class="DisINF1">{{SGV==0?UEN?'AUTO':'自动':251.5}}</button>
+                </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Boost compensation value':'升压补偿值'}}</button>
                     <button bindtap="BTOVTD" class="DisINF1" style="width:10%;text-align:center;">-</button>
@@ -691,15 +707,71 @@
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">　The charging station needs to detect the battery voltage. Here, the simulated voltage of the battery is boosted and reported to the charging station. A multimeter is needed to test the voltage at around 251. Due to the accuracy errors of the sampling resistor and ADC, each may have errors. Currently, manual correction is required. If the deviation is large, please adjust the "boost compensation value" to 251V (within plus or minus 1V).</view>
+                    <view class="tip2" hidden="{{CVer<5.47}}">　The default 'high voltage boost voltage' is 251.5V. The automatic mode voltage is set to -20V, for example, if set to 84V, the boost voltage will be 84-20=64V (this value does not need to be modified unless there are special circumstances)</view>
                 </view>
                 <view wx:if="{{!UEN}}">
                     <view class="tip2">　　充电桩需要检测电池电压,此处模拟电池电压升压后上报给充电桩的电压,需要万用表测试电压在251左右,由于取样电阻和ADC有精度误差,所以每个可能都有误差,目前需要手动校正,如偏差较大请调整"升压补偿值"修正到251V(正负1V内)。</view>
+                    <view class="tip2" hidden="{{CVer<5.47}}">　　'高压升压电压'默认251.5V,自动模式电压为设置电压-20V,比如设置84V,自动模式电压为84-20=64V(无特殊情况无需修改此值)。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
         </view>
     </view>
     <view style="height:5px;"></view>
+    <view hidden="{{!MUS}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTUJY" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==30?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTUJY" class="DisTIP" style="width:65%;">{{UEN?'Silent mode setting':'静音模式设置'}}</button>
+                <button bindtap="BTUJY1" class="DisINF" style="width:35%;">{{UEN?MUE?'ON':'OFF':MUE?'打开':'关闭'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=30}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Silent mode maximum current':'静音模式最电流'}}</button>
+                    <button bindtap="BTUJY2" class="DisINF1">{{MUA}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Maximum wind speed in silent mode':'静音模式最大风速值'}}</button>
+                    <button bindtap="BTUJY3" class="DisINF1">{{MUF}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Allow users to modify wind speed':'允许用户修改最大风速'}}</button>
+                    <button bindtap="BTUJY4" class="DisINF1">{{UEN?UME?'YES':'NO':UME?'是':'否'}}</button>
+                </view>
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">　The silent mode reduces the maximum wind speed of the fan to achieve the effect of reducing noise, but at the same time, the decrease in wind speed will lead to higher temperatures. When the silent mode is turned on, the maximum current value will change to "silent mode maximum current". After opening "Allow users to modify maximum wind speed", click the rotate wind speed icon on the main interface to set the silent mode wind speed value.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">　　静音模式采用降低风机最大风速以达到减少噪音的效果,但是同时风速降低会导致温度更高,静音模式打开时电流最大值会变为"静音模式最大电流"。<view></view>　　"允许用户修改最大风速"打开后在主界面点击旋转风速图标可以设置静音模式风速值。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{CVer<5.48}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTTCH5" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==31?'open':'close'}}"></view>
+                </view>
+                <button bindtap="BTTCH5" class="DisTIP" style="width:65%;">{{UEN?'Touch screen driver':'触屏驱动设置'}}</button>
+                <button bindtap="BTTCH6" class="DisINF" style="width:35%;">{{DSP?DSP==1?'1.83(14P)':DSP==2?'1.83(18P)':'1.69(18P)':'1.54'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=31}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">　Under normal circumstances, there is no need to set this value as the product will automatically recognize the screen version. If automatic recognition fails, resulting in incorrect screen display, manually modify this value<view></view>. After modification, the Bluetooth module will automatically restart.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">　　正常情况无需设置此值,本产品会自动识别屏幕版本,如自动识别失败导致屏幕显示不正确再手动切换此值(手动切换后不再自动识别,重置设置可再次启用自动识别)<view></view>　　修改后会自动重启蓝牙模块。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
 </view>
 <view wx:if="{{Panel==3&&!UPS}}">
     <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
@@ -744,7 +816,7 @@
                     <view style="width:70%;text-align:left">
                         <view class="tip2">　1:Left margin of text (0-60).<view></view>　2:Top margin of text (0-60).<view></view>　3:Text font size (10-30).<view></view>　4:The text to be displayed.</view>
                     </view>
-                    <view style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
+                    <view bind:tap="IMGBT" style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
                         <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
                     </view>
                 </view>
@@ -755,9 +827,10 @@
                     <view style="width:70%;text-align:left">
                         <view class="tip2">　 1:文字离左边框距离(0-60)。<view></view>　 2:文字离顶边框距离(0-60)。<view></view>　 3:文字字体大小(10-30)。<view></view>　 4:要显示的文本文字。</view>
                     </view>
-                    <view style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
-                        <canvas id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
+                    <view bind:tap="IMGBT" style="width:73px;height:73px;top:20px;background-color:#000;border-style:solid;border-width:2px;border-radius:12px;border-color:#fff;">
+                        <canvas canvasId="canvasId" id="LOGO" onReady="" style="width:60px;height:60px;top:6px;left:6px;" type="2d"></canvas>
                     </view>
+                    <canvas id="tempCanvas" style="display:none" type="2d"></canvas>
                 </view>
             </view>
             <view style="height:15px;"></view>
@@ -773,26 +846,26 @@
                     <view class="{{ShowBar==25?'open':'close1'}}"></view>
                 </view>
                 <button bindtap="BTBGP" class="DisTIP" style="width:65%;">{{UEN?'Background Image':'背景图片设置'}}</button>
-                <button bindtap="BTBGP0" class="DisINF" style="width:35%;">{{BGI?(UEN?'Image ':'图片')+BGI:UEN?'Default':'默认'}}</button>
+                <button bindtap="BTBGP0" class="DisINF" style="width:35%;">{{UEN?'Select Image':'本地图片'}}</button>
             </view>
             <view hidden="{{ShowBar!=25}}">
                 <view class="btnLayout">
-                    <button class="DisTIP1" style="width:20%;">{{UEN?'Image 1':'图片一'}}</button>
                     <button bindtap="BTBGP1" class="DisINF1" style="width:80%;white-space:pre;">{{BGP1}}</button>
+                    <button bindtap="BTBGP10" class="DisINF1" style="width:20%;">{{UEN?'Image 1':'使用'}}</button>
                 </view>
                 <view class="btnLayout">
-                    <button class="DisTIP1" style="width:20%;">{{UEN?'Image 2':'图片二'}}</button>
                     <button bindtap="BTBGP2" class="DisINF1" style="width:80%;white-space:pre;">{{BGP2}}</button>
+                    <button bindtap="BTBGP20" class="DisINF1" style="width:20%;">{{UEN?'Image 2':'使用'}}</button>
                 </view>
                 <view class="btnLayout">
-                    <button class="DisTIP1" style="width:20%;">{{UEN?'Image 3':'图片三'}}</button>
                     <button bindtap="BTBGP3" class="DisINF1" style="width:80%;white-space:pre;">{{BGP3}}</button>
+                    <button bindtap="BTBGP30" class="DisINF1" style="width:20%;">{{UEN?'Image 3':'使用'}}</button>
                 </view>
                 <view class="btnLayout">
-                    <button class="DisTIP1" style="width:20%;">{{UEN?'Image 4':'图片四'}}</button>
                     <button bindtap="BTBGP4" class="DisINF1" style="width:80%;white-space:pre;">{{BGP4}}</button>
+                    <button bindtap="BTBGP40" class="DisINF1" style="width:20%;">{{UEN?'Image 4':'使用'}}</button>
                 </view>
-                <view class="btnLayout" hidden="{{BGI==0}}">
+                <view class="btnLayout" hidden="{{BGP=='/img/bc1.gif'}}">
                     <button class="DisTIP1" style="width:20%;">{{UEN?'Transparency':'透明度'}}</button>
                     <button bindtap="BTKEY2" class="DisINF1" style="width:80%;height:40px;">
                         <slider activeColor="transparent" backgroundColor="#fff" bindchanging="CTC1" class="ribbon" max="220" min="80" onChanging="CTC1" style="position:relative;top:-10px;" value="{{BGT}}"></slider>
@@ -802,14 +875,14 @@
                     <view class="tip2">　Due to the restriction of accessing local photo albums by the mini program, only network images can be used, and GIF animations are supported. Click on the link to set the image connection address, and click on the green text in the upper right corner to switch images.<view></view>　The demonstration image connection comes from the internet and may fail at any time. If there is any infringement, contact must be deleted.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　由于小程序限制访问本地相册,所以只能使用网络图片,支持GIF动图,点击连接即可设置图片连接地址,点击右上角绿色文字即可切换图片。<view></view>　　示范图片连接来自于网络,随时可能连接失效,如有侵权,联系必删。</view>
+                    <view class="tip2">　　背景图片可以本地相册,也可以使用网络图片,且支持GIF动图,点击连接即可设置图片连接地址。<view></view>　　示范图片连接来自于网络,随时可能连接失效,如有侵权,联系必删。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{CVer<5.39}}">
+    <view hidden="{{CVer<5.39||1}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTRST0" style="width:20px;background-color:#88888850;">
@@ -878,7 +951,7 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{TCH>1}}">
+    <view hidden="{{TCH}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTKEY" style="width:20px;background-color:#88888850;">
@@ -894,6 +967,11 @@
                     <button bindtap="BTKEY2" class="DisINF1" wx:if="{{UEN}}">{{KRC?'Yes':'No'}}</button>
                     <button bindtap="BTKEY2" class="DisINF1" wx:if="{{!UEN}}">{{KRC?'是':'否'}}</button>
                 </view>
+                <view class="btnLayout" hidden="{{CVer<5.47}}">
+                    <button class="DisTIP1">{{UEN?'Up and down key switch':'同时长按加减键开关机'}}</button>
+                    <button bindtap="BTKEY3" class="DisINF1" wx:if="{{UEN}}">{{KPR?'Yes':'No'}}</button>
+                    <button bindtap="BTKEY3" class="DisINF1" wx:if="{{!UEN}}">{{KPR?'是':'否'}}</button>
+                </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">　The panel buttons can be swapped or turned on or off according to your own needs.</view>
                     <view class="tip2">　Tip: Long press the up and down keys at the same time to switch on and off. Long press the middle key to enter quick switching (which is the 4 sets of voltage and current settings displayed at the bottom of the mini program). Long press the middle key to enter and then press the up and down keys to switch</view>
@@ -907,7 +985,7 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{TCH<1||CVer<5.34}}">
+    <view hidden="{{!TCH||CVer<5.34}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTTCH" style="width:20px;background-color:#88888850;">
@@ -917,6 +995,10 @@
                 <button bindtap="BTTCH1" class="DisINF" style="width:35%;">{{LKV}}</button>
             </view>
             <view hidden="{{ShowBar!=24}}">
+                <view class="btnLayout" hidden="{{CVer<5.48}}">
+                    <button class="DisTIP1">{{UEN?'Touch screen enabled':'触屏启用'}}</button>
+                    <button bindtap="BTKEY1" class="DisINF1">{{KON?UEN?'Yes':'是':UEN?'No':'否'}}</button>
+                </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Touch Screen Lock Time':'触屏锁屏时间'}}</button>
                     <button bindtap="BTTCH2" class="DisINF1">{{LKS+(UEN?' Second':'秒')}}</button>
@@ -1069,7 +1151,7 @@
                     <button bindtap="BTUP2" class="DisINF1">{{ID}}</button>
                 </view>
                 <view class="btnLayout">
-                    <button class="DisTIP1">{{UEN?'Firmware version':'固件版本'}}</button>
+                    <button class="DisTIP1">{{UEN?'Firmware version':'当前固件版本'}}</button>
                     <button bindtap="BTUP3" class="DisINF1" style="color:gray;">{{CVer}}</button>
                 </view>
                 <view class="btnLayout">
@@ -1101,6 +1183,30 @@
                     </view>
                     <view style="height:10px;"></view>
                     <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.48||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.48 APP:1.33 2025-08-18</view>
+                        <view class="tip2" style="color:#0f0;">　　加入1.83寸JD9853触屏以及1.69寸ST7789驱动支持,加入设备屏幕背景颜色设置,加入触屏启用设置.</view>
+                    </view>
+                    <view wx:if="{{CVer<5.47||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.47 APP:1.32 2025-07-31</view>
+                        <view class="tip2" style="color:#0f0;">　　加入华为模块电流自动识别功能,雪花壳不用再校正电流,升级到此版本会重置设置电流补偿值为1(如改过电流取样的模块需要重新校正电流).加入按键开关机选择.</view>
+                    </view>
+                    <view wx:if="{{CVer<5.46||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.46 APP:1.31 2025-07-04</view>
+                        <view class="tip2" style="color:#0f0;">　　中兴和华为加入一个静音模式,该模式打开后会限制风机风速和最高电流以减少噪音,修改超温限制固定功率限制为动态电流限制,超温后会根据温度动态控制电流而非以前的固定电流.</view>
+                    </view>
+                    <view wx:if="{{CVer<5.45||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.45 APP:1.30 2025-06-30</view>
+                        <view class="tip2" style="color:#0f0;">　　加入中兴3000电压校正二,加入风机小板正反控选择(设置为正控可兼容第三方风机小板),修复充电器部分情况下不能控制电流问题,取电器修改以前默认固定VIN码为随机VIN码,固定VIN码容易被充电站拉黑,所以新版本不修改VIN码情况下使用随机码,手动修改后就变为固定码.</view>
+                    </view>
                     <view wx:if="{{CVer<5.44||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
@@ -1412,7 +1518,7 @@
                     <button bindtap="Scr3" class="DisINF1" style="text-align:center;color:{{Crs==3?'#0e0':'#fff'}};">{{UEN?'Color 3':'配色三'}}</button>
                 </view>
                 <view style="position:relative;height:260px;width:100%;">
-                    <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;;">
+                    <view style="position:absolute;left:50%;transform:translateX(-50%);top:20px;width:220px;height:220px;font-size:15px;border-style:solid;border-width:6px;border-radius:15px;border-color:#333;background-color:{{Cr50}};">
                         <view hidden="{{UI==1}}">
                             <view bindtap="CK0" class="UIBox1" style="z-index:1;border-color:{{Cr0}};left:2%;top:2px;width:95%;height:20px;color:{{Cr0}};">{{STR}}</view>
                             <view class="UIBox1" style="left:2.5%;width:62%;border-style:none;">
@@ -1464,7 +1570,7 @@
                                 <view bindtap="CK5" class="UIBox1" style="line-height:1.2;border-color:{{Cr5}};top:27px;height:64px;font-size:25px;color:{{Cr5}};">欢迎使用</view>
                                 <view bindtap="CK8" class="UIBox1" style="border-radius:2px 2px 0px 0px;border-color:{{Cr8}};left:40%;top:100px;width:20%;height:4px;background-color:{{Cr8}}"></view>
                                 <view bindtap="CK8" class="UIBox1" style="border-color:{{Cr8}};background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};line-height:3.5;text-align:center;top:105px;height:87px ;font-size:25px;color:{{Cr8}};">{{SOC}}</view>
-                                <view class="UIBox1" style="border-color:#888;top:200px;height:14px;font-size:10px;color:#888;">Ver {{CVer+'-'+CAN}}</view>
+                                <view bindtap="{{CVer>=5.48?'CKA':''}}" class="UIBox1" style="border-color:#888;top:200px;height:14px;font-size:10px;color:#888;">{{CVer>=5.48?'背景颜色':'Ver'+CVer+'-'+CAN}}</view>
                             </view>
                         </view>
                         <view hidden="{{UI==0}}">
@@ -1530,7 +1636,8 @@
             </view>
             <view>　　3.Frequency band: 2.4G</view>
         </view>
-        <view wx:if="{{!UEN}}">　　任意一部可联网手机打开热点并打开网络后按以下说明设置,部分手机如无频段设置(无法使用2.4G频段)可能无法连接,可换一部手机设置,如IPhone手机等不方便修改热点名的也可点击下面热点名和密码可做修改。<view></view>　　iPhone手机用户需要打开<view style="height:10px"></view>
+        <view wx:if="{{!UEN}}">　　任意一部可联网手机打开热点并打开网络后按以下说明设置,部分手机如无频段设置(无法使用2.4G频段)可能无法连接,可换一部手机设置,如IPhone手机等不方便修改热点名的也可点击下面热点名和密码可做修改。<view></view>
+            <view style="height:10px"></view>
             <view bindtap="BTUP6">　　 1.设置热点名称为:<text style="color:#0f0;">{{WID}}</text>
             </view>
             <view bindtap="BTUP7">　　 2.设置热点密码为:<text style="color:#0f0;">{{WPD}}</text>

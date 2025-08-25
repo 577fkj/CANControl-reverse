@@ -1,6 +1,6 @@
 var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
   t = require("@babel/runtime/helpers/asyncToGenerator.js"),
-  o = require("1D3746269E166AAF7B512E21F3E81D62.js"),
+  o = require("4186A4619E166AAF27E0CC66B95456D5.js"),
   s = [],
   i = "",
   c = "",
@@ -12,14 +12,14 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
       wx.openBluetoothAdapter({
         success: function (r) {
           (0, o.print)("BLE:", "Open BLE OK"), e({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (r) {
           (0, o.print)("BLE:", r.errMsg), e({
-            ok: !1,
+            ok: false,
             errCode: r.errCode,
             errMsg: r.errMsg
           })
@@ -32,14 +32,14 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
       wx.closeBluetoothAdapter({
         success: function (r) {
           e({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (r) {
           e({
-            ok: !1,
+            ok: false,
             errCode: r.errCode,
             errMsg: r.errMsg
           })
@@ -62,7 +62,7 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
         }), e(n, r.devices[0].RSSI)
       }
     })), wx.startBluetoothDevicesDiscovery({
-      allowDuplicatesKey: !0,
+      allowDuplicatesKey: true,
       success: function (e) {
         (0, o.print)("BLE:", "Start BLE Devices Discovery OK")
       },
@@ -81,14 +81,14 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
       wx.stopBluetoothDevicesDiscovery({
         success: function (r) {
           e({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (r) {
           e({
-            ok: !1,
+            ok: false,
             errCode: r.errCode,
             errMsg: r.errMsg
           })
@@ -98,10 +98,10 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
   },
   l = function (e) {
     return new Promise((function (r, n) {
-      for (var t = !1, c = 0, a = s; c < a.length; c++) {
+      for (var t = false, c = 0, a = s; c < a.length; c++) {
         var u = a[c];
         if (u.name === e) {
-          t = !0, i = u.deviceId;
+          t = true, i = u.deviceId;
           break
         }
       }
@@ -110,20 +110,20 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
         timeout: 3e3,
         success: function (e) {
           -1 != f && (f = 1), (0, o.print)("BLE:", "Device Connection OK"), r({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (e) {
           (0, o.print)("BLE:", e.errCode, "    ", e.errMsg), r({
-            ok: !1,
+            ok: false,
             errCode: e.errCode,
             errMsg: e.errMsg
           })
         }
       }) : r({
-        ok: !1,
+        ok: false,
         errCode: -1,
         errMsg: "Name error,Device does not exist"
       })
@@ -135,14 +135,14 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
         deviceId: i,
         success: function (r) {
           (0, o.print)("BLE:", "closeBLEConnection OK!!!"), e({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (r) {
           e({
-            ok: !1,
+            ok: false,
             errCode: r.errCode,
             errMsg: r.errMsg
           })
@@ -173,14 +173,14 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
         mtu: e,
         success: function (e) {
           r({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (e) {
           r({
-            ok: !1,
+            ok: false,
             errCode: e.errCode,
             errMsg: e.errMsg
           })
@@ -205,7 +205,7 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
               break
             }
             return f = {
-              ok: !1,
+              ok: false,
               errMsg: "蓝牙连接失败|" + f.errCode + "|" + f.errMsg,
               errCode: 10001
             }, s(f), r.abrupt("return", f);
@@ -218,25 +218,25 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
                   for (var n = 0; n < r.services.length; n++) {
                     var t;
                     if ((0, o.print)("BLE:", r.services[n].uuid), "0000FFF0-0000-1000-8000-00805F9B34FB" === (t = r.services[n].uuid.toUpperCase())) return c = "0000FFF0-0000-1000-8000-00805F9B34FB", e({
-                      ok: !0,
+                      ok: true,
                       errCode: 0,
                       errMsg: ""
                     });
                     if ("FFF0" === t) return c = "FFF0", e({
-                      ok: !0,
+                      ok: true,
                       errCode: 0,
                       errMsg: ""
                     })
                   }
                   e({
-                    ok: !1,
+                    ok: false,
                     errCode: 2e4,
                     errMsg: "服务未找到"
                   })
                 },
                 fail: function (r) {
                   (0, o.print)("BLE:", r.errMsg), e({
-                    ok: !1,
+                    ok: false,
                     errCode: r.errCode,
                     errMsg: r.errMsg
                   })
@@ -249,7 +249,7 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
               break
             }
             return v(), f = {
-              ok: !1,
+              ok: false,
               errMsg: "获取服务失败|" + f.errCode + "|" + f.errMsg,
               errCode: 10002
             }, s(f), r.abrupt("return", f);
@@ -260,28 +260,28 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
                 serviceId: c,
                 success: function (r) {
                   if ((0, o.print)("BLE:", "Get BLE Device Characteristics OK"), r.characteristics.length < 2) return (0, o.print)("BLE:", "BLE Device Characteristics Error"), void e({
-                    ok: !1,
+                    ok: false,
                     errCode: 2e4,
                     errMsg: "特征值出错"
                   });
                   var n, t;
                   n = r.characteristics[0].uuid.toUpperCase(), t = r.characteristics[1].uuid.toUpperCase(), "0000FFF2-0000-1000-8000-00805F9B34FB" === n && "0000FFF1-0000-1000-8000-00805F9B34FB" === t || "0000FFF1-0000-1000-8000-00805F9B34FB" === n && "0000FFF2-0000-1000-8000-00805F9B34FB" === t ? (a = "0000FFF2-0000-1000-8000-00805F9B34FB", u = "0000FFF1-0000-1000-8000-00805F9B34FB", e({
-                    ok: !0,
+                    ok: true,
                     errCode: 0,
                     errMsg: ""
                   })) : "FFF2" === n && "FFF1" === t || "FFF1" === n && "FFF2" === t ? (a = "FFF2", u = "FFF1", e({
-                    ok: !0,
+                    ok: true,
                     errCode: 0,
                     errMsg: ""
                   })) : ((0, o.print)("BLE:", r.errMsg), e({
-                    ok: !1,
+                    ok: false,
                     errCode: 2e4,
                     errMsg: "特征值出错"
                   }))
                 },
                 fail: function (r) {
                   (0, o.print)("BLE:", r.errMsg), e({
-                    ok: !1,
+                    ok: false,
                     errCode: r.errCode,
                     errMsg: r.errMsg
                   })
@@ -294,27 +294,27 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
               break
             }
             return v(), f = {
-              ok: !1,
+              ok: false,
               errMsg: "获取特性失败|" + f.errCode + "|" + f.errMsg,
               errCode: 10003
             }, s(f), r.abrupt("return", f);
           case 29:
             return r.next = 31, new Promise((function (e, r) {
               wx.notifyBLECharacteristicValueChange({
-                state: !0,
+                state: true,
                 deviceId: i,
                 serviceId: c,
                 characteristicId: u,
                 success: function (r) {
                   e({
-                    ok: !0,
+                    ok: true,
                     errCode: 0,
                     errMsg: ""
                   })
                 },
                 fail: function (r) {
                   e({
-                    ok: !1,
+                    ok: false,
                     errCode: r.errCode,
                     errMsg: r.errMsg
                   })
@@ -327,7 +327,7 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
               break
             }
             return v(), f = {
-              ok: !1,
+              ok: false,
               errMsg: "订阅失败|" + f.errCode + "|" + f.errMsg,
               errCode: 10004
             }, s(f), r.abrupt("return", f);
@@ -335,7 +335,7 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
             return r.next = 39, h(250);
           case 39:
             return s(f = {
-              ok: !0,
+              ok: true,
               errMsg: "",
               errCode: 0
             }), r.abrupt("return", f);
@@ -358,14 +358,14 @@ var e, r, n = require("@babel/runtime/helpers/regeneratorRuntime.js"),
         value: e,
         success: function (e) {
           r({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })
         },
         fail: function (e) {
           r({
-            ok: !1,
+            ok: false,
             errCode: e.errCode,
             errMsg: e.errMsg
           })
@@ -451,18 +451,18 @@ module.exports = {
       wx.getBluetoothAdapterState({
         success: function (r) {
           r.available ? ((0, o.print)("BLE:", "Get BLE Adapter State OK"), e({
-            ok: !0,
+            ok: true,
             errCode: 0,
             errMsg: ""
           })) : ((0, o.print)("BLE:", r.errMsg), e({
-            ok: !1,
+            ok: false,
             errCode: 2e4,
             errMsg: "蓝牙适配器关闭"
           }))
         },
         fail: function (r) {
           (0, o.print)("BLE:", r.errMsg), e({
-            ok: !1,
+            ok: false,
             errCode: r.errCode,
             errMsg: r.errMsg
           })

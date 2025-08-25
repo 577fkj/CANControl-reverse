@@ -11,9 +11,9 @@ function _createForOfIteratorHelper(r, e) {
         s: o,
         n: function () {
           return n >= r.length ? {
-            done: !0
+            done: true
           } : {
-            done: !1,
+            done: false,
             value: r[n++]
           }
         },
@@ -25,8 +25,8 @@ function _createForOfIteratorHelper(r, e) {
     }
     throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
   }
-  var a, u = !0,
-    i = !1;
+  var a, u = true,
+    i = false;
   return {
     s: function () {
       t = t.call(r)
@@ -36,7 +36,7 @@ function _createForOfIteratorHelper(r, e) {
       return u = r.done, r
     },
     e: function (r) {
-      i = !0, a = r
+      i = true, a = r
     },
     f: function () {
       try {

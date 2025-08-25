@@ -1,11 +1,11 @@
 var t, e = require("../../@babel/runtime/helpers/createForOfIteratorHelper"),
   a = require("../../@babel/runtime/helpers/regeneratorRuntime"),
   i = require("../../@babel/runtime/helpers/asyncToGenerator"),
-  n = (t = require("../../4E32DEC39E166AAF2854B6C471091D62.js")) && t.__esModule ? t : {
+  n = (t = require("../../4C9E6F719E166AAF2AF807768F6456D5.js")) && t.__esModule ? t : {
     default: t
   },
-  r = require("../../1D3746269E166AAF7B512E21F3E81D62.js");
-var s, o = require("../../E0B6CAE39E166AAF86D0A2E4CEE81D62.js"),
+  r = require("../../4186A4619E166AAF27E0CC66B95456D5.js");
+var s, o = require("../../6AF67F959E166AAF0C901792E56456D5.js"),
   c = 0,
   u = 0,
   h = 0,
@@ -50,7 +50,7 @@ function v() {
         case 17:
           return t.next = 19, o.easyConnect(e, (function () {}));
         case 19:
-          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", !1), wx.navigateTo({
+          t.sent.ok ? e.startsWith("@") ? (o.easySendData("CONNECT OK\n", false), wx.navigateTo({
             url: "../device/device?Ver=3.47&GM=" + (h ? 1 : 0)
           }), wx.hideLoading()) : e.startsWith("CAN-") ? i.data.NewUI ? (wx.navigateTo({
             url: "../device2/device?Ver=3.47&GM=" + (h ? 1 : 0)
@@ -163,11 +163,11 @@ Page({
               title: "设备连接中",
               icon: "loading",
               duration: 46e5,
-              mask: !0
+              mask: true
             }), l(c, n)) : (i = "未知设备", r = "不支持此蓝牙设备", wx.showModal({
               title: i,
               content: r,
-              showCancel: !1
+              showCancel: false
             }));
           case 1:
           case "end":

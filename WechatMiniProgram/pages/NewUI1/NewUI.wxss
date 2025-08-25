@@ -232,3 +232,19 @@ view.SetBox {
   top: 5px;
   width: 94%
 }
+
+.rotate-img {
+  animation: spin 2s linear infinite
+}
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(1turn)
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn)
+  }
+}

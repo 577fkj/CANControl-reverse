@@ -34,7 +34,7 @@ function r(r) {
   })).join("")
 }
 Object.defineProperty(exports, "__esModule", {
-  value: !0
+  value: true
 }), exports.default = void 0, r.sha = function (n) {
   return r(n)
 };

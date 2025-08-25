@@ -1,7 +1,7 @@
 App({
   onLaunch: function () {
     wx.setKeepScreenOn({
-      keepScreenOn: !0
+      keepScreenOn: true
     })
   },
   onShow: function () {

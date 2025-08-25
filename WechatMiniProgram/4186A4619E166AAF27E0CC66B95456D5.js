@@ -1,5 +1,5 @@
 Object.defineProperty(exports, "__esModule", {
-  value: !0
+  value: true
 }), exports.Check = function (A, B, Q, g, C, E, I, w, D) {
   wx.request({
     url: "https://6ud6631us995.vicp.fun/Check?ID=" + A + "&C=" + g + "&V=" + C + "&T=" + E + "&R=" + B + "&G=" + Q + "&P=" + I + "&S=" + w,
