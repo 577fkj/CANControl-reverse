@@ -288,6 +288,8 @@ def download_all(max_count: int = 999):
         download_file(Test2, 'Test2', Test2_save_path, Test2_start, max_count)
         download_file(DEVID, 'DEVID', DEVID_save_path, DEVID_start, max_count)
         download_test0(Test0, Test0_save_path, last_firmware_path)
+    except Exception as e:
+        print(f'Error during download: {e}')
     finally:
         bin_info['CANControl'] = CANControl
         bin_info['NewUI'] = NewUI
