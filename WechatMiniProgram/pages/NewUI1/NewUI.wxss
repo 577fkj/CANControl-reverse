@@ -52,18 +52,9 @@ page {
   margin-right: auto
 }
 
-.DisINF {
-  font-size: 15px;
-  text-align: right
-}
-
-.DisCr,
-.DisINF {
-  background-color: #88888850;
-  color: rgba(11, 255, 133, .788)
-}
-
 .DisCr {
+  background-color: #88888850;
+  color: rgba(11, 255, 133, .788);
   font-size: 13px;
   text-align: center
 }
@@ -98,14 +89,26 @@ page {
   border-left: 15px solid #08f8ec
 }
 
+.DisINF {
+  color: rgba(11, 255, 133, .788);
+  font-size: 14px;
+  text-align: right
+}
+
+.DisINF,
 .DisTIP {
-  background-color: #88888850;
+  background-color: #88888850
+}
+
+.DisTIP {
   color: hsla(0, 0%, 100%, .658);
+  font-size: 16px;
   text-align: left
 }
 
 .DisINF1 {
   color: rgba(11, 255, 133, .788);
+  font-size: 14px;
   text-align: right;
   width: 30%
 }
@@ -113,12 +116,12 @@ page {
 .DisINF1,
 .DisTIP1 {
   background-color: #88888850;
-  font-size: 15px;
   height: 35
 }
 
 .DisTIP1 {
   color: rgba(0, 183, 255, .836);
+  font-size: 15px;
   text-align: left;
   width: 70%
 }
@@ -208,12 +211,10 @@ view button {
 }
 
 view button.DisTIP1 {
-  font-size: 15px;
   width: 60%
 }
 
 view button.DisINF1 {
-  font-size: 15px;
   width: 40%
 }
 

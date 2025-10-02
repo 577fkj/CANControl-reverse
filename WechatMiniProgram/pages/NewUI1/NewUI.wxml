@@ -96,7 +96,7 @@
             </view>
             <view>
                 <image mode="scaleToFill" src="/img/sb.png" style="left:35%;top:520px;width:30%;height:120px;position:absolute;"></image>
-                <view wx:if="{{CEV&&(CVer<5.39||SV>126)}}">
+                <view wx:if="{{CEV&&(CVer<5.39||SV>S2V)}}">
                     <view bindtap="sa2bt3" style="position:absolute;left:35%;top:550px;width:30%;font-size:17px;color:white;">{{YS}}</view>
                     <view bindtap="sa2bt0" style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:39%;top:590px;width:22%;height:20px;color:white;">
                         <view style="border-style:solid;border-width:2px;border-radius:12px;border-color:#0af9;position:absolute;left:-2px;top:-2px;width:20px;height:20px;background-color:{{YS=='00:00:00'?'#999':'#0f0'}};"></view>
@@ -237,7 +237,7 @@
 <view wx:if="{{Panel==2&&!UPS}}">
     <view class="SetBox" style="position:fixed;background-color:#000;z-index:1;">
         <view class="SendLayout">
-            <button bindtap="BTGPWD" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'SYS Password':GM==2?'重启蓝牙':'后台密码'}}</button>
+            <button bindtap="BTGPWD" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'SYS PWD':GM==2?'重启蓝牙':'后台密码'}}</button>
             <button bindtap="BTRST" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Reset':'重置设置'}}</button>
             <button bindtap="BTBC" class="DisINF" style="width:33.33%;text-align:center;color:orange">{{UEN?'Go Back':'返回上级'}}</button>
         </view>
@@ -757,15 +757,25 @@
                 <view bindtap="BTTCH5" style="width:20px;background-color:#88888850;">
                     <view class="{{ShowBar==31?'open':'close'}}"></view>
                 </view>
-                <button bindtap="BTTCH5" class="DisTIP" style="width:65%;">{{UEN?'Touch screen driver':'触屏驱动设置'}}</button>
-                <button bindtap="BTTCH6" class="DisINF" style="width:35%;">{{DSP?DSP==1?'1.83(14P)':DSP==2?'1.83(18P)':'1.69(18P)':'1.54'}}</button>
+                <button bindtap="BTTCH5" class="DisTIP" style="width:55%;">{{UEN?'Touch screen driver':'触屏驱动设置'}}</button>
+                <button bindtap="BTTCH5" class="DisINF" style="width:45%;">{{DSP?DSP==1?'JD9853 1.83(14P)':DSP==2?'JD9853 1.83(18P)':DSP==3?'ST7789 1.69':DSP==4?'ST7789 1.83(14P)':'ST7789 1.83(18P)':'ST7789 1.54(通用)'}}</button>
             </view>
             <view hidden="{{ShowBar!=31}}">
+                <view class="btnLayout">
+                    <button bindtap="BTDDV1" style="text-align:center;width:33.33%;font-size:15px;color:{{DSP==0?'#0f0':'#aaa'}};background-color:#8885;">ST7789 1.54(通用)</button>
+                    <button bindtap="BTDDV2" style="text-align:center;width:33.33%;font-size:15px;color:{{DSP==1?'#0f0':'#aaa'}};background-color:#8885;">JD9853 1.83(14P)</button>
+                    <button bindtap="BTDDV3" style="text-align:center;width:33.33%;font-size:15px;color:{{DSP==2?'#0f0':'#aaa'}};background-color:#8885;">JD9853 1.83(18P)</button>
+                </view>
+                <view class="btnLayout">
+                    <button bindtap="BTDDV4" style="text-align:center;width:33.33%;font-size:15px;color:{{DSP==3?'#0f0':'#aaa'}};background-color:#8885;">ST7789 1.69(18P)</button>
+                    <button bindtap="BTDDV5" style="text-align:center;width:33.33%;font-size:15px;color:{{DSP==4?'#0f0':'#aaa'}};background-color:#8885;">ST7789 1.83(14P)</button>
+                    <button bindtap="BTDDV6" style="text-align:center;width:33.33%;font-size:15px;color:{{DSP==5?'#0f0':'#aaa'}};background-color:#8885;">ST7789 1.83(18P)</button>
+                </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">　Under normal circumstances, there is no need to set this value as the product will automatically recognize the screen version. If automatic recognition fails, resulting in incorrect screen display, manually modify this value<view></view>. After modification, the Bluetooth module will automatically restart.</view>
+                    <view class="tip2">　Under normal circumstances, please do not set this value. If the screen driver is incorrect, it may cause the screen to display a black screen or a distorted screen.<view></view>Switching will automatically restart the Bluetooth module (this value will not be restored even after resetting the settings after modification).</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　正常情况无需设置此值,本产品会自动识别屏幕版本,如自动识别失败导致屏幕显示不正确再手动切换此值(手动切换后不再自动识别,重置设置可再次启用自动识别)<view></view>　　修改后会自动重启蓝牙模块。</view>
+                    <view class="tip2">　　正常情况请勿设置此值,如屏幕驱动不正确会导致屏幕显示黑屏或者花屏<view></view>　　切换后会自动重启蓝牙模块(此值修改后重置设置也不会恢复)。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -882,29 +892,6 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{CVer<5.39||1}}">
-        <view class="SetBox">
-            <view class="SendLayout">
-                <view bindtap="BTRST0" style="width:20px;background-color:#88888850;">
-                    <view class="{{ShowBar==26?'open':'close1'}}"></view>
-                </view>
-                <button bindtap="BTRST0" class="DisTIP" style="width:65%;">{{UEN?'Data Anomaly Repair':'数据异常修复'}}</button>
-                <button bindtap="BTRST1" class="DisINF" style="width:35%;">{{UEN?'Repair':'修复'}}</button>
-            </view>
-            <view hidden="{{ShowBar!=26}}">
-                <view wx:if="{{UEN}}">
-                    <view class="tip2">　There is a very small probability that there will be some screen display numerical abnormalities during use, such as setting voltage and current to 0 or battery level exceeding 100%, or accidentally setting certain parameters incorrectly but not clearly. If the abnormality is caused by the Bluetooth control board, click "Repair" in the upper right corner.</view>
-                    <view class="tip2">　Abnormal repair will detect the setting data and reset some personalized settings (such as screen color, etc.). After the repair is completed, the device will automatically restart (if unable to restart automatically, please power off and manually restart)</view>
-                </view>
-                <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　在使用过程中有极小概率会出现一些屏幕显示数字异常 比如设置电压和设置电流均显示为0 或者电池电量显示超过100%等 又或者在无意间设置错了某些参数但是又不清楚怎么设置了 只要是蓝牙控制板导致的异常 此时点击右上角"修复"即可。</view>
-                    <view class="tip2">　　异常修复会检测设置数据并重置掉部分个性化设置(比如屏幕颜色等) 修复完成后会自动重启设备(如未能自动重启请断电手动重启)。</view>
-                </view>
-                <view style="height:15px;"></view>
-            </view>
-        </view>
-        <view style="height:5px;"></view>
-    </view>
     <view hidden="{{CEV==0||CVer<5.4}}">
         <view class="SetBox">
             <view class="SendLayout">
@@ -951,7 +938,7 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view hidden="{{TCH}}">
+    <view hidden="{{TCH||CEV}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTKEY" style="width:20px;background-color:#88888850;">
@@ -1008,8 +995,33 @@
                     <view class="tip2">　Click on the green number in the upper right corner to set it.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　触屏密码仅限数字,4-6位均可,锁屏后会在屏幕上显示红色锁图标,上滑或者长按屏幕开始解锁,解锁后图标变为绿色,触屏无操作{{LKS}}秒后会再次锁定。</view>
+                    <view class="tip2">　　触屏密码仅限数字,4-6位均可,锁屏后会在屏幕上显示红色锁图标,上滑屏幕开始解锁,解锁后图标变为绿色,触屏无操作{{LKS}}秒后会再次锁定。</view>
                     <view class="tip2">　　击右上角绿色数字进行设置。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{CVer<5.49||CEV==0}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTYC" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==23?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTYC" class="DisTIP" style="width:65%;">{{UEN?'Two-stage voltage':'二段允许电压'}}</button>
+                <button bindtap="SetS2V" class="DisINF" style="width:35%;">{{S2V}}V</button>
+            </view>
+            <view hidden="{{ShowBar!=23}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Slow Current Drop':'二段电流缓降'}}</button>
+                    <button bindtap="BTCKA2" class="DisINF1">{{CKA2?UEN?'ON':'打开':UEN?'OFF':'关闭'}}</button>
+                </view>
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">　The two-stage function can only be used when the battery is charging directly. If the charger is turned on, it may limit the current and cause the charger to not work properly. Since it is impossible to distinguish whether the user is charging directly or using the charger, the two-stage function can only be used within 126V by default. However, some parts require high-voltage direct charging, so the maximum allowable value can be modified here.<view></view>　Note: The two-stage function can only be used directly. If the two-stage function is turned on while charging with a charger, it may cause charging failure.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">　　二段功能只能针对电池直冲时使用,如使用充电器开启二段后可能会限流导致充电器不能正常工作,由于无法区分用户是直充还是使用充电器充电,所以默认126V以内才能使用二段功能,但是有部分用户有高压直冲需求,所以在此可修改允许最大值。<view></view>　　二段电流缓降功能打开时进入二段后会根据当前电压线性降低电流,关闭后由充电桩决定何时降流。<view></view>　　注意:二段功能只能直冲使用,如果使用充电器充电时打开二段功能可能会导致充电失败。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1183,6 +1195,12 @@
                     </view>
                     <view style="height:10px;"></view>
                     <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.49||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.49 APP:1.34 2025-09-19</view>
+                        <view class="tip2" style="color:#0f0;">　　加入取电器二段允许电压修改,以前默认126V以内才能使用二段功能,现在可以自行修改最大允许值,加入取电器二段功能缓降功能(注意:二段功能只能直充,如果时使用充电器充电可能会充电失败).加入历史故障记录功能,主要用于维修人员维修时可检查历史故障记录,只保存20条.</view>
+                    </view>
                     <view wx:if="{{CVer<5.48||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
@@ -1375,11 +1393,11 @@
             </view>
             <view hidden="{{ShowBar!=7}}">
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">　The screen display orientation can be adjusted in four directions.</view>
+                    <view class="tip2">　The display orientation of a square screen can be adjusted in four directions, while that of a rectangular screen can be adjusted in two directions.</view>
                     <view class="tip2">　Click on the green number in the upper right corner to switch.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　屏幕显示朝向可以四个方向可调。</view>
+                    <view class="tip2">　　正方形屏幕显示朝向四个方向可调,长方形屏幕两个方向可调。</view>
                     <view class="tip2">　　点击右上角绿色数字进行切换。</view>
                 </view>
                 <view style="height:15px;"></view>
@@ -1387,7 +1405,7 @@
         </view>
         <view style="height:5px;"></view>
     </view>
-    <view>
+    <view hidden="{{DSP==3}}">
         <view class="SetBox">
             <view class="SendLayout">
                 <view bindtap="BTLEDK" style="width:20px;background-color:#88888850;">
@@ -1401,43 +1419,19 @@
                     <button class="DisTIP1">{{UEN?'Set shutdown brightness':'设置关机亮度'}}</button>
                     <button bindtap="BTLEDK2" class="DisINF1">{{LEDK0}}</button>
                 </view>
-                <view wx:if="{{UEN}}">
-                    <view class="tip2">　The screen brightness value range is 0-255, and you can set the screen brightness according to your own needs.</view>
-                    <view class="tip2">　Click on the green number in the upper right corner to switch.</view>
-                </view>
-                <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
-                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
-                </view>
-                <view style="height:15px;"></view>
-            </view>
-        </view>
-        <view style="height:5px;"></view>
-    </view>
-    <view>
-        <view class="SetBox">
-            <view class="SendLayout">
-                <view bindtap="BTLEDKS" style="width:20px;background-color:#88888850;">
-                    <view class="{{ShowBar==12?'open':'close1'}}"></view>
-                </view>
-                <button bindtap="BTLEDKS" class="DisTIP" style="width:65%;">{{UEN?'Set Screen Rest ':'屏幕息屏设置'}}</button>
-                <button bindtap="BTLEDKS1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{Sleep==0?'OFF':Sleep+' Second'}}</button>
-                <button bindtap="BTLEDKS1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{Sleep==0?'关闭':Sleep+'秒'}}</button>
-            </view>
-            <view hidden="{{ShowBar!=12}}">
                 <view class="btnLayout">
-                    <button class="DisTIP1">{{UEN?'Set Screen Brightness':'设置屏幕亮度'}}</button>
+                    <button class="DisTIP1">{{UEN?'Set Screen Brightness':'设置息屏亮度'}}</button>
                     <button bindtap="BTLEDKS2" class="DisINF1">{{LEDK2}}</button>
                 </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Set Screen Brightness':'设置息屏时间'}}</button>
+                    <button bindtap="BTLEDKS1" class="DisINF1">{{Sleep==0?UEN?'OFF':'关闭':Sleep+(UEN?' Second':'秒')}}</button>
+                </view>
                 <view wx:if="{{UEN}}">
-                    <view class="tip2">　Pressing any button or connecting to Bluetooth after screen rest can light up the screen. When the mini program is connected, it will not enter screen rest. If screen rest is not required, set the screen rest time to 0.</view>
-                    <view class="tip2">　The screen brightness value range is 0-255, and you can set the screen brightness according to your own needs.</view>
-                    <view class="tip2">　Click on the green number in the upper right corner to set it.</view>
+                    <view class="tip2">　The screen brightness value range is 0-255, and you can set the screen brightness according to your needs.<view></view>　After the screen is locked, pressing any button or connecting to Bluetooth can light up the screen. When connected to a mini program, the screen will not enter lock mode. If you do not need the screen to enter lock mode, set the screen lock time to 0.</view>
                 </view>
                 <view wx:if="{{!UEN}}">
-                    <view class="tip2">　　息屏后按任意按键或者连接上蓝牙均可点亮屏幕,小程序连接时不会进入息屏,如不需要息屏则把息屏时间设置为0即可。</view>
-                    <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。</view>
-                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
+                    <view class="tip2">　　屏幕亮度值范围是0-255,可以根据自己需要设置屏幕亮度。<view></view>　　息屏后按任意按键或者连接上蓝牙均可点亮屏幕,小程序连接时不会进入息屏,如不需要息屏则把息屏时间设置为0即可。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -1620,6 +1614,57 @@
                 <view style="height:15px;"></view>
             </view>
         </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{CVer<5.49||Err==0||UEN}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTER0" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==32?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTER0" class="DisTIP" style="width:65%;">{{UEN?'Enable GIF':'历史故障记录'}}</button>
+                <button bindtap="BTER1C" class="DisINF" style="width:35%;">{{ERL}}</button>
+            </view>
+            <view hidden="{{ShowBar!=32}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Display compensation':'当前故障序号'}}</button>
+                    <button bindtap="BTER1D" class="DisINF1" style="width:10%;text-align:center;">{{'<'}}</button>
+                    <button bindtap="BTER1S" class="DisINF1" style="width:25%;text-align:center;">{{EID}}</button>
+                    <button bindtap="BTER1U" class="DisINF1" style="width:10%;text-align:center;">{{'>'}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Display compensation':'故障累计次数'}}</button>
+                    <button class="DisINF">{{ELN}}</button>
+                </view>
+                <view style="height:15px;background-color:#88888850;"></view>
+                <view class="btnLayout" style="height:50px;color:#f00;background-color:#88888850;">
+                    <view style="width:2%;"></view>
+                    <view style="width:15%;color:{{E1S==0?'#888':E1S==1?'#f00':'#f90'}};">{{E1A}}<view></view>{{E1B}}</view>
+                    <view style="width:15%;color:{{E2S==0?'#888':E2S==1?'#f00':'#f90'}};">{{E2A}}<view></view>{{E2B}}</view>
+                    <view style="width:15%;color:{{E3S==0?'#888':E3S==1?'#f00':'#f90'}};">{{E3A}}<view></view>{{E3B}}</view>
+                    <view style="width:15%;color:{{E4S==0?'#888':E4S==1?'#f00':'#f90'}};">{{E4A}}<view></view>{{E4B}}</view>
+                    <view style="width:15%;color:{{E5S==0?'#888':E5S==1?'#f00':'#f90'}};">{{E5A}}<view></view>{{E5B}}</view>
+                    <view style="width:15%;color:{{E6S==0?'#888':E6S==1?'#f00':'#f90'}};">{{E6A}}<view></view>{{E6B}}</view>
+                    <view style="width:2%;"></view>
+                </view>
+                <view style="height:15px;background-color:#88888850;"></view>
+                <view class="btnLayout" style="height:50px;background-color:#88888850;">
+                    <view style="width:2%;"></view>
+                    <view style="width:15%;color:{{E7S==0?'#888':E7S==1?'#f00':'#f90'}};">{{E7A}}<view></view>{{E7B}}</view>
+                    <view style="width:15%;color:{{E8S==0?'#888':E8S==1?'#f00':'#f90'}};">{{E8A}}<view></view>{{E8B}}</view>
+                    <view style="width:15%;color:{{E9S==0?'#888':E9S==1?'#f00':'#f90'}};">{{E9A}}<view></view>{{E9B}}</view>
+                    <view style="width:15%;color:{{EAS==0?'#888':EAS==1?'#f00':'#f90'}};">{{EAA}}<view></view>{{EAB}}</view>
+                    <view style="width:15%;color:{{EBS==0?'#888':EBS==1?'#f00':'#f90'}};">{{EBA}}<view></view>{{EBB}}</view>
+                    <view style="width:15%;color:{{ECS==0?'#888':ECS==1?'#f00':'#f90'}};">{{ECA}}<view></view>{{ECB}}</view>
+                    <view style="width:2%;"></view>
+                </view>
+                <view style="height:15px;background-color:#88888850;"></view>
+                <view class="tip2" wx:if="{{UEN}}">　This product can record up to 20 faults or statuses. When the record is full, it will overwrite the earliest one. The same fault will only be recorded once during a single use.</view>
+                <view class="tip2" wx:if="{{!UEN}}">　　本产品可记录最大20条故障或状态,当记录满后会覆盖掉最早的一条,同一故障单次使用过程中只记录一次。</view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
     </view>
 </view>
 <view style="position:relative;z-index:1;color:#fff;width:90%;left:5%;" wx:if="{{UPS}}">
