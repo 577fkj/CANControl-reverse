@@ -26,17 +26,17 @@
                 <view style="height:151px;" wx:else>
                     <view style="background-color:{{SOC>=80?'#0f0c':SOC>=30?'#ff0c':'#f00c'}};position:relative;left:0px;top:0px;height:110px;width:{{SOC}}%"></view>
                     <view style="border-style:solid;border-width:8px;border-radius:5px;border-color:#aaa;position:relative;left:100%;top:-75px;width:0%;height:25px;"></view>
-                    <view style="position:relative;top:-100px;color:#fff;width:100%;height:0px;font-size:40px;">{{SOC}}%</view>
+                    <view style="position:relative;top:-100px;color:#fff;width:100%;height:0px;font-size:40px;" wx:if="{{USC!=1}}">{{SOC}}%</view>
                 </view>
-                <view style="position:relative;top:-145px;color:#fff;width:100%;white-space:nowrap;height:0px;font-size:{{FSize}}px;">{{STR}}</view>
+                <view style="position:relative;top:{{USC!=1?'-145px':'-118px'}};color:#fff;width:100%;white-space:nowrap;height:0px;font-size:{{FSize}}px;">{{STR}}</view>
                 <view style="position:relative;top:{{CEV?'-25px':'-30px'}};color:#fff8;width:100%;">{{SCAN+'-'+CVer}}</view>
             </view>
             <view bindtap="DST1" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:195px;position:absolute;color:{{DST==0?'#0f0':'#AAAA'}};">①</view>
             <view bindtap="DST2" hidden="{{!(DOL>1)}}" style="font-size:28px;left:90%;top:160px;position:absolute;color:{{DST==1?'#0f0':'#AAAA'}};">②</view>
             <view bindtap="DST3" hidden="{{!(DOL>2)}}" style="font-size:28px;left:90%;top:125px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">③</view>
-            <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top:90px;position:absolute;color:{{DST==2?'#0f0':'#AAAA'}};">④</view>
+            <view bindtap="DST4" hidden="{{!(DOL>3)}}" style="font-size:28px;left:90%;top:90px;position:absolute;color:{{DST==3?'#0f0':'#AAAA'}};">④</view>
             <view bindtap="uset" style="left:90%;top:240px;width:28px;height:28px;position:absolute;">
-                <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate}}"></view>
+                <view style="position:absolute;left:23px;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate&&0}}"></view>
                 <image mode="aspectFit" src="/img/set.png" style="width:25px;height:25px;"></image>
             </view>
             <image bindtap="SetSM" mode="aspectFit" src="/img/vw.png" style="left:5%;top:240px;width:25px;height:25px;position:absolute;"></image>
@@ -262,7 +262,7 @@
                     <view style="position:absolute;left:57%;top:105px;font-size:15px;color:white;">{{SA}}A</view>
                     <image bindtap="nabt" id="nabt" mode="aspectFill" src="/img/cu.png" style="left:50%;width:50%;height:88px;position:absolute;"></image>
                 </view>
-                <view class="btnLayout" wx:if="{{CVer>=5.41&&SCAN=='Huawei'}}">
+                <view class="btnLayout" wx:if="{{CVer>=5.41&&SCAN=='HW48XX'}}">
                     <button class="DisTIP1">{{UEN?'Input voltage correction':'输入电压校正'}}</button>
                     <button bindtap="BTIVD1" class="DisINF1">{{IVD}}</button>
                     <button bindtap="BTIVD2" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
@@ -283,7 +283,7 @@
                     <button bindtap="BTOVD1" class="DisINF1" style="width:25%;text-align:center;">{{OVD}}</button>
                     <button bindtap="BTOVDU" class="DisINF1" style="width:10%;text-align:center;">+</button>
                 </view>
-                <view style="display:{{SCAN=='ZTE4875'||SCAN=='ZTE3000'&&CVer>=5.45?'block':'none'}}">
+                <view style="display:{{SCAN=='ZX48XX'||SCAN=='ZTE3000'&&CVer>=5.45?'block':'none'}}">
                     <view class="btnLayout">
                         <button class="DisTIP" style="width:65%;">{{UEN?'Output voltage correction two':'输出电压校正二'}}</button>
                         <button bindtap="BTOVT3" class="DisINF1">{{UEN?'Start':'开始校正'}}</button>
@@ -308,13 +308,13 @@
                 <view wx:if="{{UEN}}">
                     <view class="tip2" wx:if="{{CVer>=5.29}}">　"Voltage jump buffer" is an optimized display for some power supply output voltages that may jump to two decimal places. For example, if the voltage is set to 84V, it will jump between 84.02 and 83.99 during display. At this time, setting this value to 0.02 is sufficient (voltage jump is actually a normal phenomenon, and the size of the jump is generally determined by the performance of the transformer and output capacitor, not a control board issue).</view>
                     <view class="tip2">　Click on the green "Start" button in the upper right corner, then use a multimeter to measure the actual output voltage. In the pop-up input box, enter the actual output voltage you just measured and send it.</view>
-                    <view class="tip2" style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">　"Output voltage correction point two" is a second correction point designed for ZTE 4875F1, which has a large error after single point correction. The actual measurement shows that the accuracy can reach within 0.1 after two point correction is completed.</view>
+                    <view class="tip2" style="display:{{SCAN=='ZX48XX'&&CVer>=5.28?'block':'none'}}">　"Output voltage correction point two" is a second correction point designed for ZTE 4875F1, which has a large error after single point correction. The actual measurement shows that the accuracy can reach within 0.1 after two point correction is completed.</view>
                     <view class="tip2">　If there are still slight deviations after calibration, you can manually adjust the "display compensation" and "setting compensation"</view>
                 </view>
                 <view wx:if="{{!UEN}}">
                     <view class="tip2" wx:if="{{CVer>=5.29}}">　　"电压跳动缓冲"是针对部分电源输出电压会在小数点后两位跳动而进行优化显示,比如设置电压84V,显示时会在84.02到83.99之间跳动,此时设置此值为0.02即可(电压跳动其实是属于正常现象,一般大部分是由变压器的性能和输出电容性能决定了跳动的大小,非控制板问题)。</view>
                     <view class="tip2">　　点击右上角绿色"开始校正",然后用万用表测量实际输出电压,等待读数稳定后,在弹出的输入框中输入刚才所测得的实际输出电压后发送即可。</view>
-                    <view class="tip2" style="display:{{SCAN=='ZTE4875'&&CVer>=5.28?'block':'none'}}">　　"输出电压校正二"是针对中兴4875F1单点校正后误差较大所设计的第二校正点,实测在两点校正完成后精度可达0.1以内。</view>
+                    <view class="tip2" style="display:{{SCAN=='ZX48XX'&&CVer>=5.28?'block':'none'}}">　　"输出电压校正二"是针对中兴4875F1单点校正后误差较大所设计的第二校正点,实测在两点校正完成后精度可达0.1以内。</view>
                     <view class="tip2">　　如校正过后任然有细微偏差可手动微调"显示补偿"和"设置补偿"。</view>
                 </view>
                 <view style="height:15px;"></view>
@@ -400,9 +400,17 @@
                 <button bindtap="BTSMW1" class="DisINF" style="width:35%;">{{SMW}}</button>
             </view>
             <view hidden="{{ShowBar!=18}}">
-                <view class="btnLayout" hidden="{{CEV==1}}">
+                <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Setting range':'电流设置范围'}}</button>
                     <button bindtap="BTOAS" class="DisINF1">{{LSA+'-'+HSA}}</button>
+                </view>
+                <view class="btnLayout" hidden="{{SCAN!='ZX48XX'||CVer<5.5}}">
+                    <button class="DisTIP1">{{UEN?'Setting range':'高压直流输入判定值'}}</button>
+                    <button bindtap="BTIVH" class="DisINF1">{{IVH}}</button>
+                </view>
+                <view class="btnLayout" hidden="{{SCAN!='ZX48XX'||CVer<5.5}}">
+                    <button class="DisTIP1">{{UEN?'Setting range':'高压直流输入最大电流'}}</button>
+                    <button bindtap="BTHHA" class="DisINF1">{{HHA}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">　Set the maximum output power limit of the power system, and once it is set, the user cannot exceed this value.</view>
@@ -410,7 +418,7 @@
                 </view>
                 <view wx:if="{{!UEN}}">
                     <view class="tip2">　　设置电源系统输出功率上限,设置好后用户设置功率就不能超过此值。</view>
-                    <view class="tip2">　　点击右上角绿色文字设置。</view>
+                    <view class="tip2" hidden="{{SCAN!='ZX48XX'||CVer<5.5}}">　　当输入电压超过"高压直流输入判定值"时,最大允许电流将会切换到"高压直流输入最大电流",且电流设置范围最大值也会显示为"高压直流输入最大电流"值,当输入电压低于"高压直流输入判定值"时,将切换会正常最大电流(目前仅ZX48XX启用)。</view>
                 </view>
                 <view style="height:15px;"></view>
             </view>
@@ -531,7 +539,7 @@
                 <view class="btnLayout" wx:if="{{UCN&32||GM==2}}">
                     <button bindtap="BTCAN8" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'INFY':'英飞源'}}</button>
                     <button bindtap="BTCAN16" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">EPS6020</button>
-                    <button bindtap="BTCAN32" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'ZTE4875':'中兴4875'}}</button>
+                    <button bindtap="BTCAN32" style="text-align:center;width:33.33%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'ZX48XX':'中兴4875'}}</button>
                 </view>
                 <view class="btnLayout" wx:else>
                     <button bindtap="BTCAN8" style="text-align:center;width:50%;font-size:15px;color:rgba(67, 180, 255, 0.938);background-color:#88888850;">{{UEN?'INFY':'英飞源'}}</button>
@@ -1139,7 +1147,7 @@
                 <button bindtap="BTUP" class="DisTIP" style="width:65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
                 <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate!=CVer?'Start Upgrade':'No Available'}}</button>
                 <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate!=CVer?UPDate+'(正式版)':'已最新版'}}</button>
-                <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate}}"></view>
+                <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate&&0}}"></view>
             </view>
             <view hidden="{{ShowBar!=4}}">
                 <view class="btnLayout" wx:if="{{!ADD&&!UEN}}">
@@ -1195,6 +1203,12 @@
                     </view>
                     <view style="height:10px;"></view>
                     <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.5||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.50 APP:1.32 2025-11-04</view>
+                        <view class="tip2" style="color:#0f0;">　　中兴48系列加入高压直流输入电流切换功能，该功能可以在输入电压高于指定值时允许设置更高的输出电流，取电器修改随机VIN规则，以前随机只更换后六位，现在如不手动设置VIN则每次整个VIN均随机更换（针对特来电SOC已达到）.</view>
+                    </view>
                     <view wx:if="{{CVer<5.49||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
@@ -1616,6 +1630,27 @@
         </view>
         <view style="height:5px;"></view>
     </view>
+    <view hidden="{{USC==0}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTUSC" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==33?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTUSC" class="DisTIP" style="width:65%;">{{UEN?'Voltage percentage display':'电压百分比显示'}}</button>
+                <button bindtap="BTUSC1" class="DisINF" style="width:35%;">{{USC!=2?UEN?'OFF':'关闭':UEN?'ON':'打开'}}</button>
+            </view>
+            <view hidden="{{ShowBar!=33}}">
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">　Due to the inability of the charger to obtain protection board data, the charger displays the voltage percentage, which is not the battery capacity percentage. Many users may mistakenly believe it is the battery capacity percentage, causing misunderstandings. After version 5.49, the percentage number display is turned off by default.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">　　由于充电器无法获取保护板数据,所以充电器显示的为电压百分比,这个百分比不是电池容量百分比,部分用户会和保护板电池容量百分比进行对比后造成误会,所以可以根据自己所需进行选择是否显示。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
     <view hidden="{{CVer<5.49||Err==0||UEN}}">
         <view class="SetBox">
             <view class="SendLayout">
@@ -1634,7 +1669,7 @@
                 </view>
                 <view class="btnLayout">
                     <button class="DisTIP1">{{UEN?'Display compensation':'故障累计次数'}}</button>
-                    <button class="DisINF">{{ELN}}</button>
+                    <button class="DisINF1">{{ELN}}</button>
                 </view>
                 <view style="height:15px;background-color:#88888850;"></view>
                 <view class="btnLayout" style="height:50px;color:#f00;background-color:#88888850;">
