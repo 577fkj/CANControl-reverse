@@ -2873,6 +2873,18 @@
             "version": "5.50",
             "md5": "9497598f0bb269153fd50cd97c64d5fa",
             "size": 1606080
+        },
+        {
+            "count": 139,
+            "version": "5.49",
+            "md5": "e8b894a2168fbfee7cc8a6d8d49de265",
+            "size": 1606304
+        },
+        {
+            "count": 140,
+            "version": "5.49",
+            "md5": "9d54b3b8937fa5ebd9ec080f91bdb34b",
+            "size": 1606256
         }
     ],
     "DEVID": [
