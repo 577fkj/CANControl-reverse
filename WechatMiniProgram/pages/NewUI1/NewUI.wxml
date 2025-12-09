@@ -70,7 +70,7 @@
             <image bindtap="pwrbt" mode="aspectFit" src="/img/{{PON==1?'iv':'iv1'}}.png" style="left:5%;top:280px;width:30%;height:120px;position:absolute;"></image>
             <view style="position:absolute;left:5%;top:356px;width:30%;">{{IV}}</view>
             <image bindtap="otbt" mode="aspectFit" src="/img/ot.png" style="left:35%;top:280px;width:30%;height:120px;position:absolute;"></image>
-            <view style="position:absolute;left:35%;top:356px;width:30%;color:{{SMT?'red':'white'}};">{{OT>IT?OT:IT}}℃</view>
+            <view style="position:absolute;left:35%;top:356px;width:30%;color:{{SMT?'red':'white'}};">{{MT}}℃</view>
             <image bindtap="{{CEV?'':'owbt'}}" mode="aspectFit" src="/img/ow.png" style="left:65%;top:280px;width:30%;height:120px;position:absolute;"></image>
             <view style="position:absolute;left:65%;top:356px;width:30%;color:{{(SWT||SMT)&&!CEV?'red':'white'}};">{{UIW&&IW?IW:OW}}</view>
             <view hidden="{{CEV}}" style="position:absolute;left:65%;top:346px;width:30%;font-size:12px;color:#aaa;">{{UMW}}</view>
@@ -161,6 +161,8 @@
             <view bindtap="ks3bt" style="color:{{KSi==3?'#fff':'#999'}};">{{CX.toFixed(KS3[0],2)}}V<view></view>{{CX.toFixed(KS3[1],2)}}A</view>
             <view bindtap="ks4bt" style="color:{{KSi==4?'#fff':'#999'}};">{{CX.toFixed(KS4[0],2)}}V<view></view>{{CX.toFixed(KS4[1],2)}}A</view>
         </view>
+        <view style="font-size:14px;position:relative;top:80px;left:3%;color:#fff5;width:94%;height:0px;">{{'ID:'+ID}}</view>
+        <view style="font-size:14px;position:relative;top:80px;left:3%;color:#fff5;width:94%;height:0px;text-align:right;">{{(UEN?'Activate:':'激活日期:')+ACT}}</view>
     </view>
     <view wx:elif="{{ODM==1}}">
         <view style="height:25px;"></view>
@@ -436,7 +438,7 @@
             </view>
             <view hidden="{{ShowBar!=5}}">
                 <view class="btnLayout">
-                    <button class="DisTIP1">{{UEN?'Over Temp  Entry Value':'超温进入值'}}</button>
+                    <button class="DisTIP1">{{UEN?'Over Temp  Entry Value':'输出超温进入值'}}</button>
                     <button bindtap="BTTMC" class="DisINF1">{{UMT}}</button>
                 </view>
                 <view class="btnLayout">
@@ -448,13 +450,18 @@
                     <button bindtap="BTTMC1" class="DisINF1">{{OMT}}</button>
                 </view>
                 <view class="btnLayout" hidden="{{CVer<5.35}}">
-                    <button class="DisTIP1">{{UEN?'Over Temp Exit Value':'超温关机保护值'}}</button>
+                    <button class="DisTIP1">{{UEN?'Out Over Temp Exit Value':'输出超温关机保护值'}}</button>
                     <button bindtap="BTOST" class="DisINF1">{{OST}}</button>
+                </view>
+                <view class="btnLayout" hidden="{{IST==0}}">
+                    <button class="DisTIP1">{{UEN?'Input Over Temp Exit Value':'输入超温关机保护值'}}</button>
+                    <button bindtap="BTIST" class="DisINF1">{{IST}}</button>
                 </view>
                 <view class="tip2" wx:if="{{UEN&&CVer<5.46}}">　Overtemperature limit refers to the automatic limitation of output power to the specified power value after the temperature reaches the "overtemperature entry value", with a default of 75 degrees and 3KW. When the temperature is less than the "overtemperature exit value", it will return to the original set current.</view>
                 <view class="tip2" wx:if="{{UEN&&CVer>=5.46}}">　Overtemperature limit refers to gradually reducing the current after the temperature reaches the "overtemperature entry value" until the temperature is below the "overtemperature entry value" or reaches the "minimum limit current value". When the temperature is below the limit temperature by 1 degree, the current will gradually increase. When it is just above the "overtemperature entry value", the current will remain unchanged. When the temperature is below the overtemperature entry value by 2 degrees, the overtemperature limit will be exited. For example, if the over temperature is set to 75 degrees, the current will start to decrease when it exceeds 75 degrees, remain constant between 74-75 degrees, start to increase when it falls below 74 degrees, and release the over temperature limit when it falls below 73 degrees. If the temperature continues to rise to the "over temperature shutdown protection value", the charger will enter a shutdown state, but the fan will not be turned off. At this time, it will wait for the temperature to drop to the over temperature exit value before continuing to automatically power on for charging.</view>
-                <view class="tip2" wx:if="{{!UEN&&CVer>=5.46}}">　　超温限制是指温度高于"超温进入值"后开始逐步降低电流,直到温度低于"超温进入值"或者降至"电流最低值"为止,当温度低于限制温度2度后会逐步增加电流,当刚好处于"超温进入值"时就保持电流不变,当温度低于超温进入值5度后退出超温限制。<view></view>　　例如超温设置75度,超过75度时电流开始下降,73-75度时保持电流不变,低于73度时电流开始上升,低于70度后解除超温限制。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
-                <view class="tip2" wx:if="{{!UENC&&CVer<5.46}}">　　超温限制是指温度高于"超温进入值"后自动将输出功率限制在指定功率值,默认75度3KW,当温度小于"超温退出值"后将会恢到复原来设置电流。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
+                <view class="tip2" wx:if="{{!UEN&&CVer>=5.46}}">　　超温限制是指输出温度高于"超温进入值"后开始逐步降低电流,直到温度低于"超温进入值"或者降至"电流最低值"为止,当温度低于限制温度2度后会逐步增加电流,当刚好处于"超温进入值"时就保持电流不变,当温度低于超温进入值5度后退出超温限制。<view></view>　　例如超温设置75度,超过75度时电流开始下降,73-75度时保持电流不变,低于73度时电流开始上升,低于70度后解除超温限制。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至"超温保护值-5"后将继续自动开机充电。</view>
+                <view class="tip2" wx:if="{{IST!=0}}">　　输入超温关机保护是用于防止输入温度过高的情况下导致设备损坏,用户在通风不畅的环境中(典型案例就是放座桶中充电)使用或者风机输入口不小心被堵等,当输入温度达到{{IST-0}}时将关机并保持风速最大进行散热,当输入温度降低至{{IST-5}}时将重新开机继续进行充电。</view>
+                <view class="tip2" wx:if="{{!UEN&&CVer<5.46}}">　　超温限制是指温度高于"超温进入值"后自动将输出功率限制在指定功率值,默认75度3KW,当温度小于"超温退出值"后将会恢到复原来设置电流。<view></view>　　如果温度继续升高至"超温关机保护值"时,充电器将进入关机状态,但不会关闭风扇,此时等待温度降至超温退出值后将继续自动开机充电。</view>
                 <view style="height:15px;"></view>
             </view>
         </view>
@@ -712,6 +719,14 @@
                     <button bindtap="BTOVTD" class="DisINF1" style="width:10%;text-align:center;">-</button>
                     <button bindtap="BTOVT1" class="DisINF1" style="width:25%;text-align:center;">{{OVT}}</button>
                     <button bindtap="BTOVTU" class="DisINF1" style="width:10%;text-align:center;">+</button>
+                </view>
+                <view class="btnLayout" hidden="{{MDT==0||GM!=2}}">
+                    <button class="DisTIP1">{{UEN?'Boost current limit value':'升压限流值'}}</button>
+                    <button bindtap="SetMDT" class="DisINF1">{{MDT}}</button>
+                </view>
+                <view class="btnLayout" hidden="{{GM!=2}}">
+                    <button class="DisTIP1">{{UEN?'Boost current limit value':'辅电ADC补偿值'}}</button>
+                    <button bindtap="SetIVD" class="DisINF1">{{IVD}}</button>
                 </view>
                 <view wx:if="{{UEN}}">
                     <view class="tip2">　The charging station needs to detect the battery voltage. Here, the simulated voltage of the battery is boosted and reported to the charging station. A multimeter is needed to test the voltage at around 251. Due to the accuracy errors of the sampling resistor and ADC, each may have errors. Currently, manual correction is required. If the deviation is large, please adjust the "boost compensation value" to 251V (within plus or minus 1V).</view>
@@ -990,6 +1005,10 @@
                 <button bindtap="BTTCH1" class="DisINF" style="width:35%;">{{LKV}}</button>
             </view>
             <view hidden="{{ShowBar!=24}}">
+                <view class="btnLayout" hidden="{{TMD==0}}">
+                    <button class="DisTIP1">{{UEN?'Touch screen enabled':'触屏驱动模式'}}</button>
+                    <button bindtap="BTKEY4" class="DisINF1">{{TMD==2?UEN?'high Sensitivity':'高灵敏':UEN?'Anti-interference':'抗干扰'}}</button>
+                </view>
                 <view class="btnLayout" hidden="{{CVer<5.48}}">
                     <button class="DisTIP1">{{UEN?'Touch screen enabled':'触屏启用'}}</button>
                     <button bindtap="BTKEY1" class="DisINF1">{{KON?UEN?'Yes':'是':UEN?'No':'否'}}</button>
@@ -1004,6 +1023,37 @@
                 </view>
                 <view wx:if="{{!UEN}}">
                     <view class="tip2">　　触屏密码仅限数字,4-6位均可,锁屏后会在屏幕上显示红色锁图标,上滑屏幕开始解锁,解锁后图标变为绿色,触屏无操作{{LKS}}秒后会再次锁定。</view>
+                    <view class="tip2">　　击右上角绿色数字进行设置。</view>
+                </view>
+                <view style="height:15px;"></view>
+            </view>
+        </view>
+        <view style="height:5px;"></view>
+    </view>
+    <view hidden="{{1}}">
+        <view class="SetBox">
+            <view class="SendLayout">
+                <view bindtap="BTTCH" style="width:20px;background-color:#88888850;">
+                    <view class="{{ShowBar==24?'open':'close1'}}"></view>
+                </view>
+                <button bindtap="BTTCH" class="DisTIP" style="width:65%;">{{UEN?'Lead Acid Charging Mode':'铅酸充电模式'}}</button>
+                <button bindtap="BTTCH1" class="DisINF" style="width:35%;">{{LKV}}</button>
+            </view>
+            <view hidden="{{ShowBar!=24}}">
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Number of lead-acid battery strings':'铅酸电池串数'}}</button>
+                    <button bindtap="BTKEY1" class="DisINF1">{{KON?UEN?'Yes':'是':UEN?'No':'否'}}</button>
+                </view>
+                <view class="btnLayout">
+                    <button class="DisTIP1">{{UEN?'Touch Screen Lock Time':'铅酸电池容量'}}</button>
+                    <button bindtap="BTTCH2" class="DisINF1">{{LKS+(UEN?' Second':'秒')}}</button>
+                </view>
+                <view wx:if="{{UEN}}">
+                    <view class="tip2">　The touch screen password is limited to numbers and can be between 4 and 6 digits.</view>
+                    <view class="tip2">　Click on the green number in the upper right corner to set it.</view>
+                </view>
+                <view wx:if="{{!UEN}}">
+                    <view class="tip2">　　铅酸电池充电分为‌恒流充电、恒压充电和浮充（涓流）充电‌三个阶段，各阶段电压范围如下： 第一段恒流(0.2-0.4C)充电至14.4V 特点：充电初期以恒定电流充电，电压逐渐上升，当电压达到14.4V时切换至恒压阶段。 ‌ 注意：若充电环境温度低于5℃，电流会自动衰减至1.8A以下，否则可能引发极板硫化。 第二段恒压14.7V(开口式电池上限14.8V） 特点：电压保持恒定，电流逐渐下降，直至电流降至设定阈值（通常为0.1C）。 ‌ 第三段浮充（涓流）充电阶段 13.8V 特点：维持电池满电状态，防止过放电，适用于长期存放或备用电池。 ‌</view>
                     <view class="tip2">　　击右上角绿色数字进行设置。</view>
                 </view>
                 <view style="height:15px;"></view>
@@ -1147,14 +1197,14 @@
                 <button bindtap="BTUP" class="DisTIP" style="width:65%;">{{UEN?'OTA Firmware Upgrade':'远程固件升级'}}</button>
                 <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{UEN}}">{{ADD?'Disabled':UPDate!=CVer?'Start Upgrade':'No Available'}}</button>
                 <button bindtap="BTUP1" class="DisINF" style="width:35%;" wx:if="{{!UEN}}">{{ADD?'已禁用':UPDate!=CVer?UPDate+'(正式版)':'已最新版'}}</button>
-                <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{!ADD&&CVer<UPDate&&0}}"></view>
+                <view style="position:absolute;left:98%;width:10px;height:10px;border-radius:50%;background-color:#f00;" wx:if="{{CVer<UPDate&&0}}"></view>
             </view>
             <view hidden="{{ShowBar!=4}}">
-                <view class="btnLayout" wx:if="{{!ADD&&!UEN}}">
+                <view class="btnLayout" wx:if="{{!UEN}}">
                     <button class="DisTIP1">测试版固件</button>
                     <button bindtap="BTUP9" class="DisINF1">{{TestV}}</button>
                 </view>
-                <view class="btnLayout" wx:if="{{!ADD&&CVer>(CEV?RoCEV:RollV)}}">
+                <view class="btnLayout" wx:if="{{CVer>(CEV?RoCEV:RollV)}}">
                     <button class="DisTIP1">{{UEN?'Firmware rollback':'固件降级'}}</button>
                     <button bindtap="BTUP0" class="DisINF1">{{CEV?RoCEV:RollV}}</button>
                 </view>
@@ -1203,6 +1253,12 @@
                     </view>
                     <view style="height:10px;"></view>
                     <view class="tip2">　　固件升级需要以WIFI方式连接路由器或手机热点,并确保被连接的路由器或手机热点处于联网状态.<view></view>　　1.热点名:{{WID}}<view></view>　　2.密码:{{WPD}}<view></view>　　3.频段:2.4G<view></view>　　按上述设置后点击右上角"开始升级"按钮启动升级程序。<view></view>　　远程升级中如遇意外断电断网都不会影响当前版本,可放心使用。</view>
+                    <view wx:if="{{CVer<5.51||LST}}">
+                        <view style="height:10px;"></view>
+                        <view style="height:10px;"></view>
+                        <view class="tip2" style="color:#fa0;">固件:5.51 APP:1.32 2025-11-28</view>
+                        <view class="tip2" style="color:#0f0;">　　加入中天48系列电源模块支持,触屏新增一个抗干扰模式,此模式下误触会大大减少,修复中兴3000V6.0版本不显示电流问题,修复部分手机显示温度为输入温度问题.</view>
+                    </view>
                     <view wx:if="{{CVer<5.5||LST}}">
                         <view style="height:10px;"></view>
                         <view style="height:10px;"></view>
@@ -1517,7 +1573,7 @@
             <view hidden="{{ShowBar!=10}}">
                 <view class="btnLayout" hidden="{{CVer<=5.34}}">
                     <button class="DisTIP1">{{UEN?'Screen display style':'屏幕显示风格'}}</button>
-                    <button bindtap="BTUI" class="DisINF1">{{UI?UEN?'Simplicity':'简约':UEN?'Classics':'经典'}}</button>
+                    <button bindtap="BTUI" class="DisINF1">{{UI==1?UEN?'Simplicity':'简约':UI==0?UEN?'Classics':'经典':UEN?'ChaoQi':'超崎'}}</button>
                 </view>
                 <view class="btnLayout" hidden="{{CVer<5.19}}">
                     <button bindtap="Scr4" class="DisINF1" style="text-align:center;color:{{Crs==0?'#0e0':'#fff'}};">{{UEN?'Customization':'自定义'}}</button>
@@ -1581,7 +1637,7 @@
                                 <view bindtap="{{CVer>=5.48?'CKA':''}}" class="UIBox1" style="border-color:#888;top:200px;height:14px;font-size:10px;color:#888;">{{CVer>=5.48?'背景颜色':'Ver'+CVer+'-'+CAN}}</view>
                             </view>
                         </view>
-                        <view hidden="{{UI==0}}">
+                        <view hidden="{{UI==0||UI==2}}">
                             <view class="UIBox1" style="top:2px;width:95%;border:none;">
                                 <view bindtap="CK10" style="left:8px;width:40%;height:15px;color:{{Cr10}};text-align:left;">电源状态 {{PON?'开':'关'}}</view>
                                 <view bindtap="CK15" style="left:8px;width:40%;height:15px;color:{{Cr15}};text-align:right;">欢迎使用</view>
